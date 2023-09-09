@@ -1,0 +1,29 @@
+.signup{
+    width:50vw;
+    height:70vh;
+    background-color: rgb(110, 97, 167);
+    margin-left: 25%;
+    margin-top: 7%;
+    border-radius: 20px;
+}
+.content{
+    margin-left: 8vw;
+    padding-top: 10vh;
+
+}
+.btndesign{
+    background-color: #3bdd94;
+    padding: 3vh;
+    margin-top: 10vh;
+    margin-left: 8vw;
+}
+.signupbeaut{
+    width:50vw;
+    height:90vh;
+    background-color: rgb(110, 97, 167);
+    margin-left: 25%;
+    margin-top: 7%;
+    margin-bottom: 7%;
+    border-radius: 20px;
+
+}

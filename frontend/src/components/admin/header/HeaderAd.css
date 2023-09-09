@@ -1,0 +1,35 @@
+.headerAd{
+    width: 100%;
+    height: 12vh;
+    background-color: rgb(177, 101, 139);
+    color: #d4eae0;
+    padding-top: 1vh;
+}
+
+body {
+    background-color: #f0f0f0;
+}
+
+.navbar-dark .navbar-brand {
+    color: #ffffff; /* Brand color */
+}
+.navbar-dark .navbar-nav .nav-link {
+    color: #ffffff; /* Link color */
+}
+
+.navbtnAd{
+    background-color: #d0eadf;
+}
+.navbtn:hover{
+    background-color: rgb(6, 25, 25);
+    color: whitesmoke;
+
+}
+.profileimage{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;  
+    
+
+}

@@ -1,0 +1,15 @@
+.dashboard {
+    background-color: whitesmoke;
+    width: 200px;
+    height: 530px;
+    padding-top: 3vh;
+
+}
+.dashboard li{
+    font-weight: 500;
+    list-style-type: none;
+    cursor: pointer;
+    padding-top: 30px;
+    
+}
+
