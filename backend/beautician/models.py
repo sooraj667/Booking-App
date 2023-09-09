@@ -18,6 +18,7 @@ class Beautician(models.Model):
     email=models.CharField(max_length=200)
     phone=models.CharField(max_length=200)
     password=models.CharField(max_length=200)
+    image=models.ImageField()
     services=models.ManyToManyField(Services)
 
     def __str__(self):

@@ -1,4 +1,4 @@
-.dashboard {
+/* .dashboard {
     background-color: whitesmoke;
     width: 200px;
     height: 530px;
@@ -11,5 +11,15 @@
     cursor: pointer;
     padding-top: 30px;
     
+} */
+.ulclass{
+    font-weight: 500;
+    list-style-type: none;
+    cursor: pointer;
+    padding-top: 30px;
+
+}
+.selectimage{
+    margin-top: 20px;
 }
 

@@ -13,7 +13,7 @@ const Logincustomerpage = () => {
     >
       <Header />
       <Logincustomer />
-      {/* EFFF */}
+      {/* EDITED */}
     </div>
   );
 };

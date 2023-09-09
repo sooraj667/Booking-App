@@ -5,6 +5,7 @@ import Header from "../header/Header";
 import Cookies from "js-cookie";
 import Contents from "./Contents";
 import HeaderDashboard from "../header/HeaderDashboard";
+import Landingpartbeaut from "./Landingpartbeaut";
 const Beauticiandashboard = () => {
   const dispatch = useDispatch();
   const details = useSelector((state) => state.login);
@@ -29,7 +30,7 @@ const Beauticiandashboard = () => {
 
           </div>
           <div className="col-md-9">
-          {details.value.beautdetails.email}
+          <Landingpartbeaut/>
             
           </div>
 
