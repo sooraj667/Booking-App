@@ -19,11 +19,14 @@ const Loginbeautician = () => {
           }
 
           axiosInstance.post("beaut/login/",datas).then((response)=>{
-            console.log(response.data);
+            
             if (response.data.message=="Matched"){
            
                 Cookies.set("accesstoken-B",response.data.accesstoken,{ expires: 7 })
                 localStorage.setItem("singledetails-B",JSON.stringify(response.data.beautdata))
+                localStorage.setItem("expertin-B",JSON.stringify(response.data.expertin))
+                localStorage.setItem("services-B",JSON.stringify(response.data.services))
+                console.log(response.data,"##################33");
                 navigate("../beautician-dashboard")
 
             }

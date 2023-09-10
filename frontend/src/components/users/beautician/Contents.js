@@ -10,11 +10,14 @@ import BookIcon from '@mui/icons-material/Book';
 import WorkIcon from '@mui/icons-material/Work';
 import BeachAccessIcon from '@mui/icons-material/BeachAccess';
 import Divider from '@mui/material/Divider';
+import {toggleServices,toggleAppointments} from "../../../feautures/beautician/beautnavigationslice"
+import { useDispatch } from "react-redux";
 const Contents = () => {
+  const dispatch=useDispatch()
   return (
     <Paper
       sx={{
-        height: "550px",
+        height: "950px",
         width: "250px",
         backgroundColor: "blue",
         borderRadius: "0px",
@@ -38,7 +41,7 @@ const Contents = () => {
           bgcolor: "background.paper",
         }}
       >
-        <ListItem>
+        <ListItem onClick={()=>dispatch(toggleAppointments())}>
           <ListItemAvatar>
             <Avatar>
               <BookIcon />
@@ -47,13 +50,13 @@ const Contents = () => {
           <ListItemText primary="Appointments"  />
         </ListItem>
         <Divider variant="inset" component="li" />
-        <ListItem>
+        <ListItem onClick={()=>dispatch(toggleServices())}>
           <ListItemAvatar>
             <Avatar>
               <WorkIcon />
             </Avatar>
           </ListItemAvatar>
-          <ListItemText primary="Work" secondary="Jan 7, 2014" />
+          <ListItemText primary="Services" secondary="Jan 7, 2014" />
         </ListItem>
         <Divider variant="inset" component="li" />
         <ListItem>

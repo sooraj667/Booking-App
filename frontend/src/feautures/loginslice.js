@@ -7,6 +7,8 @@ const INITIALSTATE={
 
 
     beautdetails:"",
+    expertin:"",
+    services:[],
     accesstoken:null,
 
     custdetails:"",
@@ -30,6 +32,12 @@ const loginslice=createSlice(
             setBeautDetails:(state,action)=>{
                 state.value.beautdetails=action.payload
             },
+            setExpertIn:(state,action)=>{
+                state.value.expertin=action.payload
+            },
+            setServices:(state,action)=>{
+                state.value.services=action.payload
+            },
             setCustDetails:(state,action)=>{
                 state.value.custdetails=action.payload
             },
@@ -41,6 +49,7 @@ const loginslice=createSlice(
                 state.value.accesstokenC=action.payload
 
             }
+          
 
 
 
@@ -52,5 +61,5 @@ const loginslice=createSlice(
 
 )
 
-export const {changeEmail,changePassword,setBeautDetails,setCustDetails,setAccessToken,setAccessTokenC} = loginslice.actions
+export const {changeEmail,changePassword,setBeautDetails,setExpertIn,setServices,setCustDetails,setAccessToken,setAccessTokenC} = loginslice.actions
 export default loginslice.reducer

@@ -7,7 +7,7 @@ import beautslice from "../src/feautures/beautslice";
 import loginslice from "./feautures/loginslice";
 import adminloginslice from "./feautures/adminloginslice";
 import adminnavigationslice from "./feautures/adminnavigationslice";
-
+import beautnavigationslice from "./feautures/beautician/beautnavigationslice";
 
 import Allroutes from "./Allroutes";
 import adminDataAssignerSlice from "./feautures/adminDataAssignerSlice";
@@ -19,7 +19,8 @@ function App() {
       login: loginslice,
       adminlogin:adminloginslice,
       adminnavigation:adminnavigationslice,
-      adminalldatas:adminDataAssignerSlice
+      adminalldatas:adminDataAssignerSlice,
+      beautnavigation:beautnavigationslice
     },
   });
 

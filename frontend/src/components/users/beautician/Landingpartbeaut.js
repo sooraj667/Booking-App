@@ -2,36 +2,73 @@ import React, { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import { Input, Typography } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Button from "@mui/material/Button";
 import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
+import DriveFolderUploadIcon from "@mui/icons-material/DriveFolderUpload";
+import axiosInstance from "../../../axios/axiosconfig";
+import { storage } from "../../../firebase/firebaseconfig";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { v4 } from "uuid";
+import { setBeautDetails } from "../../../feautures/loginslice";
+import Paper from "@mui/material/Paper";
+
+
+import Topstack from "./Topstack";
 
 const Landingpartbeaut = () => {
   const [addImage, setAddImage] = useState(false);
-  const datas = useSelector((state) => state.login);
+  const [image, setImage] = useState("");
+  const [selectedImage, setSelectedImage] = useState("");
+  const statedatas = useSelector((state) => state.login);
+  const dispatch = useDispatch();
 
   const addImageHandler = () => {
     setAddImage((addImage) => !addImage);
-    // console.log(datas.value.beautdetails.id); 
+
+    // console.log(datas.value.beautdetails.id);
   };
 
-  const uploadImageHandler=()=>{
-    console.log("YEAH");
+  const handleFileChange = (e) => {
+    setSelectedImage(e.target.files[0]);
+    // console.log(URL.createObjectURL(e.target.files[0]));
+    // return setSelectedImage(URL.createObjectURL(e.target.files[0]));
+  };
 
-  }
+  const uploadImageHandler = () => {
+    const reference = ref(storage, `beautician/${selectedImage.name + v4()}`);
+    uploadBytes(reference, selectedImage)
+      .then((res) => {
+        getDownloadURL(reference).then((url) => {
+          console.log(url, "PRINTED");
+          const datas = {
+            imageurl: url,
+            id: statedatas.value.beautdetails.id,
+          };
+          axiosInstance.post("beaut/changeimage/", datas).then((response) => {
+            console.log(response.data);
+            if (response.data.message == "Added") {
+              console.log("ALL SET");
+              localStorage.setItem(
+                "singledetails-B",
+                JSON.stringify(response.data.beautdata)
+              );
+              dispatch(setBeautDetails(response.data.beautdata));
+            } else {
+              alert("NOT SET");
+            }
+          });
+        });
+      })
+      .catch(() => {
+        console.log("Error");
+      });
+  };
 
   return (
     <div>
-      <Stack direction="row" spacing={2}>
-        <Avatar
-          sx={{ width: 125, height: 125 }}
-          src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQrATrKO9sHqDH9aNVbUHvnc_gh9lGS7rbVoVXELUADNeuGjAqE"
-        />
-
-        <Typography variant="h5" component="h2">
-          {datas.value.beautdetails.email}
-        </Typography>
-      </Stack>
+        <Topstack/>
+      
 
       <Button
         type="file"
@@ -39,10 +76,12 @@ const Landingpartbeaut = () => {
         variant="contained"
         startIcon={<InsertPhotoIcon />}
         sx={{ marginTop: "10px" }}
+        size="small"
       >
         Change
       </Button>
-      <div>
+      {console.log(statedatas.value.beautdetails.image)}
+        <div>
         {addImage && (
           <>
             <input
@@ -50,23 +89,50 @@ const Landingpartbeaut = () => {
               accept="image/*"
               id="upload-button"
               type="file"
+              onChange={handleFileChange}
             />
             <div>
-            <Button
-              type="file"
-              onClick={uploadImageHandler}
-              variant="contained"
-              startIcon={<InsertPhotoIcon />}
-              sx={{ marginTop: "10px" }}
-            >
-            
-              Upload
-            </Button>
-
+              <Button
+                type="file"
+                onClick={uploadImageHandler}
+                variant="contained"
+                startIcon={<DriveFolderUploadIcon />}
+                sx={{ marginTop: "10px" }}
+                size="small"
+              >
+                Upload
+              </Button>
             </div>
-            
           </>
         )}
+      </div>
+      <div>
+   
+        <Paper elevation={24}   sx={{
+      width: 500,
+      height: 410,
+      backgroundColor: "#F5FFFA",
+      // backgroundImage:'url("https://img.freepik.com/premium-photo/close-up-hair-supplies-flat-lay_23-2148352942.jpg?w=900")',
+      objectFit:"cover",
+      backgroundRepeat:"no-repeat",
+      marginLeft:"20%",
+      marginTop:"30px",
+      marginBottom:"30%",
+      opacity: [0.9, 0.8, 0.8],
+     
+      '&:hover': {
+        backgroundColor: 'whitesmoke',
+        opacity: [0.9, 0.8, 0.7],
+      },
+    }}>
+             <Typography variant="h5" component="h1" sx={{marginLeft:"30%",color:"#080000",paddingTop:"15px"}}>
+            Today's Schedule
+
+        </Typography>
+
+        </Paper>
+
+        
       </div>
     </div>
   );
