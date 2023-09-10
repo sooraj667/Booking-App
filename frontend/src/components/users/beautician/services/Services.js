@@ -86,21 +86,28 @@ const Services = () => {
               component="h1"
               sx={{ marginLeft: "30%", color: "#080000", paddingTop: "15px" }}
             >
-              Efficient
-              <Stack spacing={2}>
+              Efficient in
+              </Typography>
+              <Stack spacing={2} sx={{
+                marginLeft:"80px",
+                marginBottom:"20px"
+              }}>
                 <h2>{statedatas.value.expertin.name}</h2>
+                </Stack>
                 <Avatar
                   sx={{
                     width: 225,
                     height: 225,
                     borderRadius: "4px",
                     objectFit: "cover",
+                    marginLeft:"60px"
+                    
                   }}
                 >
-                  <img src={statedatas.value.expertin.image} alt="" />
+                  <img   src={statedatas.value.expertin.image} alt="" />
                 </Avatar>
-              </Stack>
-            </Typography>
+             
+            
           </Paper>
         </Grid>
         <Grid xs={6}>
