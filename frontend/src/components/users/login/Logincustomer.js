@@ -25,6 +25,7 @@ const Logincustomer = () => {
        
             Cookies.set("accesstoken-C",response.data.accesstoken,{ expires: 7 })
             localStorage.setItem("singledetails-C",JSON.stringify(response.data.custdata))
+            localStorage.setItem("allbeauticians-C",JSON.stringify(response.data.allbeautdata))
             navigate("../customer-dashboard")
 
         }

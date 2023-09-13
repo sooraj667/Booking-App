@@ -3,8 +3,8 @@ from rest_framework.views import APIView
 from .models import *
 from .serializers import Customerserializer
 from rest_framework_simplejwt.tokens import RefreshToken
-
-
+from beautician.models import *
+from beautician.serializers import *
 class Signup(APIView):
     def post(self,request):
         pname=request.data.get("pname")
@@ -26,8 +26,38 @@ class Login(APIView):
         if found==1:
             obj=Customer.objects.get(email=email,password=password)
             serialized_object=Customerserializer(obj)
-
+            allbeauticians=Beautician.objects.all()
+           
+            allbeauticians_serialized=BeauticianSerializer(allbeauticians,many=True)
+           
+            for item in allbeauticians:
+                required_id=item.id
+                expertinobj=item.expertin
+                for item in allbeauticians_serialized.data:
+                    if item["id"]==required_id:
+                        item["expertin"]=ServicesSerializer(expertinobj).data
+                
             refresh=RefreshToken.for_user(obj)  
-            return Response({"message":'Matched',"custdata":serialized_object.data,"accesstoken":str(refresh.access_token),"refreshtoken":str(refresh)})
+            return Response({"message":'Matched',"custdata":serialized_object.data,"allbeautdata":allbeauticians_serialized.data,"accesstoken":str(refresh.access_token),"refreshtoken":str(refresh)})
         else:
             return Response({"message":'NotMatched'})
+        
+
+class Changeimage(APIView):
+    def post(self,request):
+        print("REACHED")
+        id=request.data.get("id")
+        image=request.data.get("imageurl")
+        print(image,"#########")
+        
+
+        obj=Customer.objects.get(id=id)  
+        if obj:
+            obj.image=image
+            obj.save()
+            serialized_object=Customerserializer(obj)
+            
+            return Response({"message":'Added',"custdata":serialized_object.data})
+        else:
+            return Response({"message":'NotAdded'})
+        

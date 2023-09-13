@@ -1,8 +1,8 @@
-import React from "react";
+import React,{ useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
-
+import {setAccessTokenB,setAccessTokenC} from "../../../feautures/loginslice"
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -10,7 +10,9 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
+import { useDispatch } from "react-redux";
 const HeaderDashboard = () => {
+  const dispatch=useDispatch()
   const datas = useSelector((state) => state.login);
   const handleLogoutB = () => {
     localStorage.removeItem("singledetails-B");
@@ -19,8 +21,24 @@ const HeaderDashboard = () => {
   };
   const handleLogoutC = () => {
     localStorage.removeItem("singledetails-C");
+    localStorage.removeItem("allbeauticians-C");
     Cookies.remove("accesstoken-C");
   };
+
+  useEffect(()=>{
+    const accesstokenB=Cookies.get('accesstoken-B')
+    const accesstokenC=Cookies.get('accesstoken-C')
+    
+   
+    if (accesstokenB){
+        
+        dispatch(setAccessTokenB(accesstokenB))
+    }
+    if (accesstokenC){
+        
+        dispatch(setAccessTokenC(accesstokenC))
+    }
+  },[])
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -43,7 +61,7 @@ const HeaderDashboard = () => {
             Groom Up
           </Typography>
 
-          <Link to="/loginbeautician">
+          {/* <Link to="/loginbeautician">
             <Button
               variant="outlined"
               color="inherit"
@@ -54,11 +72,28 @@ const HeaderDashboard = () => {
             >
               LogoutB
             </Button>
-          </Link>
+          </Link> */}
+
+          {datas.value.accesstokenB && (
+            <>
+              <Link to="/loginbeautician">
+                <Button
+                  variant="outlined"
+                  color="inherit"
+                  sx={{ 
+                    color: "white",
+                  }}
+                  onClick={handleLogoutB}
+                >
+                  LogoutB
+                </Button>
+              </Link>
+            </>
+          )}
 
           {datas.value.accesstokenC && (
             <>
-              <Link to="/loginbeautician">
+              <Link to="/logincustomer">
                 <Button
                   variant="outlined"
                   color="inherit"
@@ -67,7 +102,7 @@ const HeaderDashboard = () => {
                   }}
                   onClick={handleLogoutC}
                 >
-                  LogoutB
+                  LogoutC
                 </Button>
               </Link>
             </>

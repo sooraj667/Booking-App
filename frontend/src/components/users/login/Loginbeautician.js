@@ -26,6 +26,7 @@ const Loginbeautician = () => {
                 localStorage.setItem("singledetails-B",JSON.stringify(response.data.beautdata))
                 localStorage.setItem("expertin-B",JSON.stringify(response.data.expertin))
                 localStorage.setItem("services-B",JSON.stringify(response.data.services))
+                localStorage.setItem("allservices-B",JSON.stringify(response.data.allservices))
                 console.log(response.data,"##################33");
                 navigate("../beautician-dashboard")
 

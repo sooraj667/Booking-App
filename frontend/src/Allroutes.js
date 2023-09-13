@@ -9,7 +9,7 @@ import Loginbeauticianpage from "./pages/users/login/Loginbeauticianpage";
 import Logincustomerpage from "./pages/users/login/Logincustomerpage";
 import Beauticianpage from "./pages/users/beautician/Beauticianpage";
 import { useDispatch, useSelector } from "react-redux";
-import {setAccessToken,setAccessTokenC} from "../src/feautures/loginslice"
+import {setAccessTokenB,setAccessTokenC} from "../src/feautures/loginslice"
 import Cookies from "js-cookie"
 import Customerpage from "./pages/users/customer/Customerpage";
 import LoginpageAd from "./pages/admin/login/LoginpageAd";
@@ -17,22 +17,22 @@ import DashboardpageAd from "./pages/admin/dashboard/DashboardpageAd";
 
 const Allroutes = () => {
   const dispatch =useDispatch()
-  const accesstokenB = useSelector((state) => state.login.value.accesstoken);
+  const accesstokenB = useSelector((state) => state.login.value.accesstokenB);
   const accesstokenC = useSelector((state) => state.login.value.accesstokenC);
-  console.log(accesstokenC,"CROUTES");
+  console.log(accesstokenB,"CROUTES");
   
   useEffect(()=>{
-    const accesstoken=Cookies.get('accesstoken-B')
-    const accesstokenC=Cookies.get('accesstoken-C')
+    const accesstokenBeaut=Cookies.get('accesstoken-B')
+    const accesstokenCust=Cookies.get('accesstoken-C')
     
    
-    if (accesstoken){
+    if (accesstokenBeaut){
         
-        dispatch(setAccessToken(accesstoken))
+        dispatch(setAccessTokenB(accesstokenBeaut))
     }
-    if (accesstokenC){
+    if (accesstokenCust){
         
-        dispatch(setAccessTokenC(accesstokenC))
+        dispatch(setAccessTokenC(accesstokenCust))
     }
   },[])
   return (

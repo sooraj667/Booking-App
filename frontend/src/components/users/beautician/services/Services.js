@@ -23,8 +23,10 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import WorkIcon from '@mui/icons-material/Work';
 
 import Divider from '@mui/material/Divider';
+import Addservicemodal from "./Addservicemodal";
 
 const Services = () => {
+  
   const statedatas = useSelector((state) => state.login);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -138,7 +140,8 @@ const Services = () => {
             >
               Other Services
             </Typography>
-            <Button variant="outlined">Add Service</Button>
+            
+            
 
             <Box sx={{ width: "100%" }}>
               <Stack spacing={2}>
@@ -170,6 +173,7 @@ const Services = () => {
                 </List>
               </Stack>
             </Box>
+            <Addservicemodal/>
           </Paper>
         </Grid>
       </Grid>

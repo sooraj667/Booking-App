@@ -7,6 +7,7 @@ class Customer(models.Model):
     email=models.CharField(max_length=200)
     phone=models.CharField(max_length=200)
     password=models.CharField(max_length=200)
+    image=models.CharField(max_length=300,blank=True,null=True)
 
 
     def __str__(self):

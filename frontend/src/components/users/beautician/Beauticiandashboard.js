@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setBeautDetails,setAccessToken,setExpertIn,setServices } from "../../../feautures/loginslice";
+import { setBeautDetails,setAccessToken,setExpertIn,setServices,setAllservices } from "../../../feautures/loginslice";
 import Header from "../header/Header";
 import Cookies from "js-cookie";
 import Contents from "./Contents";
@@ -19,6 +19,7 @@ const Beauticiandashboard = () => {
     const beautDetails = localStorage.getItem("singledetails-B");
     const expertin = localStorage.getItem("expertin-B");
     const services=localStorage.getItem("services-B");
+    const allservices=localStorage.getItem("allservices-B");
     if (beautDetails) {
       const parsed=JSON.parse(beautDetails)
       dispatch(setBeautDetails(parsed));
@@ -30,6 +31,10 @@ const Beauticiandashboard = () => {
     if (services) {
       const parsedservices=JSON.parse(services)
       dispatch(setServices(parsedservices));
+    }
+    if (allservices) {
+      const parsedallservices=JSON.parse(allservices)
+      dispatch(setAllservices(parsedallservices));
     }
   },[]);
 
