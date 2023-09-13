@@ -32,7 +32,7 @@ class Login(APIView):
            
             for item in allbeauticians:
                 required_id=item.id
-                expertinobj=item.expertin
+                expertinobj=item.expertin 
                 for item in allbeauticians_serialized.data:
                     if item["id"]==required_id:
                         item["expertin"]=ServicesSerializer(expertinobj).data

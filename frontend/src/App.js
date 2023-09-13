@@ -12,6 +12,7 @@ import beautnavigationslice from "./feautures/beautician/beautnavigationslice";
 import Allroutes from "./Allroutes";
 import adminDataAssignerSlice from "./feautures/adminDataAssignerSlice";
 import customernavigationslice from "./feautures/customer/customernavigationslice";
+import customerdataslice from "./feautures/customer/customerdataslice";
 function App() {
   const store = configureStore({
     reducer: {
@@ -21,7 +22,8 @@ function App() {
       adminnavigation:adminnavigationslice,
       adminalldatas:adminDataAssignerSlice,
       beautnavigation:beautnavigationslice,
-      custnavigation:customernavigationslice
+      custnavigation:customernavigationslice,
+      custreqdata:customerdataslice,
     },
   });
 

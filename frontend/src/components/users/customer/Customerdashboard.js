@@ -6,6 +6,7 @@ import Landingpartcust from './Landingpartcust';
 import Favouritestylists from './favouritestylists/Favouritestylists';
 import Contents from './Contents';
 import Browse from './Browse';
+import Booknow from './Booknow';
 const Customerdashboard = () => {
     const details = useSelector((state) => state.login);
     const navigationdatas = useSelector((state) => state.custnavigation);
@@ -22,7 +23,7 @@ const Customerdashboard = () => {
           const allbeaut_parsed=JSON.parse(allBeauticians)
           dispatch(setAllBeauticiansC(allbeaut_parsed));
         }
-      },[]); 
+      },[]);
   return (
     <div>
     <HeaderDashboard/>
@@ -44,7 +45,10 @@ const Customerdashboard = () => {
         navigationdatas.value.browse && <Browse/>
 
       }
-      
+        {
+        navigationdatas.value.booknow && <Booknow/>
+
+      }
      
         
       </div>

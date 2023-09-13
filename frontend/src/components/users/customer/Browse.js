@@ -8,10 +8,27 @@ import { useEffect } from "react";
 import { setAllBeauticiansC } from "../../../feautures/loginslice";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import Grid from '@mui/material/Grid';
+import Button from "@mui/material/Button";
+import axiosInstance from "../../../axios/axiosconfig";
 import "./Browse.css";
+import {toggleBooknow} from "../../../feautures/customer/customernavigationslice"
 const Browse = () => {
   const dispatch = useDispatch();
   const statedatas = useSelector((state) => state.login);
+  const navigationdatas = useSelector((state) => state.custnavigation);
+
+  const booknowHandler=(id)=>{
+    dispatch((toggleBooknow(id)))
+    // const datas={
+    //     beautid:id,
+    //     custid:statedatas.value.custdetails.id
+    // }
+    // axiosInstance.post("cust/booknow",datas).then((res)=>{
+    //     console.log(res.data);
+    // }).catch((err)=>alert(err))
+
+  }
 
   useEffect(() => {
     const allBeauticians = localStorage.getItem("allbeauticians-C");
@@ -29,7 +46,7 @@ const Browse = () => {
       <Box sx={{ width: "100%" }}>
         {statedatas.value.allbeauticians.map((item) => {
           return (
-            <Stack spacing={3}>
+            <Stack spacing={3} >
               <Paper
                 elevation={24}
                 sx={{
@@ -50,17 +67,41 @@ const Browse = () => {
                   },
                 }}
               >
-                <div className="row">
-                  <Avatar sx={{ width: 125, height: 125 ,marginLeft:"30px",marginTop:"10px"}} src={item.image} />
+                <Grid container spacing={2}>
+                  <Grid item xs={2.2}>
+                    <Avatar
+                      sx={{
+                        width: 125,
+                        height: 125,
+                        marginLeft: "30px",
+                        marginTop: "10px",
+                      }}
+                      src={item.image}
+                    />
+                  </Grid>
+                  <Grid item xs={3}>
+                    
+                    <Typography variant="h5" component="h1" sx={{}}>
+                      {item.name}
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={3}>
                   <Typography variant="h5" component="h1" sx={{}}>
-                    {item.name}
-                  </Typography>
+                      Expert in
+                    </Typography>
+                  <h2>{item.expertin.name}</h2>
+                 
+                  </Grid>
+                  <Grid item xs={3} >
+                    <Button variant="contained" sx={{
+                        marginTop:"80px"
+                    }} onClick={()=>booknowHandler(item.id)}>Book Now</Button>
                   
-                  <h2 >
-                    {item.expertin.name}
-                  </h2>
-             
-                </div>
+                 
+                  </Grid>
+                </Grid>
+
+              
               </Paper>
             </Stack>
           );
