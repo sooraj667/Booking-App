@@ -22,10 +22,9 @@ class Appointment(models.Model):
     time = models.TimeField()
 
     def __str__(self):
-        return f"{self.customer.name} - {self.beautician.name} z "
+        return f"{self.customer.email} - {self.beautician.name}"
 
 
 
 
-    def __str__(self):
-        return f"{self.name} - {self.email} - {self.phone}"
+   

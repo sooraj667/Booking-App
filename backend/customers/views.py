@@ -5,6 +5,7 @@ from .serializers import Customerserializer
 from rest_framework_simplejwt.tokens import RefreshToken
 from beautician.models import *
 from beautician.serializers import *
+from datetime import datetime
 class Signup(APIView):
     def post(self,request):
         pname=request.data.get("pname")
@@ -62,22 +63,22 @@ class Changeimage(APIView):
             return Response({"message":'NotAdded'})
         
 
-# class Booknow(APIView):
-#     def post(self,request):
-#         print("REACHED")
-#         id=request.data.get("id")
-#         image=request.data.get("imageurl")
-#         print(image,"#########")
+class Booknow(APIView):
+    def post(self,request):
+        print("REACHEDDDDDDDDDD")
+        beautid=request.data.get("beautid")
+        custid=request.data.get("custid")
+        date=request.data.get("date")
+
+        beautobj=Beautician.objects.get(id=beautid)
+        custobj=Customer.objects.get(id=custid)
+        parseddateandtime=datetime.fromisoformat(str(date))
+        parseddate=parseddateandtime.date()
+        parsedtime=parseddateandtime.time()
+        print(parseddate,"DATE")
+
+        Appointment.objects.create(customer=custobj,beautician=beautobj,date=parseddate,time=parsedtime)
+        return Response({"message":'Appointmentdone'})
+   
         
 
-#         obj=Customer.objects.get(id=id)  
-#         if obj:
-#             obj.image=image
-#             obj.save()
-#             serialized_object=Customerserializer(obj)
-            
-#             return Response({"message":'Added',"custdata":serialized_object.data})
-#         else:
-#             return Response({"message":'NotAdded'})
-        
-        
