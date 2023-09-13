@@ -61,3 +61,23 @@ class Changeimage(APIView):
         else:
             return Response({"message":'NotAdded'})
         
+
+# class Booknow(APIView):
+#     def post(self,request):
+#         print("REACHED")
+#         id=request.data.get("id")
+#         image=request.data.get("imageurl")
+#         print(image,"#########")
+        
+
+#         obj=Customer.objects.get(id=id)  
+#         if obj:
+#             obj.image=image
+#             obj.save()
+#             serialized_object=Customerserializer(obj)
+            
+#             return Response({"message":'Added',"custdata":serialized_object.data})
+#         else:
+#             return Response({"message":'NotAdded'})
+        
+        
