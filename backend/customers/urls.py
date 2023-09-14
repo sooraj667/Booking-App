@@ -6,6 +6,8 @@ urlpatterns = [
     path("login/",Login.as_view(),name="Login"),
     path("changeimage/",Changeimage.as_view(),name="Changeimage"),
     path("booknow/",Booknow.as_view(),name="Booknow"),
+    path("beautstudio/",Beautstudio.as_view(),name="Beautstudio"),
+
 
     
     

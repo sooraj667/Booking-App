@@ -20,6 +20,7 @@ class Appointment(models.Model):
     beautician=models.ForeignKey(Beautician,on_delete=models.CASCADE)
     date = models.DateField()
     time = models.TimeField()
+    studio=models.ForeignKey(Studio,on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.customer.email} - {self.beautician.name}"

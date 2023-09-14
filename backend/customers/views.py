@@ -69,16 +69,46 @@ class Booknow(APIView):
         beautid=request.data.get("beautid")
         custid=request.data.get("custid")
         date=request.data.get("date")
+        time=request.data.get("time")
+        studio=request.data.get("studio")
 
         beautobj=Beautician.objects.get(id=beautid)
         custobj=Customer.objects.get(id=custid)
         parseddateandtime=datetime.fromisoformat(str(date))
         parseddate=parseddateandtime.date()
-        parsedtime=parseddateandtime.time()
-        print(parseddate,"DATE")
+        studioobj=Studio.objects.get(beautician=beautobj,place=studio)
+        
+        try:
+            Blockeddate.objects.get(beautician=beautobj,date=parseddate)
+            return Response({"message":'Date is Blocked'})
+        except:
+            parsed_time = datetime.strptime(time, "%I:%M %p").time()
+         
 
-        Appointment.objects.create(customer=custobj,beautician=beautobj,date=parseddate,time=parsedtime)
-        return Response({"message":'Appointmentdone'})
+            Appointment.objects.create(customer=custobj,beautician=beautobj,date=parseddate,time=parsed_time,studio=studioobj)
+            return Response({"message":'Appointmentdone'})
+
+        
    
         
 
+class Beautstudio(APIView):
+    def post(self,request):
+        print("REACHEDDDDDDDDDD")
+        beautid=request.data.get("beautid")
+        print(beautid,"BEAUTID")
+        try:
+            beautobj=Beautician.objects.get(id=beautid)
+            studioobjs=Studio.objects.filter(beautician=beautobj)
+            studioobjs_serialized=StudioSerializer(studioobjs,many=True)
+            print(studioobjs_serialized.data,"STUDIOS")
+            return Response({"message":"success","studiodata":studioobjs_serialized.data})
+        except:
+            return Response({"message":"not success"})
+
+        
+        
+
+        
+
+        

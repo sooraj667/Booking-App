@@ -1,5 +1,6 @@
 import React,{ useEffect } from 'react'
 import {setCustDetails,setAllBeauticiansC} from "../../../feautures/loginslice"
+
 import { useDispatch,useSelector } from 'react-redux';
 import HeaderDashboard from '../header/HeaderDashboard';
 import Landingpartcust from './Landingpartcust';
@@ -24,6 +25,8 @@ const Customerdashboard = () => {
           dispatch(setAllBeauticiansC(allbeaut_parsed));
         }
       },[]);
+
+   
   return (
     <div>
     <HeaderDashboard/>

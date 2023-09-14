@@ -26,3 +26,22 @@ class Beautician(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.email} - {self.phone}"
+    
+
+class Blockeddate(models.Model):
+    beautician=models.ForeignKey(Beautician,on_delete=models.CASCADE)
+    date=models.DateField()
+    
+    def __str__(self):
+        return f"{self.beautician.name} - {self.date}"
+    
+
+class Studio(models.Model):
+    beautician=models.ForeignKey(Beautician,on_delete=models.CASCADE)
+    locality=models.CharField(max_length=200)
+    place=models.CharField(max_length=200)
+    district=models.CharField(max_length=200)
+    state=models.CharField(max_length=200)
+
+    def __str__(self):
+        return f"{self.beautician.name} - {self.locality} -{self.place}"
