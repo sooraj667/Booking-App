@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import {toggleBeaut,toggleCust,toggleServices} from "../../../feautures/adminnavigationslice"
+import {toggleBeaut,toggleCust,toggleServices,toggleAppointments} from "../../../feautures/adminnavigationslice"
 import Paper from "@mui/material/Paper";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -78,6 +78,16 @@ const ContentAd = () => {
             </Avatar>
           </ListItemAvatar>
           <ListItemText primary="Services" secondary="July 20, 2014" />
+        </ListItem>
+        
+        <Divider variant="inset" component="li" />
+        <ListItem onClick={() => dispatch(toggleAppointments())}>
+          <ListItemAvatar>
+            <Avatar>
+              <BeachAccessIcon />
+            </Avatar>
+          </ListItemAvatar>
+          <ListItemText primary="Appointments" secondary="July 20, 2014" />
         </ListItem>
       </List>
     </Paper>

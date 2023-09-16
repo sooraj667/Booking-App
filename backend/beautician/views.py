@@ -73,6 +73,25 @@ class Addnewservice(APIView):
             return Response({"message":'Added',"services":services_serialized.data})
         else:
             return Response({"message":'NotAdded'})
+        
+class Editdetails(APIView):
+    def post(self,request):
+        id=request.data.get("id")
+        name=request.data.get("name")
+        email=request.data.get("email")
+        phone=request.data.get("phone")
+        beautobj=Beautician.objects.get(id=id)
+        beautobj.name=name
+        beautobj.email=email
+        beautobj.phone=phone
+        beautobj.save()
+        beautician_serialized=BeauticianSerializer(beautobj)
+        return Response({"message":'Added',"allbeautdatas":beautician_serialized.data})
+
+
+
+        
+
 
 
 

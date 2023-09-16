@@ -37,6 +37,8 @@ const LoginAd = () => {
           localStorage.setItem("allbeautdatas",JSON.stringify(response.data.allbeautdatas))
           localStorage.setItem("allcustdatas",JSON.stringify(response.data.allcustdatas))
           localStorage.setItem("allservices",JSON.stringify(response.data.allservices))
+          localStorage.setItem("allappointments",JSON.stringify(response.data.allappointments))
+          console.log(response.data.allappointments,"****************");
           navigate("../admindashboard")
 
       }
@@ -46,7 +48,7 @@ const LoginAd = () => {
           
       }
       
-    }).catch((errro)=>{
+    }).catch((error)=>{
       alert("error")
     })
   }

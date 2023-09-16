@@ -12,9 +12,9 @@ const Appointments = () => {
   const dispatch = useDispatch();
   const datas = useSelector((state) => state.adminalldatas);
   useEffect(() => {
-    const allappointmentsdatas = localStorage.getItem("allappointmentsdatas");
-    if (allappointmentsdatas) {
-      const parsed=JSON.parse(allappointmentsdatas)
+    const allappointments = localStorage.getItem("allappointments");
+    if (allappointments) {
+      const parsed=JSON.parse(allappointments)
       dispatch(setAllAppointments(parsed));
     }
   },[]);
@@ -36,7 +36,7 @@ const Appointments = () => {
 //   }
   return (
     <div> 
-    {console.log(datas.value.allappointmentsdatas)}
+    {console.log(datas.value.allappointments)}
     <h2>Appointments</h2>
     <div className="container mt-4">
       
@@ -47,18 +47,21 @@ const Appointments = () => {
             <th> Beautician</th>
             <th>Customer</th>
             <th>Studio</th>
-            <th>Amount</th>
+            <th>Scheduled On</th>
+         
 
           </tr>
         </thead>
         <tbody>
-          {Array.isArray(datas.value.allappointmentdatas) ? (
-            datas.value.allappointmentsdatas.map((item) => (
+          {Array.isArray(datas.value.allappointments) ? (
+            datas.value.allappointments.map((item) => (
               <tr key={item.id}>
                 <td>{item.id}</td>
-                <td>{item.name}</td>
-                <td>{item.email}</td>
-                <td>{item.phone}</td>
+                <td>{item.beautician.name}</td>
+                <td>{item.customer.name}</td>
+                <td>{item.studio.place}</td>
+                <td>{item.date} {item.time}</td>
+                
                 
                 {/* {
                    item.isblocked==="True"? <Button variant="outlined" onClick={()=>handleBlock(item.id)} sx={{backgroundColor:"#3CB371",color:"white"}}>Unblock</Button>:<Button variant="contained" onClick={()=>handleBlock(item.id)} sx={{backgroundColor:"#DC143C"}}>Block</Button>
@@ -78,6 +81,7 @@ const Appointments = () => {
           
         </tbody>
       </table>
+      {console.log(datas.value.allappointments,"********&&&&&#######")}
     </div>
   </div>
   )

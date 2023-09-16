@@ -6,8 +6,15 @@ import Modal from "@mui/material/Modal";
 import { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import { useDispatch, useSelector } from "react-redux";
-import { setAllservices,setServices } from "../../../../feautures/loginslice";
+import { setAllservices, setServices } from "../../../../feautures/loginslice";
 import axiosInstance from "../../../../axios/axiosconfig";
+import { setBeautDetails } from "../../../../feautures/loginslice";
+import {
+  changeEmail,
+  changePName,
+  changePhone,
+} from "../../../../feautures/beautslice";
+import Input from "@mui/joy/Input";
 
 const style = {
   position: "absolute",
@@ -20,13 +27,15 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-
-const Addservicemodal = () => {
+const Editdetailsmodal = () => {
   const dispatch = useDispatch();
   const statedatas = useSelector((state) => state.login);
-  const [selectedService, setSelectedService] = useState("");
+  const formdatas = useSelector((state) => state.signup);
   const [open, setOpen] = useState(false);
-  const [changed,setChanged]=useState(false)
+  const [changed, setChanged] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const handleOpen = () => {
     setOpen(true);
   };
@@ -35,29 +44,29 @@ const Addservicemodal = () => {
   };
 
   useEffect(() => {
-    const allservices = localStorage.getItem("allservices-B");
-    const services=localStorage.getItem("services-B");
-    const parsedallservices = JSON.parse(allservices);
-    const parsedservices = JSON.parse(services);
+    const allbeautdatas = localStorage.getItem("singledetails-B");
+    const parsed = JSON.parse(allbeautdatas);
+    dispatch(setBeautDetails(parsed));
+  }, [changed]);
 
-    dispatch(setAllservices(parsedallservices));
-    dispatch(setServices(parsedservices));
-  }, [changed,]);
-
-  const handleAddService = () => {
+  const handleUpdate = () => {
     const datas = {
-      servicename: selectedService,
-      beautid: statedatas.value.beautdetails.id,
+      id: statedatas.value.beautdetails.id,
+      name: name,
+      email: email,
+      phone: phone,
     };
+    console.log(datas, "##############333");
     axiosInstance
-      .post("beaut/addnewservice/", datas)
-      .then((res) =>{
-        localStorage.setItem("services-B",JSON.stringify(res.data.services))
-        setChanged((prev)=>!prev)
-        handleClose()
-
-
-      } )
+      .post("beaut/editdetails/", datas)
+      .then((res) => {
+        localStorage.setItem(
+          "singledetails-B",
+          JSON.stringify(res.data.allbeautdatas)
+        );
+        setChanged((prev) => !prev);
+        handleClose();
+      })
       .catch((error) => alert(error));
   };
   return (
@@ -67,7 +76,7 @@ const Addservicemodal = () => {
         variant="contained"
         sx={{ marginBottom: "0px", marginLeft: "220px", marginTop: "100px" }}
       >
-        Add Service
+        Edit Details
       </Button>
       <Modal
         open={open}
@@ -85,22 +94,31 @@ const Addservicemodal = () => {
               marginBottom: "30px",
             }}
           >
-            Add New Service
+            Edit Details
           </Typography>
 
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             <div className="row">
-              <label>Choose Service</label>
-              <select
-                id="mySelect"
-                name="fruit"
-                className="form-control"
-                onChange={(e) => setSelectedService(e.target.value)}
-              >
-                {statedatas.value.allservices.map((item) => {
-                  return <option>{item.name}</option>;
-                })}
-              </select>
+              <label> Name</label>
+              <Input
+                size="md"
+                placeholder=""
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
+              />
+              <label>Email</label>
+              <Input
+                size="md"
+                placeholder=""
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <label>Phone</label>
+              <Input
+                size="md"
+                placeholder=""
+                onChange={(e) => setPhone(e.target.value)}
+              />
             </div>
             <div className="row">
               <Button
@@ -109,9 +127,9 @@ const Addservicemodal = () => {
                   marginTop: "20px",
                   marginLeft: "40px",
                 }}
-                onClick={handleAddService}
+                onClick={handleUpdate}
               >
-                Add Service
+                Update
               </Button>
 
               <Button
@@ -133,4 +151,4 @@ const Addservicemodal = () => {
   );
 };
 
-export default Addservicemodal;
+export default Editdetailsmodal;

@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import CustomerManage from "./customer/CustomerManage";
 
 import ServicesAdmin from "../services/ServicesAdmin";
+import Appointments from "./appointments/Appointments";
 const DashboardAd = () => {
     const datas=useSelector((state)=>state.adminnavigation)
   return (
@@ -17,6 +18,7 @@ const DashboardAd = () => {
             {datas.value.beaut===true && <BeauticianManage/>}
             {datas.value.cust===true && <CustomerManage  />}
             {datas.value.services===true && <ServicesAdmin  />}
+            {datas.value.appointments===true && <Appointments  />}
            
             
         </div>

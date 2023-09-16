@@ -4,6 +4,7 @@ const INITIALSTATE={
    landingpart:true,
    services:false,
    appointments:false,
+   profile:false,
 
    
 
@@ -17,14 +18,22 @@ const beautnavigationslice=createSlice(
          },
          reducers:{
             toggleServices:(state)=>{
-                state.value.services=!(state.value.services)
+                state.value.services=true
                 state.value.appointments=false
                 state.value.landingpart=false
+                state.value.appointments=false
             },
             toggleAppointments:(state)=>{
-                state.value.appointments=!(state.value.appointments)
+                state.value.appointments=true
                 state.value.services=false
                 state.value.landingpart=false
+                state.value.profile=false
+            },
+            toggleProfile:(state)=>{
+                state.value.profile=true
+                state.value.services=false
+                state.value.landingpart=false
+                state.value.appointments=false
             },
            
        
@@ -39,5 +48,5 @@ const beautnavigationslice=createSlice(
 
 )
 
-export const {toggleServices,toggleAppointments} = beautnavigationslice.actions
+export const {toggleServices,toggleAppointments,toggleProfile} = beautnavigationslice.actions
 export default beautnavigationslice.reducer

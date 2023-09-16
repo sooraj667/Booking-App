@@ -6,8 +6,9 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth.hashers import check_password
 from beautician.models import *
 from customers.models import *
-from beautician.serializers import BeauticianSerializer,ServicesSerializer
-from customers.serializers import Customerserializer
+from beautician.serializers import BeauticianSerializer,ServicesSerializer,StudioSerializer
+from customers.serializers import Customerserializer,Appointmentserializer
+from rest_framework.serializers import Serializer
 
 
 class Login(APIView):
@@ -19,9 +20,7 @@ class Login(APIView):
             found=User.objects.get(email=email)
         except:
             return Response({"message":'NotMatched'})
-            
-      
-            
+    
 
         hashedpassword=found.password
         matched = check_password(password, hashedpassword)
@@ -41,10 +40,28 @@ class Login(APIView):
             allbeautdatas=BeauticianSerializer(allbeautdatas,many=True)
             allservices=Services.objects.all()
             allservices=ServicesSerializer(allservices,many=True)
+            allappointments=Appointment.objects.all()
+            allappointment_serialized=Appointmentserializer(allappointments,many=True)
+       
+            for item in allappointments:
+                req_id=item.id
+                beautobj=item.beautician
+                custobj=item.customer
+                studioobj=item.studio
+                for item in allappointment_serialized.data:
+                    if item["id"]==req_id:
+                        item["beautician"]=BeauticianSerializer(beautobj).data
+                        item["customer"]=Customerserializer(custobj).data
+                        item["studio"]=StudioSerializer(studioobj).data
+
+
+
+
+
             
 
             refresh=RefreshToken.for_user(obj)  
-            return Response({"message":'Matched',"admindata":serialized_object.data,"allbeautdatas":allbeautdatas.data,"allcustdatas":allcustdatas.data,"allservices":allservices.data,"accesstoken":str(refresh.access_token),"refreshtoken":str(refresh)})
+            return Response({"message":'Matched',"admindata":serialized_object.data,"allbeautdatas":allbeautdatas.data,"allcustdatas":allcustdatas.data,"allservices":allservices.data,"allappointments":allappointment_serialized.data,"accesstoken":str(refresh.access_token),"refreshtoken":str(refresh)})
         else:
             return Response({"message":'NotMatched'})
         
