@@ -17,7 +17,10 @@ const Header = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("singledetails-B");
-    Cookies.remove("accesstoken-B");
+    localStorage.removeItem("allservices-B");
+    localStorage.removeItem("services-B");
+    localStorage.removeItem("expertin-B");
+    Cookies.remove("accesstoken-B"); 
   };
   return (
     <Box sx={{ flexGrow: 1 }}>

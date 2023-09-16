@@ -22,6 +22,7 @@ class Beautician(models.Model):
     image=models.CharField(max_length=300,blank=True,null=True)
     expertin=models.ForeignKey(Services,on_delete=models.CASCADE,related_name='beauticians_expert_in',blank=True,null=True)
     services=models.ManyToManyField(Services,related_name='beauticians_providing_services')
+    isblocked=models.CharField(max_length=200,default="False")
    
 
     def __str__(self):

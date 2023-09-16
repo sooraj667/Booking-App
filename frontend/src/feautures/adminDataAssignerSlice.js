@@ -4,6 +4,7 @@ const INITIALSTATE={
 
     allbeautdatas:[],
     allcustdatas:[],
+    allservices:[],
 
 
    
@@ -24,6 +25,10 @@ const adminDataAssignerSlice=createSlice(
             setAllCust:(state,action)=>{
                 state.value.allcustdatas=action.payload
             },
+            setAllservices:(state,action)=>{
+                state.value.allservices=action.payload
+            },
+            
        
 
 
@@ -36,5 +41,5 @@ const adminDataAssignerSlice=createSlice(
 
 )
 
-export const {setAllBeaut,setAllCust} = adminDataAssignerSlice.actions
+export const {setAllBeaut,setAllCust,setAllservices} = adminDataAssignerSlice.actions
 export default adminDataAssignerSlice.reducer

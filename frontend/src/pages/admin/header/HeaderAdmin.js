@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import "./HeaderAd.css";
+import React from 'react'
+import "./Header.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Cookies from "js-cookie";
@@ -10,28 +10,18 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import {setAccessTokenAd} from "../../../feautures/adminloginslice";
 
-const HeaderAd = () => {
+const HeaderAdmin = () => {
     const datas = useSelector((state) => state.adminlogin);
-    const dispatch=useDispatch()
 
-
-    const handleLogout=()=>{
-  
-    localStorage.removeItem("allcustdatas")
-    localStorage.removeItem("admindetails")
-    localStorage.removeItem("allbeautdatas")
-    localStorage.removeItem("allservices")
-    Cookies.remove("accesstoken-Ad")
-  }
-  useEffect(
-    ()=>{
-      const admintoken=Cookies.get("accesstoken-Ad")
-      dispatch(setAccessTokenAd(admintoken))
-
-    },[]
-  )
+    const handleLogout = () => {
+        localStorage.removeItem("allcustdatas")
+        localStorage.removeItem("admindetails")
+        localStorage.removeItem("allbeautdatas")
+        localStorage.removeItem("allservices")
+        console.log("Ivan working ahnenn thonan");
+      Cookies.remove("accesstoken-Ad"); 
+    };
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -70,11 +60,10 @@ const HeaderAd = () => {
               </Link>
             </>
           ) }
-          {console.log(datas.value.accesstokenAd)}
         </Toolbar>
       </AppBar>
     </Box>
-  );
-};
+  )
+}
 
-export default HeaderAd;
+export default HeaderAdmin

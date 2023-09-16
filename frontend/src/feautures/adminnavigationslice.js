@@ -4,6 +4,7 @@ const INITIALSTATE={
 
    beaut:false,
    cust:false,
+   services:false,
 
    
 
@@ -17,13 +18,21 @@ const adminnavigationslice=createSlice(
          },
          reducers:{
             toggleBeaut:(state)=>{
-                state.value.beaut=!(state.value.beaut)
+                state.value.beaut=true
                 state.value.cust=false
+                state.value.services=false
             },
             toggleCust:(state)=>{
-                state.value.cust=!(state.value.cust)
+                state.value.cust=true
                 state.value.beaut=false
+                state.value.services=false
             },
+            toggleServices:(state)=>{
+                state.value.services=true
+                state.value.beaut=false
+                state.value.cust=false
+            },
+           
            
        
 
@@ -37,5 +46,5 @@ const adminnavigationslice=createSlice(
 
 )
 
-export const {toggleBeaut,toggleCust} = adminnavigationslice.actions
+export const {toggleBeaut,toggleCust,toggleServices} = adminnavigationslice.actions
 export default adminnavigationslice.reducer

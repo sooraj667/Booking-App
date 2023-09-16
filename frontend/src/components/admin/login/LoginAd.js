@@ -22,6 +22,8 @@ const LoginAd = () => {
           Cookies.set("accesstoken-Ad",response.data.accesstoken,{ expires: 7 })
           localStorage.setItem("admindetails",JSON.stringify(response.data.admindata))
           localStorage.setItem("allbeautdatas",JSON.stringify(response.data.allbeautdatas))
+          localStorage.setItem("allcustdatas",JSON.stringify(response.data.allcustdatas))
+          localStorage.setItem("allservices",JSON.stringify(response.data.allservices))
           navigate("../admindashboard")
 
       }

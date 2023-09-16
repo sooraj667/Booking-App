@@ -16,6 +16,8 @@ const HeaderDashboard = () => {
   const datas = useSelector((state) => state.login);
   const handleLogoutB = () => {
     localStorage.removeItem("singledetails-B");
+    localStorage.removeItem("allservices-B");
+    localStorage.removeItem("services-B");
     localStorage.removeItem("expertin-B");
     Cookies.remove("accesstoken-B");
   };

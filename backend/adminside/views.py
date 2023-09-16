@@ -4,21 +4,22 @@ from django.contrib.auth.models import User
 from .serializers import Usermodelserializer
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth.hashers import check_password
-from beautician.models import Beautician
-from beautician.serializers import BeauticianSerializer
+from beautician.models import *
+from customers.models import *
+from beautician.serializers import BeauticianSerializer,ServicesSerializer
+from customers.serializers import Customerserializer
 
 
 class Login(APIView):
     def post(self,request):
         email=request.data.get("email")
         password=request.data.get("password")
-        print(email,password,"#############33")
-        print("OKKOKOKOKOKOKKOk")
+  
         found=User.objects.filter(email=email)
-        print(found)
+ 
         hashedpassword=found[0].password
         matched = check_password(password, hashedpassword)
-        print("MATCHED",matched)
+    
         
        
            
@@ -26,14 +27,73 @@ class Login(APIView):
 
             obj=User.objects.get(email=email)
             serialized_object=Usermodelserializer(obj)
-            print(serialized_object,"PRIRIRIRIIR")
+      
             
-
+            allcustdatas=Customer.objects.all()
+            allcustdatas=Customerserializer(allcustdatas,many=True)
             allbeautdatas=Beautician.objects.all()
             allbeautdatas=BeauticianSerializer(allbeautdatas,many=True)
-            print(allbeautdatas,"IIIIIIIIIIIIIIIIIIIIIIIII")
+            allservices=Services.objects.all()
+            allservices=ServicesSerializer(allservices,many=True)
+            
 
             refresh=RefreshToken.for_user(obj)  
-            return Response({"message":'Matched',"admindata":serialized_object.data,"allbeautdatas":allbeautdatas.data,"accesstoken":str(refresh.access_token),"refreshtoken":str(refresh)})
+            return Response({"message":'Matched',"admindata":serialized_object.data,"allbeautdatas":allbeautdatas.data,"allcustdatas":allcustdatas.data,"allservices":allservices.data,"accesstoken":str(refresh.access_token),"refreshtoken":str(refresh)})
         else:
             return Response({"message":'NotMatched'})
+        
+
+class Blockbeaut(APIView):
+    def post(self,request):
+        beautid=request.data.get("beautid")
+        beautobj=Beautician.objects.get(id=beautid)
+        if beautobj.isblocked=="False":
+            beautobj.isblocked="True"
+        else:
+            beautobj.isblocked="False"
+
+
+        
+        beautobj.save()
+        allbeautdatas=Beautician.objects.all()
+        allbeautdatas=BeauticianSerializer(allbeautdatas,many=True)
+      
+        return Response({"message":'Blocked',"allbeautdatas":allbeautdatas.data,})
+    
+    
+class Blockcust(APIView):
+    def post(self,request):
+        custid=request.data.get("custid")
+        custobj=Customer.objects.get(id=custid)
+        if custobj.isblocked=="False":
+            custobj.isblocked="True"
+        else:
+            custobj.isblocked="False"
+
+        custobj.save()
+        allcustdatas=Customer.objects.all()
+        allcustdatas=Customerserializer(allcustdatas,many=True)
+      
+        return Response({"message":'Blocked',"allcustdatas":allcustdatas.data})
+    
+
+class Addnewservice(APIView):
+    def post(self,request):
+        servicename=request.data.get("servicename")
+        servicedesc=request.data.get("servicedesc")
+        image=request.data.get("imageurl")
+        Services.objects.create(name=servicename,description=servicedesc,image=image)
+        allservices=Services.objects.all()
+        allservices=ServicesSerializer(allservices,many=True)
+        return Response({"allservices":allservices.data})
+
+        
+      
+          
+
+
+
+
+
+
+        

@@ -8,6 +8,7 @@ class Customer(models.Model):
     phone=models.CharField(max_length=200)
     password=models.CharField(max_length=200)
     image=models.CharField(max_length=300,blank=True,null=True)
+    isblocked=models.CharField(max_length=200,default="False")
 
 
     def __str__(self):
@@ -21,6 +22,7 @@ class Appointment(models.Model):
     date = models.DateField()
     time = models.TimeField()
     studio=models.ForeignKey(Studio,on_delete=models.CASCADE)
+
 
     def __str__(self):
         return f"{self.customer.email} - {self.beautician.name}"
