@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import Loginform from "./Loginform";
 import axiosInstance from '../../../axios/axiosconfig';
 import { useNavigate } from 'react-router-dom';
@@ -7,9 +7,14 @@ import Cookies from 'js-cookie';
 import Paper from '@mui/material/Paper';
 import Button from "@mui/material/Button"
 
+import MuiAlert from '@mui/material/Alert';
 
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const Logincustomer = () => {
+  const [error,setError]=useState(false)
   const dispatch=useDispatch()
   const formdatas=useSelector((state)=>state.login)
   const navigate=useNavigate()
@@ -30,7 +35,8 @@ const Logincustomer = () => {
 
         }
         else{
-            alert("Credentials wrong")
+           
+            setError(true)
         }
         
       }).catch((error)=>{
@@ -76,6 +82,12 @@ const Logincustomer = () => {
                 >
                   Login
                 </Button>
+
+                {
+                  error && <Alert severity="error" sx={{
+                    marginTop:'20px'
+                  }}>Wrong Credentials!</Alert>
+                }
                
               </div>
             </div>

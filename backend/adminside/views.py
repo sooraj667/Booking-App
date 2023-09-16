@@ -14,10 +14,16 @@ class Login(APIView):
     def post(self,request):
         email=request.data.get("email")
         password=request.data.get("password")
-  
-        found=User.objects.filter(email=email)
- 
-        hashedpassword=found[0].password
+        print(f"EMEILLLLLLLL {email} PASWORDDDDD {password}")
+        try:
+            found=User.objects.get(email=email)
+        except:
+            return Response({"message":'NotMatched'})
+            
+      
+            
+
+        hashedpassword=found.password
         matched = check_password(password, hashedpassword)
     
         

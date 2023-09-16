@@ -75,19 +75,7 @@ const BeauticianManage = () => {
 
             
 
-            {/* <tr>
-            <td>2</td>
-            <td>Jane</td>
-            <td>Smith</td>
-            <td>jane@example.com</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Bob</td>
-            <td>Johnson</td>
-            <td>bob@example.com</td>
-          </tr> */}
-            {/* Add more rows as needed */}
+            
           </tbody>
         </table>
       </div>
