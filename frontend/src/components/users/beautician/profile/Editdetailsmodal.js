@@ -52,11 +52,11 @@ const Editdetailsmodal = () => {
   const handleUpdate = () => {
     const datas = {
       id: statedatas.value.beautdetails.id,
-      name: name,
-      email: email,
-      phone: phone,
+      name: formdatas.value.pname,
+      email: formdatas.value.email,
+      phone: formdatas.value.phone,
     };
-    console.log(datas, "##############333");
+    console.log(formdatas.value.pname, "##############333");
     axiosInstance
       .post("beaut/editdetails/", datas)
       .then((res) => {
@@ -74,7 +74,7 @@ const Editdetailsmodal = () => {
       <Button
         onClick={handleOpen}
         variant="contained"
-        sx={{ marginBottom: "0px", marginLeft: "220px", marginTop: "100px" }}
+        sx={{ marginBottom: "0px", marginLeft: "10px", marginTop: "50px" }}
       >
         Edit Details
       </Button>
@@ -98,51 +98,59 @@ const Editdetailsmodal = () => {
           </Typography>
 
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <div className="row">
-              <label> Name</label>
-              <Input
-                size="md"
-                placeholder=""
-                onChange={(e) => {
-                  setName(e.target.value);
-                }}
-              />
-              <label>Email</label>
-              <Input
-                size="md"
-                placeholder=""
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <label>Phone</label>
-              <Input
-                size="md"
-                placeholder=""
-                onChange={(e) => setPhone(e.target.value)}
-              />
-            </div>
-            <div className="row">
-              <Button
-                variant="contained"
-                sx={{
-                  marginTop: "20px",
-                  marginLeft: "40px",
-                }}
-                onClick={handleUpdate}
-              >
+            <div class="card-body">
+              <div class="form-group">
+                <div className="row">
+                  <label for="username" className="mr-3">
+                    Name:
+                  </label>
+                  <TextField
+                    variant="standard"
+                    onChange={(e) => dispatch(changePName(e.target.value))}
+                  />
+                </div>
+                <span className="text-danger">{formdatas.value.error.pname}</span>
+              </div>
+
+              <div class="form-group">
+                <div className="row">
+                  <label for="email" className="mr-3">
+                    Email:
+                  </label>
+                  <TextField
+                    variant="standard"
+                    onChange={(e) => dispatch(changeEmail(e.target.value))}
+                  />
+                </div>
+                <span className="text-danger">{formdatas.value.error.email}</span>
+              </div>
+
+              <div class="form-group">
+                <div className="row">
+                  <label for="password" className="mr-3">
+                    Phone:
+                  </label>
+                  <TextField
+                    type="numtextber"
+                    variant="standard"
+                    required
+                    onChange={(e) => dispatch(changePhone(e.target.value))}
+                  />
+                </div>
+                <span className="text-danger">{formdatas.value.error.phone}</span>
+              </div>
+              <Button variant="contained" onClick={handleUpdate}>
                 Update
+
               </Button>
 
-              <Button
-                onClick={handleClose}
-                variant="contained"
-                sx={{
-                  marginTop: "20px",
-                  marginLeft: "70px",
-                  backgroundColor: "#DC143C",
-                }}
-              >
-                Close
-              </Button>
+              
+
+              
+               
+              
+
+            
             </div>
           </Typography>
         </Box>

@@ -32,12 +32,12 @@ const Profile = () => {
           },
         }}
       >
-        <div className="ml-5">
-            <div className="row">
+        <div style={{"marginLeft":"320px","paddingTop":"120px"}}>
+            <div className="row ">
                 <Avatar src={statedatas.value.beautdetails.image}  sx={{ width: 125, height: 125 }}/>
 
             </div>
-            <div className="row  mt-3">
+            <div className="row  mt-3 ">
                 <Typography variant="h6" component="h1"> Name : </Typography>
                 <Typography variant="h6" component="h1"> {statedatas.value.beautdetails.name} </Typography>
 
@@ -54,6 +54,7 @@ const Profile = () => {
 
             </div>
             <Editdetailsmodal/>
+            
 
 
             
@@ -61,6 +62,7 @@ const Profile = () => {
        
 
         </div>
+        
    
         
       </Paper>
