@@ -162,9 +162,11 @@ const Services = () => {
                             </Avatar>
                           </ListItemAvatar>
                           <ListItemText
-                            primary={item.name}
-                            secondary="Jan 7, 2014"
+                            primary={item.service.name}
+                            secondary={`Rs ${item.servicefee} /-`}
                           />
+                          {/* {item.service.name} */}
+                      
                         </ListItem>
                         <Divider variant="inset" component="li" />
                       </>

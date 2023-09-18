@@ -22,6 +22,7 @@ const beautnavigationslice=createSlice(
                 state.value.appointments=false
                 state.value.landingpart=false
                 state.value.appointments=false
+                state.value.profile=false
             },
             toggleAppointments:(state)=>{
                 state.value.appointments=true

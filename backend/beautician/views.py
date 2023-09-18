@@ -1,7 +1,7 @@
 from rest_framework.response import Response 
 from rest_framework.views import APIView
 from .models import *
-from .serializers import BeauticianSerializer,ServicesSerializer
+from .serializers import *
 from rest_framework_simplejwt.tokens import RefreshToken
 
 
@@ -24,14 +24,15 @@ class Login(APIView):
 
         found=Beautician.objects.filter(email=email,password=password).count()    
         if found==1:
-            obj=Beautician.objects.get(email=email,password=password)
-            serialized_object=BeauticianSerializer(obj)
-            expertin_serialized=ServicesSerializer(obj.expertin)
-            otherservices_serialized=ServicesSerializer(obj.services,many=True)
+            beautobj=Beautician.objects.get(email=email,password=password)
+            serialized_object=BeauticianSerializer(beautobj)
+            expertin_serialized=ServicesSerializer(beautobj.expertin)
+            beautservices=Servicefees.objects.filter(beautician=beautobj)
+            beautservices_serialized=ServicefeesSerializer(beautservices,many=True)
             allservices_serialized=ServicesSerializer(Services.objects.all(),many=True)
 
-            refresh=RefreshToken.for_user(obj)  
-            return Response({"message":'Matched',"beautdata":serialized_object.data,"expertin":expertin_serialized.data,"services":otherservices_serialized.data,"allservices":allservices_serialized.data,"accesstoken":str(refresh.access_token),"refreshtoken":str(refresh)})
+            refresh=RefreshToken.for_user(beautobj)  
+            return Response({"message":'Matched',"beautdata":serialized_object.data,"expertin":expertin_serialized.data,"services":beautservices_serialized.data,"allservices":allservices_serialized.data,"accesstoken":str(refresh.access_token),"refreshtoken":str(refresh)})
         else:
             return Response({"message":'NotMatched'})
 
@@ -59,20 +60,53 @@ class Addnewservice(APIView):
     def post(self,request):
         id=request.data.get("beautid")
         servicename=request.data.get("servicename")
-        print(servicename,"#########")
+        servicefee=request.data.get("servicefee")
         serviceobj=Services.objects.get(name=servicename)
+        beautobj=Beautician.objects.get(id=id)
+    
+
+        try:
+            beautservices=Servicefees.objects.get(beautician=beautobj,service=serviceobj)
+            print("ALREADY PRESENT ####################################")
+            return Response({"message":'Already Present'})
+
+        except:
+            print("NOT PRESENT")
+            
+        
+        
+            
+
+            Servicefees.objects.create(service=serviceobj,beautician=beautobj,servicefee=servicefee)
+            beautservices=Servicefees.objects.filter(beautician=beautobj)
+            beautservices_serialized=ServicefeesSerializer(beautservices,many=True)
+            for item in beautservices:
+                req_id=item.id
+                for item in beautservices_serialized.data:
+                    if item["id"]==req_id:
+                        serviceid=item["service"]
+                        serviceobj=Services.objects.get(id=serviceid)
+                        serviceobj_serialized=ServicesSerializer(serviceobj)
+                        item["service"]=serviceobj_serialized.data
+            return Response({"message":'Added',"services":beautservices_serialized.data})
+
+
+                
+
+
+
         
         
 
-        obj=Beautician.objects.get(id=id)  
-        if obj:
-            obj.services.add(serviceobj)
-            obj.save()
-            services_serialized=ServicesSerializer(obj.services,many=True)
+        # obj=Beautician.objects.get(id=id)  
+        # if obj:
+        #     obj.services.add(serviceobj)
+        #     obj.save()
+        #     services_serialized=ServicesSerializer(obj.services,many=True)
             
-            return Response({"message":'Added',"services":services_serialized.data})
-        else:
-            return Response({"message":'NotAdded'})
+        # return Response({"message":'Added',"services":beautservices_serialized.data})
+        # else:
+        #     return Response({"message":'NotAdded'})
         
 class Editdetails(APIView):
     def post(self,request):

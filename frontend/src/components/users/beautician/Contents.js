@@ -39,9 +39,11 @@ const Contents = () => {
           width: "100%",
           maxWidth: 360,
           bgcolor: "background.paper",
+          
+
         }}
       >
-        <ListItem onClick={()=>dispatch(toggleAppointments())}>
+        <ListItem  sx={{ cursor: "pointer" }}  onClick={()=>dispatch(toggleAppointments())}>
           <ListItemAvatar>
             <Avatar>
               <BookIcon />
@@ -50,7 +52,7 @@ const Contents = () => {
           <ListItemText primary="Appointments"  />
         </ListItem>
         <Divider variant="inset" component="li" />
-        <ListItem onClick={()=>dispatch(toggleServices())}>
+        <ListItem sx={{ cursor: "pointer" }} onClick={()=>dispatch(toggleServices())}>
           <ListItemAvatar>
             <Avatar>
               <WorkIcon />
@@ -59,7 +61,7 @@ const Contents = () => {
           <ListItemText primary="Services" secondary="Jan 7, 2014" />
         </ListItem>
         <Divider variant="inset" component="li" />
-        <ListItem onClick={()=>dispatch(toggleProfile())}>
+        <ListItem sx={{ cursor: "pointer" }} onClick={()=>dispatch(toggleProfile())}>
           <ListItemAvatar>
             <Avatar>
               <BeachAccessIcon />

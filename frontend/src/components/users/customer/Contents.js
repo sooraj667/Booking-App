@@ -41,7 +41,7 @@ const Contents = () => {
           bgcolor: "background.paper",
         }}
       >
-        <ListItem onClick={() => dispatch(toggleFavouritestylists())}>
+        <ListItem sx={{ cursor: "pointer" }} onClick={() => dispatch(toggleFavouritestylists())}>
           <ListItemAvatar>
             <Avatar>
               <BookIcon />
@@ -50,7 +50,7 @@ const Contents = () => {
           <ListItemText primary="Favourite Stylists" />
         </ListItem>
         <Divider variant="inset" component="li" />
-        <ListItem onClick={() => dispatch(toggleBookings())}>
+        <ListItem sx={{ cursor: "pointer" }} onClick={() => dispatch(toggleBookings())}>
           <ListItemAvatar>
             <Avatar>
               <WorkIcon />
@@ -59,7 +59,7 @@ const Contents = () => {
           <ListItemText primary="Bookings" secondary="Jan 7, 2014" />
         </ListItem>
         <Divider variant="inset" component="li" />
-        <ListItem onClick={() => dispatch(toggleBrowse())}>
+        <ListItem sx={{ cursor: "pointer" }} onClick={() => dispatch(toggleBrowse())}>
           <ListItemAvatar>
             <Avatar>
               <WorkIcon />
