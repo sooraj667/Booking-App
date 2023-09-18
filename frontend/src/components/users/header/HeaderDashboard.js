@@ -1,4 +1,4 @@
-import React,{ useEffect } from "react";
+import React,{ useEffect,useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
@@ -14,6 +14,8 @@ import { useDispatch } from "react-redux";
 const HeaderDashboard = () => {
   const dispatch=useDispatch()
   const datas = useSelector((state) => state.login);
+  const [accesstokenB,setAccessTokenB]=useState("")
+  const [accesstokenC,setAccessTokenC]=useState("")
   const handleLogoutB = () => {
     localStorage.removeItem("singledetails-B");
     localStorage.removeItem("allservices-B");
@@ -28,17 +30,19 @@ const HeaderDashboard = () => {
   };
 
   useEffect(()=>{
-    const accesstokenB=Cookies.get('accesstoken-B')
-    const accesstokenC=Cookies.get('accesstoken-C')
+    const atokenB=Cookies.get('accesstoken-B')
+    const atokenC=Cookies.get('accesstoken-C')
+    
     
    
-    if (accesstokenB){
+    if (atokenB){
+      console.log(("HEYYYYYYYy"));
         
-        dispatch(setAccessTokenB(accesstokenB))
+        setAccessTokenB(atokenB)
     }
-    if (accesstokenC){
+    if (atokenC){
         
-        dispatch(setAccessTokenC(accesstokenC))
+        setAccessTokenC(atokenC)
     }
   },[])
   return (
@@ -76,7 +80,7 @@ const HeaderDashboard = () => {
             </Button>
           </Link> */}
 
-          {datas.value.accesstokenB && (
+          {accesstokenB && (
             <>
               <Link to="/loginbeautician">
                 <Button
@@ -93,7 +97,7 @@ const HeaderDashboard = () => {
             </>
           )}
 
-          {datas.value.accesstokenC && (
+          {accesstokenC && (
             <>
               <Link to="/logincustomer">
                 <Button
