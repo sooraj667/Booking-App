@@ -8,6 +8,8 @@ urlpatterns = [
     path("booknow/",Booknow.as_view(),name="Booknow"),
     path("getbeautdatas/",Getbeautdatas.as_view(),name="Getbeautdatas"),
     path("getbookings/",Getbookings.as_view(),name="Getbookings"),
+    path("getlandingpage/",Getlandingpage.as_view(),name="Getlandingpage"),
+    path("editdetails/",Editdetails.as_view(),name="Editdetails"),
 
 
     

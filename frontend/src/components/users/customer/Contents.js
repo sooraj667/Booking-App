@@ -11,7 +11,7 @@ import WorkIcon from "@mui/icons-material/Work";
 import BeachAccessIcon from "@mui/icons-material/BeachAccess";
 import Divider from "@mui/material/Divider";
 import { useDispatch } from "react-redux";
-import {toggleBookings,toggleFavouritestylists,toggleBrowse} from "../../../feautures/customer/customernavigationslice"
+import {toggleBookings,toggleFavouritestylists,toggleBrowse,toggleProfile} from "../../../feautures/customer/customernavigationslice"
 const Contents = () => {
   const dispatch = useDispatch();
   return (
@@ -41,14 +41,14 @@ const Contents = () => {
           bgcolor: "background.paper",
         }}
       >
-        <ListItem sx={{ cursor: "pointer" }} onClick={() => dispatch(toggleFavouritestylists())}>
+        {/* <ListItem sx={{ cursor: "pointer" }} onClick={() => dispatch(toggleFavouritestylists())}>
           <ListItemAvatar>
             <Avatar>
               <BookIcon />
             </Avatar>
           </ListItemAvatar>
           <ListItemText primary="Favourite Stylists" />
-        </ListItem>
+        </ListItem> */}
         <Divider variant="inset" component="li" />
         <ListItem sx={{ cursor: "pointer" }} onClick={() => dispatch(toggleBookings())}>
           <ListItemAvatar>
@@ -68,13 +68,13 @@ const Contents = () => {
           <ListItemText primary="Browse" secondary="Jan 7, 2014" />
         </ListItem>
         <Divider variant="inset" component="li" />
-        <ListItem>
+        <ListItem sx={{ cursor: "pointer" }} onClick={() => dispatch(toggleProfile())}>
           <ListItemAvatar>
             <Avatar>
               <BeachAccessIcon />
             </Avatar>
           </ListItemAvatar>
-          <ListItemText primary="Vacation" secondary="July 20, 2014" />
+          <ListItemText primary="Profile" secondary="July 20, 2014" />
         </ListItem>
       </List>
     </Paper>

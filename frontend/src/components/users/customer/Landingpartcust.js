@@ -14,6 +14,7 @@ import { setCustDetails } from "../../../feautures/loginslice";
 import Paper from "@mui/material/Paper";
 import Topstackcust from "./Topstackcust";
 
+
 const Landingpartcust = () => {
   const [addImage, setAddImage] = useState(false);
   const [image, setImage] = useState("");
@@ -34,6 +35,16 @@ const Landingpartcust = () => {
     // console.log(URL.createObjectURL(e.target.files[0]));
     // return setSelectedImage(URL.createObjectURL(e.target.files[0]));
   };
+
+//   useEffect(
+//     ()=>{
+//         axiosInstance.post("cust/getlandingpage").then((res)=>{
+//             console.log(res.data);
+//         }).catch((err)=>{
+//             alert(err)
+//         })
+//     }
+//   )
 
   const uploadImageHandler = () => {
     const reference = ref(storage, `customer/${selectedImage.name + v4()}`);

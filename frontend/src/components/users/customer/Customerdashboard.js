@@ -9,6 +9,7 @@ import Contents from './Contents';
 import Browse from './Browse';
 import Booknow from './Booknow';
 import Booking from './bookings/Booking';
+import Profile from './profile/Profile';
 const Customerdashboard = () => {
     const details = useSelector((state) => state.login);
     const navigationdatas = useSelector((state) => state.custnavigation);
@@ -55,6 +56,10 @@ const Customerdashboard = () => {
       }
       {
         navigationdatas.value.bookings && <Booking/>
+
+      }
+       {
+        navigationdatas.value.profile && <Profile/>
 
       }
      

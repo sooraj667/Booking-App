@@ -189,3 +189,80 @@ class Getbookings(APIView):
             return Response({"message":"success","appointmentdata":appointmentsobjs_serialized.data})
         except:
             return Response({"message":"not success"})
+        
+class Getlandingpage(APIView):
+    def post(self,request):
+        print("REACHEDDDDDDDDDD")
+        custid=request.data.get("custid")
+        print(custid,"CUSTID")
+        try:
+            custobj=Customer.objects.get(id=custid)
+            print(custobj,"#######")
+            appointmentsobjs=Appointment.objects.filter(customer=custobj)
+            appointmentsobjs_serialized=Appointmentserializer(appointmentsobjs,many=True)
+
+            # studioobjs=Studio.objects.filter(beautician=beautobj)
+            # studioobjs_serialized=StudioSerializer(studioobjs,many=True)
+
+            # serviceobjs=Servicefees.objects.filter(beautician=beautobj)
+            # serviceobjs_serialized=ServicefeesSerializer(serviceobjs,many=True)
+            print("ALLSET")
+            print(appointmentsobjs)
+            for item in appointmentsobjs:
+                serviceobj=item.service
+                beauticianobj=item.beautician
+                studioobj=item.studio
+
+                baseservice=serviceobj.service
+                baseservice_serialized=ServicesSerializer(baseservice)
+                print(f"{serviceobj},{beauticianobj},{studioobj} ############3")
+                
+
+                serviceobj_serialized=ServicefeesSerializer(serviceobj)
+                beauticianobj_serialized=BeauticianSerializer(beauticianobj)
+                studioobj_serialized=StudioSerializer(studioobj)
+                
+
+                
+                
+                serviceid=serviceobj.id
+                beauticianid=beauticianobj.id
+                studioid=studioobj.id
+               
+                for item in appointmentsobjs_serialized.data:
+                    if item["service"]==serviceid:
+                        item["service"]=serviceobj_serialized.data
+                        item["service"]["service"]=baseservice_serialized.data
+                    if  item["beautician"]==beauticianid:
+                        item["beautician"]=beauticianobj_serialized.data
+                    if  item["studio"]==studioid:
+                        item["studio"]=studioobj_serialized.data
+
+
+                
+
+                        
+
+                
+            print(appointmentsobjs_serialized.data)
+
+            # print(studioobjs_serialized.data,"STUDIOS")
+            return Response({"message":"success","appointmentdata":appointmentsobjs_serialized.data})
+        except:
+            return Response({"message":"not success"})
+        
+
+
+class Editdetails(APIView):
+    def post(self,request): 
+        id=request.data.get("id")
+        name=request.data.get("name")
+        email=request.data.get("email")
+        phone=request.data.get("phone")
+        custobj=Customer.objects.get(id=id)
+        custobj.name=name
+        custobj.email=email
+        custobj.phone=phone 
+        custobj.save()
+        customer_serialized=Customerserializer(custobj)
+        return Response({"message":'Added',"allcustdatas":customer_serialized.data})

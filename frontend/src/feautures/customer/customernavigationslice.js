@@ -6,6 +6,7 @@ const INITIALSTATE={
    bookings:false,
    browse:false,
    booknow:false,
+   profile:false,
    booknowbeauticianid:"",
 
    
@@ -20,11 +21,12 @@ const customernavigationslice=createSlice(
          },
          reducers:{
             toggleFavouritestylists:(state)=>{
-                state.value.favouritestylists=!(state.value.services)
+                state.value.favouritestylists=true
                 state.value.bookings=false
                 state.value.landingpart=false
                 state.value.browse=false
                 state.value.booknow=false
+                state.value.profile=false
             },
             toggleBookings:(state)=>{
                 state.value.bookings=true
@@ -32,13 +34,15 @@ const customernavigationslice=createSlice(
                 state.value.landingpart=false
                 state.value.browse=false
                 state.value.booknow=false
+                state.value.profile=false
             },
             toggleBrowse:(state)=>{
-                state.value.browse=!(state.value.browse)
+                state.value.browse=true
                 state.value.favouritestylists=false
                 state.value.landingpart=false
                 state.value.bookings=false
                 state.value.booknow=false
+                state.value.profile=false
             },
             toggleBooknow:(state,action)=>{
                 state.value.booknow=true
@@ -46,7 +50,16 @@ const customernavigationslice=createSlice(
                 state.value.landingpart=false
                 state.value.bookings=false
                 state.value.browse=false
+                state.value.profile=false
                 state.value.booknowbeauticianid=action.payload
+            },
+            toggleProfile:(state,action)=>{
+                state.value.profile=true
+                state.value.favouritestylists=false
+                state.value.landingpart=false
+                state.value.bookings=false
+                state.value.browse=false
+                state.value.booknow=false
             }
            
        
@@ -61,5 +74,5 @@ const customernavigationslice=createSlice(
 
 )
 
-export const {toggleFavouritestylists,toggleBookings,toggleBrowse,toggleBooknow} = customernavigationslice.actions
+export const {toggleFavouritestylists,toggleBookings,toggleBrowse,toggleBooknow,toggleProfile} = customernavigationslice.actions
 export default customernavigationslice.reducer
