@@ -4,6 +4,7 @@ const INITIALSTATE={
     bookbeautdata:"",
     beautstudios:[],
     beautservices:[],
+    allappointments:[],
    
    
 
@@ -25,6 +26,9 @@ const customerdataslice=createSlice(
             setBeautservices:(state,action)=>{
                 state.value.beautservices=action.payload
             },
+            setAllappointments:(state,action)=>{
+                state.value.allappointments=action.payload
+            }
             
            
        
@@ -39,5 +43,5 @@ const customerdataslice=createSlice(
 
 )
 
-export const {setBookbeautdata,setBeautstudios,setBeautservices} = customerdataslice.actions
+export const {setBookbeautdata,setBeautstudios,setBeautservices,setAllappointments} = customerdataslice.actions
 export default customerdataslice.reducer

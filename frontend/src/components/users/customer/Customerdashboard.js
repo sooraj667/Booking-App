@@ -8,6 +8,7 @@ import Favouritestylists from './favouritestylists/Favouritestylists';
 import Contents from './Contents';
 import Browse from './Browse';
 import Booknow from './Booknow';
+import Booking from './bookings/Booking';
 const Customerdashboard = () => {
     const details = useSelector((state) => state.login);
     const navigationdatas = useSelector((state) => state.custnavigation);
@@ -50,6 +51,10 @@ const Customerdashboard = () => {
       }
         {
         navigationdatas.value.booknow && <Booknow/>
+
+      }
+      {
+        navigationdatas.value.bookings && <Booking/>
 
       }
      

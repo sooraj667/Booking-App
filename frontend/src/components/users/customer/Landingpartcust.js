@@ -10,7 +10,7 @@ import axiosInstance from "../../../axios/axiosconfig";
 import { storage } from "../../../firebase/firebaseconfig";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
-import {setCustDetails} from "../../../feautures/loginslice"
+import { setCustDetails } from "../../../feautures/loginslice";
 import Paper from "@mui/material/Paper";
 import Topstackcust from "./Topstackcust";
 
@@ -64,75 +64,76 @@ const Landingpartcust = () => {
   };
   return (
     <div>
-    <Topstackcust/>
-  
+      <Topstackcust />
 
-  <Button
-    type="file"
-    onClick={addImageHandler}
-    variant="contained"
-    startIcon={<InsertPhotoIcon />}
-    sx={{ marginTop: "10px" }}
-    size="small"
-  >
-    Change
-  </Button>
-  {console.log(statedatas.value.beautdetails.image)}
-    <div>
-    {addImage && (
-      <>
-        <input
-          className="selectimage"
-          accept="image/*"
-          id="upload-button"
-          type="file"
-          onChange={handleFileChange}
-        />
-        <div>
-          <Button
-            type="file"
-            onClick={uploadImageHandler}
-            variant="contained"
-            startIcon={<DriveFolderUploadIcon />}
-            sx={{ marginTop: "10px" }}
-            size="small"
+      <Button
+        type="file"
+        onClick={addImageHandler}
+        variant="contained"
+        startIcon={<InsertPhotoIcon />}
+        sx={{ marginTop: "10px" }}
+        size="small"
+      >
+        Change
+      </Button>
+      {console.log(statedatas.value.beautdetails.image)}
+      <div>
+        {addImage && (
+          <>
+            <input
+              className="selectimage"
+              accept="image/*"
+              id="upload-button"
+              type="file"
+              onChange={handleFileChange}
+            />
+            <div>
+              <Button
+                type="file"
+                onClick={uploadImageHandler}
+                variant="contained"
+                startIcon={<DriveFolderUploadIcon />}
+                sx={{ marginTop: "10px" }}
+                size="small"
+              >
+                Upload
+              </Button>
+            </div>
+          </>
+        )}
+      </div>
+      <div>
+        <Paper
+          elevation={24}
+          sx={{
+            width: 500,
+            height: 410,
+            backgroundColor: "#F5FFFA",
+            // backgroundImage:'url("https://img.freepik.com/premium-photo/close-up-hair-supplies-flat-lay_23-2148352942.jpg?w=900")',
+            objectFit: "cover",
+            backgroundRepeat: "no-repeat",
+            marginLeft: "20%",
+            marginTop: "30px",
+            marginBottom: "30%",
+            opacity: [0.9, 0.8, 0.8],
+
+            "&:hover": {
+              backgroundColor: "whitesmoke",
+              opacity: [0.9, 0.8, 0.7],
+            },
+          }}
+        >
+          <Typography
+            variant="h5"
+            component="h1"
+            sx={{ marginLeft: "30%", color: "#080000", paddingTop: "15px" }}
           >
-            Upload
-          </Button>
-        </div>
-      </>
-    )}
-  </div>
-  <div>
+            Today's Schedule
+          </Typography>
+        </Paper>
+      </div>
+    </div>
+  );
+};
 
-    <Paper elevation={24}   sx={{
-  width: 500,
-  height: 410,
-  backgroundColor: "#F5FFFA",
-  // backgroundImage:'url("https://img.freepik.com/premium-photo/close-up-hair-supplies-flat-lay_23-2148352942.jpg?w=900")',
-  objectFit:"cover",
-  backgroundRepeat:"no-repeat",
-  marginLeft:"20%",
-  marginTop:"30px",
-  marginBottom:"30%",
-  opacity: [0.9, 0.8, 0.8],
- 
-  '&:hover': {
-    backgroundColor: 'whitesmoke',
-    opacity: [0.9, 0.8, 0.7],
-  },
-}}>
-         <Typography variant="h5" component="h1" sx={{marginLeft:"30%",color:"#080000",paddingTop:"15px"}}>
-        Today's Schedule
-
-    </Typography>
-
-    </Paper>
-
-    
-  </div>
-</div>
-  )
-}
-
-export default Landingpartcust
+export default Landingpartcust;

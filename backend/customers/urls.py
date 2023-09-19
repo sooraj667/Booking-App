@@ -7,6 +7,7 @@ urlpatterns = [
     path("changeimage/",Changeimage.as_view(),name="Changeimage"),
     path("booknow/",Booknow.as_view(),name="Booknow"),
     path("getbeautdatas/",Getbeautdatas.as_view(),name="Getbeautdatas"),
+    path("getbookings/",Getbookings.as_view(),name="Getbookings"),
 
 
     

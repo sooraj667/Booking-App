@@ -27,7 +27,7 @@ const customernavigationslice=createSlice(
                 state.value.booknow=false
             },
             toggleBookings:(state)=>{
-                state.value.bookings=!(state.value.bookings)
+                state.value.bookings=true
                 state.value.favouritestylists=false
                 state.value.landingpart=false
                 state.value.browse=false
