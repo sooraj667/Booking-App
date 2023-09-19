@@ -71,12 +71,16 @@ class Booknow(APIView):
         date=request.data.get("date")
         time=request.data.get("time")
         studio=request.data.get("studio")
+        servicename=request.data.get("servicename")
 
         beautobj=Beautician.objects.get(id=beautid)
         custobj=Customer.objects.get(id=custid)
         parseddateandtime=datetime.fromisoformat(str(date))
         parseddate=parseddateandtime.date()
         studioobj=Studio.objects.get(beautician=beautobj,place=studio)
+        print(studioobj,"############")
+        service_obj=Services.objects.get(name=servicename)
+        service_obj_req=Servicefees.objects.get(beautician=beautobj,service=service_obj)
         
         try:
             Blockeddate.objects.get(beautician=beautobj,date=parseddate)
@@ -85,14 +89,14 @@ class Booknow(APIView):
             parsed_time = datetime.strptime(time, "%I:%M %p").time()
          
 
-            Appointment.objects.create(customer=custobj,beautician=beautobj,date=parseddate,time=parsed_time,studio=studioobj)
+            Appointment.objects.create(customer=custobj,beautician=beautobj,date=parseddate,time=parsed_time,studio=studioobj,service=service_obj_req)
             return Response({"message":'Appointmentdone'})
 
         
    
         
 
-class Beautstudio(APIView):
+class Getbeautdatas(APIView):
     def post(self,request):
         print("REACHEDDDDDDDDDD")
         beautid=request.data.get("beautid")
@@ -101,8 +105,21 @@ class Beautstudio(APIView):
             beautobj=Beautician.objects.get(id=beautid)
             studioobjs=Studio.objects.filter(beautician=beautobj)
             studioobjs_serialized=StudioSerializer(studioobjs,many=True)
-            print(studioobjs_serialized.data,"STUDIOS")
-            return Response({"message":"success","studiodata":studioobjs_serialized.data})
+
+            serviceobjs=Servicefees.objects.filter(beautician=beautobj)
+            serviceobjs_serialized=ServicefeesSerializer(serviceobjs,many=True)
+            # for item in serviceobjs:
+            #     req_service=item.service
+            #     for i in serviceobjs_serialized.data:
+            #         if i["service"]==req_service.id:
+            #             Service
+                        
+
+                
+            
+
+            # print(studioobjs_serialized.data,"STUDIOS")
+            return Response({"message":"success","studiodata":studioobjs_serialized.data,"servicedata":serviceobjs_serialized.data})
         except:
             return Response({"message":"not success"})
 

@@ -22,6 +22,8 @@ class Appointment(models.Model):
     date = models.DateField()
     time = models.TimeField()
     studio=models.ForeignKey(Studio,on_delete=models.CASCADE)
+    service=models.ForeignKey(Servicefees,on_delete=models.CASCADE)
+    booked_timing=models.DateTimeField(auto_now_add=True)
 
 
     def __str__(self):

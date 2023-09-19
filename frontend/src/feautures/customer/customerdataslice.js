@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const INITIALSTATE={
     bookbeautdata:"",
     beautstudios:[],
+    beautservices:[],
    
    
 
@@ -20,7 +21,10 @@ const customerdataslice=createSlice(
             },
             setBeautstudios:(state,action)=>{
                 state.value.beautstudios=action.payload
-            }
+            },
+            setBeautservices:(state,action)=>{
+                state.value.beautservices=action.payload
+            },
             
            
        
@@ -35,5 +39,5 @@ const customerdataslice=createSlice(
 
 )
 
-export const {setBookbeautdata,setBeautstudios} = customerdataslice.actions
+export const {setBookbeautdata,setBeautstudios,setBeautservices} = customerdataslice.actions
 export default customerdataslice.reducer

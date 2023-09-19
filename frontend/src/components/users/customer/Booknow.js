@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   setBookbeautdata,
   setBeautstudios,
+  setBeautservices
 } from "../../../feautures/customer/customerdataslice";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -22,6 +23,7 @@ const Booknow = () => {
   const [startDate, setStartDate] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
   const [selectedStudio, setSelectedStudio] = useState("");
+  const [selectedService, setSelectedService] = useState("");
   const [beautStudios, setBeautStudios] = useState("DEYY");
   const [alltime, setAlltime] = useState([
     "10:00 AM",
@@ -49,6 +51,10 @@ const Booknow = () => {
     setSelectedStudio(e.target.value);
   };
 
+  const handleServiceChange = (e) => {
+    setSelectedService(e.target.value);
+  };
+
   const handleConfirm = () => {
     const datas = {
       beautid: reqdatas.value.bookbeautdata.id,
@@ -56,6 +62,7 @@ const Booknow = () => {
       date: startDate,
       time: selectedTime,
       studio:selectedStudio,
+      servicename:selectedService,
     };
     axiosInstance
       .post("cust/booknow/", datas)
@@ -88,13 +95,14 @@ const Booknow = () => {
       beautid: reqdatas.value.bookbeautdata.id,
     };
     axiosInstance
-      .post("cust/beautstudio/", datas)
+      .post("cust/getbeautdatas/", datas)
       .then((res) => {
         if (res.data.message==="success") {
           console.log(res.data.studiodata);
         //   const parseddata=JSON.parse(res.data.studiodata)
         //   console.log(parseddata,"PARSEDDATA");
         dispatch(setBeautstudios(res.data.studiodata))
+        dispatch(setBeautservices(res.data.servicedata))
          
         }
         if (res.data.message==="notsuccess") {
@@ -147,9 +155,21 @@ const Booknow = () => {
           value={selectedTime}
           className=" form-control dateform"
         >
-          <option>Select Time</option>
+          <option>Select Studio</option>
           {reqdatas.value.beautstudios.map((item) => {
             return <option>{item.place}</option>;
+          })}
+        </select>
+
+        <select
+          name="selectedTime"
+          onChange={handleServiceChange}
+          value={selectedTime}
+          className=" form-control dateform"
+        >
+          <option>Select Service</option>
+          {reqdatas.value.beautservices.map((item) => {
+            return <option>{item.servicefee}</option>;
           })}
         </select>
         {/* <InputLabel id="demo-simple-select-label">Select Studio</InputLabel>

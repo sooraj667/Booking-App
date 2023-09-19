@@ -14,6 +14,7 @@ import Cookies from "js-cookie"
 import Customerpage from "./pages/users/customer/Customerpage";
 import LoginpageAd from "./pages/admin/login/LoginpageAd";
 import DashboardpageAd from "./pages/admin/dashboard/DashboardpageAd";
+import Customerdashboard from "./components/users/customer/Customerdashboard";
 
 const Allroutes = () => {
   const dispatch =useDispatch()
@@ -24,6 +25,7 @@ const Allroutes = () => {
   useEffect(()=>{
     const accesstokenBeaut=Cookies.get('accesstoken-B')
     const accesstokenCust=Cookies.get('accesstoken-C')
+    console.log("ADICHITEENNN")
     
    
     if (accesstokenBeaut){
@@ -48,8 +50,16 @@ const Allroutes = () => {
               element={<Signupbeauticianpage />}
             />
             <Route path="/signupcustomer" element={<Signupcustomerpage />} />
-            <Route path="/loginbeautician" element={<Loginbeauticianpage />} />
-            <Route path="/logincustomer" element={<Logincustomerpage />} />
+            
+            
+            {
+                !accesstokenC?<Route path="/logincustomer" element={<Logincustomerpage />} />
+                :null
+            }
+            {
+                !accesstokenB?<Route path="/loginbeautician" element={<Loginbeauticianpage />} />
+                :null
+            }
             {
                 accesstokenB?<Route path="/beautician-dashboard" element={<Beauticianpage />} />:null
             }
