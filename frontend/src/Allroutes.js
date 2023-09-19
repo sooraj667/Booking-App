@@ -60,6 +60,7 @@ const Allroutes = () => {
                 !accesstokenB?<Route path="/loginbeautician" element={<Loginbeauticianpage />} />
                 :null
             }
+            {/* <Route path="/beautician-dashboard" element={<Beauticianpage />} /> */}
             {
                 accesstokenB?<Route path="/beautician-dashboard" element={<Beauticianpage />} />:null
             }

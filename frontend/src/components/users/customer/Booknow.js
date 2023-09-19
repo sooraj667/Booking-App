@@ -64,6 +64,7 @@ const Booknow = () => {
       studio:selectedStudio,
       servicename:selectedService,
     };
+    console.log(datas,"MAINDATAS");
     axiosInstance
       .post("cust/booknow/", datas)
       .then((res) => {
@@ -169,7 +170,7 @@ const Booknow = () => {
         >
           <option>Select Service</option>
           {reqdatas.value.beautservices.map((item) => {
-            return <option>{item.servicefee}</option>;
+            return <option>{item.service.name}</option>;
           })}
         </select>
         {/* <InputLabel id="demo-simple-select-label">Select Studio</InputLabel>

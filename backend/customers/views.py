@@ -108,11 +108,13 @@ class Getbeautdatas(APIView):
 
             serviceobjs=Servicefees.objects.filter(beautician=beautobj)
             serviceobjs_serialized=ServicefeesSerializer(serviceobjs,many=True)
-            # for item in serviceobjs:
-            #     req_service=item.service
-            #     for i in serviceobjs_serialized.data:
-            #         if i["service"]==req_service.id:
-            #             Service
+
+            for item in serviceobjs:
+                req_service=item.service
+                serviceid=req_service.id
+                for item in serviceobjs_serialized.data:
+                    if item["service"]==serviceid:
+                        item["service"]=ServicesSerializer(req_service).data
                         
 
                 
