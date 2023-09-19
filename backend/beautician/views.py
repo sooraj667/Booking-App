@@ -25,10 +25,21 @@ class Login(APIView):
         found=Beautician.objects.filter(email=email,password=password).count()    
         if found==1:
             beautobj=Beautician.objects.get(email=email,password=password)
+            print(beautobj)
+            if beautobj.isblocked==True:
+                print("ISBLOCKED TRUE")
+                return Response({"message":'Blocked'})
             serialized_object=BeauticianSerializer(beautobj)
             expertin_serialized=ServicesSerializer(beautobj.expertin)
             beautservices=Servicefees.objects.filter(beautician=beautobj)
             beautservices_serialized=ServicefeesSerializer(beautservices,many=True)
+            for item in beautservices:
+                serviceobj=item.service
+                for item in beautservices_serialized.data:
+                    if item["service"]==serviceobj.id:
+                        item["service"]=ServicesSerializer(serviceobj).data
+                
+
             allservices_serialized=ServicesSerializer(Services.objects.all(),many=True)
 
             refresh=RefreshToken.for_user(beautobj)  

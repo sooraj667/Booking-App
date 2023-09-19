@@ -30,6 +30,7 @@ const Services = () => {
   const statedatas = useSelector((state) => state.login);
   const dispatch = useDispatch();
   useEffect(() => {
+    console.log("SERVICES");
     const beautDetails = localStorage.getItem("singledetails-B");
     const expertin = localStorage.getItem("expertin-B");
     const services = localStorage.getItem("services-B");

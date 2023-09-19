@@ -32,7 +32,10 @@ const Profile = () => {
           },
         }}
       >
-        <div style={{"marginLeft":"320px","paddingTop":"120px"}}>
+        <div style={{"marginLeft":"320px","paddingTop":"20px"}}>
+          <Typography variant="h6" component="h1" sx={{marginBottom:"1.9rem"}}>
+            EDIT DETAILS
+          </Typography>
             <div className="row ">
                 <Avatar src={statedatas.value.beautdetails.image}  sx={{ width: 125, height: 125 }}/>
 

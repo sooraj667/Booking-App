@@ -20,6 +20,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 const Loginbeautician = () => {
     const dispatch=useDispatch()
     const [error,setError]=useState(false)
+    const [blockederror,setBlockedError]=useState(false)
     const formdatas=useSelector((state)=>state.login)
     const navigate=useNavigate()
     const handleSubmit=()=>{
@@ -41,8 +42,14 @@ const Loginbeautician = () => {
                 navigate("../beautician-dashboard")
 
             }
-            else{
+            else if(response.data.message=="Blocked"){
+              setBlockedError(true)
+              setError(false)
+
+            }
+            else {
                 setError(true)
+                setBlockedError(false)
                 // alert("Credentials wrong")
             }
             
@@ -91,6 +98,11 @@ const Loginbeautician = () => {
                   error && <Alert severity="error" sx={{
                     marginTop:'20px'
                   }}>Wrong Credentials!</Alert>
+                }
+                {
+                  blockederror && <Alert severity="error" sx={{
+                    marginTop:'20px'
+                  }}>Sorry You are blocked!</Alert>
                 }
                
               </div>

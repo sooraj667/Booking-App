@@ -44,7 +44,7 @@ const ContentAd = () => {
           bgcolor: "background.paper",
         }}
       >
-        <ListItem onClick={() => dispatch(toggleBeaut())}>
+        <ListItem sx={{cursor:"pointer"}} onClick={() => dispatch(toggleBeaut())}>
           <ListItemAvatar>
             <Avatar>
               <BookIcon />
@@ -53,7 +53,7 @@ const ContentAd = () => {
           <ListItemText primary="Beauticians" />
         </ListItem>
         <Divider variant="inset" component="li" />
-        <ListItem onClick={() => dispatch(toggleCust())}>
+        <ListItem sx={{cursor:"pointer"}} onClick={() => dispatch(toggleCust())}>
           <ListItemAvatar>
             <Avatar>
               <WorkIcon />
@@ -71,7 +71,7 @@ const ContentAd = () => {
           <ListItemText primary="Browse" secondary="Jan 7, 2014" />
         </ListItem> */}
         <Divider variant="inset" component="li" />
-        <ListItem onClick={() => dispatch(toggleServices())}>
+        <ListItem sx={{cursor:"pointer"}} onClick={() => dispatch(toggleServices())}>
           <ListItemAvatar>
             <Avatar>
               <BeachAccessIcon />
@@ -81,7 +81,7 @@ const ContentAd = () => {
         </ListItem>
         
         <Divider variant="inset" component="li" />
-        <ListItem onClick={() => dispatch(toggleAppointments())}>
+        <ListItem sx={{cursor:"pointer"}} onClick={() => dispatch(toggleAppointments())}>
           <ListItemAvatar>
             <Avatar>
               <BeachAccessIcon />

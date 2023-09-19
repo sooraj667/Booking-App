@@ -19,6 +19,7 @@ const Landingpartcust = () => {
   const [addImage, setAddImage] = useState(false);
   const [image, setImage] = useState("");
   const [selectedImage, setSelectedImage] = useState("");
+  const [todayAppointments, setTodayAppointments] = useState([]);
   const statedatas = useSelector((state) => state.login);
   const dispatch = useDispatch();
 
@@ -36,15 +37,23 @@ const Landingpartcust = () => {
     // return setSelectedImage(URL.createObjectURL(e.target.files[0]));
   };
 
-//   useEffect(
-//     ()=>{
-//         axiosInstance.post("cust/getlandingpage").then((res)=>{
-//             console.log(res.data);
-//         }).catch((err)=>{
-//             alert(err)
-//         })
-//     }
-//   )
+  useEffect(
+    ()=>{
+      const custdetails = JSON.parse(localStorage.getItem("singledetails-C"));
+      console.log(custdetails, "################3");
+
+      const datas={
+        custid:custdetails.id
+      }
+        axiosInstance.post("cust/getlandingpage/",datas).then((res)=>{
+            console.log(res.data,"**************");
+            setTodayAppointments(res.data.todays_appointmentdata)
+
+        }).catch((err)=>{
+            alert(err)
+        })
+    },[]
+  )
 
   const uploadImageHandler = () => {
     const reference = ref(storage, `customer/${selectedImage.name + v4()}`);
@@ -143,6 +152,66 @@ const Landingpartcust = () => {
           >
             Appointments For Today
           </Typography>
+          {
+            todayAppointments.map(
+              (item)=>{
+                return(
+                  <Stack
+                  spacing={2}
+                  className="stackdiv"
+                  
+                  sx={{
+                    borderBottom: "1px solid #ddd",
+                    marginBottom: "10px",
+                    paddingBottom: "10px",
+                  }}
+                >
+                  <div className="row">
+                    <div className="col-md-8">
+                      <div className="titles" style={{ fontWeight: "bold" }}>
+                        Date:
+                      </div>
+                      <div className="values">{item.date}</div>
+      
+                      <div className="titles" style={{ fontWeight: "bold" }}>
+                        Time:
+                      </div>
+                      <div className="values">{item.time}</div>
+      
+                      <div className="titles" style={{ fontWeight: "bold" }}>
+                        Studio Address:
+                      </div>
+                      <div className="values">
+                        {`${item.studio.locality}, ${item.studio.place}, ${item.studio.district}, ${item.studio.state}`}
+                      </div>
+      
+                      <div className="titles" style={{ fontWeight: "bold" }}>
+                        Service:
+                      </div>
+                      <div className="values">{item.service.service.name}</div>
+      
+                      <div className="titles" style={{ fontWeight: "bold" }}>
+                        Amount:
+                      </div>
+                      <div className="values">{item.service.servicefee}</div>
+                    </div>
+                    <div className="col-md-4">
+                      <Avatar
+                        alt={item.beautician.name}
+                        src={item.beautician.image}
+                        sx={{ width: 120, height: 120, borderRadius: "50%" }}
+                      />
+                      <div className="titles" style={{ fontWeight: "bold" }}>
+                        Appointment with:
+                      </div>
+                      <div className="values">{item.beautician.name}</div>
+                    </div>
+                  </div>
+                </Stack>
+                )
+              }
+            )
+          }
         </Paper>
       </div>
     </div>

@@ -8,6 +8,7 @@ import Box from "@mui/material/Box";
 import { useSelector } from "react-redux";
 // import "./Profile.css"
 import Editdetailsmodal from "./Editdetailsmodal";
+import Topstackcust from "../Topstackcust";
 
 const Profile = () => {
   const statedatas = useSelector((state) => state.login);
@@ -35,6 +36,7 @@ const Profile = () => {
         <div style={{"marginLeft":"320px","paddingTop":"120px"}}>
             <div className="row ">
                 <Avatar src={statedatas.value.custdetails.image}  sx={{ width: 125, height: 125 }}/>
+               
 
             </div>
             <div className="row  mt-3 ">

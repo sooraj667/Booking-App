@@ -6,6 +6,10 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from beautician.models import *
 from beautician.serializers import *
 from datetime import datetime
+from datetime import date
+
+
+
 class Signup(APIView):
     def post(self,request):
         pname=request.data.get("pname")
@@ -192,13 +196,15 @@ class Getbookings(APIView):
         
 class Getlandingpage(APIView):
     def post(self,request):
-        print("REACHEDDDDDDDDDD")
+        print("LANDINGG")
         custid=request.data.get("custid")
-        print(custid,"CUSTID")
+       
         try:
             custobj=Customer.objects.get(id=custid)
-            print(custobj,"#######")
-            appointmentsobjs=Appointment.objects.filter(customer=custobj)
+            
+            print(date.today())
+            appointmentsobjs=Appointment.objects.filter(customer=custobj,date=date.today())
+            
             appointmentsobjs_serialized=Appointmentserializer(appointmentsobjs,many=True)
 
             # studioobjs=Studio.objects.filter(beautician=beautobj)
@@ -207,7 +213,7 @@ class Getlandingpage(APIView):
             # serviceobjs=Servicefees.objects.filter(beautician=beautobj)
             # serviceobjs_serialized=ServicefeesSerializer(serviceobjs,many=True)
             print("ALLSET")
-            print(appointmentsobjs)
+            print(appointmentsobjs,"LOOKKKKKKKKKKKKK")
             for item in appointmentsobjs:
                 serviceobj=item.service
                 beauticianobj=item.beautician
@@ -247,7 +253,7 @@ class Getlandingpage(APIView):
             print(appointmentsobjs_serialized.data)
 
             # print(studioobjs_serialized.data,"STUDIOS")
-            return Response({"message":"success","appointmentdata":appointmentsobjs_serialized.data})
+            return Response({"message":"success","todays_appointmentdata":appointmentsobjs_serialized.data})
         except:
             return Response({"message":"not success"})
         
