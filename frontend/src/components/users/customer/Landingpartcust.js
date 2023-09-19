@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import { Input, Typography } from "@mui/material";
@@ -26,6 +26,8 @@ const Landingpartcust = () => {
 
     // console.log(datas.value.beautdetails.id);
   };
+
+
 
   const handleFileChange = (e) => {
     setSelectedImage(e.target.files[0]);
@@ -126,9 +128,9 @@ const Landingpartcust = () => {
           <Typography
             variant="h5"
             component="h1"
-            sx={{ marginLeft: "30%", color: "#080000", paddingTop: "15px" }}
+            sx={{ marginLeft: "20%", color: "#080000", paddingTop: "15px" }}
           >
-            Today's Schedule
+            Appointments For Today
           </Typography>
         </Paper>
       </div>

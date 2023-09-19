@@ -44,70 +44,81 @@ const Booking = () => {
       <Paper
         elevation={24}
         sx={{
-          width: 500,
-          height: 410,
+          width: 900,
+          height: "auto",
           backgroundColor: "#F5FFFA",
-          // backgroundImage:'url("https://img.freepik.com/premium-photo/close-up-hair-supplies-flat-lay_23-2148352942.jpg?w=900")',
-          objectFit: "cover",
-          backgroundRepeat: "no-repeat",
-          marginLeft: "20%",
-          marginTop: "30px",
-          marginBottom: "30%",
+          margin: "20px auto",
+          padding: "20px",
+          borderRadius: "12px",
+          transition: "background-color 0.3s, opacity 0.3s",
           opacity: [0.9, 0.8, 0.8],
-
           "&:hover": {
             backgroundColor: "whitesmoke",
             opacity: [0.9, 0.8, 0.7],
           },
         }}
       >
-        <div class="heading">All Bookings</div>
+        <div
+          className="heading"
+          style={{ fontSize: "1.5rem", fontWeight: "bold" ,marginLeft:"320px"}}
+        >
+          All Bookings
+        </div>
 
-        {reqdatas.value.allappointments.map((item) => {
-          return (
-            <>
-              <Stack spacing={2} class="stackdiv">
-                <div class="row">
-                  <div className="col-md-8">
-                    <div className="row">
-                      <div className="titles">Date:</div>
+        {reqdatas.value.allappointments.map((item, index) => (
+          <Stack
+            spacing={2}
+            className="stackdiv"
+            key={index}
+            sx={{
+              borderBottom: "1px solid #ddd",
+              marginBottom: "10px",
+              paddingBottom: "10px",
+            }}
+          >
+            <div className="row">
+              <div className="col-md-8">
+                <div className="titles" style={{ fontWeight: "bold" }}>
+                  Date:
+                </div>
+                <div className="values">{item.date}</div>
 
-                      <div class="values">{item.date}</div>
-                    </div>
-                    <div className="row">
-                      <div className="titles">Time:</div>
+                <div className="titles" style={{ fontWeight: "bold" }}>
+                  Time:
+                </div>
+                <div className="values">{item.time}</div>
 
-                      <div class="values">{item.time}</div>
-                    </div>
-                    <div className="row">
-                      <div className="titles">Studio Address:</div>
-
-                      <div class="values">{item.studio.locality} ,{item.studio.place},{item.studio.district},{item.studio.state}</div>
-                    </div>
-                    <div className="row">
-                      <div className="titles">Service:</div>
-
-                      <div class="values">{item.service.service.name}</div>
-                    </div>
-                    <div className="row">
-                      <div className="titles">Amount:</div>
-
-                      <div class="values">{item.service.servicefee}</div>
-                    </div>
-                  </div>
-                  <div className="col-md-4">
-                    <Avatar alt="Remy Sharp" src={item.beautician.image}  sx={{width:120,height:120}}/>
-                    <div className="titles">Appointment with:</div>
-                    <div class="values">{item.beautician.name}</div>
-                    
-                  </div>
+                <div className="titles" style={{ fontWeight: "bold" }}>
+                  Studio Address:
+                </div>
+                <div className="values">
+                  {`${item.studio.locality}, ${item.studio.place}, ${item.studio.district}, ${item.studio.state}`}
                 </div>
 
-                
-              </Stack>
-            </>
-          );
-        })}
+                <div className="titles" style={{ fontWeight: "bold" }}>
+                  Service:
+                </div>
+                <div className="values">{item.service.service.name}</div>
+
+                <div className="titles" style={{ fontWeight: "bold" }}>
+                  Amount:
+                </div>
+                <div className="values">{item.service.servicefee}</div>
+              </div>
+              <div className="col-md-4">
+                <Avatar
+                  alt={item.beautician.name}
+                  src={item.beautician.image}
+                  sx={{ width: 120, height: 120, borderRadius: "50%" }}
+                />
+                <div className="titles" style={{ fontWeight: "bold" }}>
+                  Appointment with:
+                </div>
+                <div className="values">{item.beautician.name}</div>
+              </div>
+            </div>
+          </Stack>
+        ))}
       </Paper>
     </div>
   );

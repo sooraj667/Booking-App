@@ -26,7 +26,7 @@ const Topstackcust = () => {
         />
 
         <Typography variant="h5" component="h2">
-          {statedatas.value.custdetails.email}
+          {statedatas.value.custdetails.name}
         </Typography>
       </Stack>
   )
