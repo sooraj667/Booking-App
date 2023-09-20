@@ -253,6 +253,33 @@ class Addstudio(APIView):
             return Response({"message":"not success"})
 
 
+class Editstudio(APIView):
+    def post(self,request):
+        
+        beautid=request.data.get("beautid")
+        studioid=request.data.get("studioid")
+
+        locality=request.data.get("locality")
+        place=request.data.get("place")
+        district=request.data.get("district")
+        state=request.data.get("state")
+
+
+        try:
+            beautobj=Beautician.objects.get(id=beautid)
+            studioobj=Studio.objects.get(id=studioid)
+            studioobj.locality=locality
+            studioobj.place=place
+            studioobj.district=district
+            studioobj.state=state
+            studioobj.save()
+            
+            studioobjs=Studio.objects.filter(beautician=beautobj)
+            studioobjs_serialized=StudioSerializer(studioobjs,many=True)
+            return Response({"message":"success","studios":studioobjs_serialized.data})
+        except:
+            return Response({"message":"not success"})
+
 
         
 

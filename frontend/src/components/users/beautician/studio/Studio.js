@@ -5,9 +5,14 @@ import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import axiosInstance from "../../../../axios/axiosconfig";
-import { useDispatch,useSelector } from "react-redux";
-import {setStudiodatas} from "../../../../feautures/beautician/studioformslice"
+import { useDispatch, useSelector } from "react-redux";
+import { setStudiodatas } from "../../../../feautures/beautician/studioformslice";
 import Addstudiomodal from "./Addstudiomodal";
+import "./Studio.css"
+import Editstudiomodal from "./Editstudiomodal";
+
+
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
@@ -17,9 +22,8 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const Studio = () => {
-  
-  const studiodatas=useSelector((state)=>state.studioform)
-  const dispatch=useDispatch()
+  const studiodatas = useSelector((state) => state.studioform);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const beautdetails = localStorage.getItem("singledetails-B");
@@ -33,7 +37,7 @@ const Studio = () => {
       .post("beaut/getstudios/", datas)
       .then((res) => {
         console.log(res.data);
-        localStorage.setItem("studios-B",JSON.stringify(res.data.studios))
+        localStorage.setItem("studios-B", JSON.stringify(res.data.studios));
         dispatch(setStudiodatas(res.data.studios));
       })
       .catch((err) => alert(err));
@@ -46,26 +50,24 @@ const Studio = () => {
         </div>
 
         <div className="col-md-2 mt-2">
-          <Addstudiomodal/>
+          <Addstudiomodal />
         </div>
       </div>
       <div className="row">
-        <Stack
-         
-          spacing={2}
-        >
+        <Stack spacing={2}>
           {studiodatas.value.studiodetails.map((item) => {
             return (
               <>
-              <div className="">
-          
-                <p>{item.locality} ,{item.place} ,{item.district} ,{item.state}</p>
-
-              </div>
-
-
-          
-           
+                <div class="address-container">
+                  <p class="address-text">
+                    <span class="locality">{item.locality}</span>,
+                    <span class="place">{item.place}</span>,
+                    <span class="district">{item.district}</span>,
+                    <span class="state">{item.state}</span>
+                  </p>
+                  <Editstudiomodal studioId={item.id}/>
+                  
+                </div>
               </>
             );
           })}

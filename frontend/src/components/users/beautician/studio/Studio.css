@@ -1,0 +1,35 @@
+.address-container {
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    padding: 35px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 300px; /* Adjust the width to your preference */
+  }
+
+  .address-text {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  /* You can style individual components (locality, place, district, state) here */
+  .address-component {
+    margin-bottom: 5px;
+  }
+
+  .locality {
+    color: #333;
+  }
+
+  .place {
+    color: #555;
+  }
+
+  .district {
+    color: #777;
+  }
+
+  .state {
+    color: #999;
+  }
