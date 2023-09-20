@@ -8,38 +8,33 @@ import TextField from "@mui/material/TextField";
 import { useDispatch, useSelector } from "react-redux";
 // import { setAllservices,setServices } from "../../../../feautures/loginslice";
 import axiosInstance from "../../../axios/axiosconfig";
-import Input from '@mui/joy/Input';
+import Input from "@mui/joy/Input";
 import { storage } from "../../../firebase/firebaseconfig";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
-import {setAllservices} from "../../../feautures/adminDataAssignerSlice"
-
-
-
-
+import { setAllservices } from "../../../feautures/adminDataAssignerSlice";
 
 const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 400,
-    bgcolor: "background.paper",
-    border: "1px solid #000",
-    boxShadow: 24,
-    p: 4,
-  };
-
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "1px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
 
 const Addnewservicemodal = () => {
   const dispatch = useDispatch();
   const statedatas = useSelector((state) => state.login);
   const [servicename, setServicename] = useState("");
   const [servicedesc, setServicedesc] = useState("");
-  const [selectedImage,setSelectedImage] = useState("")
-  const [changed,setChanged]=useState(false)
+  const [selectedImage, setSelectedImage] = useState("");
+  const [changed, setChanged] = useState(false);
   const [open, setOpen] = useState(false);
-//   const [changed,setChanged]=useState(false)
+  //   const [changed,setChanged]=useState(false)
   const handleOpen = () => {
     setOpen(true);
   };
@@ -47,21 +42,20 @@ const Addnewservicemodal = () => {
     setOpen(false);
   };
 
-
   const handleAddService = () => {
     const datas = {
       servicename: servicename,
       servicedesc: servicedesc,
-
     };
     axiosInstance
       .post("adminside/addnewservice/", datas)
-      .then((res) =>{
-        localStorage.setItem("allservices",JSON.stringify(res.data.allservices))
+      .then((res) => {
+        localStorage.setItem(
+          "allservices",
+          JSON.stringify(res.data.allservices)
+        );
         // setChanged((prev)=>!prev)
-
-
-      } )
+      })
       .catch((error) => alert(error));
   };
 
@@ -79,24 +73,21 @@ const Addnewservicemodal = () => {
           console.log(url, "PRINTED");
           const datas = {
             imageurl: url,
-            servicename:servicename,
-            servicedesc:servicedesc,
+            servicename: servicename,
+            servicedesc: servicedesc,
           };
-          axiosInstance.post("adminside/addnewservice/", datas).then((response) => {
-            console.log(response.data.allservices,"ALLSERVICES");
+          axiosInstance
+            .post("adminside/addnewservice/", datas)
+            .then((response) => {
+              console.log(response.data.allservices, "ALLSERVICES");
               console.log("ALL SET");
               localStorage.setItem(
                 "allservices",
                 JSON.stringify(response.data.allservices)
-              );  
-              setChanged(true)
-              handleClose()
-              
-             
-            
-       
-            
-          });
+              );
+              setChanged(true);
+              handleClose();
+            });
         });
       })
       .catch(() => {
@@ -104,60 +95,91 @@ const Addnewservicemodal = () => {
       });
   };
 
-  useEffect(()=>{
-    const allservices=localStorage.getItem("allservices")
-    const parsed=JSON.parse(allservices)
-    dispatch(setAllservices(parsed))
-
-  },[changed])
-
+  useEffect(() => {
+    const allservices = localStorage.getItem("allservices");
+    const parsed = JSON.parse(allservices);
+    dispatch(setAllservices(parsed));
+  }, [changed]);
 
   return (
     <div>
-        <div>
-      <Button
-        onClick={handleOpen}
-        variant="contained"
-        sx={{ marginBottom: "0px", marginLeft: "220px", marginTop: "100px" }}
-      >
-        Add Service
-      </Button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Typography
-            id="modal-modal-title"
-            variant="h6"
-            component="h2"
-            sx={{
-              marginLeft: "90px",
-              marginBottom: "30px",
-            }}
-          >
-            Add New Service
-          </Typography>
+      <div>
+        <Button
+          onClick={handleOpen}
+          variant="contained"
+          sx={{ marginBottom: "0px", marginLeft: "220px", marginTop: "100px" }}
+        >
+          Add Service
+        </Button>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Typography
+              id="modal-modal-title"
+              variant="h6"
+              component="h2"
+              sx={{
+                marginLeft: "90px",
+                marginBottom: "30px",
+              }}
+            >
+              Add New Service
+            </Typography>
 
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <div className="row">
-              <label>Service name</label>
-              <Input size="md" placeholder="Medium" onChange={(e)=>setServicename(e.target.value)}/>
-              <label>Description</label>
-              <Input size="md" placeholder="Medium" onChange={(e)=>setServicedesc(e.target.value)}/>
-              <label>Image</label>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              <div className="row">
+                <div className="row mb-3">
+                  <div className="col-md-6">
+                    <label>Service name:</label>
+                  </div>
+                  <div className="col-md-6">
+                    <Input
+                      size="md"
+                      placeholder="Medium"
+                      onChange={(e) => setServicename(e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="row mb-3">
+                  <div className="col-md-6 ">
+                  <label>Description:</label>
+                  </div>
+                  <div className="col-md-6">
+                  <Input
+                    size="md"
+                    placeholder="Medium"
+                    onChange={(e) => setServicedesc(e.target.value)}
+                  />
+                  </div>
+                </div>
 
-              <input
-              className="selectimage"
-              accept="image/*"
-              id="upload-button"
-              type="file"
-              onChange={handleFileChange}
-            />
-            <div>
-              {/* <Button
+                <div className="row mb-3">
+                  <div className="col-md-6">
+                  <label>Image:</label>
+                  </div>
+                  <div className="col-md-6">
+                  <input
+                    className="selectimage"
+                    accept="image/*"
+                    id="upload-button"
+                    type="file"
+                    onChange={handleFileChange}
+                  />
+                  </div>
+                </div>
+
+                
+
+           
+               
+
+             
+
+                  {/* <Button
                 type="file"
                 onClick={uploadImageHandler}
                 variant="contained"
@@ -167,9 +189,9 @@ const Addnewservicemodal = () => {
               >
                 Upload
               </Button> */}
-            </div>
+               
 
-              {/* <select
+                {/* <select
                 id="mySelect"
                 name="fruit"
                 className="form-control"
@@ -179,38 +201,37 @@ const Addnewservicemodal = () => {
                   return <option>{item.name}</option>;
                 })}
               </select> */}
-            </div>
-            <div className="row">
-              <Button
-                variant="contained"
-                sx={{
-                  marginTop: "20px",
-                  marginLeft: "40px",
-                }}
-                onClick={handleSubmit}
-              >
-                Add Service
-              </Button>
+              </div>
+              <div className="row">
+                <Button
+                  variant="contained"
+                  sx={{
+                    marginTop: "20px",
+                    marginLeft: "40px",
+                  }}
+                  onClick={handleSubmit}
+                >
+                  Add Service
+                </Button>
 
-              <Button
-                onClick={handleClose}
-                variant="contained"
-                sx={{
-                  marginTop: "20px",
-                  marginLeft: "70px",
-                  backgroundColor: "#DC143C",
-                }}
-              >
-                Close
-              </Button>
-            </div>
-          </Typography>
-        </Box>
-      </Modal>
+                <Button
+                  onClick={handleClose}
+                  variant="contained"
+                  sx={{
+                    marginTop: "20px",
+                    marginLeft: "70px",
+                    backgroundColor: "#DC143C",
+                  }}
+                >
+                  Close
+                </Button>
+              </div>
+            </Typography>
+          </Box>
+        </Modal>
+      </div>
     </div>
+  );
+};
 
-    </div>
-  )
-}
-
-export default Addnewservicemodal
+export default Addnewservicemodal;

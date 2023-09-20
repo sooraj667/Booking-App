@@ -169,7 +169,7 @@ const Booknow = () => {
           value={selectedTime}
           className=" form-control dateform"
         >
-      
+          
           {reqdatas.value.beautservices.map((item) => {
             return <option>{item.service.name}</option>;
           })}

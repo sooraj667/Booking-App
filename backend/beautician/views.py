@@ -5,6 +5,9 @@ from .serializers import *
 from customers.serializers import *
 from rest_framework_simplejwt.tokens import RefreshToken
 from customers.models import *
+from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import check_password
+
 
 class Signup(APIView):
     def post(self,request):
@@ -13,7 +16,9 @@ class Signup(APIView):
         phone=request.data.get("phone")
         password=request.data.get("password")
 
-        newobj=Beautician.objects.create(name=pname,email=email,phone=phone,password=password)
+        hashed_password=make_password(password)
+
+        newobj=Beautician.objects.create(name=pname,email=email,phone=phone,password=hashed_password)
         serialized_object=BeauticianSerializer(newobj)
         return Response({"message":'Created',"beautdata":serialized_object.data})
     
@@ -22,10 +27,17 @@ class Login(APIView):
     def post(self,request):
         email=request.data.get("email")
         password=request.data.get("password")
+        
 
-        found=Beautician.objects.filter(email=email,password=password).count()    
+        found=Beautician.objects.filter(email=email).count()    
         if found==1:
-            beautobj=Beautician.objects.get(email=email,password=password)
+            beautobj=Beautician.objects.get(email=email)
+            is_valid=check_password(password, beautobj.password)
+            if not is_valid:
+                return Response({"message":'NotMatched'})
+
+            # beautobj=Beautician.objects.get(email=email,password=password)
+            
             print(beautobj)
             if beautobj.isblocked==True:
                 print("ISBLOCKED TRUE")
