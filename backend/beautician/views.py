@@ -241,11 +241,13 @@ class Addstudio(APIView):
         place=request.data.get("place")
         district=request.data.get("district")
         state=request.data.get("state")
+        country=request.data.get("country")
+        pincode=request.data.get("pincode")
 
 
         try:
             beautobj=Beautician.objects.get(id=beautid)
-            Studio.objects.create(beautician=beautobj,locality=locality,place=place,district=district,state=state)
+            Studio.objects.create(beautician=beautobj,locality=locality,place=place,district=district,state=state,country=country,pincode=pincode)
             studioobjs=Studio.objects.filter(beautician=beautobj)
             studioobjs_serialized=StudioSerializer(studioobjs,many=True)
             return Response({"message":"success","studios":studioobjs_serialized.data})
@@ -263,6 +265,8 @@ class Editstudio(APIView):
         place=request.data.get("place")
         district=request.data.get("district")
         state=request.data.get("state")
+        country=request.data.get("country")
+        pincode=request.data.get("pincode")
 
 
         try:
@@ -272,6 +276,8 @@ class Editstudio(APIView):
             studioobj.place=place
             studioobj.district=district
             studioobj.state=state
+            studioobj.country=country
+            studioobj.pincode=pincode
             studioobj.save()
             
             studioobjs=Studio.objects.filter(beautician=beautobj)

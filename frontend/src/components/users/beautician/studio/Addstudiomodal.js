@@ -10,7 +10,7 @@ import { setAllservices, setServices } from "../../../../feautures/loginslice";
 import axiosInstance from "../../../../axios/axiosconfig";
 import { setBeautDetails } from "../../../../feautures/loginslice";
 import {
-    changePlace,changeLocality,changeDistrict,changeState,setStudiodatas
+    changePlace,changeLocality,changeDistrict,changeState,changePincode,changeCountry,setStudiodatas
 } from "../../../../feautures/beautician/studioformslice";
 import Input from "@mui/joy/Input";
 
@@ -61,6 +61,8 @@ const Addstudiomodal = () => {
       place: formdatas.value.place,
       district: formdatas.value.district,
       state: formdatas.value.state,
+      country: formdatas.value.country,
+      pincode: formdatas.value.pincode,
     };
     console.log(formdatas.value.pname, "##############333");
     axiosInstance
@@ -164,6 +166,38 @@ const Addstudiomodal = () => {
                 </div>
                 <span className="text-danger">{formdatas.value.error.state}</span>
               </div>
+
+              <div class="form-group">
+                <div className="row">
+                  <label for="password" className="mr-3">
+                    Country:
+                  </label>
+                  <TextField
+                    type="numtextber"
+                    variant="standard"
+                    required
+                    onChange={(e) => dispatch(changeCountry(e.target.value))}
+                  />
+                </div>
+                <span className="text-danger">{formdatas.value.error.country}</span>
+              </div>
+
+              <div class="form-group">
+                <div className="row">
+                  <label for="password" className="mr-3">
+                    Pincode:
+                  </label>
+                  <TextField
+                    type="numtextber"
+                    variant="standard"
+                    required
+                    onChange={(e) => dispatch(changePincode(e.target.value))}
+                  />
+                </div>
+                <span className="text-danger">{formdatas.value.error.pincode}</span>
+              </div>
+
+
               <Button variant="contained" onClick={handleUpdate}>
                 Update
 

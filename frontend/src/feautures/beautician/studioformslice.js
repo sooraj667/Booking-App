@@ -7,6 +7,8 @@ const INITIALSTATE={
         place:"",
         district:"",
         state:"",
+        country:"",
+        pincode:"",
         error:{
             locality:null,
             place:null,
@@ -99,6 +101,38 @@ const studioformslice=createSlice(
                 }
                 
             },
+            changeCountry:(state,action)=>{
+                if (!/^[a-zA-Z]+$/.test(action.payload)){
+                    state.value.error.country="Country can only have alphabets!"
+                    state.value.errorcheck=true
+                }
+       
+             
+                else{
+                    state.value.error.country=null
+                    state.value.country=action.payload
+                    state.value.errorcheck=false
+                }
+                
+            },
+            changePincode:(state,action)=>{
+                if (!/^\d{6}$/.test(action.payload)){
+                    state.value.error.pincode="Invalid Pincode!"
+                    state.value.errorcheck=true
+                }
+       
+              
+                else{
+                    state.value.error.pincode=null
+                    state.value.pincode=action.payload
+                    state.value.errorcheck=false
+                }
+                
+            },
+            
+
+
+
             setStudiodatas:(state,action)=>{
                 state.value.studiodetails=action.payload
             }
@@ -113,7 +147,7 @@ const studioformslice=createSlice(
 
 )
 
-export const {changeState,changeDistrict,changePlace,changeLocality,setStudiodatas} = studioformslice.actions
+export const {changeState,changeDistrict,changePlace,changeLocality,changeCountry,changePincode,setStudiodatas} = studioformslice.actions
 
 
 

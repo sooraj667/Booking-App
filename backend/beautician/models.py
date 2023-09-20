@@ -49,6 +49,8 @@ class Studio(models.Model):
     place=models.CharField(max_length=200)
     district=models.CharField(max_length=200)
     state=models.CharField(max_length=200)
+    country=models.CharField(max_length=200)
+    pincode=models.PositiveIntegerField(blank=True,null=True)
 
     def __str__(self):
         return f"{self.beautician.name} - {self.locality} -{self.place}"

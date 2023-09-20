@@ -60,10 +60,12 @@ const Studio = () => {
               <>
                 <div class="address-container">
                   <p class="address-text">
-                    <span class="locality">{item.locality}</span>,
-                    <span class="place">{item.place}</span>,
-                    <span class="district">{item.district}</span>,
-                    <span class="state">{item.state}</span>
+                    <span class="locality">{item.locality}</span>-
+                    <span class="place">{item.place}</span>-
+                    <span class="district">{item.district}</span>-
+                    <span class="state">{item.state}</span>-
+                    <span class="state">{item.country}</span>-
+                    <span class="state"> Pincode:{item.pincode}</span>
                   </p>
                   <Editstudiomodal studioId={item.id}/>
                   
