@@ -8,5 +8,7 @@ urlpatterns = [
     path("addnewservice/",Addnewservice.as_view(),name="Addnewservice"),
     path("editdetails/",Editdetails.as_view(),name="Editdetails"),
     path("getbookings/",Getbookings.as_view(),name="Getbookings"),
+    path("getstudios/",Getstudios.as_view(),name="Getstudios"),
+    path("addstudio/",Addstudio.as_view(),name="Addstudio"),
     
 ]

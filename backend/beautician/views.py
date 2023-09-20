@@ -55,8 +55,14 @@ class Login(APIView):
 
             allservices_serialized=ServicesSerializer(Services.objects.all(),many=True)
 
+
+            studioobjs=Studio.objects.filter(beautician=beautobj)
+            studioobjs_serialized=StudioSerializer(studioobjs,many=True)
+           
+
+
             refresh=RefreshToken.for_user(beautobj)  
-            return Response({"message":'Matched',"beautdata":serialized_object.data,"expertin":expertin_serialized.data,"services":beautservices_serialized.data,"allservices":allservices_serialized.data,"accesstoken":str(refresh.access_token),"refreshtoken":str(refresh)})
+            return Response({"message":'Matched',"beautdata":serialized_object.data,"expertin":expertin_serialized.data,"services":beautservices_serialized.data,"allservices":allservices_serialized.data,"studios":studioobjs_serialized.data,"accesstoken":str(refresh.access_token),"refreshtoken":str(refresh)})
         else:
             return Response({"message":'NotMatched'})
 
@@ -206,6 +212,43 @@ class Getbookings(APIView):
 
             # print(studioobjs_serialized.data,"STUDIOS")
             return Response({"message":"success","appointmentdata":appointmentsobjs_serialized.data})
+        except:
+            return Response({"message":"not success"})
+        
+
+
+class Getstudios(APIView):
+    def post(self,request):
+ 
+        beautid=request.data.get("beautid")
+
+        try:
+            beautobj=Beautician.objects.get(id=beautid)
+            studioobjs=Studio.objects.filter(beautician=beautobj)
+            studioobjs_serialized=StudioSerializer(studioobjs,many=True)
+            return Response({"message":"success","studios":studioobjs_serialized.data})
+        except:
+            return Response({"message":"not success"})
+  
+       
+
+class Addstudio(APIView):
+    def post(self,request):
+        
+        beautid=request.data.get("beautid")
+        print(beautid,"FUNDA")
+        locality=request.data.get("locality")
+        place=request.data.get("place")
+        district=request.data.get("district")
+        state=request.data.get("state")
+
+
+        try:
+            beautobj=Beautician.objects.get(id=beautid)
+            Studio.objects.create(beautician=beautobj,locality=locality,place=place,district=district,state=state)
+            studioobjs=Studio.objects.filter(beautician=beautobj)
+            studioobjs_serialized=StudioSerializer(studioobjs,many=True)
+            return Response({"message":"success","studios":studioobjs_serialized.data})
         except:
             return Response({"message":"not success"})
 

@@ -13,6 +13,7 @@ import Allroutes from "./Allroutes";
 import adminDataAssignerSlice from "./feautures/adminDataAssignerSlice";
 import customernavigationslice from "./feautures/customer/customernavigationslice";
 import customerdataslice from "./feautures/customer/customerdataslice";
+import studioformslice from "./feautures/beautician/studioformslice";
 function App() {
   const store = configureStore({
     reducer: {
@@ -24,6 +25,7 @@ function App() {
       beautnavigation:beautnavigationslice,
       custnavigation:customernavigationslice,
       custreqdata:customerdataslice,
+      studioform:studioformslice,
     },
   });
 

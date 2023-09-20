@@ -9,6 +9,7 @@ import Landingpartbeaut from "./Landingpartbeaut";
 import Services from "./services/Services";
 import Profile from "./profile/Profile";
 import Appointments from "./appointments/Appointments";
+import Studio from "./studio/Studio";
 
 const Beauticiandashboard = () => {
   const statedatas=useSelector((state)=>state.beautnavigation)
@@ -67,6 +68,10 @@ const Beauticiandashboard = () => {
           }
             {
             navigationdatas.value.appointments && <Appointments/>
+
+          }
+          {
+            navigationdatas.value.studio && <Studio/>
 
           }
           

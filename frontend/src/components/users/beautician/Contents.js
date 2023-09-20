@@ -10,7 +10,7 @@ import BookIcon from '@mui/icons-material/Book';
 import WorkIcon from '@mui/icons-material/Work';
 import BeachAccessIcon from '@mui/icons-material/BeachAccess';
 import Divider from '@mui/material/Divider';
-import {toggleServices,toggleAppointments,toggleProfile} from "../../../feautures/beautician/beautnavigationslice"
+import {toggleServices,toggleAppointments,toggleProfile,toggleStudio} from "../../../feautures/beautician/beautnavigationslice"
 import { useDispatch } from "react-redux";
 const Contents = () => {
   const dispatch=useDispatch()
@@ -70,6 +70,14 @@ const Contents = () => {
           <ListItemText primary="Profile" secondary="July 20, 2014" />
         </ListItem>
       </List>
+        <ListItem sx={{ cursor: "pointer" }} onClick={()=>dispatch(toggleStudio())}>
+          <ListItemAvatar>
+            <Avatar>
+              <BeachAccessIcon />
+            </Avatar>
+          </ListItemAvatar>
+          <ListItemText primary="Studio" secondary="July 20, 2014" />
+        </ListItem>
     </Paper>
   );
 };

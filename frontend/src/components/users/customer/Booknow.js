@@ -41,7 +41,7 @@ const Booknow = () => {
   const dispatch = useDispatch();
   const handleDateChange = (date) => {
     setStartDate(date);
-    console.log(startDate, "DATE");
+    
   };
   const handleTimeChange = (e) => {
     setSelectedTime(e.target.value);
@@ -75,14 +75,15 @@ const Booknow = () => {
 
   useEffect(() => {
     const allBeauticians = localStorage.getItem("allbeauticians-C");
-    console.log(navdatas.value.booknowbeauticianid, "BEAUTID");
+    
+
 
     if (allBeauticians) {
       const allbeaut_parsed = JSON.parse(allBeauticians);
       allbeaut_parsed.filter((item) => {
         if (navdatas.value.booknowbeauticianid == item.id) {
           const reqbeaut = item;
-          console.log(reqbeaut, "REQBEAUT####");
+         
           dispatch(setBookbeautdata(reqbeaut));
 
           return reqbeaut;
@@ -92,14 +93,18 @@ const Booknow = () => {
   }, []);
 
   useEffect(() => {
+    console.log("CALLEDD");
+    const id=localStorage.getItem("id")
+
     const datas = {
-      beautid: reqdatas.value.bookbeautdata.id,
+      beautid: id,
     };
+    console.log(datas,"DATASSSSSSSSSSSSSSSSSSSSS");
     axiosInstance
       .post("cust/getbeautdatas/", datas)
       .then((res) => {
         if (res.data.message==="success") {
-          console.log(res.data.studiodata);
+          console.log(res.data.studiodata,"STUDIODATAAA");
         //   const parseddata=JSON.parse(res.data.studiodata)
         //   console.log(parseddata,"PARSEDDATA");
         dispatch(setBeautstudios(res.data.studiodata))
