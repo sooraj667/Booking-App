@@ -8,6 +8,7 @@ import HeaderDashboard from "../header/HeaderDashboard";
 import Landingpartbeaut from "./Landingpartbeaut";
 import Services from "./services/Services";
 import Profile from "./profile/Profile";
+import Appointments from "./appointments/Appointments";
 
 const Beauticiandashboard = () => {
   const statedatas=useSelector((state)=>state.beautnavigation)
@@ -62,6 +63,10 @@ const Beauticiandashboard = () => {
           }
            {
             navigationdatas.value.profile && <Profile/>
+
+          }
+            {
+            navigationdatas.value.appointments && <Appointments/>
 
           }
           

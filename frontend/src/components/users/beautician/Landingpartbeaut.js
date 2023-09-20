@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import { Input, Typography } from "@mui/material";
@@ -22,6 +22,13 @@ const Landingpartbeaut = () => {
   const [selectedImage, setSelectedImage] = useState("");
   const statedatas = useSelector((state) => state.login);
   const dispatch = useDispatch();
+
+  // useEffect(
+  //   ()=>{
+
+  //     axiosInstance.post("beaut/getlandingpart/",datas)
+  //   }
+  // )
 
   const addImageHandler = () => {
     setAddImage((addImage) => !addImage);

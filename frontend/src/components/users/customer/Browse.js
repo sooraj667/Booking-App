@@ -8,18 +8,18 @@ import { useEffect } from "react";
 import { setAllBeauticiansC } from "../../../feautures/loginslice";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import Grid from '@mui/material/Grid';
+import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import axiosInstance from "../../../axios/axiosconfig";
 import "./Browse.css";
-import {toggleBooknow} from "../../../feautures/customer/customernavigationslice"
+import { toggleBooknow } from "../../../feautures/customer/customernavigationslice";
 const Browse = () => {
   const dispatch = useDispatch();
   const statedatas = useSelector((state) => state.login);
   const navigationdatas = useSelector((state) => state.custnavigation);
 
-  const booknowHandler=(id)=>{
-    dispatch((toggleBooknow(id)))
+  const booknowHandler = (id) => {
+    dispatch(toggleBooknow(id));
     // const datas={
     //     beautid:id,
     //     custid:statedatas.value.custdetails.id
@@ -27,8 +27,7 @@ const Browse = () => {
     // axiosInstance.post("cust/booknow",datas).then((res)=>{
     //     console.log(res.data);
     // }).catch((err)=>alert(err))
-
-  }
+  };
 
   useEffect(() => {
     const allBeauticians = localStorage.getItem("allbeauticians-C");
@@ -46,7 +45,7 @@ const Browse = () => {
       <Box sx={{ width: "100%" }}>
         {statedatas.value.allbeauticians.map((item) => {
           return (
-            <Stack spacing={3} >
+            <Stack spacing={3}>
               <Paper
                 elevation={24}
                 sx={{
@@ -80,28 +79,48 @@ const Browse = () => {
                     />
                   </Grid>
                   <Grid item xs={3}>
-                    
-                    <Typography variant="h5" component="h1" sx={{}}>
+                    <Typography
+                      variant="h5"
+                      component="h1"
+                      sx={{
+                        fontSize: "24px", // Adjust the font size as needed
+                        fontWeight: "bold", // Make the text bold if desired
+                        // Change the text color based on your color palette
+                        marginBottom: "16px", // Add some spacing at the bottom
+                        // You can add more styles as needed, such as fontFamily, letterSpacing, etc.
+                      }}
+                    >
                       {item.name}
                     </Typography>
                   </Grid>
                   <Grid item xs={3}>
-                  <Typography variant="h5" component="h1" sx={{}}>
+                    <Typography
+                      variant="h5"
+                      component="h1"
+                      sx={{
+                        fontSize: "24px", // Adjust the font size as needed
+                        fontWeight: "bold", // Make the text bold if desired
+                        // Change the text color based on your color palette
+                        marginBottom: "16px", // Add some spacing at the bottom
+                        // You can add more styles as needed, such as fontFamily, letterSpacing, etc.
+                      }}
+                    >
                       Expert in
                     </Typography>
-                  <h2>{item.expertin.name}</h2>
-                 
+                    <h2>{item.expertin.name}</h2>
                   </Grid>
-                  <Grid item xs={3} >
-                    <Button variant="contained" sx={{
-                        marginTop:"80px"
-                    }} onClick={()=>booknowHandler(item.id)}>Book Now</Button>
-                  
-                 
+                  <Grid item xs={3}>
+                    <Button
+                      variant="contained"
+                      sx={{
+                        marginTop: "80px",
+                      }}
+                      onClick={() => booknowHandler(item.id)}
+                    >
+                      Book Now
+                    </Button>
                   </Grid>
                 </Grid>
-
-              
               </Paper>
             </Stack>
           );

@@ -1,6 +1,6 @@
 from rest_framework.response import Response 
 from rest_framework.views import APIView
-from .models import *
+from .models import Appointment
 from .serializers import *
 from rest_framework_simplejwt.tokens import RefreshToken
 from beautician.models import *
@@ -50,10 +50,10 @@ class Login(APIView):
 
 class Changeimage(APIView):
     def post(self,request):
-        print("REACHED")
+     
         id=request.data.get("id")
         image=request.data.get("imageurl")
-        print(image,"#########")
+
         
 
         obj=Customer.objects.get(id=id)  
@@ -69,7 +69,6 @@ class Changeimage(APIView):
 
 class Booknow(APIView):
     def post(self,request):
-        print("REACHEDDDDDDDDDD")
         beautid=request.data.get("beautid")
         custid=request.data.get("custid")
         date=request.data.get("date")
@@ -82,7 +81,7 @@ class Booknow(APIView):
         parseddateandtime=datetime.fromisoformat(str(date))
         parseddate=parseddateandtime.date()
         studioobj=Studio.objects.get(beautician=beautobj,place=studio)
-        print(studioobj,"############")
+
         service_obj=Services.objects.get(name=servicename)
         service_obj_req=Servicefees.objects.get(beautician=beautobj,service=service_obj)
         
@@ -135,12 +134,12 @@ class Getbeautdatas(APIView):
         
 class Getbookings(APIView):
     def post(self,request):
-        print("REACHEDDDDDDDDDD")
+ 
         custid=request.data.get("custid")
-        print(custid,"CUSTID")
+
         try:
             custobj=Customer.objects.get(id=custid)
-            print(custobj,"#######")
+  
             appointmentsobjs=Appointment.objects.filter(customer=custobj)
             appointmentsobjs_serialized=Appointmentserializer(appointmentsobjs,many=True)
 
@@ -149,8 +148,8 @@ class Getbookings(APIView):
 
             # serviceobjs=Servicefees.objects.filter(beautician=beautobj)
             # serviceobjs_serialized=ServicefeesSerializer(serviceobjs,many=True)
-            print("ALLSET")
-            print(appointmentsobjs)
+   
+     
             for item in appointmentsobjs:
                 serviceobj=item.service
                 beauticianobj=item.beautician
@@ -158,7 +157,7 @@ class Getbookings(APIView):
 
                 baseservice=serviceobj.service
                 baseservice_serialized=ServicesSerializer(baseservice)
-                print(f"{serviceobj},{beauticianobj},{studioobj} ############3")
+               
                 
 
                 serviceobj_serialized=ServicefeesSerializer(serviceobj)

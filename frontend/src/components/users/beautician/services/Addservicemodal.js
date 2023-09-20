@@ -82,7 +82,7 @@ const Addservicemodal = () => {
       <Button
         onClick={handleOpen}
         variant="contained"
-        sx={{ marginBottom: "0px", marginLeft: "220px", marginTop: "100px" }}
+        sx={{ marginBottom: "0px", marginLeft: "160px", marginTop: "30px" }}
       >
         Add Service
       </Button>

@@ -63,7 +63,7 @@ const Services = () => {
       </Typography>
 
       <Grid container spacing={2}>
-        <Grid xs={6}>
+        {/* <Grid xs={6}>
           <Paper
             elevation={24}
             sx={{
@@ -112,12 +112,12 @@ const Services = () => {
              
             
           </Paper>
-        </Grid>
-        <Grid xs={6}>
+        </Grid> */}
+        <Grid xs={12}>
           <Paper
             elevation={24}
             sx={{
-              width: 350,
+              width: 450,
               height: 350,
               backgroundColor: "#F5FFFA",
               // backgroundImage:'url("https://img.freepik.com/premium-photo/close-up-hair-supplies-flat-lay_23-2148352942.jpg?w=900")',
@@ -126,6 +126,7 @@ const Services = () => {
 
               marginTop: "30px",
               marginBottom: "30%",
+              marginLeft:"20%",
               opacity: [0.9, 0.8, 0.8],
 
               "&:hover": {
@@ -139,7 +140,7 @@ const Services = () => {
               component="h1"
               sx={{ marginLeft: "30%", color: "#080000", paddingTop: "15px" }}
             >
-              Other Services
+              Your Services
             </Typography>
             
             
@@ -149,7 +150,7 @@ const Services = () => {
                 <List
                   sx={{
                     width: "100%",
-                    maxWidth: 360,
+                    maxWidth: 900,
                     bgcolor: "background.paper",
                   }}
                 >
@@ -166,6 +167,7 @@ const Services = () => {
                             primary={item.service.name}
                             secondary={`Rs ${item.servicefee} /-`}
                           />
+                          <Avatar src={item.service.image}></Avatar>
                           {/* {item.service.name} */}
                       
                         </ListItem>

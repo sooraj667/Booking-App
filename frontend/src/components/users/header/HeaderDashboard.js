@@ -91,7 +91,7 @@ const HeaderDashboard = () => {
                   }}
                   onClick={handleLogoutB}
                 >
-                  LogoutB
+                  Logout
                 </Button>
               </Link>
             </>
@@ -108,7 +108,7 @@ const HeaderDashboard = () => {
                   }}
                   onClick={handleLogoutC}
                 >
-                  LogoutC
+                  Logout
                 </Button>
               </Link>
             </>

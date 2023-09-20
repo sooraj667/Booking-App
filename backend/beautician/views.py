@@ -2,8 +2,9 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import *
 from .serializers import *
+from customers.serializers import *
 from rest_framework_simplejwt.tokens import RefreshToken
-
+from customers.models import *
 
 class Signup(APIView):
     def post(self,request):
@@ -132,6 +133,69 @@ class Editdetails(APIView):
         beautobj.save()
         beautician_serialized=BeauticianSerializer(beautobj)
         return Response({"message":'Added',"allbeautdatas":beautician_serialized.data})
+    
+
+
+class Getbookings(APIView):
+    def post(self,request):
+ 
+        beautid=request.data.get("beautid")
+
+        try:
+            beautobj=Beautician.objects.get(id=beautid)
+  
+            appointmentsobjs=Appointment.objects.filter(beautician=beautobj)
+            appointmentsobjs_serialized=Appointmentserializer(appointmentsobjs,many=True)
+
+            # studioobjs=Studio.objects.filter(beautician=beautobj)
+            # studioobjs_serialized=StudioSerializer(studioobjs,many=True)
+
+            # serviceobjs=Servicefees.objects.filter(beautician=beautobj)
+            # serviceobjs_serialized=ServicefeesSerializer(serviceobjs,many=True)
+   
+     
+            for item in appointmentsobjs:
+                serviceobj=item.service
+                customerobj=item.customer
+                studioobj=item.studio
+
+                baseservice=serviceobj.service
+                baseservice_serialized=ServicesSerializer(baseservice)
+               
+                
+
+                serviceobj_serialized=ServicefeesSerializer(serviceobj)
+                customerobj_serialized=Customerserializer(customerobj)
+                studioobj_serialized=StudioSerializer(studioobj)
+                
+
+                
+                
+                serviceid=serviceobj.id
+                customerid=customerobj.id
+                studioid=studioobj.id
+               
+                for item in appointmentsobjs_serialized.data:
+                    if item["service"]==serviceid:
+                        item["service"]=serviceobj_serialized.data
+                        item["service"]["service"]=baseservice_serialized.data
+                    if  item["customer"]==customerid:
+                        item["customer"]=customerobj_serialized.data
+                    if  item["studio"]==studioid:
+                        item["studio"]=studioobj_serialized.data
+
+
+                
+
+                        
+
+                
+            print(appointmentsobjs_serialized.data)
+
+            # print(studioobjs_serialized.data,"STUDIOS")
+            return Response({"message":"success","appointmentdata":appointmentsobjs_serialized.data})
+        except:
+            return Response({"message":"not success"})
 
 
 
