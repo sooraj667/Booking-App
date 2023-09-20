@@ -130,6 +130,7 @@ const Booknow = () => {
             height: 225,
           }}
         />
+        <InputLabel id="demo-simple-select-label">Choose Date</InputLabel>
         <DatePicker
           selected={startDate}
           onChange={handleDateChange}
@@ -143,32 +144,32 @@ const Booknow = () => {
           value={selectedTime}
           className=" form-control dateform"
         >
-          <option>Select Time</option>
+         
           {alltime.map((item) => {
             return <option>{item}</option>;
           })}
         </select>
 
-
+        <InputLabel id="demo-simple-select-label">Choose Studio</InputLabel>
         <select
           name="selectedTime"
           onChange={handleStudioChange}
           value={selectedTime}
           className=" form-control dateform"
         >
-          <option>Select Studio</option>
+         
           {reqdatas.value.beautstudios.map((item) => {
             return <option>{item.place}</option>;
           })}
         </select>
-
+        <InputLabel id="demo-simple-select-label">Select Service</InputLabel>
         <select
           name="selectedTime"
           onChange={handleServiceChange}
           value={selectedTime}
           className=" form-control dateform"
         >
-          <option>Select Service</option>
+      
           {reqdatas.value.beautservices.map((item) => {
             return <option>{item.service.name}</option>;
           })}
