@@ -32,16 +32,13 @@ const Services = () => {
   useEffect(() => {
     console.log("SERVICES");
     const beautDetails = localStorage.getItem("singledetails-B");
-    const expertin = localStorage.getItem("expertin-B");
+
     const services = localStorage.getItem("services-B");
     if (beautDetails) {
       const parsed = JSON.parse(beautDetails);
       dispatch(setBeautDetails(parsed));
     }
-    if (expertin) {
-      const parsedexpert = JSON.parse(expertin);
-      dispatch(setExpertIn(parsedexpert));
-    }
+ 
     if (services) {
       const parsedservices = JSON.parse(services);
       dispatch(setServices(parsedservices));

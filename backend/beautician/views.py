@@ -43,7 +43,7 @@ class Login(APIView):
                 print("ISBLOCKED TRUE")
                 return Response({"message":'Blocked'})
             serialized_object=BeauticianSerializer(beautobj)
-            expertin_serialized=ServicesSerializer(beautobj.expertin)
+            
             beautservices=Servicefees.objects.filter(beautician=beautobj)
             beautservices_serialized=ServicefeesSerializer(beautservices,many=True)
             for item in beautservices:
@@ -62,7 +62,7 @@ class Login(APIView):
 
 
             refresh=RefreshToken.for_user(beautobj)  
-            return Response({"message":'Matched',"beautdata":serialized_object.data,"expertin":expertin_serialized.data,"services":beautservices_serialized.data,"allservices":allservices_serialized.data,"studios":studioobjs_serialized.data,"accesstoken":str(refresh.access_token),"refreshtoken":str(refresh)})
+            return Response({"message":'Matched',"beautdata":serialized_object.data,"services":beautservices_serialized.data,"allservices":allservices_serialized.data,"studios":studioobjs_serialized.data,"accesstoken":str(refresh.access_token),"refreshtoken":str(refresh)})
         else:
             return Response({"message":'NotMatched'})
 
