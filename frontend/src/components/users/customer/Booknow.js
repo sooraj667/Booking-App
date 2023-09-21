@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   setBookbeautdata,
   setBeautstudios,
-  setBeautservices
+  setBeautservices,
 } from "../../../feautures/customer/customerdataslice";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -17,6 +17,7 @@ import MenuItem from "@mui/material/MenuItem";
 // import FormControl from '@mui/material/FormControl';
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
+import "./Browse.css"
 
 
 const Booknow = () => {
@@ -41,7 +42,6 @@ const Booknow = () => {
   const dispatch = useDispatch();
   const handleDateChange = (date) => {
     setStartDate(date);
-    
   };
   const handleTimeChange = (e) => {
     setSelectedTime(e.target.value);
@@ -61,29 +61,25 @@ const Booknow = () => {
       custid: statedatas.value.custdetails.id,
       date: startDate,
       time: selectedTime,
-      studio:selectedStudio,
-      servicename:selectedService,
+      studio: selectedStudio,
+      servicename: selectedService,
     };
-    console.log(datas,"MAINDATAS");
+
     axiosInstance
       .post("cust/booknow/", datas)
-      .then((res) => {
-        console.log(res.data.message);
-      })
+      .then((res) => {})
       .catch((err) => alert(err));
   };
 
   useEffect(() => {
     const allBeauticians = localStorage.getItem("allbeauticians-C");
-    
-
 
     if (allBeauticians) {
       const allbeaut_parsed = JSON.parse(allBeauticians);
       allbeaut_parsed.filter((item) => {
         if (navdatas.value.booknowbeauticianid == item.id) {
           const reqbeaut = item;
-         
+
           dispatch(setBookbeautdata(reqbeaut));
 
           return reqbeaut;
@@ -93,48 +89,54 @@ const Booknow = () => {
   }, []);
 
   useEffect(() => {
-    console.log("CALLEDD");
-    const id=localStorage.getItem("id")
+    const id = localStorage.getItem("id");
 
     const datas = {
       beautid: id,
     };
-    console.log(datas,"DATASSSSSSSSSSSSSSSSSSSSS");
+
     axiosInstance
       .post("cust/getbeautdatas/", datas)
       .then((res) => {
-        if (res.data.message==="success") {
-          console.log(res.data.studiodata,"STUDIODATAAA");
-        //   const parseddata=JSON.parse(res.data.studiodata)
-        //   console.log(parseddata,"PARSEDDATA");
-        dispatch(setBeautstudios(res.data.studiodata))
-        dispatch(setBeautservices(res.data.servicedata))
-         
+        if (res.data.message === "success") {
+          console.log(res.data.servicedata, "servicedata");
+
+          dispatch(setBeautstudios(res.data.studiodata));
+          dispatch(setBeautservices(res.data.servicedata));
         }
-        if (res.data.message==="notsuccess") {
-            console.log("not success");
-            
-          }
+        if (res.data.message === "notsuccess") {
+        }
       })
-      .catch((err) => console.log(err))
-  },[]);
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <div>
+         <div className="expertin">
+          <p>{reqdatas.value.bookbeautdata.name}</p>
+          Expert In
+        {reqdatas.value.beautservices
+          .filter((item) => item.topservice === true) 
+          .map((item) => (
+            <p  key={item.id}  > {item.service.name} </p>
+          ))}
+          </div>
       <Stack
         spacing={2}
         sx={{
           marginTop: "70px",
-          marginLeft: "220px",
+          marginLeft: "320px",
         }}
       >
         <Avatar
           src={reqdatas.value.bookbeautdata.image}
           sx={{
-            width: 225,
+            width: 225, 
             height: 225,
           }}
         />
+     
+
         <InputLabel id="demo-simple-select-label">Choose Date</InputLabel>
         <DatePicker
           selected={startDate}
@@ -149,7 +151,6 @@ const Booknow = () => {
           value={selectedTime}
           className=" form-control dateform"
         >
-         
           {alltime.map((item) => {
             return <option>{item}</option>;
           })}
@@ -162,7 +163,6 @@ const Booknow = () => {
           value={selectedTime}
           className=" form-control dateform"
         >
-         
           {reqdatas.value.beautstudios.map((item) => {
             return <option>{item.place}</option>;
           })}
@@ -174,7 +174,6 @@ const Booknow = () => {
           value={selectedTime}
           className=" form-control dateform"
         >
-          
           {reqdatas.value.beautservices.map((item) => {
             return <option>{item.service.name}</option>;
           })}
@@ -191,7 +190,7 @@ const Booknow = () => {
             return <option>{item}</option>;
           })}
         </select> */}
-         
+
         {/* <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
@@ -215,8 +214,8 @@ const Booknow = () => {
           Confirm
         </Button>
       </Stack>
-      {console.log(reqdatas.value.beautstudios,"DDDDDDDDDDDDDDDD")}
-         {console.log("HANNAAAAAAAAAAAAAAAA")}
+      {console.log(reqdatas.value.beautstudios, "DDDDDDDDDDDDDDDD")}
+      {console.log("HANNAAAAAAAAAAAAAAAA")}
     </div>
   );
 };

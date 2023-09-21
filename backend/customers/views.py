@@ -35,12 +35,12 @@ class Login(APIView):
            
             allbeauticians_serialized=BeauticianSerializer(allbeauticians,many=True)
            
-            for item in allbeauticians:
-                required_id=item.id
-                expertinobj=item.expertin 
-                for item in allbeauticians_serialized.data:
-                    if item["id"]==required_id:
-                        item["expertin"]=ServicesSerializer(expertinobj).data
+            # for item in allbeauticians:
+            #     required_id=item.id
+            #     expertinobj=item.expertin 
+            #     for item in allbeauticians_serialized.data:
+            #         if item["id"]==required_id:
+            #             item["expertin"]=ServicesSerializer(expertinobj).data
                 
             refresh=RefreshToken.for_user(obj)  
             return Response({"message":'Matched',"custdata":serialized_object.data,"allbeautdata":allbeauticians_serialized.data,"accesstoken":str(refresh.access_token),"refreshtoken":str(refresh)})

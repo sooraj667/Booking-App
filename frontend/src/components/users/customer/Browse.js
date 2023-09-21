@@ -40,17 +40,17 @@ const Browse = () => {
   }, []);
   return (
     <div>
-      <Typography variant="h2" component="h3">
-        Browse
-      </Typography>
+      <div className="heading1">
+        Explore
+      </div>
       <Box sx={{ width: "100%" }}>
         {statedatas.value.allbeauticians.map((item) => {
           return (
-            <Stack spacing={3}>
+            <Stack spacing={3} className="mt-3">
               <Paper
                 elevation={24}
                 sx={{
-                  width: 900,
+                  width: 700,
                   height: 190,
                   backgroundColor: "#F5FFFA",
                   // backgroundImage:'url("https://img.freepik.com/premium-photo/close-up-hair-supplies-flat-lay_23-2148352942.jpg?w=900")',
@@ -67,8 +67,8 @@ const Browse = () => {
                   },
                 }}
               >
-                <Grid container spacing={2}>
-                  <Grid item xs={2.2}>
+                <Grid container spacing={4} >
+                  <Grid item xs={3}>
                     <Avatar
                       sx={{
                         width: 125,
@@ -79,8 +79,9 @@ const Browse = () => {
                       src={item.image}
                     />
                   </Grid>
-                  <Grid item xs={3}>
+                  <Grid item xs={4}>
                     <Typography
+                    className="textclass"
                       variant="h5"
                       component="h1"
                       sx={{
@@ -92,25 +93,20 @@ const Browse = () => {
                       }}
                     >
                       {item.name}
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={3}>
-                    <Typography
-                      variant="h5"
-                      component="h1"
+                      <Button
+                      variant="contained"
                       sx={{
-                        fontSize: "24px", // Adjust the font size as needed
-                        fontWeight: "bold", // Make the text bold if desired
-                        // Change the text color based on your color palette
-                        marginBottom: "16px", // Add some spacing at the bottom
-                        // You can add more styles as needed, such as fontFamily, letterSpacing, etc.
+                        marginTop: "80px",
                       }}
+                      onClick={() => booknowHandler(item.id)}
                     >
-                      Expert in
+                      Book Now
+                    </Button> 
+                      
                     </Typography>
-                    <h2>{item.expertin.name}</h2>
                   </Grid>
-                  <Grid item xs={3}>
+                 
+                  {/* <Grid item xs={4}>
                     <Button
                       variant="contained"
                       sx={{
@@ -120,7 +116,7 @@ const Browse = () => {
                     >
                       Book Now
                     </Button>
-                  </Grid>
+                  </Grid> */}
                 </Grid>
               </Paper>
             </Stack>

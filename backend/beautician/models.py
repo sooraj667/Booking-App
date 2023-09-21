@@ -20,8 +20,6 @@ class Beautician(models.Model):
     phone=models.CharField(max_length=200)
     password=models.CharField(max_length=200)
     image=models.CharField(max_length=300,blank=True,null=True)
-    expertin=models.ForeignKey(Services,on_delete=models.CASCADE,related_name='beauticians_expert_in',blank=True,null=True)
-    expertin_fee=models.PositiveIntegerField(blank=True,null=True)
     # services=models.ManyToManyField(Services,related_name='beauticians_providing_services')
     isblocked=models.CharField(max_length=200,default="False")
    
@@ -34,6 +32,7 @@ class Servicefees(models.Model):
     service=models.ForeignKey(Services,on_delete=models.CASCADE)
     servicefee=models.PositiveIntegerField(null=True)
     blocked=models.BooleanField(default=False)
+    topservice=models.BooleanField(default=False)
 
 class Blockeddate(models.Model):
     beautician=models.ForeignKey(Beautician,on_delete=models.CASCADE)
