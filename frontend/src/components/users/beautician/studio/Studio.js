@@ -8,10 +8,10 @@ import axiosInstance from "../../../../axios/axiosconfig";
 import { useDispatch, useSelector } from "react-redux";
 import { setStudiodatas } from "../../../../feautures/beautician/studioformslice";
 import Addstudiomodal from "./Addstudiomodal";
-import "./Studio.css"
+import "./Studio.css";
 import Editstudiomodal from "./Editstudiomodal";
-
-
+import Deleteconfirmationmodal from "../../../modals/Deleteconfirmationmodal";
+// import {setReRender} from "../../../../feautures/rerenderslice"
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -22,7 +22,9 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const Studio = () => {
+  const [changed, setChanged] = useState(false);
   const studiodatas = useSelector((state) => state.studioform);
+  const rerender = useSelector((state) => state.rerender);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -41,7 +43,11 @@ const Studio = () => {
         dispatch(setStudiodatas(res.data.studios));
       })
       .catch((err) => alert(err));
-  }, []);
+  }, [changed]);
+
+  const handleChildStateChange = () => {
+    setChanged(true);
+  };
   return (
     <div>
       <div className="row">
@@ -67,8 +73,15 @@ const Studio = () => {
                     <span class="state">{item.country}</span>-
                     <span class="state"> Pincode:{item.pincode}</span>
                   </p>
-                  <Editstudiomodal studioId={item.id}/>
-                  
+                  <div className="row">
+                    <Editstudiomodal studioId={item.id} />
+                    <Deleteconfirmationmodal
+                      id={item.id}
+                      item_to_delete="studio"
+                      rerenderit={handleChildStateChange}
+                      
+                    />
+                  </div>
                 </div>
               </>
             );

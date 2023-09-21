@@ -14,6 +14,7 @@ import adminDataAssignerSlice from "./feautures/adminDataAssignerSlice";
 import customernavigationslice from "./feautures/customer/customernavigationslice";
 import customerdataslice from "./feautures/customer/customerdataslice";
 import studioformslice from "./feautures/beautician/studioformslice";
+import rerenderslice from "./feautures/rerenderslice";
 function App() {
   const store = configureStore({
     reducer: {
@@ -26,6 +27,7 @@ function App() {
       custnavigation:customernavigationslice,
       custreqdata:customerdataslice,
       studioform:studioformslice,
+      rerender:rerenderslice,
     },
   });
 

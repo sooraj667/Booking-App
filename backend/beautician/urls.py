@@ -11,5 +11,6 @@ urlpatterns = [
     path("getstudios/",Getstudios.as_view(),name="Getstudios"),
     path("addstudio/",Addstudio.as_view(),name="Addstudio"),
     path("editstudio/",Editstudio.as_view(),name="Editstudio"),
+    path("deletestudio/",Deletestudio.as_view(),name="Deletestudio"),
     
 ]

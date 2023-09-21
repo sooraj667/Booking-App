@@ -285,7 +285,21 @@ class Editstudio(APIView):
             return Response({"message":"success","studios":studioobjs_serialized.data})
         except:
             return Response({"message":"not success"})
+        
+class Deletestudio(APIView):
+    def post(self,request):
+        
+                
+        studioid=request.data.get("studioid")
+        print(studioid,"##################")
+        studioobj=Studio.objects.get(id=studioid)
+        print(studioobj,"STUDIONBJJJJDJDJJD")
+        beautobj=studioobj.beautician
+        studioobj.delete()
+        studioobjs_serialized=StudioSerializer(Studio.objects.filter(beautician=beautobj),many=True)
 
+        return Response({"message":"success","studios":studioobjs_serialized.data})
+ 
 
         
 
