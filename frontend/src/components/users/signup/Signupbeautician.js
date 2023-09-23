@@ -1,11 +1,12 @@
 import React from "react";
 import Signupform from "./Signupform";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import axiosInstance from "../../../axios/axiosconfig";
 import Paper from '@mui/material/Paper';
 import Button from "@mui/material/Button"
 
 import { useNavigate } from "react-router-dom";
+import {setBeautotp} from "../../../feautures/otpslice"
 
 
 const Signupbeautician = () => {
@@ -13,6 +14,7 @@ const Signupbeautician = () => {
 
   const formdatas=useSelector((state)=> state.signup)
   const navigate=useNavigate()
+  const dispatch=useDispatch()
  
 
   const handleSubmit=()=>{
@@ -26,7 +28,8 @@ const Signupbeautician = () => {
     axiosInstance.post("beaut/signup/",datas).then((response)=>{
       console.log("SUCCESSFULL");
       console.log(response.data);
-      navigate("../loginbeautician/")
+      dispatch(setBeautotp())
+      navigate("../otp/")
       
     }).catch((error)=>{
       alert("ERROR")

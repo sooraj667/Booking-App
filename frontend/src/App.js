@@ -15,6 +15,7 @@ import customernavigationslice from "./feautures/customer/customernavigationslic
 import customerdataslice from "./feautures/customer/customerdataslice";
 import studioformslice from "./feautures/beautician/studioformslice";
 import rerenderslice from "./feautures/rerenderslice";
+import otpslice from "./feautures/otpslice";
 function App() {
   const store = configureStore({
     reducer: {
@@ -28,6 +29,7 @@ function App() {
       custreqdata:customerdataslice,
       studioform:studioformslice,
       rerender:rerenderslice,
+      otp:otpslice
     },
   });
 

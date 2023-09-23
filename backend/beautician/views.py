@@ -7,6 +7,38 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from customers.models import *
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.hashers import check_password
+from django.core.mail import send_mail
+from django.conf import settings
+import random
+
+
+
+def generate_otp():
+    return str(random.randint(1000, 9999))
+
+
+class Confirmotp(APIView):
+    def post(self,request):
+        user_entered_otp=request.data.get("otp")
+        email=request.data.get("email")
+        try:
+            otpobj=OTP.objects.get(otp=user_entered_otp,email=email)
+            otpobj.delete()
+            return Response({"message":'Success'}) 
+        except:
+            return Response({"message":'Failed'})
+       
+       
+           
+            
+        
+            
+
+            
+     
+
+
+    
 
 
 class Signup(APIView):
@@ -16,12 +48,21 @@ class Signup(APIView):
         phone=request.data.get("phone")
         password=request.data.get("password")
 
+
+        otpvalue=generate_otp()
+        OTP.objects.create(otp=otpvalue,email=email)
+      
+        subject = "OTP for registration in Groom UP"
+        message = f"Your OTP for registration is {otpvalue}.Please enter this otp to register."
+        recipient = email
+        send_mail(subject, 
+              message, settings.EMAIL_HOST_USER, [recipient], fail_silently=False)
+
         hashed_password=make_password(password)
 
         newobj=Beautician.objects.create(name=pname,email=email,phone=phone,password=hashed_password)
         serialized_object=BeauticianSerializer(newobj)
-        return Response({"message":'Created',"beautdata":serialized_object.data})
-    
+        return Response({"message":'Created',"beautdata":serialized_object.data}) 
     
 class Login(APIView):
     def post(self,request):
@@ -29,13 +70,14 @@ class Login(APIView):
         password=request.data.get("password")
         
 
+
         found=Beautician.objects.filter(email=email).count()    
         if found==1:
             beautobj=Beautician.objects.get(email=email)
             is_valid=check_password(password, beautobj.password)
             if not is_valid:
                 return Response({"message":'NotMatched'})
-
+            
             # beautobj=Beautician.objects.get(email=email,password=password)
             
             print(beautobj)

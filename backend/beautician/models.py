@@ -53,3 +53,11 @@ class Studio(models.Model):
 
     def __str__(self):
         return f"{self.beautician.name} - {self.locality} -{self.place}"
+
+class OTP(models.Model):
+    otp=models.PositiveIntegerField(blank=True,null=True)
+    email=models.CharField(max_length=200,blank=True,null=True)
+    
+
+    def __str__(self):
+        return f"{self.otp}"

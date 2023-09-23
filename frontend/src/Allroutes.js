@@ -15,6 +15,7 @@ import Customerpage from "./pages/users/customer/Customerpage";
 import LoginpageAd from "./pages/admin/login/LoginpageAd";
 import DashboardpageAd from "./pages/admin/dashboard/DashboardpageAd";
 import Customerdashboard from "./components/users/customer/Customerdashboard";
+import Otppage from "./components/users/otp/Otppage";
 
 const Allroutes = () => {
   const dispatch =useDispatch()
@@ -50,6 +51,9 @@ const Allroutes = () => {
               element={<Signupbeauticianpage />}
             />
             <Route path="/signupcustomer" element={<Signupcustomerpage />} />
+
+            <Route path="/otp" element={<Otppage />} />
+
             
             
             {
