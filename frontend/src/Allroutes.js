@@ -16,6 +16,7 @@ import LoginpageAd from "./pages/admin/login/LoginpageAd";
 import DashboardpageAd from "./pages/admin/dashboard/DashboardpageAd";
 import Customerdashboard from "./components/users/customer/Customerdashboard";
 import Otppage from "./components/users/otp/Otppage";
+import OTPMainpage from "./pages/otp/OTPMainpage";
 
 const Allroutes = () => {
   const dispatch =useDispatch()
@@ -52,7 +53,7 @@ const Allroutes = () => {
             />
             <Route path="/signupcustomer" element={<Signupcustomerpage />} />
 
-            <Route path="/otp" element={<Otppage />} />
+            <Route path="/otp" element={<OTPMainpage />} />
 
             
             

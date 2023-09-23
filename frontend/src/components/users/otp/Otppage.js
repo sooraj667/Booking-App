@@ -39,7 +39,7 @@ const Otppage = () => {
         }
     }
   return (
-    <div style={{backgroundImage:"url('https://images.unsplash.com/photo-1603899122634-f086ca5f5ddd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80')",backgroundSize: "cover",height:"750px"}}>
+    <div >
     <Paper
       elevation={24}
       sx={{
@@ -50,7 +50,7 @@ const Otppage = () => {
         objectFit: "cover",
         backgroundRepeat: "no-repeat",
         marginLeft: "30%",
-        marginTop: "",
+        marginTop: "40px",
         opacity: [0.9, 0.8, 0.8],
         paddingTop:"100px",
 
