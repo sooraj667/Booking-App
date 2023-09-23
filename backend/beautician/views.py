@@ -100,6 +100,10 @@ class Login(APIView):
 
             studioobjs=Studio.objects.filter(beautician=beautobj)
             studioobjs_serialized=StudioSerializer(studioobjs,many=True)
+
+
+
+           
            
 
 

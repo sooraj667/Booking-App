@@ -18,6 +18,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import "./Browse.css"
+import Paypal from "../../paypal/Paypal"
 
 
 const Booknow = () => {
@@ -203,6 +204,11 @@ const Booknow = () => {
             return <MenuItem>{item}</MenuItem>;
           })}
         </Select> */}
+        
+        <Paypal/>
+
+
+
         <Button
           variant="contained"
           sx={{
