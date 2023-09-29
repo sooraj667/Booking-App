@@ -13,10 +13,13 @@ import { v4 } from "uuid";
 import { setCustDetails } from "../../../feautures/loginslice";
 import Paper from "@mui/material/Paper";
 import Topstackcust from "./Topstackcust";
-
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
 
 const Landingpartcust = () => {
+  const[allServices,setAllServices]=useState([])
   const [addImage, setAddImage] = useState(false);
+  
   const [image, setImage] = useState("");
   const [selectedImage, setSelectedImage] = useState("");
   const [todayAppointments, setTodayAppointments] = useState([]);
@@ -28,6 +31,19 @@ const Landingpartcust = () => {
 
     // console.log(datas.value.beautdetails.id);
   };
+  useEffect(
+    ()=>{
+      axiosInstance.get("cust/getallservices/").then((response)=>{
+        console.log(response.data.allservices)
+        setAllServices(response.data.allservices)
+
+      }
+       
+      ).catch((error)=>{
+        console.log(error);
+      })
+    },[]
+  )
 
 
 
@@ -36,6 +52,8 @@ const Landingpartcust = () => {
     // console.log(URL.createObjectURL(e.target.files[0]));
     // return setSelectedImage(URL.createObjectURL(e.target.files[0]));
   };
+
+
 
   useEffect(
     ()=>{
@@ -88,7 +106,7 @@ const Landingpartcust = () => {
     <div>
       <Topstackcust />
 
-      <Button
+      {/* <Button
         type="file"
         onClick={addImageHandler}
         variant="contained"
@@ -123,7 +141,7 @@ const Landingpartcust = () => {
             </div>
           </>
         )}
-      </div>
+      </div> */}
       <div>
         <Paper
           elevation={24}
@@ -145,7 +163,30 @@ const Landingpartcust = () => {
             },
           }}
         >
-          <Typography
+
+<ImageList sx={{ width: 500, height: 450 }} cols={3} rowHeight={164}>
+      {allServices.map((item) => (
+        <ImageListItem key={item.img}>
+          <img
+            srcSet={`${item.image}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+            src={`${item.image}?w=164&h=164&fit=crop&auto=format`}
+            alt={item.title}
+            loading="lazy"
+          />
+        </ImageListItem>
+      ))}
+    </ImageList>
+
+
+
+
+
+
+
+
+
+
+          {/* <Typography
             variant="h5"
             component="h1"
             sx={{ marginLeft: "20%", color: "#080000", paddingTop: "15px" }}
@@ -211,7 +252,7 @@ const Landingpartcust = () => {
                 )
               }
             )
-          }
+          } */}
         </Paper>
       </div>
     </div>

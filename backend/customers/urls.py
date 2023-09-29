@@ -10,6 +10,7 @@ urlpatterns = [
     path("getbookings/",Getbookings.as_view(),name="Getbookings"),
     path("getlandingpage/",Getlandingpage.as_view(),name="Getlandingpage"),
     path("editdetails/",Editdetails.as_view(),name="Editdetails"),
+    path("getallservices/",Getallservices.as_view(),name="Getallservices"),
 
 
     

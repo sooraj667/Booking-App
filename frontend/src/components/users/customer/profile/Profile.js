@@ -9,10 +9,67 @@ import { useSelector } from "react-redux";
 // import "./Profile.css"
 import Editdetailsmodal from "./Editdetailsmodal";
 import Topstackcust from "../Topstackcust";
+import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
+import DriveFolderUploadIcon from "@mui/icons-material/DriveFolderUpload";
+import { storage } from "../../../../firebase/firebaseconfig";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { v4 } from "uuid";
+import { useState } from "react";
+import { setCustDetails } from "../../../../feautures/loginslice";
+import { useDispatch } from "react-redux";
+import axiosInstance from "../../../../axios/axiosconfig";
 
 const Profile = () => {
   const statedatas = useSelector((state) => state.login);
+  const [addImage, setAddImage] = useState(false);
+  const [image, setImage] = useState("");
+  const [selectedImage, setSelectedImage] = useState("");
+  const dispatch = useDispatch();
+
+  const handleFileChange = (e) => {
+    setSelectedImage(e.target.files[0]);
+    // console.log(URL.createObjectURL(e.target.files[0]));
+    // return setSelectedImage(URL.createObjectURL(e.target.files[0]));
+  };
+
+  const addImageHandler = () => {
+    setAddImage((addImage) => !addImage);
+
+    // console.log(datas.value.beautdetails.id);
+  };
+  const uploadImageHandler = () => {
+    const reference = ref(storage, `customer/${selectedImage.name + v4()}`);
+    uploadBytes(reference, selectedImage)
+      .then((res) => {
+        getDownloadURL(reference).then((url) => {
+          console.log(url, "PRINTED");
+          const datas = {
+            imageurl: url,
+            id: statedatas.value.custdetails.id,
+          };
+          axiosInstance.post("cust/changeimage/", datas).then((response) => {
+            console.log(response.data);
+            if (response.data.message == "Added") {
+              console.log("ALL SET");
+              localStorage.setItem(
+                "singledetails-C",
+                JSON.stringify(response.data.custdata)
+              );
+              dispatch(setCustDetails(response.data.custdata));
+            } else {
+              alert("NOT SET");
+            }
+          });
+        });
+      })
+      .catch(() => {
+        console.log("Error");
+      });
+  };
   return (
+    <>
+        
+    
     <Paper
         elevation={24}
         sx={{
@@ -33,9 +90,51 @@ const Profile = () => {
           },
         }}
       >
+         
         <div style={{"marginLeft":"320px","paddingTop":"120px"}}>
+        <Avatar src={statedatas.value.custdetails.image}  sx={{ width: 125, height: 125 }}/>
+        <Button
+        type="file"
+        onClick={addImageHandler}
+        variant="contained"
+        startIcon={<InsertPhotoIcon />}
+        sx={{ marginTop: "10px" }}
+        size="small"
+      >
+        Change Photo
+      </Button>
+      {console.log(statedatas.value.beautdetails.image)}
+      <div>
+        {addImage && (
+          <>
+            <input
+              className="selectimage"
+              accept="image/*"
+              id="upload-button"
+              type="file"
+              onChange={handleFileChange}
+            />
+            <div>
+              <Button
+                type="file"
+                onClick={uploadImageHandler}
+                variant="contained"
+                startIcon={<DriveFolderUploadIcon />}
+                sx={{ marginTop: "10px" }}
+                size="small"
+              >
+                Upload
+              </Button>
+            </div>
+          </>
+        )}
+      </div>
             <div className="row ">
-                <Avatar src={statedatas.value.custdetails.image}  sx={{ width: 125, height: 125 }}/>
+
+           
+
+
+                
                
 
             </div>
@@ -68,6 +167,7 @@ const Profile = () => {
    
         
       </Paper>
+      </>
     
   )
 }

@@ -272,3 +272,17 @@ class Editdetails(APIView):
         custobj.save()
         customer_serialized=Customerserializer(custobj)
         return Response({"message":'Added',"allcustdatas":customer_serialized.data})
+    
+class Getallservices(APIView):
+    def get(self,request): 
+        allservices=Services.objects.all()
+        allservices_serialized=ServicesSerializer(allservices,many=True)
+        return Response({"message":'Added',"allservices":allservices_serialized.data})
+        
+
+
+
+
+
+
+        
