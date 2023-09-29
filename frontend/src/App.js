@@ -16,6 +16,7 @@ import customerdataslice from "./feautures/customer/customerdataslice";
 import studioformslice from "./feautures/beautician/studioformslice";
 import rerenderslice from "./feautures/rerenderslice";
 import otpslice from "./feautures/otpslice";
+import paymentdataslice from "./feautures/customer/paymentdataslice";
 function App() {
   const store = configureStore({
     reducer: {
@@ -29,7 +30,8 @@ function App() {
       custreqdata:customerdataslice,
       studioform:studioformslice,
       rerender:rerenderslice,
-      otp:otpslice
+      otp:otpslice,
+      paymentdatas:paymentdataslice,
     },
   });
 

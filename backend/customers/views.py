@@ -69,6 +69,7 @@ class Changeimage(APIView):
 
 class Booknow(APIView):
     def post(self,request):
+        print("VIEW REACHEDDDDDDDDDDDD NEWWEWEWE")
         beautid=request.data.get("beautid")
         custid=request.data.get("custid")
         date=request.data.get("date")

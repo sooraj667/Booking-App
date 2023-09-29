@@ -1,8 +1,12 @@
 import React from 'react'
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import toast,{Toaster} from 'react-hot-toast';
-
-const Paypal = () => {
+import axiosInstance from '../../axios/axiosconfig';
+import { useSelector } from 'react-redux';
+const Paypal = ( ) => {
+    const reqdatas = useSelector((state) => state.custreqdata);
+    const statedatas = useSelector((state) => state.login);
+    const paymentdatas = useSelector((state) => state.paymentdatas);
   return (
     <>
 
@@ -23,6 +27,19 @@ const Paypal = () => {
             }
             onApprove={()=>{
                 toast.success("Payment successfully completed!")
+                const datas={
+                    beautid: reqdatas.value.bookbeautdata.id,
+                    custid: statedatas.value.custdetails.id,
+                    date: paymentdatas.value.date,
+                    time: paymentdatas.value.time,
+                    service: paymentdatas.value.service,
+                    studio: paymentdatas.value.studio,
+                    
+                }
+                console.log(datas,"MWONEEEEEEEEEEEEE");
+                axiosInstance.post("cust/booknow/",datas).then((response)=>{
+                    console.log(response,"RESRERSRERSRERSR");
+                }).catch((error)=>alert(error))
             }}
             onCancel={()=>{
                 toast.error("You cancelled the payment!")

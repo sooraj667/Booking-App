@@ -19,7 +19,7 @@ import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import "./Browse.css"
 import Paypal from "../../paypal/Paypal"
-
+import {setService,setDate,setTime,setStudio} from "../../../feautures/customer/paymentdataslice"
 
 const Booknow = () => {
   const [startDate, setStartDate] = useState("");
@@ -40,20 +40,24 @@ const Booknow = () => {
   const statedatas = useSelector((state) => state.login);
   const navdatas = useSelector((state) => state.custnavigation);
   const reqdatas = useSelector((state) => state.custreqdata);
+  const paymentdatas = useSelector((state) => state.paymentdatas);
   const dispatch = useDispatch();
   const handleDateChange = (date) => {
-    setStartDate(date);
+    dispatch(setDate(date));
   };
   const handleTimeChange = (e) => {
-    setSelectedTime(e.target.value);
+    dispatch(setTime(e.target.value));
   };
 
   const handleStudioChange = (e) => {
-    setSelectedStudio(e.target.value);
+    dispatch(setStudio(e.target.value));
+    console.log(paymentdatas.value.studio);
   };
 
   const handleServiceChange = (e) => {
-    setSelectedService(e.target.value);
+    dispatch(setService(e.target.value));
+    console.log((e.target.value,"E.TARGET.VALUE"));
+    console.log(paymentdatas.value.service);
   };
 
   const handleConfirm = () => {
@@ -100,7 +104,7 @@ const Booknow = () => {
       .post("cust/getbeautdatas/", datas)
       .then((res) => {
         if (res.data.message === "success") {
-          console.log(res.data.servicedata, "servicedata");
+         
 
           dispatch(setBeautstudios(res.data.studiodata));
           dispatch(setBeautservices(res.data.servicedata));
@@ -140,7 +144,7 @@ const Booknow = () => {
 
         <InputLabel id="demo-simple-select-label">Choose Date</InputLabel>
         <DatePicker
-          selected={startDate}
+          selected={paymentdatas.value.date}
           onChange={handleDateChange}
           dateFormat="MM/dd/yyyy"
           className="custom-datepicker"
@@ -149,7 +153,7 @@ const Booknow = () => {
         <select
           name="selectedTime"
           onChange={handleTimeChange}
-          value={selectedTime}
+        
           className=" form-control dateform"
         >
           {alltime.map((item) => {
@@ -161,7 +165,7 @@ const Booknow = () => {
         <select
           name="selectedTime"
           onChange={handleStudioChange}
-          value={selectedTime}
+   
           className=" form-control dateform"
         >
           {reqdatas.value.beautstudios.map((item) => {
@@ -172,7 +176,7 @@ const Booknow = () => {
         <select
           name="selectedTime"
           onChange={handleServiceChange}
-          value={selectedTime}
+       
           className=" form-control dateform"
         >
           {reqdatas.value.beautservices.map((item) => {
@@ -204,8 +208,8 @@ const Booknow = () => {
             return <MenuItem>{item}</MenuItem>;
           })}
         </Select> */}
-        
-        <Paypal/>
+
+        <Paypal selectedService={selectedService} selectedStudio={selectedStudio} selectedTime={selectedTime} startDate={startDate}/>
 
 
 
@@ -220,10 +224,10 @@ const Booknow = () => {
           Confirm
         </Button>
       </Stack>
-      {console.log(reqdatas.value.beautstudios, "DDDDDDDDDDDDDDDD")}
-      {console.log("HANNAAAAAAAAAAAAAAAA")}
+  
     </div>
   );
 };
+
 
 export default Booknow;
