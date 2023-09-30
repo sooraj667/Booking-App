@@ -15,6 +15,20 @@ import Paper from "@mui/material/Paper";
 import Topstackcust from "./Topstackcust";
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
+import ImageListItemBar from '@mui/material/ImageListItemBar';
+import IconButton from '@mui/material/IconButton';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
+import Container from '@mui/material/Container';
+
+
+function srcset(image, width, height, rows = 1, cols = 1) {
+  return {
+    src: `${image}?w=${width * cols}&h=${height * rows}&fit=crop&auto=format`,
+    srcSet: `${image}?w=${width * cols}&h=${
+      height * rows
+    }&fit=crop&auto=format&dpr=2 2x`,
+  };
+}
 
 const Landingpartcust = () => {
   const[allServices,setAllServices]=useState([])
@@ -143,16 +157,16 @@ const Landingpartcust = () => {
         )}
       </div> */}
       <div>
-        <Paper
+        <Container
           elevation={24}
           sx={{
-            width: 500,
-            height: 410,
+            width: 800,
+            height: 810,
             backgroundColor: "#F5FFFA",
             // backgroundImage:'url("https://img.freepik.com/premium-photo/close-up-hair-supplies-flat-lay_23-2148352942.jpg?w=900")',
             objectFit: "cover",
             backgroundRepeat: "no-repeat",
-            marginLeft: "20%",
+            marginLeft: "10%",
             marginTop: "30px",
             marginBottom: "30%",
             opacity: [0.9, 0.8, 0.8],
@@ -164,17 +178,48 @@ const Landingpartcust = () => {
           }}
         >
 
-<ImageList sx={{ width: 500, height: 450 }} cols={3} rowHeight={164}>
-      {allServices.map((item) => (
-        <ImageListItem key={item.img}>
-          <img
-            srcSet={`${item.image}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-            src={`${item.image}?w=164&h=164&fit=crop&auto=format`}
-            alt={item.title}
-            loading="lazy"
-          />
-        </ImageListItem>
-      ))}
+<ImageList
+      sx={{
+        width: 500,
+        height: 1450,
+        // Promote the list into its own layer in Chrome. This costs memory, but helps keeping high FPS.
+        transform: 'translateZ(0)',
+      }}
+      rowHeight={200}
+      gap={1}
+    >
+      {allServices.map((item) => {
+        const cols = item.featured ? 2 : 1;
+        const rows = item.featured ? 2 : 1;
+
+        return (
+          <ImageListItem key={item.img} cols={cols} rows={rows}>
+            <img
+              {...srcset(item.image, 250, 200, rows, cols)}
+              alt={item.name}
+              loading="lazy"
+            />
+            <ImageListItemBar
+              sx={{
+                background:
+                  'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, ' +
+                  'rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
+              }}
+              title={item.name}
+              position="top"
+              actionIcon={
+                <IconButton
+                  sx={{ color: 'white' }}
+                  aria-label={`star ${item.title}`}
+                >
+                  <StarBorderIcon />
+                </IconButton>
+              }
+              actionPosition="left"
+            />
+          </ImageListItem>
+        );
+      })}
     </ImageList>
 
 
@@ -253,7 +298,7 @@ const Landingpartcust = () => {
               }
             )
           } */}
-        </Paper>
+        </Container>
       </div>
     </div>
   );
