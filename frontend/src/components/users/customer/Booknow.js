@@ -7,6 +7,10 @@ import {
   setBookbeautdata,
   setBeautstudios,
   setBeautservices,
+  setDate,
+  setService,
+  setStudio,
+  setTime,
 } from "../../../feautures/customer/customerdataslice";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -17,9 +21,9 @@ import MenuItem from "@mui/material/MenuItem";
 // import FormControl from '@mui/material/FormControl';
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
-import "./Browse.css"
-import Paypal from "../../paypal/Paypal"
-import {setService,setDate,setTime,setStudio} from "../../../feautures/customer/paymentdataslice"
+import "./Browse.css";
+import Paypal from "../../paypal/Paypal";
+// import {setService,setDate,setTime,setStudio} from "../../../feautures/customer/paymentdataslice"
 
 const Booknow = () => {
   const [startDate, setStartDate] = useState("");
@@ -43,25 +47,22 @@ const Booknow = () => {
   const paymentdatas = useSelector((state) => state.paymentdatas);
   const dispatch = useDispatch();
 
-
-
-  
   const handleDateChange = (date) => {
-    setStartDate(date)
+    dispatch(setDate(date));
   };
   const handleTimeChange = (e) => {
-    setSelectedTime(e.target.value)
+    console.log(e.target.value, "TIME");
+    dispatch(setTime(e.target.value));
   };
 
   const handleStudioChange = (e) => {
-    setSelectedStudio(e.target.value)
-    
+    console.log(e.target.value, "STUDIO");
+    dispatch(setStudio(e.target.value));
   };
 
   const handleServiceChange = (e) => {
-    setSelectedService(e.target.value)
-    console.log((e.target.value,"E.TARGET.VALUE"));
-    console.log(paymentdatas.value.service);
+    console.log(e.target.value, "SERVICE");
+    dispatch(setService(e.target.value));
   };
 
   const handleConfirm = () => {
@@ -108,8 +109,6 @@ const Booknow = () => {
       .post("cust/getbeautdatas/", datas)
       .then((res) => {
         if (res.data.message === "success") {
-         
-
           dispatch(setBeautstudios(res.data.studiodata));
           dispatch(setBeautservices(res.data.servicedata));
         }
@@ -121,15 +120,15 @@ const Booknow = () => {
 
   return (
     <div>
-         <div className="expertin">
-          <p>{reqdatas.value.bookbeautdata.name}</p>
-          Expert In
+      <div className="expertin">
+        <p>{reqdatas.value.bookbeautdata.name}</p>
+        Expert In
         {reqdatas.value.beautservices
-          .filter((item) => item.topservice === true) 
+          .filter((item) => item.topservice === true)
           .map((item) => (
-            <p  key={item.id}  > {item.service.name} </p>
+            <p key={item.id}> {item.service.name} </p>
           ))}
-          </div>
+      </div>
       <Stack
         spacing={2}
         sx={{
@@ -140,82 +139,16 @@ const Booknow = () => {
         <Avatar
           src={reqdatas.value.bookbeautdata.image}
           sx={{
-            width: 225, 
+            width: 225,
             height: 225,
           }}
         />
-     
 
-        <InputLabel id="demo-simple-select-label">Choose Date</InputLabel>
-        <DatePicker
-          selected={paymentdatas.value.date}
-          onChange={handleDateChange}
-          dateFormat="MM/dd/yyyy"
-          className="custom-datepicker"
-        />
-        <InputLabel id="demo-simple-select-label">Select Time</InputLabel>
-        <select
-          name="selectedTime"
-          onChange={handleTimeChange}
-        
-          className=" form-control dateform"
-        >
-          {alltime.map((item) => {
-            return <option>{item}</option>;
-          })}
-        </select>
-
-        <InputLabel id="demo-simple-select-label">Choose Studio</InputLabel>
-        <select
-          name="selectedTime"
-          onChange={handleStudioChange}
-   
-          className=" form-control dateform"
-        >
-          {reqdatas.value.beautstudios.map((item) => {
-            return <option>{item.place}</option>;
-          })}
-        </select>
-        <InputLabel id="demo-simple-select-label">Select Service</InputLabel>
-        <select
-          name="selectedTime"
-          onChange={handleServiceChange}
        
-          className=" form-control dateform"
-        >
-          {reqdatas.value.beautservices.map((item) => {
-            return <option>{item.service.name}</option>;
-          })}
-        </select>
-        {/* <InputLabel id="demo-simple-select-label">Select Studio</InputLabel>
-        <select
-          name="selectedTime"
-          onChange={handleStudioChange}
-          value={selectedStudio}
-          className=" form-control dateform"
-        >
-          <option>Select Time</option>
-          {reqdatas.value.beautstudios.map((item) => {
-            return <option>{item}</option>;
-          })}
-        </select> */}
 
-        {/* <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={selectedTime}
-          label="Something"
-          onChange={handleTimeChange}
-        >
-            
-           {alltime.map((item) => {
-            return <MenuItem>{item}</MenuItem>;
-          })}
-        </Select> */}
-
-        <Paypal selectedService={selectedService} selectedStudio={selectedStudio} selectedTime={selectedTime} startDate={startDate}/>
-
-
+        <Paypal
+ 
+        />
 
         <Button
           variant="contained"
@@ -228,10 +161,8 @@ const Booknow = () => {
           Confirm
         </Button>
       </Stack>
-  
     </div>
   );
 };
-
 
 export default Booknow;

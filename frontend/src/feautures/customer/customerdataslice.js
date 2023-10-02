@@ -5,6 +5,11 @@ const INITIALSTATE={
     beautstudios:[],
     beautservices:[],
     allappointments:[],
+
+    date:"",
+    time:"",
+    studio:"",
+    service:"",
    
    
 
@@ -28,6 +33,22 @@ const customerdataslice=createSlice(
             },
             setAllappointments:(state,action)=>{
                 state.value.allappointments=action.payload
+            },
+
+
+
+
+            setDate:(state,action)=>{
+                state.value.date=action.payload
+            },
+            setTime:(state,action)=>{
+                state.value.time=action.payload
+            },
+            setStudio:(state,action)=>{
+                state.value.studio=action.payload
+            },
+            setService:(state,action)=>{
+                state.value.service=action.payload
             }
             
            
@@ -43,5 +64,5 @@ const customerdataslice=createSlice(
 
 )
 
-export const {setBookbeautdata,setBeautstudios,setBeautservices,setAllappointments} = customerdataslice.actions
+export const {setBookbeautdata,setBeautstudios,setBeautservices,setAllappointments,     setService,setStudio,setTime,setDate} = customerdataslice.actions
 export default customerdataslice.reducer

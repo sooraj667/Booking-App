@@ -77,9 +77,18 @@ class Booknow(APIView):
         studio=request.data.get("studio")
         servicename=request.data.get("servicename")
 
+
+        
+
+
         beautobj=Beautician.objects.get(id=beautid)
         custobj=Customer.objects.get(id=custid)
-        parseddateandtime=datetime.fromisoformat(str(date))
+
+
+        date_format = '%a %b %d %Y %H:%M:%S GMT%z (%Z)'
+        parseddateandtime = datetime.strptime(date, date_format)
+
+        
         parseddate=parseddateandtime.date()
         studioobj=Studio.objects.get(beautician=beautobj,place=studio)
 
