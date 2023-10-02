@@ -19,32 +19,36 @@ import ImageListItemBar from '@mui/material/ImageListItemBar';
 import IconButton from '@mui/material/IconButton';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import Container from '@mui/material/Container';
+import ListSubheader from '@mui/material/ListSubheader';
+import InfoIcon from '@mui/icons-material/Info';
+import {setServiceId} from "../../../feautures/customer/servicepreviewslice"
+import {toggleServicePreview} from "../../../feautures/customer/customernavigationslice"
 
 
-function srcset(image, width, height, rows = 1, cols = 1) {
-  return {
-    src: `${image}?w=${width * cols}&h=${height * rows}&fit=crop&auto=format`,
-    srcSet: `${image}?w=${width * cols}&h=${
-      height * rows
-    }&fit=crop&auto=format&dpr=2 2x`,
-  };
-}
+
+// function srcset(image, width, height, rows = 1, cols = 1) {
+//   return {
+//     src: `${image}?w=${width * cols}&h=${height * rows}&fit=crop&auto=format`,
+//     srcSet: `${image}?w=${width * cols}&h=${
+//       height * rows
+//     }&fit=crop&auto=format&dpr=2 2x`,
+//   };
+// }
 
 const Landingpartcust = () => {
   const[allServices,setAllServices]=useState([])
   const [addImage, setAddImage] = useState(false);
   
-  const [image, setImage] = useState("");
-  const [selectedImage, setSelectedImage] = useState("");
+
   const [todayAppointments, setTodayAppointments] = useState([]);
   const statedatas = useSelector((state) => state.login);
   const dispatch = useDispatch();
 
-  const addImageHandler = () => {
-    setAddImage((addImage) => !addImage);
+  // const addImageHandler = () => {
+  //   setAddImage((addImage) => !addImage);
 
-    // console.log(datas.value.beautdetails.id);
-  };
+  //   // console.log(datas.value.beautdetails.id);
+  // };
   useEffect(
     ()=>{
       axiosInstance.get("cust/getallservices/").then((response)=>{
@@ -60,25 +64,35 @@ const Landingpartcust = () => {
   )
 
 
+  const handleServiceClick=(id)=>{
+    dispatch(setServiceId(id))
+    dispatch(toggleServicePreview())
+    
+  
 
-  const handleFileChange = (e) => {
-    setSelectedImage(e.target.files[0]);
-    // console.log(URL.createObjectURL(e.target.files[0]));
-    // return setSelectedImage(URL.createObjectURL(e.target.files[0]));
-  };
+    
+    
+  }
+
+
+  // const handleFileChange = (e) => {
+  //   setSelectedImage(e.target.files[0]);
+  //   // console.log(URL.createObjectURL(e.target.files[0]));
+  //   // return setSelectedImage(URL.createObjectURL(e.target.files[0]));
+  // };
 
 
 
   useEffect(
     ()=>{
       const custdetails = JSON.parse(localStorage.getItem("singledetails-C"));
-      console.log(custdetails, "################3");
+  
 
       const datas={
         custid:custdetails.id
       }
         axiosInstance.post("cust/getlandingpage/",datas).then((res)=>{
-            console.log(res.data,"**************");
+      
             setTodayAppointments(res.data.todays_appointmentdata)
 
         }).catch((err)=>{
@@ -87,35 +101,35 @@ const Landingpartcust = () => {
     },[]
   )
 
-  const uploadImageHandler = () => {
-    const reference = ref(storage, `customer/${selectedImage.name + v4()}`);
-    uploadBytes(reference, selectedImage)
-      .then((res) => {
-        getDownloadURL(reference).then((url) => {
-          console.log(url, "PRINTED");
-          const datas = {
-            imageurl: url,
-            id: statedatas.value.custdetails.id,
-          };
-          axiosInstance.post("cust/changeimage/", datas).then((response) => {
-            console.log(response.data);
-            if (response.data.message == "Added") {
-              console.log("ALL SET");
-              localStorage.setItem(
-                "singledetails-C",
-                JSON.stringify(response.data.custdata)
-              );
-              dispatch(setCustDetails(response.data.custdata));
-            } else {
-              alert("NOT SET");
-            }
-          });
-        });
-      })
-      .catch(() => {
-        console.log("Error");
-      });
-  };
+  // const uploadImageHandler = () => {
+  //   const reference = ref(storage, `customer/${selectedImage.name + v4()}`);
+  //   uploadBytes(reference, selectedImage)
+  //     .then((res) => {
+  //       getDownloadURL(reference).then((url) => {
+  //         console.log(url, "PRINTED");
+  //         const datas = {
+  //           imageurl: url,
+  //           id: statedatas.value.custdetails.id,
+  //         };
+  //         axiosInstance.post("cust/changeimage/", datas).then((response) => {
+  //           console.log(response.data);
+  //           if (response.data.message == "Added") {
+  //             console.log("ALL SET");
+  //             localStorage.setItem(
+  //               "singledetails-C",
+  //               JSON.stringify(response.data.custdata)
+  //             );
+  //             dispatch(setCustDetails(response.data.custdata));
+  //           } else {
+  //             alert("NOT SET");
+  //           }
+  //         });
+  //       });
+  //     })
+  //     .catch(() => {
+  //       console.log("Error");
+  //     });
+  // };
   return (
     <div>
       <Topstackcust />
@@ -178,48 +192,34 @@ const Landingpartcust = () => {
           }}
         >
 
-<ImageList
-      sx={{
-        width: 500,
-        height: 1450,
-        // Promote the list into its own layer in Chrome. This costs memory, but helps keeping high FPS.
-        transform: 'translateZ(0)',
-      }}
-      rowHeight={200}
-      gap={1}
-    >
-      {allServices.map((item) => {
-        const cols = item.featured ? 2 : 1;
-        const rows = item.featured ? 2 : 1;
-
-        return (
-          <ImageListItem key={item.img} cols={cols} rows={rows}>
-            <img
-              {...srcset(item.image, 250, 200, rows, cols)}
-              alt={item.name}
-              loading="lazy"
-            />
-            <ImageListItemBar
-              sx={{
-                background:
-                  'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, ' +
-                  'rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
-              }}
-              title={item.name}
-              position="top"
-              actionIcon={
-                <IconButton
-                  sx={{ color: 'white' }}
-                  aria-label={`star ${item.title}`}
-                >
-                  <StarBorderIcon />
-                </IconButton>
-              }
-              actionPosition="left"
-            />
-          </ImageListItem>
-        );
-      })}
+<ImageList sx={{ width: 700, height: 450 }}>
+      <ImageListItem key="Subheader" cols={2}>
+        <ListSubheader component="div">December</ListSubheader>
+      </ImageListItem>
+      {allServices.map((item) => (
+        <ImageListItem key={item.image}>
+          <img
+            srcSet={`${item.image}?w=248&fit=crop&auto=format&dpr=2 2x`}
+            src={`${item.image}?w=248&fit=crop&auto=format`}
+            alt={item.title}
+            loading="lazy"
+            onClick={()=>handleServiceClick(item.id)}
+          />
+          
+          <ImageListItemBar
+            title={item.name}
+            subtitle={item.description}
+            actionIcon={
+              <IconButton
+                sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
+                aria-label={`info about ${item.title}`}
+              >
+                <InfoIcon />
+              </IconButton>
+            }
+          />
+        </ImageListItem>
+      ))}
     </ImageList>
 
 

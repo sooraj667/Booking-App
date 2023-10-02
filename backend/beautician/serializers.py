@@ -19,6 +19,8 @@ class StudioSerializer(ModelSerializer):
         fields= "__all__"
 
 class ServicefeesSerializer(ModelSerializer):
+    service=ServicesSerializer()
+    beautician=BeauticianSerializer()
     class Meta:
         model=Servicefees
         fields= "__all__"

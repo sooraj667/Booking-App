@@ -28,8 +28,7 @@ const Profile = () => {
 
   const handleFileChange = (e) => {
     setSelectedImage(e.target.files[0]);
-    // console.log(URL.createObjectURL(e.target.files[0]));
-    // return setSelectedImage(URL.createObjectURL(e.target.files[0]));
+
   };
 
   const addImageHandler = () => {

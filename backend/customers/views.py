@@ -278,6 +278,27 @@ class Getallservices(APIView):
         allservices=Services.objects.all()
         allservices_serialized=ServicesSerializer(allservices,many=True)
         return Response({"message":'Added',"allservices":allservices_serialized.data})
+    
+class Getsingleservice(APIView):
+    def post(self,request): 
+        serviceid=request.data.get("serviceid")
+        print(serviceid,"PRINTED")
+        serviceobj=Services.objects.get(id=serviceid)
+        service_serialized=ServicesSerializer(serviceobj)
+        return Response({"message":'Added',"service":service_serialized.data})
+    
+
+
+class Getservicebeauts(APIView):
+    def post(self,request): 
+        serviceid=request.data.get("serviceid")
+        serviceobj=Services.objects.get(id=serviceid)
+        servicefeesobjs=Servicefees.objects.filter(service=serviceobj)
+        servicefeesobjs_serialized=ServicefeesSerializer(servicefeesobjs,many=True)
+     
+
+        return Response({"message":'Added',"services":servicefeesobjs_serialized.data})
+    
         
 
 

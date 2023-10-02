@@ -17,6 +17,7 @@ import studioformslice from "./feautures/beautician/studioformslice";
 import rerenderslice from "./feautures/rerenderslice";
 import otpslice from "./feautures/otpslice";
 import paymentdataslice from "./feautures/customer/paymentdataslice";
+import servicepreviewslice from "./feautures/customer/servicepreviewslice";
 function App() {
   const store = configureStore({
     reducer: {
@@ -32,6 +33,7 @@ function App() {
       rerender:rerenderslice,
       otp:otpslice,
       paymentdatas:paymentdataslice,
+      servicepreview:servicepreviewslice,
     },
   });
 

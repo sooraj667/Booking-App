@@ -11,6 +11,8 @@ urlpatterns = [
     path("getlandingpage/",Getlandingpage.as_view(),name="Getlandingpage"),
     path("editdetails/",Editdetails.as_view(),name="Editdetails"),
     path("getallservices/",Getallservices.as_view(),name="Getallservices"),
+    path("getsingleservice/",Getsingleservice.as_view(),name="Getsingleservice"),
+    path("getservicebeauts/",Getservicebeauts.as_view(),name="Getservicebeauts"),
 
 
     
