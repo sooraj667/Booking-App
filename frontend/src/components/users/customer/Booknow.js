@@ -42,20 +42,24 @@ const Booknow = () => {
   const reqdatas = useSelector((state) => state.custreqdata);
   const paymentdatas = useSelector((state) => state.paymentdatas);
   const dispatch = useDispatch();
+
+
+
+  
   const handleDateChange = (date) => {
-    dispatch(setDate(date));
+    setStartDate(date)
   };
   const handleTimeChange = (e) => {
-    dispatch(setTime(e.target.value));
+    setSelectedTime(e.target.value)
   };
 
   const handleStudioChange = (e) => {
-    dispatch(setStudio(e.target.value));
-    console.log(paymentdatas.value.studio);
+    setSelectedStudio(e.target.value)
+    
   };
 
   const handleServiceChange = (e) => {
-    dispatch(setService(e.target.value));
+    setSelectedService(e.target.value)
     console.log((e.target.value,"E.TARGET.VALUE"));
     console.log(paymentdatas.value.service);
   };

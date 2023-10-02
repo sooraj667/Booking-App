@@ -7,17 +7,21 @@ import Avatar from "@mui/material/Avatar";
 import { deepOrange, deepPurple } from "@mui/material/colors";
 import { useTheme } from "@mui/material/styles";
 
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
+import StarHalfIcon from '@mui/icons-material/StarHalf';
+import Viewmore from "./Viewmore";
+import { toggleBooknow} from "../../../../feautures/customer/customernavigationslice"
 const Servicepreview = () => {
   const servicepreview = useSelector((state) => state.servicepreview);
   const [singleService, setSingleService] = useState("");
   const [serviceBeauts, setServiceBeauts] = useState([]);
+  
   const theme = useTheme();
 
   useEffect(() => {
@@ -46,6 +50,8 @@ const Servicepreview = () => {
       })
       .catch((error) => alert("2ND ERROR"));
   }, []);
+
+
   return (
     <>
       <div className="row">
@@ -53,11 +59,11 @@ const Servicepreview = () => {
           sx={{
             width: 900,
             height: 900,
-            backgroundColor: "#F5FFFA",
-            "&:hover": {
-              backgroundColor: "#F5FFFA",
-              opacity: [0.9, 0.8, 0.7],
-            },
+            // backgroundColor: "#F5FFFA",
+            // "&:hover": {
+            //   backgroundColor: "#F5FFFA",
+            //   opacity: [0.9, 0.8, 0.7],
+            // },
           }}
         >
           <h1 className="expertin">{singleService.name}</h1>
@@ -72,37 +78,46 @@ const Servicepreview = () => {
             src={singleService.image}
           />
           <div className="row mt-5">
-          {serviceBeauts.map((item) => {
-            return (
+            {serviceBeauts.map((item) => {
+              return (
                 <div className="col-md-4">
-                    <Card sx={{ maxWidth: 345 }}>
-                <CardMedia
-                  sx={{ height: 240 }}
-                  image={item.beautician.image}
-                  title="green iguana"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    {item.beautician.name}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    Lizards are a widespread group of squamate reptiles, with over 6,000
-                    species, ranging across all continents except Antarctica
-                  </Typography>
-                </CardContent>
-                <CardActions>
-                  <Button size="small">Share</Button>
-                  <Button size="small">Learn More</Button>
-                </CardActions>
-              </Card>
-
+                  <Card sx={{ maxWidth: 345 }}>
+                    <CardMedia
+                      sx={{ height: 240 }}
+                      image={item.beautician.image}
+                      title="green iguana"
+                    />
+                    <CardContent>
+                      <Typography gutterBottom variant="h5" component="div">
+                        {item.beautician.name}
+                      </Typography>
+                      <div className="row ml-1">
+                        <Typography gutterBottom component="div" variant="h6">
+                          Fee :
+                        </Typography>
+                        <Typography gutterBottom component="div" variant="h5">
+                          {item.servicefee}/-
+                        </Typography>
+                      </div>
+                    </CardContent>
+                    <CardActions>
+                      <Button size="small">Book Now</Button>
+                      <div className="row  expert">
+                        Expert
+                        <AutoAwesomeIcon />
+                      </div>
+                    </CardActions>
+                  </Card>
                 </div>
-                
-            );
-          })}
-
+              );
+            })}
           </div>
-          
+    
+            <Viewmore/>
+           
+      
+     
+       
         </Container>
       </div>
     </>

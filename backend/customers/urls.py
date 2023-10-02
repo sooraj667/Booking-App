@@ -13,6 +13,7 @@ urlpatterns = [
     path("getallservices/",Getallservices.as_view(),name="Getallservices"),
     path("getsingleservice/",Getsingleservice.as_view(),name="Getsingleservice"),
     path("getservicebeauts/",Getservicebeauts.as_view(),name="Getservicebeauts"),
+    path("getviewmoreservicebeauts/",Getviewmoreservicebeauts.as_view(),name="Getviewmoreservicebeauts"),
 
 
     

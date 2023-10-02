@@ -293,7 +293,18 @@ class Getservicebeauts(APIView):
     def post(self,request): 
         serviceid=request.data.get("serviceid")
         serviceobj=Services.objects.get(id=serviceid)
-        servicefeesobjs=Servicefees.objects.filter(service=serviceobj)
+        servicefeesobjs=Servicefees.objects.filter(service=serviceobj,topservice=True)
+        servicefeesobjs_serialized=ServicefeesSerializer(servicefeesobjs,many=True)
+     
+
+        return Response({"message":'Added',"services":servicefeesobjs_serialized.data})
+
+
+class Getviewmoreservicebeauts(APIView):
+    def post(self,request): 
+        serviceid=request.data.get("serviceid")
+        serviceobj=Services.objects.get(id=serviceid)
+        servicefeesobjs=Servicefees.objects.filter(service=serviceobj).exclude(topservice=True)
         servicefeesobjs_serialized=ServicefeesSerializer(servicefeesobjs,many=True)
      
 

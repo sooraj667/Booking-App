@@ -45,3 +45,31 @@
     margin-top: 0%; /* Add some spacing below the heading */
      /* Center the text horizontally */
   }
+  .expert{
+    color: green;
+    margin-left: 40%;
+  }
+  .intermediate{
+    color: rgb(179, 179, 124)  ;
+    margin-left: 38%;
+  }
+  .viewmorebtn {
+    margin-left: 50%;
+    margin-top: 40px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .viewmorebtn:hover {
+    background-color: #45a049;
+  }
+  
