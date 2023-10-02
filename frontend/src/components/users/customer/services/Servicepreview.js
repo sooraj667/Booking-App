@@ -7,14 +7,12 @@ import Avatar from "@mui/material/Avatar";
 import { deepOrange, deepPurple } from "@mui/material/colors";
 import { useTheme } from "@mui/material/styles";
 
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
-import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-import SkipNextIcon from "@mui/icons-material/SkipNext";
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 
 const Servicepreview = () => {
   const servicepreview = useSelector((state) => state.servicepreview);
@@ -73,53 +71,38 @@ const Servicepreview = () => {
             alt="Remy Sharp"
             src={singleService.image}
           />
+          <div className="row mt-5">
           {serviceBeauts.map((item) => {
             return (
-              <Card sx={{ display: "flex" }}>
-                <Box sx={{ display: "flex", flexDirection: "column" }}>
-                  <CardContent sx={{ flex: "1 0 auto" }}>
-                    <Typography component="div" variant="h5">
-                      {item.beautician.name}
-                    </Typography>
-                    <Typography
-                      variant="subtitle1"
-                      color="text.secondary"
-                      component="div"
-                    >
-                      Mac Miller
-                    </Typography>
-                  </CardContent>
-                  <Box
-                    sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}
-                  >
-                    <IconButton aria-label="previous">
-                      {theme.direction === "rtl" ? (
-                        <SkipNextIcon />
-                      ) : (
-                        <SkipPreviousIcon />
-                      )}
-                    </IconButton>
-                    <IconButton aria-label="play/pause">
-                      <PlayArrowIcon sx={{ height: 38, width: 38 }} />
-                    </IconButton>
-                    <IconButton aria-label="next">
-                      {theme.direction === "rtl" ? (
-                        <SkipPreviousIcon />
-                      ) : (
-                        <SkipNextIcon />
-                      )}
-                    </IconButton>
-                  </Box>
-                </Box>
+                <div className="col-md-4">
+                    <Card sx={{ maxWidth: 345 }}>
                 <CardMedia
-                  component="img"
-                  sx={{ width: 151 }}
+                  sx={{ height: 240 }}
                   image={item.beautician.image}
-                  alt="Live from space album cover"
+                  title="green iguana"
                 />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="div">
+                    {item.beautician.name}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Lizards are a widespread group of squamate reptiles, with over 6,000
+                    species, ranging across all continents except Antarctica
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                  <Button size="small">Share</Button>
+                  <Button size="small">Learn More</Button>
+                </CardActions>
               </Card>
+
+                </div>
+                
             );
           })}
+
+          </div>
+          
         </Container>
       </div>
     </>
