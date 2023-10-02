@@ -40,9 +40,13 @@ const Browse = () => {
   }, []);
   return (
     <div>
+      <div className="row">
       <div className="heading1">
         Explore
       </div>
+
+      </div>
+   
       <Box sx={{ width: "100%" }}>
         {statedatas.value.allbeauticians.map((item) => {
           return (

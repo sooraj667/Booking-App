@@ -6,7 +6,7 @@ import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import { deepOrange, deepPurple } from "@mui/material/colors";
 import { useTheme } from "@mui/material/styles";
-
+import { useDispatch } from "react-redux";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -14,14 +14,18 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
-import StarHalfIcon from '@mui/icons-material/StarHalf';
+import StarHalfIcon from "@mui/icons-material/StarHalf";
 import Viewmore from "./Viewmore";
-import { toggleBooknow} from "../../../../feautures/customer/customernavigationslice"
+import { toggleBooknow } from "../../../../feautures/customer/customernavigationslice";
+
+
+
 const Servicepreview = () => {
   const servicepreview = useSelector((state) => state.servicepreview);
   const [singleService, setSingleService] = useState("");
   const [serviceBeauts, setServiceBeauts] = useState([]);
-  
+  const dispatch=useDispatch()
+
   const theme = useTheme();
 
   useEffect(() => {
@@ -51,6 +55,11 @@ const Servicepreview = () => {
       .catch((error) => alert("2ND ERROR"));
   }, []);
 
+
+  const booknowHandler = (id) => {
+    dispatch(toggleBooknow(id));
+    localStorage.setItem("id",id)
+  };
 
   return (
     <>
@@ -101,7 +110,7 @@ const Servicepreview = () => {
                       </div>
                     </CardContent>
                     <CardActions>
-                      <Button size="small">Book Now</Button>
+                      <Button size="small" onClick={() => booknowHandler(item.beautician.id)}>Book Now</Button>
                       <div className="row  expert">
                         Expert
                         <AutoAwesomeIcon />
@@ -112,12 +121,8 @@ const Servicepreview = () => {
               );
             })}
           </div>
-    
-            <Viewmore/>
-           
-      
-     
-       
+
+          <Viewmore />
         </Container>
       </div>
     </>

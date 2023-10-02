@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import { Input, Typography } from "@mui/material";
@@ -13,18 +13,24 @@ import { v4 } from "uuid";
 import { setCustDetails } from "../../../feautures/loginslice";
 import Paper from "@mui/material/Paper";
 import Topstackcust from "./Topstackcust";
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
-import ImageListItemBar from '@mui/material/ImageListItemBar';
-import IconButton from '@mui/material/IconButton';
-import StarBorderIcon from '@mui/icons-material/StarBorder';
-import Container from '@mui/material/Container';
-import ListSubheader from '@mui/material/ListSubheader';
-import InfoIcon from '@mui/icons-material/Info';
-import {setServiceId} from "../../../feautures/customer/servicepreviewslice"
-import {toggleServicePreview} from "../../../feautures/customer/customernavigationslice"
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
+import ImageListItemBar from "@mui/material/ImageListItemBar";
+import IconButton from "@mui/material/IconButton";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
+import Container from "@mui/material/Container";
+import ListSubheader from "@mui/material/ListSubheader";
+import InfoIcon from "@mui/icons-material/Info";
+import { setServiceId } from "../../../feautures/customer/servicepreviewslice";
+import { toggleServicePreview } from "../../../feautures/customer/customernavigationslice";
 
 
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
+import StarHalfIcon from "@mui/icons-material/StarHalf";
 
 // function srcset(image, width, height, rows = 1, cols = 1) {
 //   return {
@@ -36,9 +42,8 @@ import {toggleServicePreview} from "../../../feautures/customer/customernavigati
 // }
 
 const Landingpartcust = () => {
-  const[allServices,setAllServices]=useState([])
+  const [allServices, setAllServices] = useState([]);
   const [addImage, setAddImage] = useState(false);
-  
 
   const [todayAppointments, setTodayAppointments] = useState([]);
   const statedatas = useSelector((state) => state.login);
@@ -49,31 +54,22 @@ const Landingpartcust = () => {
 
   //   // console.log(datas.value.beautdetails.id);
   // };
-  useEffect(
-    ()=>{
-      axiosInstance.get("cust/getallservices/").then((response)=>{
-        console.log(response.data.allservices)
-        setAllServices(response.data.allservices)
-
-      }
-       
-      ).catch((error)=>{
-        console.log(error);
+  useEffect(() => {
+    axiosInstance
+      .get("cust/getallservices/")
+      .then((response) => {
+        console.log(response.data.allservices);
+        setAllServices(response.data.allservices);
       })
-    },[]
-  )
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
-
-  const handleServiceClick=(id)=>{
-    dispatch(setServiceId(id))
-    dispatch(toggleServicePreview())
-    
-  
-
-    
-    
-  }
-
+  const handleServiceClick = (id) => {
+    dispatch(setServiceId(id));
+    dispatch(toggleServicePreview());
+  };
 
   // const handleFileChange = (e) => {
   //   setSelectedImage(e.target.files[0]);
@@ -81,25 +77,21 @@ const Landingpartcust = () => {
   //   // return setSelectedImage(URL.createObjectURL(e.target.files[0]));
   // };
 
+  useEffect(() => {
+    const custdetails = JSON.parse(localStorage.getItem("singledetails-C"));
 
-
-  useEffect(
-    ()=>{
-      const custdetails = JSON.parse(localStorage.getItem("singledetails-C"));
-  
-
-      const datas={
-        custid:custdetails.id
-      }
-        axiosInstance.post("cust/getlandingpage/",datas).then((res)=>{
-      
-            setTodayAppointments(res.data.todays_appointmentdata)
-
-        }).catch((err)=>{
-            alert(err)
-        })
-    },[]
-  )
+    const datas = {
+      custid: custdetails.id,
+    };
+    axiosInstance
+      .post("cust/getlandingpage/", datas)
+      .then((res) => {
+        setTodayAppointments(res.data.todays_appointmentdata);
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  }, []);
 
   // const uploadImageHandler = () => {
   //   const reference = ref(storage, `customer/${selectedImage.name + v4()}`);
@@ -176,7 +168,7 @@ const Landingpartcust = () => {
           sx={{
             width: 800,
             height: 810,
-            backgroundColor: "#F5FFFA",
+            // backgroundColor: "#F5FFFA",
             // backgroundImage:'url("https://img.freepik.com/premium-photo/close-up-hair-supplies-flat-lay_23-2148352942.jpg?w=900")',
             objectFit: "cover",
             backgroundRepeat: "no-repeat",
@@ -185,18 +177,56 @@ const Landingpartcust = () => {
             marginBottom: "30%",
             opacity: [0.9, 0.8, 0.8],
 
-            "&:hover": {
-              backgroundColor: "whitesmoke",
-              opacity: [0.9, 0.8, 0.7],
-            },
+            // "&:hover": {
+            //   backgroundColor: "whitesmoke",
+            //   opacity: [0.9, 0.8, 0.7],
+            // },
           }}
         >
+          <div className="row">
+            <div className="heading1">Services</div>
+          </div>
+          <div className="row">
+            {allServices.map((item) => {
+              return (
+                <div className="col-md-4">
+                  <Card sx={{ maxWidth: 345 ,height:395,marginTop:7 }}>
+                    <CardMedia
+                      sx={{ height: 240 }}
+                      image={item.image}
+                      title="green iguana"
+                      onClick={()=>handleServiceClick(item.id)}
+                    />
+                    <CardContent>
+                      <Typography gutterBottom variant="h5" component="div">
+                        {item.name}
+                      </Typography>
+                      <div className="row ml-1">
+                        {/* <Typography gutterBottom component="div" variant="h6">
+                          Fee :
+                        </Typography>
+                        <Typography gutterBottom component="div" variant="h5">
+                          {item.servicefee}/-
+                        </Typography> */}
+                      </div>
+                      <Button size="small" onClick={()=>handleServiceClick(item.id)}>Check Beauticians</Button>
+                    </CardContent>
+                    <CardActions>
+                      {/* <Button size="small" onClick={()=>handleServiceClick(item.id)}>Check Beauticians</Button> */}
+                      
+                    </CardActions>
+                  </Card>
+                </div>
+              );
+            })}
+          </div>
 
-<ImageList sx={{ width: 700, height: 450 }}>
-      <ImageListItem key="Subheader" cols={2}>
-        <ListSubheader component="div">December</ListSubheader>
-      </ImageListItem>
-      {allServices.map((item) => (
+          {/* <ImageList sx={{ width: 700, height: 450 }}>
+            <ImageListItem key="Subheader" cols={2}>
+              <ListSubheader component="div">December</ListSubheader>
+            </ImageListItem> */}
+
+            {/* {allServices.map((item) => (
         <ImageListItem key={item.image}>
           <img
             srcSet={`${item.image}?w=248&fit=crop&auto=format&dpr=2 2x`}
@@ -219,17 +249,8 @@ const Landingpartcust = () => {
             }
           />
         </ImageListItem>
-      ))}
-    </ImageList>
-
-
-
-
-
-
-
-
-
+      ))} */}
+          {/* </ImageList> */}
 
           {/* <Typography
             variant="h5"

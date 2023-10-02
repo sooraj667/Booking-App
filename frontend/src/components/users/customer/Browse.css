@@ -44,7 +44,10 @@
     color: #333; /* Choose a text color */
     margin-top: 0%; /* Add some spacing below the heading */
      /* Center the text horizontally */
+    /* border-bottom: 2px solid #b21919; */
+    border-bottom: 2px solid #310909;
   }
+
   .expert{
     color: green;
     margin-left: 40%;

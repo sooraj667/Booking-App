@@ -40,6 +40,11 @@ const Booking = () => {
   return (
     <div>
        {/* <Topstackcust/> */}
+      <div className="row">
+        <div className="heading1">
+          Booking History
+        </div>
+      </div>
 
       <Paper
         elevation={24}

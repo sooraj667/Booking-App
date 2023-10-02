@@ -67,6 +67,13 @@ const Profile = () => {
   };
   return (
     <>
+    <div className="row">
+      <div className="heading1">
+        Profile
+      </div>
+    </div>
+
+
         
     
     <Paper
