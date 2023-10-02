@@ -122,6 +122,21 @@ const Landingpartcust = () => {
   //       console.log("Error");
   //     });
   // };
+
+
+  useEffect(() => {
+    const custDetails = localStorage.getItem("singledetails-C");
+    //const allBeauticians = localStorage.getItem("allbeauticians-C");
+
+    if (custDetails) {
+      const custdetails_parsed=JSON.parse(custDetails)
+      dispatch(setCustDetails(custdetails_parsed));
+    }
+    // if (allBeauticians) {
+    //   const allbeaut_parsed=JSON.parse(allBeauticians)
+    //   dispatch(setAllBeauticiansC(allbeaut_parsed));
+    // }
+  },[]);
   return (
     <div>
       <Topstackcust />

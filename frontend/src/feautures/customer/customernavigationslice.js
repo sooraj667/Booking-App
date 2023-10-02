@@ -75,7 +75,17 @@ const customernavigationslice=createSlice(
                 state.value.browse=false
                 state.value.booknow=false
                 state.value.profile=false
+            },
+            toggleLandingPart:(state,action)=>{
+                state.value.landingpart=true
+                state.value.servicepreview=false
+                state.value.favouritestylists=false
+                state.value.bookings=false
+                state.value.browse=false
+                state.value.booknow=false
+                state.value.profile=false
             }
+
            
        
 
@@ -89,5 +99,5 @@ const customernavigationslice=createSlice(
 
 )
 
-export const {toggleFavouritestylists,toggleBookings,toggleBrowse,toggleBooknow,toggleProfile,toggleServicePreview} = customernavigationslice.actions
+export const {toggleFavouritestylists,toggleBookings,toggleBrowse,toggleBooknow,toggleProfile,toggleServicePreview,toggleLandingPart} = customernavigationslice.actions
 export default customernavigationslice.reducer

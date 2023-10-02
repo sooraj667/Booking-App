@@ -11,6 +11,13 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useDispatch } from "react-redux";
+import HomeIcon from '@mui/icons-material/Home';
+
+import {toggleLandingPart} from "../../../feautures/customer/customernavigationslice"
+
+
+
+
 const HeaderDashboard = () => {
   const dispatch=useDispatch()
   const datas = useSelector((state) => state.login);
@@ -45,6 +52,11 @@ const HeaderDashboard = () => {
         setAccessTokenC(atokenC)
     }
   },[])
+
+
+  const handleHomeClick=()=>{
+    dispatch(toggleLandingPart())
+  }
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -99,6 +111,12 @@ const HeaderDashboard = () => {
 
           {accesstokenC && (
             <>
+            <div className="mr-3 home">
+            <HomeIcon onClick={handleHomeClick}/>
+
+            </div>
+
+               
               
               <Link to="/logincustomer">
                 <Button
