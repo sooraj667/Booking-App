@@ -63,6 +63,14 @@ const Booking = () => {
           },
         }}
       >
+
+
+
+
+
+
+
+
         <div
           className="heading"
           style={{ fontSize: "1.5rem", fontWeight: "bold" ,marginLeft:"320px"}}
