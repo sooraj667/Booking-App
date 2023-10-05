@@ -13,5 +13,6 @@ urlpatterns = [
     path("editstudio/",Editstudio.as_view(),name="Editstudio"),
     path("deletestudio/",Deletestudio.as_view(),name="Deletestudio"),
     path("confirmotp/",Confirmotp.as_view(),name="Confirmotp"),
+    path("todays-schedule/",Todaysschedule.as_view(),name="Todaysschedule"),
     
 ]

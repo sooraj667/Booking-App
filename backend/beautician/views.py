@@ -345,6 +345,19 @@ class Deletestudio(APIView):
         studioobjs_serialized=StudioSerializer(Studio.objects.filter(beautician=beautobj),many=True)
 
         return Response({"message":"success","studios":studioobjs_serialized.data})
+    
+class Todaysschedule(APIView):
+    def get(self,request):
+        
+        print(request.data,"MWONEEEEE")
+        beautid=request.data.get("beautid")
+        beautobj=Beautician.objects.get(id=beautid)
+        appointments=Appointment.objects.filter(beautician=beautobj)
+        appointments_serialized=Appointmentserializer(appointments,many=True)
+
+       
+
+        return Response({"message":"success","schedules":appointments_serialized.data})
  
 
         

@@ -79,3 +79,17 @@
   .home{
     cursor: pointer;
   }
+  .imagecls{
+    max-height: 500px;
+    width: 100%;
+    object-fit: cover;
+    padding: 20px;
+    border-radius: 25px;
+    
+  }
+  .paper{
+    max-width: 99%;
+    max-height: 90%;
+   
+  }
+  
