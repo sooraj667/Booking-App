@@ -14,6 +14,8 @@ urlpatterns = [
     path("getsingleservice/",Getsingleservice.as_view(),name="Getsingleservice"),
     path("getservicebeauts/",Getservicebeauts.as_view(),name="Getservicebeauts"),
     path("getviewmoreservicebeauts/",Getviewmoreservicebeauts.as_view(),name="Getviewmoreservicebeauts"),
+    path("forgotpassword/",Forgotpassword.as_view(),name="Forgotpassword"),
+    path("changepassword/",ChangePassword.as_view(),name="ChangePassword"),
 
 
     

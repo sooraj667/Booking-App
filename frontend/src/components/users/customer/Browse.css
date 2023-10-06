@@ -92,4 +92,41 @@
     max-height: 90%;
    
   }
+
+
+
+
+
+.maincont{
+  margin-top: 64px;
+  justify-content: center;
+  align-items: center;
+
+
+}
+.paperesh{
+  width: 100%;
+  height: 100%;
   
+}
+.cols{
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+  
+}
+.mainrow{
+  padding-top: 70px;
+}
+
+
+
+.forgotpw{
+  color: #115194;
+  display: flex;
+  cursor: pointer;
+  justify-content: center;
+}
+.email{
+  font-weight: 500;
+}

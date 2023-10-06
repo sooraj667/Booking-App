@@ -9,6 +9,8 @@ import Button from "@mui/material/Button"
 
 import MuiAlert from '@mui/material/Alert';
 
+import ForgotpwModal from '../forgotPassword/ForgotpwModal';
+
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -82,6 +84,9 @@ const Logincustomer = () => {
                 >
                   Login
                 </Button>
+           
+                <ForgotpwModal/>
+
 
                 {
                   error && <Alert severity="error" sx={{

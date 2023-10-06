@@ -6,11 +6,7 @@
     margin-top: 7%;
     border-radius: 20px;
 }
-.content{
-    margin-left: 8vw;
-    padding-top: 10vh;
 
-}
 .btndesign{
     background-color: #3bdd94;
     padding: 3vh;
@@ -26,4 +22,17 @@
     margin-bottom: 7%;
     border-radius: 20px;
 
+}
+.content{
+    margin-left: 8vw;
+    padding-top: 10vh;
+    
+    font-size: x-large;
+    font-weight: 700;
+}
+.btnrow{
+    display: flex;
+    justify-content:center;
+    /* align-items: center; */
+    /* background-color: #3bdd94; */
 }

@@ -17,6 +17,8 @@ import DashboardpageAd from "./pages/admin/dashboard/DashboardpageAd";
 import Customerdashboard from "./components/users/customer/Customerdashboard";
 import Otppage from "./components/users/otp/Otppage";
 import OTPMainpage from "./pages/otp/OTPMainpage";
+import Dummy from "./components/dummy/Dummy";
+import ChangePasswordUI from "./components/users/forgotPassword/ChangePasswordUI";
 
 const Allroutes = () => {
   const dispatch =useDispatch()
@@ -77,6 +79,11 @@ const Allroutes = () => {
             
             <Route path="/adminlogin" element={<LoginpageAd />} />
             <Route path="/admindashboard" element={<DashboardpageAd />} />
+
+
+            <Route path="/dummy" element={<Dummy />} />
+
+            <Route path="/forgotpassword" element={<ChangePasswordUI />} />
             
             
             

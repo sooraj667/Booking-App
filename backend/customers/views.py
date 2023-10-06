@@ -7,6 +7,10 @@ from beautician.models import *
 from beautician.serializers import *
 from datetime import datetime
 from datetime import date
+from django.core.mail import send_mail
+from django.conf import settings
+from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import check_password
 
 
 
@@ -17,7 +21,9 @@ class Signup(APIView):
         phone=request.data.get("phone")
         password=request.data.get("password")
 
-        newobj=Customer.objects.create(name=pname,email=email,phone=phone,password=password)
+        hashed_password=make_password(password)
+
+        newobj=Customer.objects.create(name=pname,email=email,phone=phone,password=hashed_password)
         serialized_object=Customerserializer(newobj)
         return Response({"message":'Created',"beautdata":serialized_object.data})
     
@@ -26,11 +32,21 @@ class Login(APIView):
     def post(self,request):
         email=request.data.get("email")
         password=request.data.get("password")
+        try:
+            custobj=Customer.objects.get(email=email)
+        except:
+            return Response({"message":'NotMatched'})
 
-        found=Customer.objects.filter(email=email,password=password).count()    
-        if found==1:
-            obj=Customer.objects.get(email=email,password=password)
-            serialized_object=Customerserializer(obj)
+        valid=check_password(password,custobj.password)
+
+        if not valid:
+            return Response({"message":'NotMatched'})
+
+
+        found=Customer.objects.filter(email=email).count()    
+        if valid:
+            
+            serialized_object=Customerserializer(custobj)
             allbeauticians=Beautician.objects.all()
            
             allbeauticians_serialized=BeauticianSerializer(allbeauticians,many=True)
@@ -42,7 +58,7 @@ class Login(APIView):
             #         if item["id"]==required_id:
             #             item["expertin"]=ServicesSerializer(expertinobj).data
                 
-            refresh=RefreshToken.for_user(obj)  
+            refresh=RefreshToken.for_user(custobj)  
             return Response({"message":'Matched',"custdata":serialized_object.data,"allbeautdata":allbeauticians_serialized.data,"accesstoken":str(refresh.access_token),"refreshtoken":str(refresh)})
         else:
             return Response({"message":'NotMatched'})
@@ -318,6 +334,37 @@ class Getviewmoreservicebeauts(APIView):
      
 
         return Response({"message":'Added',"services":servicefeesobjs_serialized.data})
+    
+class Forgotpassword(APIView):
+    def post(self,request): 
+        email=request.data.get("email")
+        try:
+            custobj=Customer.objects.get(email=email)
+            id=custobj.id
+            subject = "Forgot Password"
+            message = "http://localhost:3000/forgotpassword/"
+            recipient = email
+            send_mail(subject, 
+                message, settings.EMAIL_HOST_USER, [recipient], fail_silently=False)
+            return Response({"message":'success',"id":id})
+        except:
+            return Response({"message":'failed'})
+        
+
+class ChangePassword(APIView):
+    def post(self,request): 
+        id=request.data.get("id")
+        password=request.data.get("password")
+       
+        
+        custobj=Customer.objects.get(id=id)
+        custobj.password=make_password(password)
+        custobj.save()
+        print("Saved")
+        return Response({"message":'success'})
+       
+
+  
     
         
 
