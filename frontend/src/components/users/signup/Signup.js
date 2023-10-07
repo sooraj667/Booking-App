@@ -23,7 +23,7 @@ const Signup = () => {
             // marginRight:"25vw",
             marginTop: "20px",
             marginBottom:10,
-            paddingBottom:40,
+            paddingBottom:30,
             opacity: [0.9, 0.8, 0.8],
 
             "&:hover": {

@@ -6,7 +6,12 @@ const Homepage = () => {
   return (
     <div>
         <Header/>
+        <div className="container-fluid landing">
         <Landingbody/>
+
+        </div>
+
+        
         
     
     </div>

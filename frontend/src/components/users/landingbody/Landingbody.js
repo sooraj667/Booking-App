@@ -30,7 +30,7 @@ const Landingbody = () => {
     },
   });
   return (
-    <div className="landing">
+    <div className="">
       <div className="row">
         <div className="col-md-6">
           <div className="content">
@@ -42,7 +42,7 @@ const Landingbody = () => {
             <BootstrapButton variant="contained">Get Started</BootstrapButton>
           </Link>
         </div>
-        <div className="col-md-6">
+        {/* <div className="col-md-6">
           <img
             className="imagecls"
             src={
@@ -50,7 +50,7 @@ const Landingbody = () => {
             }
             alt=""
           />
-        </div>
+        </div> */}
       </div>
     </div>
   );
