@@ -5,14 +5,18 @@ import axiosInstance from "../../../axios/axiosconfig";
 import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from "react-router-dom";
 import MuiAlert from '@mui/material/Alert';
+import { useSelector } from "react-redux";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 const ChangePWForm = () => {
+
     const[password,setPassword]=useState("")
     const[rePassword,setRePassword]=useState("")
     const[error,setError]=useState("")
+
+    const forgotpassword=useSelector((state)=>state.forgotpassword)
 
     const navigate=useNavigate()
     
@@ -38,7 +42,41 @@ const ChangePWForm = () => {
         else if (password===rePassword){
             console.log("CLICKED BEST");
             
-            const datas={
+
+            if (localStorage.getItem("change-pw-status")==="beautician"){
+              const datas={
+                password:password,
+                id:localStorage.getItem("forgotpassword-id-beautician")
+            }
+            console.log(datas,"THESE ARE DATAS");
+            axiosInstance.post("beaut/changepassword/",datas).then((res)=>{
+                
+                console.log(res.data,"AFTER VIEW");
+                toast.success('Password Changed! Redirecting to Loginpage')
+                setTimeout(()=>{
+                    
+                    navigate("../login")
+
+                },3000)
+
+                
+
+                
+
+                setError(false)
+            }).catch((error)=>{
+                alert("Error")
+
+            })
+
+            }
+
+
+
+
+
+            if(localStorage.getItem("change-pw-status")==="customer"){
+              const datas={
                 password:password,
                 id:localStorage.getItem("forgotpassword-id")
             }
@@ -62,10 +100,19 @@ const ChangePWForm = () => {
                 alert("Error")
 
             })
+
+            }
+
+
+
+
+            
         }
     }
   return (
+    
     <div className="form-main-div">
+      {console.log(forgotpassword.value,"HEEYYYYYY")}
         <Toaster />
       <h2 className="head">Change Password</h2>
       <hr />

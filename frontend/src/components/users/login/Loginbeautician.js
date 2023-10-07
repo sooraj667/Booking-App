@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import Loginform from "./Loginform";
 import axiosInstance from '../../../axios/axiosconfig';
 import { useNavigate } from 'react-router-dom';
@@ -7,9 +7,10 @@ import {setBeautDetails,setAccessToken} from "../../../feautures/loginslice"
 import Cookies from 'js-cookie';
 import Paper from '@mui/material/Paper';
 import Button from "@mui/material/Button"
-
+import {setBeautician} from "../../../feautures/forgotpassword/forgotpasswordslice"
 
 import MuiAlert from '@mui/material/Alert';
+import ForgotpwModal from '../forgotPassword/ForgotpwModal';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -59,6 +60,14 @@ const Loginbeautician = () => {
           })
 
     }
+
+
+    useEffect(
+      ()=>{
+        dispatch(setBeautician())
+        localStorage.setItem("change-pw-status","beautician")
+      }
+    )
   return (
     <Paper elevation={24}   sx={{
       width: 500,
@@ -95,6 +104,7 @@ const Loginbeautician = () => {
                 >
                   Login
                 </Button>
+                <ForgotpwModal/>
                 {
                   error && <Alert severity="error" sx={{
                     marginTop:'20px'

@@ -358,6 +358,32 @@ class Todaysschedule(APIView):
        
 
         return Response({"message":"success","schedules":appointments_serialized.data})
+    
+class Forgotpassword(APIView):
+    def post(self,request): 
+        email=request.data.get("email")
+        try:
+            beautobj=Beautician.objects.get(email=email)
+            id=beautobj.id
+            subject = "Forgot Password"
+            message = "http://localhost:3000/forgotpassword/"
+            recipient = email
+            send_mail(subject, 
+                message, settings.EMAIL_HOST_USER, [recipient], fail_silently=False)
+            return Response({"message":'success',"id":id})
+        except:
+            return Response({"message":'failed'})
+        
+class ChangePassword(APIView):
+    def post(self,request): 
+        print("reached")
+        id=request.data.get("id")
+        password=request.data.get("password")
+        beautobj=Beautician.objects.get(id=id)
+        beautobj.password=make_password(password)
+        beautobj.save()
+        print("Saved")
+        return Response({"message":'success'})
  
 
         

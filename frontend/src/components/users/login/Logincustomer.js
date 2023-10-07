@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import Loginform from "./Loginform";
 import axiosInstance from '../../../axios/axiosconfig';
 import { useNavigate } from 'react-router-dom';
@@ -6,7 +6,7 @@ import { useDispatch,useSelector } from 'react-redux';
 import Cookies from 'js-cookie';
 import Paper from '@mui/material/Paper';
 import Button from "@mui/material/Button"
-
+import {setCustomer} from "../../../feautures/forgotpassword/forgotpasswordslice"
 import MuiAlert from '@mui/material/Alert';
 
 import ForgotpwModal from '../forgotPassword/ForgotpwModal';
@@ -46,6 +46,13 @@ const Logincustomer = () => {
       })
 
 }
+
+useEffect(
+  ()=>{
+    dispatch(setCustomer())
+    localStorage.setItem("change-pw-status","customer")
+  }
+)
   return (
 
 

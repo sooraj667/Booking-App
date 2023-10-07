@@ -4,7 +4,9 @@ import Loginbeauticianpage from "../../../pages/users/login/Loginbeauticianpage"
 import Logincustomerpage from "../../../pages/users/login/Logincustomerpage";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
+
 const Login = () => {
+
   return (
 
     <Paper
@@ -25,6 +27,7 @@ const Login = () => {
       }}
     >
       <div className="content">Login as a Beautician or Customer</div>
+
       <div className="row">
         <div className="col-md-6">
           <Link to="../loginbeautician/">
