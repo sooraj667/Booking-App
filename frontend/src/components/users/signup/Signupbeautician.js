@@ -7,19 +7,24 @@ import Button from "@mui/material/Button";
 import { Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { setBeautotp } from "../../../feautures/otpslice";
-
+import {submitForm} from "../../../feautures/beautslice"
 const Signupbeautician = () => {
   const formdatas = useSelector((state) => state.signup);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleSubmit = () => {
+    dispatch(submitForm())
     const datas = {
       pname: formdatas.value.pname,
       email: formdatas.value.email,
       phone: formdatas.value.phone,
       password: formdatas.value.password,
     };
+    if (formdatas.value.pname==="" || formdatas.value.email==="" || formdatas.value.phone==="" || formdatas.value.password===""){
+      
+      return
+    }
     axiosInstance
       .post("beaut/signup/", datas)
       .then((response) => {
@@ -83,7 +88,10 @@ const Signupbeautician = () => {
                         Sign Up
                       </Button>
                     )}
+
+                  
                   </div>
+                  <div className="text-danger ml-5 pb-5">{formdatas.value.error.submiterror}</div>
                 </div>
               </div>
             </div>

@@ -1,22 +1,41 @@
-import React from "react";
+import React,{useState} from "react";
 import Signupform from "./Signupform";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../../axios/axiosconfig";
 import Paper from '@mui/material/Paper';
 import Button from "@mui/material/Button"
+import {submitForm} from "../../../feautures/beautslice"
 const Signupcustomer = () => {
 
   const formdatas=useSelector((state)=> state.signup)
   const navigate=useNavigate()
+  const [signupError,setSignupError]=useState(false)
+  const dispatch=useDispatch()
+  
+
+
   const handleSubmit=()=>{
+    dispatch(submitForm())
+    console.log(formdatas.value.error.submiterror,"GGG")
+    // if (signupdatas.value.error.submiterror===true){
+    //   console.log("RETURN CHEYYEDA KOPPE");
+    //   return
+    // }
     const datas={
       pname:formdatas.value.pname,
       email:formdatas.value.email,
       phone:formdatas.value.phone,
-      password:formdatas.value.password
+      password:formdatas.value.password,
       
     }
+    if (formdatas.value.pname==="" || formdatas.value.email==="" || formdatas.value.phone==="" || formdatas.value.password===""){
+      setSignupError(true)
+      return
+    }
+   
+
+
     axiosInstance.post("cust/signup/",datas).then((response)=>{
       console.log("SUCCESSFULL");
       console.log(response.data);
@@ -48,6 +67,7 @@ const Signupcustomer = () => {
         opacity: [0.9, 0.8, 0.7],
       },
     }}>
+ 
       <div className=""></div>
       <div className="row">
         <div class="container mt-5">
@@ -69,6 +89,12 @@ const Signupcustomer = () => {
                   Sign Up
                 </Button>
                 }
+                {/* {
+                  signupError&& <div className="text-danger ml-5 mt-3">Please fill all the fields!</div>
+                } */}
+
+
+                <div className="text-danger ml-5 mt-3">{formdatas.value.error.submiterror}</div>
                
               </div>
             </div>
