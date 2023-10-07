@@ -11,8 +11,24 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.hashers import check_password
+import random
 
 
+def generate_otp():
+    return str(random.randint(1000, 9999))
+
+
+
+class Confirmotp(APIView):
+    def post(self,request):
+        user_entered_otp=request.data.get("otp")
+        email=request.data.get("email")
+        try:
+            otpobj=OTP.objects.get(otp=user_entered_otp,email=email)
+            otpobj.delete()
+            return Response({"message":'Success'}) 
+        except:
+            return Response({"message":'Failed'})
 
 class Signup(APIView):
     def post(self,request):
@@ -20,6 +36,27 @@ class Signup(APIView):
         email=request.data.get("email")
         phone=request.data.get("phone")
         password=request.data.get("password")
+
+        try:
+            check_obj=Customer.objects.get(email=email)
+            return Response({"message":'Email-Failed'}) 
+        except:
+            pass
+
+        try:
+            check_obj=Customer.objects.get(phone=phone)
+            return Response({"message":'Phone-Failed'}) 
+        except:
+            pass
+
+        otpvalue=generate_otp()
+        OTP.objects.create(otp=otpvalue,email=email)
+      
+        subject = "OTP for registration in Groom UP"
+        message = f"Your OTP for registration is {otpvalue}.Please enter this otp to register."
+        recipient = email
+        send_mail(subject, 
+              message, settings.EMAIL_HOST_USER, [recipient], fail_silently=False)
 
         hashed_password=make_password(password)
 

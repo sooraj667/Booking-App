@@ -3,12 +3,14 @@ import Logincustomer from "../../../components/users/login/Logincustomer";
 import Header from "../../../components/users/header/Header";
 const Logincustomerpage = () => {
   return (
-    <div
-      
-    >
+    <div>
       <Header />
+      <div className="logincust-landing">
       <Logincustomer />
-      {/* EDITED */}
+
+      </div>
+     
+    
     </div>
   );
 };

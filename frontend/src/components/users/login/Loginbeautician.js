@@ -84,6 +84,7 @@ const Loginbeautician = () => {
           sx={{
             // width: 500,
             // height: 410,
+            padding:3,
             backgroundColor: "whitesmoke",
             // backgroundImage:'url("https://img.freepik.com/premium-photo/close-up-hair-supplies-flat-lay_23-2148352942.jpg?w=900")',
             objectFit: "cover",

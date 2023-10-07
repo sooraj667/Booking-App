@@ -48,6 +48,20 @@ class Signup(APIView):
         phone=request.data.get("phone")
         password=request.data.get("password")
 
+        try:
+            check_obj=Beautician.objects.get(email=email)
+            return Response({"message":'Email-Failed'}) 
+        except:
+            pass
+
+        try:
+            check_obj=Beautician.objects.get(phone=phone)
+            return Response({"message":'Phone-Failed'}) 
+        except:
+            pass
+
+
+
 
         otpvalue=generate_otp()
         OTP.objects.create(otp=otpvalue,email=email)

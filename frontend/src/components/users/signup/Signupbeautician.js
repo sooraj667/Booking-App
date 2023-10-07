@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import Signupform from "./Signupform";
 import { useSelector, useDispatch } from "react-redux";
 import axiosInstance from "../../../axios/axiosconfig";
@@ -8,8 +8,20 @@ import { Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { setBeautotp } from "../../../feautures/otpslice";
 import {submitForm} from "../../../feautures/beautslice"
+import MuiAlert from "@mui/material/Alert";
+import toast, { Toaster } from 'react-hot-toast';
+
+
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
+
+
 const Signupbeautician = () => {
   const formdatas = useSelector((state) => state.signup);
+  const [alreadyTaken,setAlreadyTaken]=useState(null)
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -28,10 +40,30 @@ const Signupbeautician = () => {
     axiosInstance
       .post("beaut/signup/", datas)
       .then((response) => {
+        if(response.data.message==="Email-Failed"){
+          setAlreadyTaken("Email already taken!")
+          return
+
+        }
+
+        if(response.data.message==="Phone-Failed"){
+          setAlreadyTaken("Phone number already taken!")
+          return
+
+        }
+
+
         console.log("SUCCESSFULL");
         console.log(response.data);
         dispatch(setBeautotp());
-        navigate("../otp/");
+        toast.success('Otp Sent to your mail! Check')
+        setTimeout(()=>{
+                    
+        navigate("../otp/")
+
+          },3000)
+
+        // navigate("../otp/");
       })
       .catch((error) => {
         alert("ERROR");
@@ -40,6 +72,7 @@ const Signupbeautician = () => {
 
   return (
     <div className="row mainrow">
+      <Toaster/>
       <div className="col-3">
 
       </div>
@@ -49,6 +82,7 @@ const Signupbeautician = () => {
           sx={{
             // width: 600,
             // height: 510,
+            padding:3,
             backgroundColor: "whitesmoke",
             // backgroundImage:'url("https://img.freepik.com/premium-photo/close-up-hair-supplies-flat-lay_23-2148352942.jpg?w=900")',
             objectFit: "cover",
@@ -91,7 +125,40 @@ const Signupbeautician = () => {
 
                   
                   </div>
-                  <div className="text-danger ml-5 pb-5">{formdatas.value.error.submiterror}</div>
+
+
+                  {formdatas.value.error.submiterror&&
+                  <Alert
+                  severity="error"
+                  sx={{
+                    
+                   
+                  }}
+                >
+                  {formdatas.value.error.submiterror}
+                </Alert>
+
+
+                  }
+
+
+                  {alreadyTaken &&
+                  <Alert
+                  severity="error"
+                  sx={{
+                    
+                  }}
+                >
+                  {alreadyTaken}
+                </Alert>
+
+                  }
+
+                  
+
+                      
+                  {/* <div className="text-danger ml-5 pb-5 ">{formdatas.value.error.submiterror}</div>
+                  <div className="text-danger ml-5 pb-5">{alreadyTaken}</div> */}
                 </div>
               </div>
             </div>
