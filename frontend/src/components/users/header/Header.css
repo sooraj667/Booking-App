@@ -32,4 +32,14 @@ body {
     
 
 }
+.groomup {
+    text-decoration: none; 
+    color: inherit; 
+}
+.groomup:hover{
+    text-decoration: none;
+    color: inherit; 
+
+}
+
 

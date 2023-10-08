@@ -17,8 +17,7 @@ const Contents = () => {
   return (
     <Paper
       sx={{
-        height: "950px",
-        width: "250px",
+        height:"1000px",
         backgroundColor: "blue",
         borderRadius: "0px",
         backgroundColor: "whitesmoke",

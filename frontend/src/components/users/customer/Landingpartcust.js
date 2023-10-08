@@ -182,7 +182,7 @@ const Landingpartcust = () => {
           elevation={24}
           sx={{
             width: 800,
-            height: 810,
+            height:"100vh",
             // backgroundColor: "#F5FFFA",
             // backgroundImage:'url("https://img.freepik.com/premium-photo/close-up-hair-supplies-flat-lay_23-2148352942.jpg?w=900")',
             objectFit: "cover",
