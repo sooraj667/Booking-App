@@ -66,6 +66,7 @@ class Signup(APIView):
     
     
 class Login(APIView):
+    
     def post(self,request):
         email=request.data.get("email")
         password=request.data.get("password")
@@ -102,6 +103,7 @@ class Login(APIView):
         
 
 class Changeimage(APIView):
+   
     def post(self,request):
      
         id=request.data.get("id")
@@ -121,6 +123,7 @@ class Changeimage(APIView):
         
 
 class Booknow(APIView):
+    
     def post(self,request):
         print("VIEW REACHEDDDDDDDDDDDD NEWWEWEWE")
         beautid=request.data.get("beautid")
@@ -163,6 +166,7 @@ class Booknow(APIView):
         
 
 class Getbeautdatas(APIView):
+    
     def post(self,request):
   
         beautid=request.data.get("beautid")
@@ -196,6 +200,7 @@ class Getbeautdatas(APIView):
 
         
 class Getbookings(APIView):
+    
     def post(self,request):
  
         custid=request.data.get("custid")
@@ -257,6 +262,7 @@ class Getbookings(APIView):
             return Response({"message":"not success"})
         
 class Getlandingpage(APIView):
+   
     def post(self,request):
         print("LANDINGG")
         custid=request.data.get("custid")
@@ -322,6 +328,7 @@ class Getlandingpage(APIView):
 
 
 class Editdetails(APIView):
+   
     def post(self,request): 
         id=request.data.get("id")
         name=request.data.get("name")
@@ -336,12 +343,14 @@ class Editdetails(APIView):
         return Response({"message":'Added',"allcustdatas":customer_serialized.data})
     
 class Getallservices(APIView):
+
     def get(self,request): 
         allservices=Services.objects.all()
         allservices_serialized=ServicesSerializer(allservices,many=True)
         return Response({"message":'Added',"allservices":allservices_serialized.data})
     
 class Getsingleservice(APIView):
+ 
     def post(self,request): 
         serviceid=request.data.get("serviceid")
         print(serviceid,"PRINTED")
@@ -352,6 +361,7 @@ class Getsingleservice(APIView):
 
 
 class Getservicebeauts(APIView):
+  
     def post(self,request): 
         serviceid=request.data.get("serviceid")
         serviceobj=Services.objects.get(id=serviceid)
@@ -363,6 +373,7 @@ class Getservicebeauts(APIView):
 
 
 class Getviewmoreservicebeauts(APIView):
+  
     def post(self,request): 
         serviceid=request.data.get("serviceid")
         serviceobj=Services.objects.get(id=serviceid)

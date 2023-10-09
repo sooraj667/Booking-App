@@ -19,6 +19,10 @@ import Otppage from "./components/users/otp/Otppage";
 import OTPMainpage from "./pages/otp/OTPMainpage";
 import Dummy from "./components/dummy/Dummy";
 import ChangePasswordUI from "./components/users/forgotPassword/ChangePasswordUI";
+import ProtectedRoute from "./components/users/customer/protectedroute/ProtectedRoute";
+import PRforLogin from "./components/users/customer/protectedroute/PRforLogin";
+import PRforBeauticianDashboard from "./components/users/beautician/protectedroute/PRforBeauticianDashboard";
+import PRforBeauticianLogin from "./components/users/beautician/protectedroute/PRforBeauticianLogin";
 
 const Allroutes = () => {
   const dispatch =useDispatch()
@@ -49,6 +53,7 @@ const Allroutes = () => {
             <Route path="" element={<Homepage />} />
             <Route path="/signup" element={<Signuplandingpage />} />
             <Route path="/login" element={<Loginlandingpage />} />
+            {/* <Route path="/login" element={<Loginlandingpage />} /> */}
             <Route
               path="/signupbeautician"
               element={<Signupbeauticianpage />}
@@ -57,32 +62,59 @@ const Allroutes = () => {
 
             <Route path="/otp" element={<OTPMainpage />} />
 
+
+            <Route path="" element={<PRforBeauticianLogin/>}>
+
+            <Route path="/loginbeautician" element={<Loginbeauticianpage />} />
+
+
+              </Route>
+
             
+            <Route path="" element={<PRforLogin/>}>
+
+            <Route path="/logincustomer" element={<Logincustomerpage />} />
             
-            {
+
+            </Route>
+            {/* {
                 !accesstokenC?<Route path="/logincustomer" element={<Logincustomerpage />} />
                 :null
-            }
-            {
+            } */}
+            {/* {
                 !accesstokenB?<Route path="/loginbeautician" element={<Loginbeauticianpage />} />
                 :null
-            }
+            } */}
             {/* <Route path="/beautician-dashboard" element={<Beauticianpage />} /> */}
-            {
+            {/* {
                 accesstokenB?<Route path="/beautician-dashboard" element={<Beauticianpage />} />:null
-            }
+            } */}
             {/* {
                 accesstokenC?<Route path="/customer-dashboard" element={<Customerpage />} />:null
             } */}
 
-            <Route path="/customer-dashboard" element={<Customerpage />} />   
+            <Route path="" element={<PRforBeauticianDashboard/>}>
+
+            <Route path="/beautician-dashboard" element={<Beauticianpage />} />
+            
+
+            </Route>
+
+
+
+            <Route path="" element={<ProtectedRoute/>}>
+
+            <Route path="/customer-dashboard" element={<Customerpage />} />  
+             
+
+            </Route>
 
 
             
             <Route path="/adminlogin" element={<LoginpageAd />} />
             <Route path="/admindashboard" element={<DashboardpageAd />} />
 
-            
+
 
 
 
