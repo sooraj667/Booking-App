@@ -23,6 +23,8 @@ import ProtectedRoute from "./components/users/customer/protectedroute/Protected
 import PRforLogin from "./components/users/customer/protectedroute/PRforLogin";
 import PRforBeauticianDashboard from "./components/users/beautician/protectedroute/PRforBeauticianDashboard";
 import PRforBeauticianLogin from "./components/users/beautician/protectedroute/PRforBeauticianLogin";
+import PRforAdminDashboard from "./components/admin/protectedroute/PRforAdminDashboard";
+import PRforAdminLogin from "./components/admin/protectedroute/PRforAdminLogin";
 
 const Allroutes = () => {
   const dispatch =useDispatch()
@@ -111,15 +113,23 @@ const Allroutes = () => {
 
 
             
+            <Route path="" element={<PRforAdminLogin/>}>
             <Route path="/adminlogin" element={<LoginpageAd />} />
+            </Route>
+
+
+            <Route path="" element={<PRforAdminDashboard/>}>
             <Route path="/admindashboard" element={<DashboardpageAd />} />
+            
+            </Route>
+            
 
 
 
 
 
 
-            <Route path="/dummy" element={<Dummy />} />
+            {/* <Route path="/dummy" element={<Dummy />} /> */}
 
             <Route path="/forgotpassword" element={<ChangePasswordUI />} />
             

@@ -1,4 +1,4 @@
-import Reac,{useState} from 'react'
+import React,{useState} from 'react'
 import { Navigate } from "react-router-dom";
 import Beauticianpage from '../../../../pages/users/beautician/Beauticianpage';
 import Cookies from 'js-cookie';
