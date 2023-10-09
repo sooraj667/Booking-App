@@ -31,7 +31,7 @@ const Customerdashboard = () => {
 
    
   return (
-    <div>
+    <div >
     <HeaderDashboard/>
     <div className="row">
       <div className="col-md-3">

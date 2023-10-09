@@ -24,7 +24,6 @@ import InfoIcon from "@mui/icons-material/Info";
 import { setServiceId } from "../../../feautures/customer/servicepreviewslice";
 import { toggleServicePreview } from "../../../feautures/customer/customernavigationslice";
 
-
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -32,8 +31,7 @@ import CardMedia from "@mui/material/CardMedia";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import StarHalfIcon from "@mui/icons-material/StarHalf";
 
-
-
+import "./Landingpartcust.css";
 
 // function srcset(image, width, height, rows = 1, cols = 1) {
 //   return {
@@ -126,20 +124,19 @@ const Landingpartcust = () => {
   //     });
   // };
 
-
   useEffect(() => {
     const custDetails = localStorage.getItem("singledetails-C");
     //const allBeauticians = localStorage.getItem("allbeauticians-C");
 
     if (custDetails) {
-      const custdetails_parsed=JSON.parse(custDetails)
+      const custdetails_parsed = JSON.parse(custDetails);
       dispatch(setCustDetails(custdetails_parsed));
     }
     // if (allBeauticians) {
     //   const allbeaut_parsed=JSON.parse(allBeauticians)
     //   dispatch(setAllBeauticiansC(allbeaut_parsed));
     // }
-  },[]);
+  }, []);
   return (
     <div>
       <Topstackcust />
@@ -185,7 +182,7 @@ const Landingpartcust = () => {
           elevation={24}
           sx={{
             width: 800,
-            height:"100vh",
+            height: "100vh",
             // backgroundColor: "#F5FFFA",
             // backgroundImage:'url("https://img.freepik.com/premium-photo/close-up-hair-supplies-flat-lay_23-2148352942.jpg?w=900")',
             objectFit: "cover",
@@ -201,25 +198,25 @@ const Landingpartcust = () => {
             // },
           }}
         >
-          <div className="row">
+          <div className="row ">
             <div className="heading1">Services</div>
           </div>
-          <div className="row">
+          <div className="row ">
             {allServices.map((item) => {
               return (
                 <div className="col-md-4">
-                  <Card sx={{ maxWidth: 345 ,height:395,marginTop:7 }}>
+                  <Card className="team" sx={{ maxWidth: 375, height: 370, marginTop: 7 }}>
                     <CardMedia
                       sx={{ height: 240 }}
                       image={item.image}
                       title="green iguana"
-                      onClick={()=>handleServiceClick(item.id)}
+                      onClick={() => handleServiceClick(item.id)}
                     />
-                    <CardContent>
-                      <Typography gutterBottom variant="h5" component="div">
+                    <CardContent className="items">
+                      <Typography gutterBottom variant="h6" component="div" className="">
                         {item.name}
                       </Typography>
-                      <div className="row ml-1">
+                      <div className="row ml-1 ">
                         {/* <Typography gutterBottom component="div" variant="h6">
                           Fee :
                         </Typography>
@@ -227,19 +224,24 @@ const Landingpartcust = () => {
                           {item.servicefee}/-
                         </Typography> */}
                       </div>
-                      <Button size="small" onClick={()=>handleServiceClick(item.id)}>Check Beauticians</Button>
+                      <Button
+                        size="small"
+                        onClick={() => handleServiceClick(item.id)}
+                      
+                        className="btn-class"
+                        sx={{color:"black"}}
+                        
+                      >
+                        Check Beauticians
+                      </Button>
                     </CardContent>
                     <CardActions>
                       {/* <Button size="small" onClick={()=>handleServiceClick(item.id)}>Check Beauticians</Button> */}
-                      
                     </CardActions>
                   </Card>
-                  
                 </div>
               );
             })}
-     
-
           </div>
 
           {/* <ImageList sx={{ width: 700, height: 450 }}>
@@ -247,7 +249,7 @@ const Landingpartcust = () => {
               <ListSubheader component="div">December</ListSubheader>
             </ImageListItem> */}
 
-            {/* {allServices.map((item) => (
+          {/* {allServices.map((item) => (
         <ImageListItem key={item.image}>
           <img
             srcSet={`${item.image}?w=248&fit=crop&auto=format&dpr=2 2x`}
@@ -342,6 +344,11 @@ const Landingpartcust = () => {
           } */}
         </Container>
       </div>
+
+      
+      
+
+      
     </div>
   );
 };
