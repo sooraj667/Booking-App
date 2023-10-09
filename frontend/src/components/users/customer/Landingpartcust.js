@@ -32,6 +32,9 @@ import CardMedia from "@mui/material/CardMedia";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import StarHalfIcon from "@mui/icons-material/StarHalf";
 
+
+
+
 // function srcset(image, width, height, rows = 1, cols = 1) {
 //   return {
 //     src: `${image}?w=${width * cols}&h=${height * rows}&fit=crop&auto=format`,
@@ -231,9 +234,12 @@ const Landingpartcust = () => {
                       
                     </CardActions>
                   </Card>
+                  
                 </div>
               );
             })}
+     
+
           </div>
 
           {/* <ImageList sx={{ width: 700, height: 450 }}>

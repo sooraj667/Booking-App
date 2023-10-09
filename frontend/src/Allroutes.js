@@ -71,14 +71,20 @@ const Allroutes = () => {
             {
                 accesstokenB?<Route path="/beautician-dashboard" element={<Beauticianpage />} />:null
             }
-            {
+            {/* {
                 accesstokenC?<Route path="/customer-dashboard" element={<Customerpage />} />:null
-            }
+            } */}
+
+            <Route path="/customer-dashboard" element={<Customerpage />} />   
 
 
             
             <Route path="/adminlogin" element={<LoginpageAd />} />
             <Route path="/admindashboard" element={<DashboardpageAd />} />
+
+            
+
+
 
 
             <Route path="/dummy" element={<Dummy />} />
