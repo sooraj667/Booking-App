@@ -47,13 +47,13 @@ const Beauticiandashboard = () => {
   
   return (
     <div>
-        <HeaderDashboard/>
-        <div className="row">
-          <div className="col-md-3">
+        {/* <HeaderDashboard/> */}
+        <div className="row outer">
+          <div className="col-md-3 sidebar">
           <Contents/>
 
           </div>
-          <div className="col-md-9">
+          <div className="col-md-9 rightsection">
           {
             navigationdatas.value.landingpart && <Landingpartbeaut/>
           }

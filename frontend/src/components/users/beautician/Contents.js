@@ -1,4 +1,5 @@
-import React from "react";
+import React,{useState} from "react";
+import { useSelector } from "react-redux";
 import "./Contents.css";
 import Paper from "@mui/material/Paper";
 import List from '@mui/material/List';
@@ -10,12 +11,141 @@ import BookIcon from '@mui/icons-material/Book';
 import WorkIcon from '@mui/icons-material/Work';
 import BeachAccessIcon from '@mui/icons-material/BeachAccess';
 import Divider from '@mui/material/Divider';
+import { useNavigate } from "react-router-dom";
 import {toggleServices,toggleAppointments,toggleProfile,toggleStudio} from "../../../feautures/beautician/beautnavigationslice"
 import { useDispatch } from "react-redux";
+import Cookies from "js-cookie";
+import  Button  from "@mui/material/Button";
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import ContentCutIcon from '@mui/icons-material/ContentCut';
+import StoreIcon from '@mui/icons-material/Store';
 const Contents = () => {
+  const [accessToken,setAccessToken]=useState(Cookies.get("accesstoken-B"))
   const dispatch=useDispatch()
+  const statedatas=useSelector((state)=>state.login)
+  const navigate=useNavigate()
+
+
+  const handleLogout = () => {
+    localStorage.removeItem("singledetails-B");
+    localStorage.removeItem("allservices-B");
+    localStorage.removeItem("services-B");
+    localStorage.removeItem("expertin-B");
+    Cookies.remove("accesstoken-B");
+    navigate("../loginbeautician")
+  };
   return (
-    <Paper
+    <>
+    <div className="dp">
+    <Avatar
+        sx={{ width: 100, height: 100 }}
+              src={statedatas.value.beautdetails.image}
+        >
+
+        </Avatar>
+
+      
+
+    </div>
+    <div className="name">
+      {statedatas.value.beautdetails.name}
+
+    </div>
+
+    <div class="divide"></div>
+    <ul className="sidebarlist">
+
+   
+
+
+
+      <li className="item" onClick={() => dispatch(toggleAppointments())}>
+        <div className="col-md-3">
+          <div class="icon">
+            <BookIcon />
+          </div>
+        </div>
+        <div className="col-md-9">
+          <div class="title">Appointments</div>
+        </div>
+      </li>
+      <li className="item" onClick={() => dispatch(toggleProfile())}>
+        <div className="col-md-3">
+          <div class="icon">
+            <AccountBoxIcon />
+          </div>
+        </div>
+        <div className="col-md-9">
+          <div class="title">Profile</div>
+        </div>
+      </li>
+
+      <li className="item" onClick={() => dispatch(toggleServices())}>
+        <div className="col-md-3">
+          <div class="icon">
+            <ContentCutIcon />
+          </div>
+        </div>
+        <div className="col-md-9">
+          <div class="title">Services</div>
+        </div>
+      </li>
+
+
+
+      <li className="item" onClick={() => dispatch(toggleStudio())}>
+        <div className="col-md-3">
+          <div class="icon">
+            <StoreIcon />
+          </div>
+        </div>
+        <div className="col-md-9">
+          <div class="title">Explore</div>
+        </div>
+      </li>
+
+    </ul>
+    {
+      accessToken &&
+      <div className="logout">
+      <Button onClick={handleLogout} sx={{backgroundColor:"#b23b3b",color:"#D0D4D9"}} >
+        Logout
+
+      </Button>
+
+    </div>
+    }
+    
+    
+
+    </>
+    
+  );
+};
+
+export default Contents;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{/* <Paper
       sx={{
         height: "950px",
         width: "250px",
@@ -78,8 +208,4 @@ const Contents = () => {
           </ListItemAvatar>
           <ListItemText primary="Studio" secondary="July 20, 2014" />
         </ListItem>
-    </Paper>
-  );
-};
-
-export default Contents;
+    </Paper> */}

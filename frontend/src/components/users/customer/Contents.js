@@ -32,7 +32,7 @@ import {toggleLandingPart} from "../../../feautures/customer/customernavigations
 const Contents = () => {
   const dispatch = useDispatch();
   const navigate=useNavigate()
-  const[accessToken,setAccessTOken]=useState(Cookies.get("accesstoken-C"))
+  const[accessToken,setAccessToken]=useState(Cookies.get("accesstoken-C"))
   const statedatas = useSelector((state) => state.login);
 
 
