@@ -139,7 +139,7 @@ const Landingpartcust = () => {
   }, []);
   return (
     <div>
-      <Topstackcust />
+      {/* <Topstackcust /> */}
 
       {/* <Button
         type="file"
@@ -177,13 +177,23 @@ const Landingpartcust = () => {
           </>
         )}
       </div> */}
-      <div>
+      <div class="landouter">
+        
+          
+       
+        <div className="hero">
+    
+          SERVICES
+       
+
+        </div>
+        <hr />
         <Container
           elevation={24}
           sx={{
             width: 800,
             height: "100vh",
-            // backgroundColor: "#F5FFFA",
+            
             // backgroundImage:'url("https://img.freepik.com/premium-photo/close-up-hair-supplies-flat-lay_23-2148352942.jpg?w=900")',
             objectFit: "cover",
             backgroundRepeat: "no-repeat",
@@ -198,9 +208,9 @@ const Landingpartcust = () => {
             // },
           }}
         >
-          <div className="row ">
+          {/* <div className="row ">
             <div className="heading1">Services</div>
-          </div>
+          </div> */}
           <div className="row ">
             {allServices.map((item) => {
               return (

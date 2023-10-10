@@ -19,7 +19,36 @@ import Header from "../users/header/Header";
 const Dummy = () => {
 
   return (
-    <div className="">
+    <div className="outer">
+      <div className="sidebar">
+      <Contents/>
+
+      </div>
+      
+      
+
+    </div>
+    
+    
+    
+
+  );
+};
+
+export default Dummy;
+
+
+
+
+
+
+
+
+
+
+
+
+{/* <div className="">
       <div className="row">
         <HeaderDashboard />
       </div>
@@ -58,11 +87,4 @@ const Dummy = () => {
 
       </div>
 
-    </div>
-    
-    
-
-  );
-};
-
-export default Dummy;
+    </div> */}

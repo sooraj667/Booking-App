@@ -1,4 +1,23 @@
 
+.landouter{
+    height: 100vh;
+    
+}
+.hero{
+   
+    height: 20vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 30px;
+    
+    
+}
+
+
+
 .team{
     height: 100%;
 }
