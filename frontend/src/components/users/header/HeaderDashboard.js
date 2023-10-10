@@ -14,7 +14,7 @@ import { useDispatch } from "react-redux";
 import HomeIcon from '@mui/icons-material/Home';
 
 import {toggleLandingPart} from "../../../feautures/customer/customernavigationslice"
-
+import"./Header.css"
 
 
 
@@ -63,6 +63,7 @@ const HeaderDashboard = () => {
         position="static"
         sx={{
           backgroundColor: "#0c0335",
+          
         }}
       >
         <Toolbar>

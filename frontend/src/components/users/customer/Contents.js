@@ -15,15 +15,17 @@ import {toggleBookings,toggleFavouritestylists,toggleBrowse,toggleProfile} from 
 const Contents = () => {
   const dispatch = useDispatch();
   return (
-    <Paper
+    <div className="row ">
+      <Paper
       sx={{
-        height:"100%",
-        backgroundColor: "blue",
+        height:"100vh",
+        width:"100%",
         borderRadius: "0px",
         backgroundColor: "whitesmoke",
         // backgroundImage:'url("https://img.freepik.com/premium-photo/close-up-hair-supplies-flat-lay_23-2148352942.jpg?w=900")',
         objectFit: "cover",
         backgroundRepeat: "no-repeat",
+        margin:0,
 
         opacity: [0.9, 0.8, 0.8],
 
@@ -77,6 +79,9 @@ const Contents = () => {
         </ListItem>
       </List>
     </Paper>
+
+    </div>
+    
   );
 };
 

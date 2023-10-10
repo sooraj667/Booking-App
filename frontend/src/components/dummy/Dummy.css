@@ -1,0 +1,46 @@
+.dashboard{
+    font-size: 33px;
+}
+.topheading{
+    background-color: aqua;
+}
+
+
+
+
+.team{
+    height: 25vh;
+}
+
+.team .items {
+    transition: 0.5s;
+    height: 100%;
+    background-color: whitesmoke
+  }
+ 
+  .team .items:hover {
+    background-color: whitesmoke;
+    color: #fff;
+    cursor: pointer;
+  }
+  .team .items:hover p {
+    color: #fff;
+  }
+  .team .items:hover .overlay {
+    opacity: 1;
+  }
+  .team .items:hover .overlay i:hover {
+    background-color: #230246;
+    color: #fff;
+  }
+  
+  .btn-class{
+    color:inherit;
+    background-color: inherit;
+    
+  }
+
+  .btn-class:hover {
+    color: white;
+  }
+ 

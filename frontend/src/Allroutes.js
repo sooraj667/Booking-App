@@ -129,7 +129,7 @@ const Allroutes = () => {
 
 
 
-            {/* <Route path="/dummy" element={<Dummy />} /> */}
+            <Route path="/dummy" element={<Dummy />} />
 
             <Route path="/forgotpassword" element={<ChangePasswordUI />} />
             
