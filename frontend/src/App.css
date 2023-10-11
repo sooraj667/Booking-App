@@ -9,6 +9,9 @@ body{
     
     
 }
+html{
+  color: #e3e1eb;
+}
 .signupbeautpage{
     background-color: rgb(13, 9, 2);
 }
@@ -109,7 +112,9 @@ body{
     margin-top: 20px;
 }
 .beautouter{
-    background-image: url("https://images.pexels.com/photos/2096622/pexels-photo-2096622.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+    background-image: url("https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80");
+    /* background:linear-gradient(65deg,#fdba61,#e69dd0); */
+    /* background-color: beige; */
     height: 1300px;
     background-repeat: no-repeat;
     background-size: cover;
