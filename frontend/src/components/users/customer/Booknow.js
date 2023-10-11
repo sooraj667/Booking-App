@@ -119,7 +119,7 @@ const Booknow = () => {
   }, []);
 
   return (
-    <div>
+    <div className="booknow-outer">
       <div className="expertin">
         <p>{reqdatas.value.bookbeautdata.name}</p>
         Expert In
@@ -129,11 +129,13 @@ const Booknow = () => {
             <p key={item.id}> {item.service.name} </p>
           ))}
       </div>
-      <Stack
+      <div className="flex">
+        <div className="box">
+        <Stack
         spacing={2}
         sx={{
           marginTop: "70px",
-          marginLeft: "320px",
+          
         }}
       >
         <Avatar
@@ -144,13 +146,11 @@ const Booknow = () => {
           }}
         />
 
-       
-
         <Paypal
- 
+
         />
 
-        <Button
+        {/* <Button
           variant="contained"
           sx={{
             width: "15%",
@@ -159,10 +159,60 @@ const Booknow = () => {
           onClick={handleConfirm}
         >
           Confirm
-        </Button>
+        </Button> */}
       </Stack>
+
+        </div>
+    
+      
+
+
+
+      </div>
     </div>
   );
 };
 
 export default Booknow;
+
+// <div>
+//       <div className="expertin">
+//         <p>{reqdatas.value.bookbeautdata.name}</p>
+//         Expert In
+//         {reqdatas.value.beautservices
+//           .filter((item) => item.topservice === true)
+//           .map((item) => (
+//             <p key={item.id}> {item.service.name} </p>
+//           ))}
+//       </div>
+      // <Stack
+      //   spacing={2}
+      //   sx={{
+      //     marginTop: "70px",
+      //     marginLeft: "320px",
+      //   }}
+      // >
+      //   <Avatar
+      //     src={reqdatas.value.bookbeautdata.image}
+      //     sx={{
+      //       width: 225,
+      //       height: 225,
+      //     }}
+      //   />
+
+      //   <Paypal
+
+      //   />
+
+      //   <Button
+      //     variant="contained"
+      //     sx={{
+      //       width: "15%",
+      //       marginLeft: "590px",
+      //     }}
+      //     onClick={handleConfirm}
+      //   >
+      //     Confirm
+      //   </Button>
+      // </Stack>
+//     </div>

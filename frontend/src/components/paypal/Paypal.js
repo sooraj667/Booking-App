@@ -52,39 +52,44 @@ const Paypal = ( ) => {
   return (
     <>
     {console.log(`${selectedService}${selectedStudio} ${startDate} ${selectedTime} MYRRRRRRRRRRR`)}
-     <InputLabel id="demo-simple-select-label">Choose Date</InputLabel>
+    
+     <div className='title'>Choose Date</div>
         <DatePicker
           selected={paymentdatas.value.date}
           onChange={handleDateChange}
           dateFormat="MM/dd/yyyy"
-          className="custom-datepicker"
+          className=" inputform form-control"
         />
-        <InputLabel id="demo-simple-select-label">Select Time</InputLabel>
+
+
+        <div className='title'>Select Time</div>
+        
         <select
           name="selectedTime"
           onChange={handleTimeChange}
-          className=" form-control dateform"
+          className=" form-control inputform"
         >
           {alltime.map((item) => {
             return <option>{item}</option>;
           })}
         </select>
 
-        <InputLabel id="demo-simple-select-label">Choose Studio</InputLabel>
+        <div className='title'>Choose Studio</div>
         <select
           name="selectedStudio"
           onChange={handleStudioChange}
-          className=" form-control dateform"
+          className=" form-control inputform "
         >
           {reqdatas.value.beautstudios.map((item) => {
             return <option>{item.place}</option>;
           })}
         </select>
-        <InputLabel id="demo-simple-select-label">Select Service</InputLabel>
+      
+        <div className='title'>Select Service</div>
         <select
           name="selectedService"
           onChange={handleServiceChange}
-          className=" form-control dateform"
+          className=" form-control inputform"
         >
           {reqdatas.value.beautservices.map((item) => {
             return <option>{item.service.name}</option>;

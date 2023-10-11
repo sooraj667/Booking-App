@@ -270,7 +270,7 @@ body {
     /* font-family: 'Arial', sans-serif;  */
     font-size: 18px; /* Adjust the font size as needed */
     font-weight: bold; /* Adjust the font weight if desired */
-    color: #333; /* Choose a text color */
+    color: #212529; /* Choose a text color */
     text-align: center; /* Center the text horizontally */
     text-transform: uppercase; /* Convert text to uppercase */
     letter-spacing: 2px; /* Add letter spacing for emphasis */
@@ -281,12 +281,13 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a box shadow */
     margin-right: 50px;
     transition: all 0.3s ease;
+    cursor: pointer;
     
   }
   .expertin:hover {
     transform: scale(1.03); /* Scale the element on hover */
 
-    color: #0c0335; /* Change the text color on hover */
+    color: #212529; /* Change the text color on hover */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a larger box shadow on hover */
   }
   .textclass{
@@ -807,6 +808,24 @@ body {
     flex-direction: row;
     justify-content: center;
 }
+.inputform{
+    background-color: inherit;
+}
+/* .booknow-outer .box{
+    border: 1px solid black;
+    padding: 5vw;
+    border-radius: 7px;
+} */
+
+.title{
+    font-size: 500;
+    font-size: 17px;
+    
+}
+
+
+
+  
 
 
 
