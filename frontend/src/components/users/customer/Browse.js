@@ -39,7 +39,114 @@ const Browse = () => {
     }
   }, []);
   return (
-    <div>
+    <div className="browse-outer">
+      <div className="hero">
+        EXPLORE
+      </div>
+      <hr />
+      <div className="flex">
+      {statedatas.value.allbeauticians.map((item) => {
+          return (
+            <Stack spacing={3} className="mt-3">
+              <Paper
+                elevation={24}
+                sx={{
+                  width: 700,
+                  height: 190,
+                  backgroundColor: "inherit",
+                  // backgroundImage:'url("https://img.freepik.com/premium-photo/close-up-hair-supplies-flat-lay_23-2148352942.jpg?w=900")',
+                  objectFit: "cover",
+                  backgroundRepeat: "no-repeat",
+                  marginLeft: "20%",
+                  marginTop: "30px",
+                  marginBottom: "30%",
+                  opacity: [0.9, 0.8, 0.8],
+
+                  "&:hover": {
+                    backgroundColor: "inherit",
+                    opacity: [0.9, 0.8, 0.7],
+                  },
+                }}
+              >
+                <Grid container spacing={4} >
+                  <Grid item xs={3}>
+                    <Avatar
+                      sx={{
+                        width: 125,
+                        height: 125,
+                        marginLeft: "30px",
+                        marginTop: "10px",
+                      }}
+                      src={item.image}
+                    />
+                  </Grid>
+                  <Grid item xs={4}>
+                    <Typography
+                    className="textclass"
+                      variant="h5"
+                      component="h1"
+                      sx={{
+                        fontSize: "24px", // Adjust the font size as needed
+                        fontWeight: "bold", // Make the text bold if desired
+                        // Change the text color based on your color palette
+                        marginBottom: "16px", // Add some spacing at the bottom
+                        // You can add more styles as needed, such as fontFamily, letterSpacing, etc.
+                      }}
+                    >
+                      {item.name}
+                      <Button
+                      variant="contained"
+                      sx={{
+                        marginTop: "10px",
+                        backgroundColor: "inherit",
+                        color: "black",
+                        "&:hover": {
+                          backgroundColor: "#212529",
+                          color: "#D0D4D9", // Specify the desired background color on hover
+                        },
+                      }}
+                      onClick={() => booknowHandler(item.id)}
+                    >
+                      Book Now
+                    </Button> 
+                      
+                    </Typography>
+                  </Grid>
+                 
+                  {/* <Grid item xs={4}>
+                    <Button
+                      variant="contained"
+                      sx={{
+                        marginTop: "80px",
+                      }}
+                      onClick={() => booknowHandler(item.id)}
+                    >
+                      Book Now
+                    </Button>
+                  </Grid> */}
+                </Grid>
+              </Paper>
+            </Stack>
+          );
+        })}
+
+      </div>
+    </div>
+    
+  );
+};
+
+export default Browse;
+
+
+
+
+
+
+
+
+
+{/* <div>
       <div className="row">
       <div className="heading1">
         Explore
@@ -121,14 +228,10 @@ const Browse = () => {
                       Book Now
                     </Button>
                   </Grid> */}
-                </Grid>
-              </Paper>
-            </Stack>
-          );
-        })}
-      </Box>
-    </div>
-  );
-};
-
-export default Browse;
+      //           </Grid>
+      //         </Paper>
+      //       </Stack>
+      //     );
+      //   })}
+      // </Box>
+    // </div> */}
