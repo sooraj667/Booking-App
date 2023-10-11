@@ -1,7 +1,7 @@
 .outer{
     width:100vw;
     height:100%;
-    
+
    
     
     
@@ -10,9 +10,10 @@
 .sidebar{
     height: 100%;
     width:20vw;
-    background-color: #051E34;
+    background-color: "inherit";
     position: fixed;
     z-index: 1000;
+    border: 1px solid black;
 }
 .sidebarlist{
     height: auto;
