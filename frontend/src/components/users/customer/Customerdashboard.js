@@ -33,6 +33,9 @@ const Customerdashboard = () => {
   return (
     // <div className='outer'>
     // <HeaderDashboard/>
+    <div className="beautouter">
+
+    
     <div className="row outer">
       <div className="col-md-3 sidebar">
       <Contents/>
@@ -77,6 +80,8 @@ const Customerdashboard = () => {
     
 
   
+
+</div>
 
 </div>
   )
