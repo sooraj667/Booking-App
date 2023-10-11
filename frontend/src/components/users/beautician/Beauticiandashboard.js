@@ -46,7 +46,7 @@ const Beauticiandashboard = () => {
   
   
   return (
-    <div>
+    <div class="beautouter">
         {/* <HeaderDashboard/> */}
         <div className="row outer">
           <div className="col-md-3 sidebar">

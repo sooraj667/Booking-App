@@ -100,7 +100,7 @@ const Contents = () => {
           </div>
         </div>
         <div className="col-md-9">
-          <div class="title">Explore</div>
+          <div class="title">Studio</div>
         </div>
       </li>
 

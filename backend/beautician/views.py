@@ -10,6 +10,7 @@ from django.contrib.auth.hashers import check_password
 from django.core.mail import send_mail
 from django.conf import settings
 import random
+from datetime import datetime
 
 
 
@@ -361,17 +362,25 @@ class Deletestudio(APIView):
         return Response({"message":"success","studios":studioobjs_serialized.data})
     
 class Todaysschedule(APIView):
-    def get(self,request):
+    def post(self,request):
+
+        today_date = datetime.now().date()
+        day_name = today_date.strftime('%A')
         
-        print(request.data,"MWONEEEEE")
+        print(request.data.get("beautid"),"NOKK")
         beautid=request.data.get("beautid")
         beautobj=Beautician.objects.get(id=beautid)
         appointments=Appointment.objects.filter(beautician=beautobj)
+        if appointments.count()==0:
+            return Response({"message":"failed", "date":str(today_date) , "day":str(day_name)})
+
         appointments_serialized=Appointmentserializer(appointments,many=True)
+
+        
 
        
 
-        return Response({"message":"success","schedules":appointments_serialized.data})
+        return Response({"message":"success","schedules":appointments_serialized.data ,"date":str(today_date) , "day":str(day_name)})
     
 class Forgotpassword(APIView):
     def post(self,request): 

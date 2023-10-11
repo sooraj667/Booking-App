@@ -10,24 +10,41 @@ import axiosInstance from "../../../axios/axiosconfig";
 import Paper from "@mui/material/Paper";
 
 import Topstack from "./Topstack";
+import "./Landingpartbeaut.css"
 
 const Landingpartbeaut = () => {
  
   const statedatas = useSelector((state) => state.login);
   const [todaysSchedule,setTodaysSchedule]=useState([])
+  const [noSchedule,setNoSchedule]=useState(false)
+
+  const [todayDate,setTodaysDate]=useState("")
+  const [day,setDay]=useState("")
   const dispatch = useDispatch();
 
   useEffect(
     ()=>{
-      const beautid=localStorage.getItem("singledetails-B").id
+      const beautid=JSON.parse(localStorage.getItem("singledetails-B"))
       const datas={
-        beautid:beautid
+        beautid:beautid.id
       }
-      axiosInstance.get("beaut/todays-schedule/",beautid).then((response)=>{
-        setTodaysSchedule(response.data.schedule)
+      console.log(datas,"NOKKADA");
+      axiosInstance.post("beaut/todays-schedule/",datas).then((response)=>{
+        if (response.data.message==="failed"){
+          setNoSchedule(true)
+        
+
+        }
+        else{
+          setTodaysSchedule(response.data.schedule)
+
+        }
+        setTodaysDate(response.data.date)
+        setDay(response.data.day)
+        
 
       }).catch((error)=>{
-        alert(error)
+        console.log(error);
 
       })
     },[]
@@ -39,39 +56,40 @@ const Landingpartbeaut = () => {
 
   return (
     <div>
-      <Topstack />
-
-      
-      <div>
-        <Paper
-          elevation={24}
-          sx={{
-            width: 500,
-            height: 410,
-            backgroundColor: "#F5FFFA",
-            // backgroundImage:'url("https://img.freepik.com/premium-photo/close-up-hair-supplies-flat-lay_23-2148352942.jpg?w=900")',
-            objectFit: "cover",
-            backgroundRepeat: "no-repeat",
-            marginLeft: "20%",
-            marginTop: "30px",
-            marginBottom: "30%",
-            opacity: [0.9, 0.8, 0.8],
-
-            "&:hover": {
-              backgroundColor: "whitesmoke",
-              opacity: [0.9, 0.8, 0.7],
-            },
-          }}
-        >
-          <Typography
-            variant="h5"
-            component="h1"
-            sx={{ marginLeft: "30%", color: "#080000", paddingTop: "15px" }}
-          >
-            Today's Schedule
-          </Typography>
-        </Paper>
+      <div className="hero">
+        TODAYS SCHEDULE
       </div>
+      <hr />
+      <div className="schedule-outer">
+        <div className="schedule-box">
+          <div className="top">
+            <div className="col-md-8 headingg">
+              SCHEDULES
+
+            </div>
+            <div className="col-md-4 datee">
+            {day} {todayDate}
+
+            </div>
+            
+          </div>
+          <hr />
+          <div className="sch-content">
+          {
+            noSchedule ? 
+            <div className="no-schedule">
+              No Bookings!
+            </div> : ""
+          }
+
+
+          </div>
+          
+
+        </div>
+
+      </div>
+     
     </div>
   );
 };
