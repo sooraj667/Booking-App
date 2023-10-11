@@ -24,6 +24,7 @@ import WorkIcon from '@mui/icons-material/Work';
 
 import Divider from '@mui/material/Divider';
 import Addservicemodal from "./Addservicemodal";
+import "./Services.css"
 
 const Services = () => {
   
@@ -46,109 +47,23 @@ const Services = () => {
   }, []);
   return (
     <div>
-      {console.log(statedatas.value.expertin.name)}
-      <Topstack />
-      <Typography
-        variant="h3"
-        component="h4"
-        sx={{
-          marginTop: "30px",
-          marginLeft: "350px",
-        }}
-      >
-        Services
-      </Typography>
-
-      <Grid container spacing={2}>
-        {/* <Grid xs={6}>
-          <Paper
-            elevation={24}
-            sx={{
-              width: 350,
-              height: 350,
-              backgroundColor: "#F5FFFA",
-              // backgroundImage:'url("https://img.freepik.com/premium-photo/close-up-hair-supplies-flat-lay_23-2148352942.jpg?w=900")',
-              objectFit: "cover",
-              backgroundRepeat: "no-repeat",
-
-              marginTop: "30px",
-              marginBottom: "30%",
-              opacity: [0.9, 0.8, 0.8],
-
-              "&:hover": {
-                backgroundColor: "whitesmoke",
-                opacity: [0.9, 0.8, 0.7],
-              },
-            }}
-          >
-            <Typography
-              variant="h5"
-              component="h1"
-              sx={{ marginLeft: "30%", color: "#080000", paddingTop: "15px" }}
-            >
-              Efficient in
-              </Typography>
-              <Stack spacing={2} sx={{
-                marginLeft:"80px",
-                marginBottom:"20px"
-              }}>
-                <h2>{statedatas.value.expertin.name}</h2>
-                </Stack>
-                <Avatar
-                  sx={{
-                    width: 225,
-                    height: 225,
-                    borderRadius: "4px",
-                    objectFit: "cover",
-                    marginLeft:"60px"
-                    
-                  }}
-                >
-                  <img   src={statedatas.value.expertin.image} alt="" />
-                </Avatar>
-             
-            
-          </Paper>
-        </Grid> */}
-        <Grid xs={12}>
-          <Paper
-            elevation={24}
-            sx={{
-              width: 450,
-              height: 350,
-              backgroundColor: "#F5FFFA",
-              // backgroundImage:'url("https://img.freepik.com/premium-photo/close-up-hair-supplies-flat-lay_23-2148352942.jpg?w=900")',
-              objectFit: "cover",
-              backgroundRepeat: "no-repeat",
-
-              marginTop: "30px",
-              marginBottom: "30%",
-              marginLeft:"20%",
-              opacity: [0.9, 0.8, 0.8],
-
-              "&:hover": {
-                backgroundColor: "whitesmoke",
-                opacity: [0.9, 0.8, 0.7],
-              },
-            }}
-          >
-            <Typography
-              variant="h5"
-              component="h1"
-              sx={{ marginLeft: "30%", color: "#080000", paddingTop: "15px" }}
-            >
-              Your Services
-            </Typography>
-            
-            
-
-            <Box sx={{ width: "100%" }}>
-              <Stack spacing={2}>
-                <List
+      <div className="hero">
+        SERVICES
+      </div>
+      <hr />
+      <div className="services-outer">
+        <div className="services-box">
+          <div className="services-heading">
+            Your Services
+          </div>
+          <hr />
+          <div className="services-body">
+          <List
                   sx={{
                     width: "100%",
-                    maxWidth: 900,
-                    bgcolor: "background.paper",
+                    color:"#212529",
+                  
+                    bgcolor: "inherit",
                   }}
                 >
                   {statedatas.value.services.map((item) => {
@@ -157,14 +72,14 @@ const Services = () => {
                         <ListItem >
                           <ListItemAvatar>
                             <Avatar>
-                              <WorkIcon />
+                            <Avatar src={item.service.image}></Avatar>
                             </Avatar>
                           </ListItemAvatar>
                           <ListItemText
                             primary={item.service.name}
                             secondary={`Rs ${item.servicefee} /-`}
                           />
-                          <Avatar src={item.service.image}></Avatar>
+                          {/* <Avatar src={item.service.image}></Avatar> */}
                           {/* {item.service.name} */}
                       
                         </ListItem>
@@ -173,14 +88,197 @@ const Services = () => {
                     );
                   })}
                 </List>
-              </Stack>
-            </Box>
-            <Addservicemodal/>
-          </Paper>
-        </Grid>
-      </Grid>
+
+                <Addservicemodal/>
+
+
+          </div>
+
+        </div>
+        
+
+      </div>
+      
     </div>
   );
 };
 
 export default Services;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// {console.log(statedatas.value.expertin.name)}
+//       <Topstack />
+//       <Typography
+//         variant="h3"
+//         component="h4"
+//         sx={{
+//           marginTop: "30px",
+//           marginLeft: "350px",
+//         }}
+//       >
+//         Services
+//       </Typography>
+
+//       <Grid container spacing={2}>
+//         {/* <Grid xs={6}>
+//           <Paper
+//             elevation={24}
+//             sx={{
+//               width: 350,
+//               height: 350,
+//               backgroundColor: "#F5FFFA",
+//               // backgroundImage:'url("https://img.freepik.com/premium-photo/close-up-hair-supplies-flat-lay_23-2148352942.jpg?w=900")',
+//               objectFit: "cover",
+//               backgroundRepeat: "no-repeat",
+
+//               marginTop: "30px",
+//               marginBottom: "30%",
+//               opacity: [0.9, 0.8, 0.8],
+
+//               "&:hover": {
+//                 backgroundColor: "whitesmoke",
+//                 opacity: [0.9, 0.8, 0.7],
+//               },
+//             }}
+//           >
+//             <Typography
+//               variant="h5"
+//               component="h1"
+//               sx={{ marginLeft: "30%", color: "#080000", paddingTop: "15px" }}
+//             >
+//               Efficient in
+//               </Typography>
+//               <Stack spacing={2} sx={{
+//                 marginLeft:"80px",
+//                 marginBottom:"20px"
+//               }}>
+//                 <h2>{statedatas.value.expertin.name}</h2>
+//                 </Stack>
+//                 <Avatar
+//                   sx={{
+//                     width: 225,
+//                     height: 225,
+//                     borderRadius: "4px",
+//                     objectFit: "cover",
+//                     marginLeft:"60px"
+                    
+//                   }}
+//                 >
+//                   <img   src={statedatas.value.expertin.image} alt="" />
+//                 </Avatar>
+             
+            
+//           </Paper>
+//         </Grid> */}
+//         <Grid xs={12}>
+//           <Paper
+//             elevation={24}
+//             sx={{
+//               width: 450,
+//               height: 350,
+//               backgroundColor: "#F5FFFA",
+//               // backgroundImage:'url("https://img.freepik.com/premium-photo/close-up-hair-supplies-flat-lay_23-2148352942.jpg?w=900")',
+//               objectFit: "cover",
+//               backgroundRepeat: "no-repeat",
+
+//               marginTop: "30px",
+//               marginBottom: "30%",
+//               marginLeft:"20%",
+//               opacity: [0.9, 0.8, 0.8],
+
+//               "&:hover": {
+//                 backgroundColor: "whitesmoke",
+//                 opacity: [0.9, 0.8, 0.7],
+//               },
+//             }}
+//           >
+//             <Typography
+//               variant="h5"
+//               component="h1"
+//               sx={{ marginLeft: "30%", color: "#080000", paddingTop: "15px" }}
+//             >
+//               Your Services
+//             </Typography>
+            
+            
+
+//             <Box sx={{ width: "100%" }}>
+//               <Stack spacing={2}>
+//                 <List
+//                   sx={{
+//                     width: "100%",
+//                     maxWidth: 900,
+//                     bgcolor: "background.paper",
+//                   }}
+//                 >
+//                   {statedatas.value.services.map((item) => {
+//                     return (
+//                       <>
+//                         <ListItem >
+//                           <ListItemAvatar>
+//                             <Avatar>
+//                               <WorkIcon />
+//                             </Avatar>
+//                           </ListItemAvatar>
+//                           <ListItemText
+//                             primary={item.service.name}
+//                             secondary={`Rs ${item.servicefee} /-`}
+//                           />
+//                           <Avatar src={item.service.image}></Avatar>
+//                           {/* {item.service.name} */}
+                      
+//                         </ListItem>
+//                         <Divider variant="inset" component="li" />
+//                       </>
+//                     );
+//                   })}
+//                 </List>
+//               </Stack>
+//             </Box>
+//             <Addservicemodal/>
+//           </Paper>
+//         </Grid>
+//       </Grid>

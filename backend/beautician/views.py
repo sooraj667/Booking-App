@@ -171,14 +171,14 @@ class Addnewservice(APIView):
             Servicefees.objects.create(service=serviceobj,beautician=beautobj,servicefee=servicefee)
             beautservices=Servicefees.objects.filter(beautician=beautobj)
             beautservices_serialized=ServicefeesSerializer(beautservices,many=True)
-            for item in beautservices:
-                req_id=item.id
-                for item in beautservices_serialized.data:
-                    if item["id"]==req_id:
-                        serviceid=item["service"]
-                        serviceobj=Services.objects.get(id=serviceid)
-                        serviceobj_serialized=ServicesSerializer(serviceobj)
-                        item["service"]=serviceobj_serialized.data
+            # for item in beautservices:
+            #     req_id=item.id
+            #     for item in beautservices_serialized.data:
+            #         if item["id"]==req_id:
+            #             serviceid=item["service"]
+            #             serviceobj=Services.objects.get(id=serviceid)
+            #             serviceobj_serialized=ServicesSerializer(serviceobj)
+            #             item["service"]=serviceobj_serialized.data
             return Response({"message":'Added',"services":beautservices_serialized.data})
 
 

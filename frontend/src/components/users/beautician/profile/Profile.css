@@ -2,3 +2,17 @@
     margin-left:"300px";
 
 }
+.profile-outer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 5vh;
+}
+.profile-box{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+}

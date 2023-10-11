@@ -71,17 +71,133 @@ const Profile = () => {
 
   return (
     <div>
-      
+      <div className="hero">
+        PROFILE
+      </div>
+      <hr />
+
+      <div className="profile-outer">
+        <div className="profile-box">
+          <div className="top">
+            {/* <div className="col-md-8 headingg">
+              SCHEDULES
+
+            </div> */}
+            <div className="col-md-4 datee">
+           
+
+            </div>
+            
+          </div>
+          <hr />
+          <div className="sch-content">
+
+          <div style={{}}>
+          <Typography
+            variant="h6"
+            component="h1"
+            sx={{ marginBottom: "1.9rem" }}
+          >
+            EDIT DETAILS
+          </Typography>
+          <div className="row ">
+            <Avatar
+              src={statedatas.value.beautdetails.image}
+              sx={{ width: 125, height: 125 }}
+            />
+          </div>
+          <Button
+        type="file"
+        onClick={addImageHandler}
+        variant="contained"
+        startIcon={<InsertPhotoIcon />}
+        sx={{ marginTop: "10px",backgroundColor:"inherit",color:"black",'&:hover': {
+          backgroundColor: '#212529',color:"#D0D4D9" // Specify the desired background color on hover
+        } }}
+        size="small"
+      >
+        Change
+      </Button>
+      {console.log(statedatas.value.beautdetails.image)}
+      <div>
+        {addImage && (
+          <>
+            <input
+              className="selectimage"
+              accept="image/*"
+              id="upload-button"
+              type="file"
+              onChange={handleFileChange}
+            />
+            <div>
+              <Button
+                type="file"
+                onClick={uploadImageHandler}
+                variant="contained"
+                startIcon={<DriveFolderUploadIcon />}
+                sx={{ marginTop: "10px"  }}
+                size="small"
+              >
+                Upload
+              </Button>
+            </div>
+          </>
+        )}
+      </div>
+          <div className="row  mt-3 ">
+            <Typography variant="h6" component="h1">
+              {" "}
+              Name :{" "}
+            </Typography>
+            <Typography variant="h6" component="h1">
+              {" "}
+              {statedatas.value.beautdetails.name}{" "}
+            </Typography>
+          </div>
+          <div className="row  mt-3">
+            <Typography variant="h6" component="h1">
+              {" "}
+              Email :{" "}
+            </Typography>
+            <Typography variant="h6" component="h1">
+              {" "}
+              {statedatas.value.beautdetails.email}{" "}
+            </Typography>
+          </div>
+
+          <div className="row  mt-3">
+            <Typography variant="h6" component="h1">
+              {" "}
+              Phone :{" "}
+            </Typography>
+            <Typography variant="h6" component="h1">
+              {" "}
+              {statedatas.value.beautdetails.phone}{" "}
+            </Typography>
+          </div>
+          <Editdetailsmodal />
+        </div>
+         
+
+
+          </div>
+          
+
+        </div>
+
+      </div>
 
       
 
-      <Paper
+      
+
+      {/* <Paper
         elevation={24}
         sx={{
           width: 850,
 
           height: 850,
-          backgroundColor: "#F5FFFA",
+          backgroundColor: "inherit",
           // backgroundImage:'url("https://img.freepik.com/premium-photo/close-up-hair-supplies-flat-lay_23-2148352942.jpg?w=900")',
           objectFit: "cover",
           backgroundRepeat: "no-repeat",
@@ -178,7 +294,7 @@ const Profile = () => {
           </div>
           <Editdetailsmodal />
         </div>
-      </Paper>
+      </Paper> */}
     </div>
   );
 };

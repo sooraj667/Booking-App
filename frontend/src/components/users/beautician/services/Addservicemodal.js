@@ -82,7 +82,9 @@ const Addservicemodal = () => {
       <Button
         onClick={handleOpen}
         variant="contained"
-        sx={{ marginBottom: "0px", marginLeft: "160px", marginTop: "30px" }}
+        sx={{ marginBottom: "0px", marginLeft: "160px", marginTop: "30px",backgroundColor:"inherit",color:"#212529" , '&:hover': {
+          backgroundColor: '#212529',color:"#D0D4D9" // Specify the desired background color on hover
+        } }}
       >
         Add Service
       </Button>
