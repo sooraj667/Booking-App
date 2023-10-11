@@ -75,7 +75,7 @@ const Servicepreview = () => {
             // },
           }}
         >
-          <h1 className="expertin">{singleService.name}</h1>
+          <div className="expertin">{singleService.name}</div>
           <Avatar
             sx={{
               bgcolor: deepOrange[500],
