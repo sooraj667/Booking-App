@@ -311,7 +311,12 @@ body {
     color: rgb(179, 179, 124)  ;
     margin-left: 38%;
   }
-  .viewmorebtn {
+  .viewmorediv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  /* .viewmorebtn {
     margin-left: 50%;
     margin-top: 40px;
     background-color: #4caf50;
@@ -325,7 +330,7 @@ body {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-  }
+  } */
   
   .viewmorebtn:hover {
     background-color: #45a049;
@@ -765,6 +770,32 @@ body {
     
 
 }
+/* .prev-content{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
+} */
+
+.prev-content .part1{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 3vh;
+   
+   
+
+}
+
+/* .prev-content .part2{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center
+
+} */
 
 
 

@@ -9,6 +9,8 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import StarHalfIcon from "@mui/icons-material/StarHalf";
 
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+
 import { useSelector,useDispatch } from "react-redux";
 import {toggleBooknow} from "../../../../feautures/customer/customernavigationslice"
 
@@ -64,9 +66,17 @@ const Viewmore = () => {
 
   return (
     <>
-      <button className="viewmorebtn" onClick={handleViewMore}>
+    <div className="viewmorediv">
+    <Button  onClick={handleViewMore}
+    sx={{ marginTop: "10px",backgroundColor:"inherit",color:"black",'&:hover': {
+      backgroundColor: '#212529',color:"#D0D4D9" // Specify the desired background color on hover
+    } }}>
         View More
-      </button>
+        <KeyboardArrowDownIcon/>
+      </Button>
+
+    </div>
+  
       {viewMoreBool && (
         <div className="row mt-4">
           {viewMoreServiceBeauts.map((item) => {

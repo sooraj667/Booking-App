@@ -63,31 +63,28 @@ const Servicepreview = () => {
 
   return (
     <>
-      <div className="row">
-        <Container
-          sx={{
-            width: 900,
-            height: 900,
-            // backgroundColor: "#F5FFFA",
-            // "&:hover": {
-            //   backgroundColor: "#F5FFFA",
-            //   opacity: [0.9, 0.8, 0.7],
-            // },
-          }}
-        >
-          <div className="expertin">{singleService.name}</div>
-          <Avatar
+    <div className="prev-outer">
+      <div className="expertin">
+      {singleService.name}
+
+      </div>
+      <div className="prev-content">
+        <div className="part1">
+        <Avatar
             sx={{
               bgcolor: deepOrange[500],
               width: 150,
               height: 150,
-              marginLeft: "50%",
+              
             }}
             alt="Remy Sharp"
             src={singleService.image}
           />
-          <div className="row mt-5">
-            {serviceBeauts.map((item) => {
+
+        </div>
+        <hr />
+        <div className="part2">
+        {serviceBeauts.map((item) => {
               return (
                 <div className="col-md-4">
                   <Card sx={{ maxWidth: 345 }}>
@@ -120,9 +117,41 @@ const Servicepreview = () => {
                 </div>
               );
             })}
+
+        </div>
+
+        <div className="part3">
+        <Viewmore />
+        </div>
+    
+
+      </div>
+
+
+    </div>
+
+
+
+
+      <div className="row">
+        <Container
+          sx={{
+            width: 900,
+            height: 900,
+            // backgroundColor: "#F5FFFA",
+            // "&:hover": {
+            //   backgroundColor: "#F5FFFA",
+            //   opacity: [0.9, 0.8, 0.7],
+            // },
+          }}
+        >
+          
+         
+          <div className="row mt-5">
+            
           </div>
 
-          <Viewmore />
+          
         </Container>
       </div>
     </>
