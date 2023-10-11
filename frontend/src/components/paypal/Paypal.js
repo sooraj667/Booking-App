@@ -6,6 +6,14 @@ import { useSelector } from 'react-redux';
 import DatePicker from "react-datepicker";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
+import moment from 'moment';
+import MuiAlert from "@mui/material/Alert";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
+
 const Paypal = ( ) => {
     const reqdatas = useSelector((state) => state.custreqdata);
     const statedatas = useSelector((state) => state.login);
@@ -15,6 +23,7 @@ const Paypal = ( ) => {
     const [selectedTime, setSelectedTime] = useState("");
     const [selectedStudio, setSelectedStudio] = useState("");
     const [selectedService, setSelectedService] = useState("");
+    const[dateError,setDateError]=useState(false)
 
     const [alltime, setAlltime] = useState([
         "10:00 AM",
@@ -28,9 +37,18 @@ const Paypal = ( ) => {
       ]);
 
 
+
     const handleDateChange = (date) => {
         setStartDate(date);
         localStorage.setItem("date",date)
+        const currentdate=new Date()
+        if(date< currentdate){
+          setDateError(true)
+        }
+        else {
+          setDateError(false)
+
+        }
       };
       const handleTimeChange = (e) => {
         console.log(e.target.value, "TIME");
@@ -59,7 +77,20 @@ const Paypal = ( ) => {
           onChange={handleDateChange}
           dateFormat="MM/dd/yyyy"
           className=" inputform form-control"
+        
         />
+
+        {
+          dateError && <Alert
+          severity="error"
+          sx={{
+            marginTop: "20px",
+            marginLeft: "70px",
+          }}
+        >
+          Please Choose Valid Date
+        </Alert>
+        }
 
 
         <div className='title'>Select Time</div>
@@ -95,48 +126,52 @@ const Paypal = ( ) => {
             return <option>{item.service.name}</option>;
           })}
         </select>
+        {dateError ? "":
+        <PayPalScriptProvider options={{ clientId: "AeaCyw6WUYkOvfUXMp0ScN2r6KEfhVvxWytZvEAlbUXH_NoQsJ70TyTabFoedoIEkqTTwI5kUtFoaauE" }}>
+        <PayPalButtons createOrder={
+            (data,actions)=>{
+                return actions.order.create({
+                    purchase_units:[
+                        {
+                            amount:{
+                                value:"2.00"
 
-    <PayPalScriptProvider options={{ clientId: "AeaCyw6WUYkOvfUXMp0ScN2r6KEfhVvxWytZvEAlbUXH_NoQsJ70TyTabFoedoIEkqTTwI5kUtFoaauE" }}>
-            <PayPalButtons createOrder={
-                (data,actions)=>{
-                    return actions.order.create({
-                        purchase_units:[
-                            {
-                                amount:{
-                                    value:"2.00"
-
-                                }
                             }
-                        ]
-                    })
-                }
+                        }
+                    ]
+                })
             }
-            onApprove={()=>{
-                toast.success("Payment successfully completed!")
-                const datas={
-                    beautid: reqdatas.value.bookbeautdata.id,
-                    custid: statedatas.value.custdetails.id,
-                    date: localStorage.getItem("date"),
-                    time: localStorage.getItem("time"),
-                    studio: localStorage.getItem("studio"),
-                    servicename: localStorage.getItem("service")
-                    
-                }
-                console.log(datas,"MWONEEEEEEEEEEEEE");
-                axiosInstance.post("cust/booknow/",datas).then((response)=>{
-                    console.log(response,"RESRERSRERSRERSR");
-                }).catch((error)=>alert(error))
-            }}
-            onCancel={()=>{
-                toast.error("You cancelled the payment!")
-            }}
-            onError={()=>{
-                toast.error("Error!")
-            }}
-            
-             />
-             <Toaster/>
-        </PayPalScriptProvider>
+        }
+        onApprove={()=>{
+            toast.success("Payment successfully completed!")
+            const datas={
+                beautid: reqdatas.value.bookbeautdata.id,
+                custid: statedatas.value.custdetails.id,
+                date: localStorage.getItem("date"),
+                time: localStorage.getItem("time"),
+                studio: localStorage.getItem("studio"),
+                servicename: localStorage.getItem("service")
+                
+            }
+            console.log(datas,"MWONEEEEEEEEEEEEE");
+            axiosInstance.post("cust/booknow/",datas).then((response)=>{
+                console.log(response,"RESRERSRERSRERSR");
+            }).catch((error)=>alert(error))
+        }}
+        onCancel={()=>{
+            toast.error("You cancelled the payment!")
+        }}
+        onError={()=>{
+            toast.error("Error!")
+        }}
+        
+         />
+         <Toaster/>
+    </PayPalScriptProvider>
+
+        }
+
+    
     
     </>
    
