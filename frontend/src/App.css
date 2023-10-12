@@ -826,7 +826,46 @@ body {
 .booknow-outer .box{
     width: 23vw;
 }
+.booking-completed-box{
+    margin-top: 10vh;
+    width: 70vw;
+    height: 70vh;
+    border: 1px solid black;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.booking-completed-box .title{
+    font-size: 30px;
+    font-size: 800;
 
+}
+.booking-completed-box .description{
+    font-size: 20px;
+    font-size: 800;
+
+}
+
+.booking-completed-box .more-description{
+    font-size: 17px;
+    font-size: 600;
+
+}
+.booking-completed-box .thankyou{
+    font-size: 22px;
+    font-weight: 700;
+    margin-top: 4vh;
+
+
+
+}
+
+.booking-completed-box:hover {
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Changes shadow on hover for interactive effect */
+    /* background-color: #1D364D; */
+}
 
 
   

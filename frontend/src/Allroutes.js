@@ -25,6 +25,7 @@ import PRforBeauticianDashboard from "./components/users/beautician/protectedrou
 import PRforBeauticianLogin from "./components/users/beautician/protectedroute/PRforBeauticianLogin";
 import PRforAdminDashboard from "./components/admin/protectedroute/PRforAdminDashboard";
 import PRforAdminLogin from "./components/admin/protectedroute/PRforAdminLogin";
+import BookingCompleted from "./components/users/customer/booking-completed/BookingCompleted";
 
 const Allroutes = () => {
   const dispatch =useDispatch()
@@ -132,6 +133,8 @@ const Allroutes = () => {
             <Route path="/dummy" element={<Dummy />} />
 
             <Route path="/forgotpassword" element={<ChangePasswordUI />} />
+
+            <Route path="/booking-completed" element={<BookingCompleted />} />  
             
             
             

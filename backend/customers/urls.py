@@ -18,6 +18,7 @@ urlpatterns = [
     path("forgotpassword/",Forgotpassword.as_view(),name="Forgotpassword"),
     path("changepassword/",ChangePassword.as_view(),name="ChangePassword"),
     path("check-availability/",Checkavailability.as_view(),name="Checkavailability"),
+    path("booking-completed-beautdetails/",Bookingbeautdetails.as_view(),name="Bookingbeautdetails"),
 
 
     

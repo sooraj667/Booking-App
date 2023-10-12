@@ -133,6 +133,9 @@ class Booknow(APIView):
         studio=request.data.get("studio")
         servicename=request.data.get("servicename")
 
+        servicename=servicename.split(" - ")[0]
+        print(servicename,"SERVEEEEEEEEEEEEEEEEE")
+
 
         
 
@@ -435,7 +438,20 @@ class Checkavailability(APIView):
             return Response({"message":message})
        
    
-       
+
+class Bookingbeautdetails(APIView):
+  
+    def post(self,request): 
+        print("REACHED CURRENT VIEW")
+        beautid=request.data.get("beautid")
+        custid=request.data.get("custid")
+        beautobj=Beautician.objects.get(id=beautid)
+        custobj=Customer.objects.get(id=custid)
+        recent_appointment=Appointment.objects.filter(beautician=beautobj,customer=custobj).last()
+        recent_appointment_serialized=Appointmentserializer(recent_appointment)
+        beautname=beautobj.name
+        return Response({"beauticianname":beautname,"recentappointment":recent_appointment_serialized.data})
+        
 
   
     

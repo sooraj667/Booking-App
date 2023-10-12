@@ -8,6 +8,7 @@ import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import moment from "moment";
 import MuiAlert from "@mui/material/Alert";
+import { useNavigate } from "react-router-dom";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -24,6 +25,11 @@ const Paypal = () => {
   const [selectedService, setSelectedService] = useState("");
   const [dateError, setDateError] = useState(false);
   const [slotNotAvailable, setSlotNotAvailable] = useState(false);
+  const [selectedFeeForPayment, setSelectedFeeForPayment] = useState("IVDE ONNULA");
+
+  const navigate=useNavigate()
+
+
 
   const [alltime, setAlltime] = useState([
     "10:00 AM",
@@ -85,11 +91,14 @@ const Paypal = () => {
     console.log(e.target.value, "SERVICE");
     setSelectedService(e.target.value);
     localStorage.setItem("service", e.target.value);
+    const numberValue = parseFloat(e.target.value.replace(/[^0-9.]/g, ''));
+    setSelectedFeeForPayment((numberValue).toString())
+
   };
   return (
     <>
       {console.log(
-        `${selectedService}${selectedStudio} ${startDate} ${selectedTime} MYRRRRRRRRRRR`
+        `${selectedService}${selectedStudio} ${startDate} ${selectedTime} deyyyy`
       )}
 
       <div className="title">Choose Date</div>
@@ -154,8 +163,9 @@ const Paypal = () => {
         onChange={handleServiceChange}
         className=" form-control inputform"
       >
+        {console.log(reqdatas.value.beautservices,"NOKKEDAADAAADADAD")}
         {reqdatas.value.beautservices.map((item) => {
-          return <option>{item.service.name}</option>;
+          return <option>{item.service.name}  - $ {item.servicefee}/-</option>;
         })}
       </select>
       {(dateError || slotNotAvailable) ? (
@@ -173,7 +183,7 @@ const Paypal = () => {
                 purchase_units: [
                   {
                     amount: {
-                      value: "2.00",
+                      value: "1",
                     },
                   },
                 ],
@@ -181,6 +191,9 @@ const Paypal = () => {
             }}
             onApprove={() => {
               toast.success("Payment successfully completed!");
+              localStorage.setItem("bookedbeautid",reqdatas.value.bookbeautdata.id)
+              localStorage.setItem("bookedcustid",statedatas.value.custdetails.id)
+              
               const datas = {
                 beautid: reqdatas.value.bookbeautdata.id,
                 custid: statedatas.value.custdetails.id,
@@ -195,6 +208,8 @@ const Paypal = () => {
                 .then((response) => {
                   console.log(response, "RESRERSRERSRERSR");
                 })
+                
+                setTimeout(navigate("../booking-completed"),2000)
                 .catch((error) => alert(error));
             }}
             onCancel={() => {
@@ -207,6 +222,9 @@ const Paypal = () => {
           <Toaster />
         </PayPalScriptProvider>
       )}
+      {console.log(selectedFeeForPayment,"FEEEE")}
+      {console.log(typeof selectedFeeForPayment,"TYPE" )}
+   
     </>
   );
 };
