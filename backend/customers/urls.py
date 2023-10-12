@@ -17,6 +17,7 @@ urlpatterns = [
     path("confirmotp/",Confirmotp.as_view(),name="Confirmotp"),
     path("forgotpassword/",Forgotpassword.as_view(),name="Forgotpassword"),
     path("changepassword/",ChangePassword.as_view(),name="ChangePassword"),
+    path("check-availability/",Checkavailability.as_view(),name="Checkavailability"),
 
 
     

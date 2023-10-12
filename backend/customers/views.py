@@ -412,6 +412,31 @@ class ChangePassword(APIView):
         return Response({"message":'success'})
        
 
+class Checkavailability(APIView):
+    def post(self,request): 
+        date=request.data.get("date")
+        time=request.data.get("time")
+
+        date_format = '%a %b %d %Y %H:%M:%S GMT%z (%Z)'
+        parseddateandtime = datetime.strptime(date, date_format)
+
+        
+        parseddate=parseddateandtime.date()
+        parsed_time = datetime.strptime(time, "%I:%M %p").time()    
+
+        print(f"{parsed_time} ANDDDDDDDD{parseddate}")
+
+        try:
+            Appointment.objects.get(date=parseddate,time=parsed_time)
+            message="Not Available"
+            return Response({"message":message})
+        except:
+            message="Available"
+            return Response({"message":message})
+       
+   
+       
+
   
     
         
