@@ -8,11 +8,13 @@ import axiosInstance from "../../../../axios/axiosconfig";
 import Stack from "@mui/material/Stack";
 import Avatar from "@mui/material/Avatar";
 import "./Bookings.css";
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 const Booking = () => {
   const custdata = useSelector((state) => state.login);
   const reqdatas = useSelector((state) => state.custreqdata);
   const dispatch = useDispatch();
+  const[address,setAddress]=useState("")
 
   useEffect(() => {
     const custdetails = JSON.parse(localStorage.getItem("singledetails-C"));
@@ -37,10 +39,120 @@ const Booking = () => {
       })
       .catch((err) => console.log(err));
   }, []);
+
+  const addressHandler =(id)=>{
+    if(address==""){
+      setAddress(id)
+    }
+    else{
+      setAddress("")
+
+    }
+
+    
+    
+
+  }
   return (
-    <div>
-       {/* <Topstackcust/> */}
-      <div className="row">
+    <div className="booking-outer">
+      <div className="hero">BOOKINGS</div>
+      <hr />
+      <div className="flex">
+        {console.log(reqdatas.value.allappointments,"BYDUBAI")}
+
+      <section className='aboutHome'>
+        <div className='container flexSB'>
+          {/* <div className='left row'>
+            <img src={"https://images.unsplash.com/photo-1600948836101-f9ffda59d250?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2036&q=80"} alt='' />
+          </div> */}
+          <div className='right row'>
+            {/* <Heading subtitle='LEARN ANYTHING' title='Benefits About Online Learning Expertise' /> */}
+            <div className='items'>
+              {reqdatas.value.allappointments.map((val) => {
+                return (
+                  <>
+                  <div className='item flexSB'>
+                    <div className='img'>
+                      <img src={val.beautician.image} alt='' />
+                      <div className='text'>
+                      <h2 key={val.id}>{val.beautician.name}</h2>
+                      <hr />
+                      <p>Service -{val.service.service.name} <br />
+                      Amount Paid - {val.service.servicefee}</p> 
+                    
+                    </div>
+                      
+                    </div>
+                    <div className='text'>
+                      
+                     
+                      <p>Date - {val.date} <br /> 
+                      Time - {val.time}</p>
+                      <hr />
+                      <div onClick={()=>addressHandler(val.id)}>ADDRESS <ArrowDropDownIcon/></div>
+                      {
+                        (address===val.id) &&
+
+                        
+                  
+                       
+                        
+                        
+                        <p>Address - {val.studio.locality} <br /> {val.studio.place} <br /> {val.studio.district} <br /> {val.studio.state} <br /> {val.studio.country} <br /> pincode - {val.studio.pincode} <br /> </p>
+                      }
+                      
+                      
+                    </div>
+                  </div>
+               
+                  </>
+                )
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        {/* <div className="box">
+          <div className="card">
+            <div className="row bg-dark">
+              <div className="col-6">
+                <div className="title">Beautician</div>
+                <div className="value">Parvathi</div>
+              </div>
+              <div className="col-6">Image</div>
+            </div>
+          </div>
+        </div> */}
+      </div>
+    </div>
+  );
+};
+
+export default Booking;
+
+{
+  /* <div> */
+}
+{
+  /* <Topstackcust/> */
+}
+{
+  /* <div className="row">
         <div className="heading1">
           Booking History
         </div>
@@ -62,16 +174,11 @@ const Booking = () => {
             opacity: [0.9, 0.8, 0.7],
           },
         }}
-      >
+      > */
+}
 
-
-
-
-
-
-
-
-        <div
+{
+  /* <div
           className="heading"
           style={{ fontSize: "1.5rem", fontWeight: "bold" ,marginLeft:"320px"}}
         >
@@ -133,8 +240,5 @@ const Booking = () => {
           </Stack>
         ))}
       </Paper>
-    </div>
-  );
-};
-
-export default Booking;
+    </div> */
+}

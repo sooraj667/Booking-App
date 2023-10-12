@@ -30,7 +30,7 @@ html{
 .sidebar{
     height: 100%;
     width:20vw;
-    background-color: "inherit";
+    background-color:#051E34;
     position: fixed;
     z-index: 1000;
     border: 1px solid black;
@@ -58,7 +58,7 @@ html{
 
 .sidebarlist .item:hover{
     cursor: pointer;
-    background-color: #1D364D;
+    background-color:#183249;
 }
 .dp{
     align-items: center;
@@ -112,8 +112,10 @@ html{
     margin-top: 20px;
 }
 .beautouter{
-    background-image: url("https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80");
-    /* background:linear-gradient(65deg,#fdba61,#e69dd0); */
+    /* background-image: url("https://img.freepik.com/free-photo/blue-smooth-wall-textured-background_53876-106133.jpg?w=900&t=st=1697104029~exp=1697104629~hmac=9dccfe4a217a6cc50f13a4a940e02e8eb99acc6ade0c38d0f6260560f2213893"); */
+    /* background:linear-gradient(65deg,rgb(13, 12, 39),#114e7a); */
+    background: linear-gradient(65deg, rgb(13, 12, 39), #0a558a, #a3779f);
+
     /* background-color: beige; */
     height: 1300px;
     background-repeat: no-repeat;
@@ -866,6 +868,102 @@ body {
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Changes shadow on hover for interactive effect */
     /* background-color: #1D364D; */
 }
+.booking-outer .box{
+    width: 90%;
+    height:90%;
+    display: flex;
+    justify-content: center;
+    
+}
+
+.booking-outer .card{
+    display: flex;
+    width:80%;
+    height:30vh;
+    border: 1px solid black;
+    background-color: inherit;
+
+
+}
+.booking-outer .value{
+    font-size: 25px;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-around;
+
+}
+
+
+/* Hannahs Css */
+
+.aboutHome {
+    height: auto;
+
+  }
+  .aboutHome #heading {
+    text-align: left;
+    padding: 0;
+  }
+  .aboutHome .left img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  /* .aboutHome .right {
+    padding: 80px 50px;
+  } */
+  /* .aboutHome .items {
+    margin-top: 50px;
+  } */
+  .aboutHome .item {
+    background-color: inherit;
+    width: 40vw;
+    margin-bottom: 3vh;
+    margin-top: 30px;
+    padding: 20px;
+    transition: 0.5s;
+  }
+  .aboutHome .img {
+    width: 200px;
+  }
+  .aboutHome img {
+    width: 120px;
+    height: 120px;
+    border-radius: 3px;
+  }
+  .aboutHome .item h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+  .aboutHome .item p {
+    color: #999999;
+  }
+  .aboutHome .item:hover {
+    background-color: #959bb2;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 5px 25px -2px rgb(0 0 0 / 6%);
+  }
+  .aboutHome .item:hover p {
+    color: #fff;
+  }
+  @media screen and (max-width: 768px) {
+
+    .aboutHome .container {
+      flex-direction: column-reverse;
+    }
+    .aboutHome .row {
+      width: 100%;
+    }
+  }
+
+  .flexSB {
+    display: flex;
+    justify-content: space-between;
+
+  }
+  
+
 
 
   
