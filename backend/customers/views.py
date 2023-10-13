@@ -459,6 +459,9 @@ class CancelBooking(APIView):
     def post(self,request): 
         id=request.data.get("bookingid")
         appointment=Appointment.objects.get(id=id)
+        servicefee=appointment.service.servicefee
+        appointment.beautician.wallet_amount-=servicefee
+        appointment.beautician.save()
         appointment.delete()
     
         
