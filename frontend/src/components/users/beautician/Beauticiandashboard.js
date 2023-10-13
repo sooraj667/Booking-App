@@ -10,12 +10,16 @@ import Services from "./services/Services";
 import Profile from "./profile/Profile";
 import Appointments from "./appointments/Appointments";
 import Studio from "./studio/Studio";
+import axiosInstance from "../../../axios/axiosconfig";
+import { useState } from "react";
 
 const Beauticiandashboard = () => {
   const statedatas=useSelector((state)=>state.beautnavigation)
   const dispatch = useDispatch();
   const details = useSelector((state) => state.login);
   const navigationdatas = useSelector((state) => state.beautnavigation);
+  const logindatas=useSelector((state)=>state.login)
+
 
 
   useEffect(() => {
@@ -26,6 +30,7 @@ const Beauticiandashboard = () => {
     if (beautDetails) {
       const parsed=JSON.parse(beautDetails)
       dispatch(setBeautDetails(parsed));
+      
     }
     // if (expertin) {
     //   const parsedexpert=JSON.parse(expertin)
@@ -39,7 +44,26 @@ const Beauticiandashboard = () => {
       const parsedallservices=JSON.parse(allservices)
       dispatch(setAllservices(parsedallservices));
     }
+ 
+
+
   },[]);
+
+  
+
+  // useEffect(
+  //   ()=>{
+  //     const datas={
+  //       id:logindatas.value.beautdetails.id
+
+  //     }
+  //     axiosInstance.post("beaut/get-no-of-bookings/",datas).then((res)=>{
+  //       console.log(res.data.count);
+  //     }).catch((err)=>console.log("Error"))
+  //   }
+  // )
+
+
 
 
   
@@ -47,6 +71,7 @@ const Beauticiandashboard = () => {
   
   return (
     <div class="beautouter">
+     
         {/* <HeaderDashboard/> */}
         <div className="row outer">
           <div className="col-md-3 sidebar">

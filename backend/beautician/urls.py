@@ -16,5 +16,6 @@ urlpatterns = [
     path("todays-schedule/",Todaysschedule.as_view(),name="Todaysschedule"),
     path("forgotpassword/",Forgotpassword.as_view(),name="Forgotpassword"),
     path("changepassword/",ChangePassword.as_view(),name="ChangePassword"),
+
     
 ]

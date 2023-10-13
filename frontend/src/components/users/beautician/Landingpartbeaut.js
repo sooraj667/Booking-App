@@ -20,6 +20,7 @@ const Landingpartbeaut = () => {
 
   const [todayDate,setTodaysDate]=useState("")
   const [day,setDay]=useState("")
+  const[totalCount,setTotalCount]=useState("")
   const dispatch = useDispatch();
 
   useEffect(
@@ -32,11 +33,13 @@ const Landingpartbeaut = () => {
       axiosInstance.post("beaut/todays-schedule/",datas).then((response)=>{
         if (response.data.message==="failed"){
           setNoSchedule(true)
+          setTotalCount(response.data.count)
         
 
         }
         else{
           setTodaysSchedule(response.data.schedule)
+          setTotalCount(response.data.count)
 
         }
         setTodaysDate(response.data.date)
@@ -59,7 +62,26 @@ const Landingpartbeaut = () => {
       <div className="hero">
         TODAYS SCHEDULE
       </div>
+     
       <hr />
+      <div className="countmaindiv">
+      <div className="countdiv">
+        <h5>TOTAL BOOKINGS</h5>
+        
+        <div>
+        <h2>{totalCount}</h2>
+
+        </div>
+        
+      
+      </div>
+      <div className="countdiv">
+       
+      
+      </div>
+
+      </div>
+      
       <div className="schedule-outer">
         <div className="schedule-box">
           <div className="top">

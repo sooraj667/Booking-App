@@ -371,16 +371,19 @@ class Todaysschedule(APIView):
         beautid=request.data.get("beautid")
         beautobj=Beautician.objects.get(id=beautid)
         appointments=Appointment.objects.filter(beautician=beautobj)
+        appointment_count=appointments.count() 
         if appointments.count()==0:
-            return Response({"message":"failed", "date":str(today_date) , "day":str(day_name)})
+            return Response({"message":"failed", "date":str(today_date) , "day":str(day_name), "count":str(appointment_count)})
 
         appointments_serialized=Appointmentserializer(appointments,many=True)
 
         
 
+        
+
        
 
-        return Response({"message":"success","schedules":appointments_serialized.data ,"date":str(today_date) , "day":str(day_name)})
+        return Response({"message":"success","schedules":appointments_serialized.data ,"date":str(today_date) , "day":str(day_name),"count":str(appointment_count)})
     
 class Forgotpassword(APIView):
     def post(self,request): 
@@ -408,7 +411,13 @@ class ChangePassword(APIView):
         print("Saved")
         return Response({"message":'success'})
  
-
+# class Getnoofbookings(APIView):
+#     def post(self,request): 
+#         beautid=request.data.get("beautid")
+#         print(beautid,"ITHAAN ID")
+#         appointment_count=Appointment.objects.filter(beautician=Beautician.objects.get(id=beautid)).count()      
+#         return Response({"message":'success',"count":str(appointment_count)})
+ 
         
 
 

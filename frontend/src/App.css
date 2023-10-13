@@ -962,6 +962,37 @@ body {
     justify-content: space-between;
 
   }
+
+
+  /* Hannahs Css */
+
+
+  .countmaindiv{
+    display: flex;
+    justify-content: space-around;
+
+  }
+
+  .countdiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 20vw;
+    height: 30vh;
+    background: linear-gradient(to right, #3498db, #6d7087);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 24px;
+    padding: 20px;
+    transition: background 0.3s ease; /* Add a smooth transition effect */
+}
+
+.countdiv:hover {
+    background: linear-gradient(to right, #6d7087, #3498db); /* Change the background colors on hover */
+}
   
 
 
