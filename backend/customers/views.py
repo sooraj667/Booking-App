@@ -213,7 +213,7 @@ class Getbookings(APIView):
         try:
             custobj=Customer.objects.get(id=custid)
   
-            appointmentsobjs=Appointment.objects.filter(customer=custobj)
+            appointmentsobjs=Appointment.objects.filter(customer=custobj,date__gte=date.today())
             appointmentsobjs_serialized=Appointmentserializer(appointmentsobjs,many=True)
 
             # studioobjs=Studio.objects.filter(beautician=beautobj)
