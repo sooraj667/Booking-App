@@ -12,9 +12,10 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import toast, { Toaster } from "react-hot-toast";
-import { togglePreviousBooking } from "../../../../feautures/customer/customernavigationslice";
+import { toggleBookings } from "../../../../feautures/customer/customernavigationslice";
+import DoneAllIcon from '@mui/icons-material/DoneAll';
 
-const Booking = () => {
+const PreviousBooking = () => {
   const reqdatas = useSelector((state) => state.custreqdata);
   const dispatch = useDispatch();
   const [address, setAddress] = useState("");
@@ -31,7 +32,7 @@ const Booking = () => {
       custid: custdetails.id,
     };
     axiosInstance
-      .post("cust/getbookings/", datas)
+      .post("cust/get-previous-bookings/", datas)
       .then((res) => {
         if (res.data.message === "success") {
           console.log(res.data.appointmentdata, "########################");
@@ -86,21 +87,21 @@ const Booking = () => {
   };
 
   const previouBookingClickHandler = () => {
-    dispatch(togglePreviousBooking());
+    dispatch(toggleBookings());
   };
-
   return (
     <div className="booking-outer">
+   
       <Toaster />
       <div
         className="booking-hero"
         onClick={() => setBookingToggleHandler((prev) => !prev)}
       >
-        BOOKINGS <ArrowDropDownIcon />
+        PREVIOUS BOOKING <ArrowDropDownIcon />
       </div>
       {bookingToggleHandler && (
         <div className="previous-booking" onClick={previouBookingClickHandler}>
-          PREVIOUS BOOKINGS
+          BOOKING
         </div>
       )}
 
@@ -127,7 +128,9 @@ const Booking = () => {
                             <hr />
                             <p>
                               Service -{val.service.service.name} <br />
-                              Amount Paid - {val.service.servicefee}
+                              Amount Paid - {val.service.servicefee}<br />
+                              Status - <span className="text-success">Completed <DoneAllIcon/></span> <br />
+                              
                             </p>
                             {/* <Button
                             onClick={()=>handleCancelItem(val.id)}
@@ -156,7 +159,7 @@ const Booking = () => {
                                   },
                                 }}
                               >
-                                CANCEL BOOKING
+                                ADD REVIEW
                               </Button>
                               <Dialog
                                 open={open}
@@ -165,19 +168,21 @@ const Booking = () => {
                                 aria-describedby="alert-dialog-description"
                               >
                                 <DialogTitle id="alert-dialog-title">
-                                  {"Cancel Booking? "}
+                                  {"ADD REVIEW "}
                                 </DialogTitle>
                                 <DialogContent>
                                   <DialogContentText id="alert-dialog-description">
-                                    Are You sure you want to cancel?
+                                    How was your experience?
+                                    <input type="text" className="form-control mt-3"/>
+                                    
                                   </DialogContentText>
                                 </DialogContent>
                                 <DialogActions>
                                   <Button onClick={handleClose}>
-                                   CLOSE
+                                    CLOSE
                                   </Button>
                                   <Button onClick={handleSubmit} autoFocus>
-                                   CONFIRM
+                                    CONFIRM
                                   </Button>
                                 </DialogActions>
                               </Dialog>
@@ -216,102 +221,4 @@ const Booking = () => {
   );
 };
 
-export default Booking;
-
-{
-  /* <div> */
-}
-{
-  /* <Topstackcust/> */
-}
-{
-  /* <div className="row">
-        <div className="heading1">
-          Booking History
-        </div>
-      </div>
-
-      <Paper
-        elevation={24}
-        sx={{
-          width: 900,
-          height: "auto",
-          backgroundColor: "#F5FFFA",
-          margin: "20px auto",
-          padding: "20px",
-          borderRadius: "12px",
-          transition: "background-color 0.3s, opacity 0.3s",
-          opacity: [0.9, 0.8, 0.8],
-          "&:hover": {
-            backgroundColor: "whitesmoke",
-            opacity: [0.9, 0.8, 0.7],
-          },
-        }}
-      > */
-}
-
-{
-  /* <div
-          className="heading"
-          style={{ fontSize: "1.5rem", fontWeight: "bold" ,marginLeft:"320px"}}
-        >
-          All Bookings
-        </div>
-
-        {reqdatas.value.allappointments.map((item, index) => (
-          <Stack
-            spacing={2}
-            className="stackdiv"
-            key={index}
-            sx={{
-              borderBottom: "1px solid #ddd",
-              marginBottom: "10px",
-              paddingBottom: "10px",
-            }}
-          >
-            <div className="row">
-              <div className="col-md-8">
-                <div className="titles" style={{ fontWeight: "bold" }}>
-                  Date:
-                </div>
-                <div className="values">{item.date}</div>
-
-                <div className="titles" style={{ fontWeight: "bold" }}>
-                  Time:
-                </div>
-                <div className="values">{item.time}</div>
-
-                <div className="titles" style={{ fontWeight: "bold" }}>
-                  Studio Address:
-                </div>
-                <div className="values">
-                  {`${item.studio.locality}, ${item.studio.place}, ${item.studio.district}, ${item.studio.state}`}
-                </div>
-
-                <div className="titles" style={{ fontWeight: "bold" }}>
-                  Service:
-                </div>
-                <div className="values">{item.service.service.name}</div>
-
-                <div className="titles" style={{ fontWeight: "bold" }}>
-                  Amount:
-                </div>
-                <div className="values">{item.service.servicefee}</div>
-              </div>
-              <div className="col-md-4">
-                <Avatar
-                  alt={item.beautician.name}
-                  src={item.beautician.image}
-                  sx={{ width: 120, height: 120, borderRadius: "50%" }}
-                />
-                <div className="titles" style={{ fontWeight: "bold" }}>
-                  Appointment with:
-                </div>
-                <div className="values">{item.beautician.name}</div>
-              </div>
-            </div>
-          </Stack>
-        ))}
-      </Paper>
-    </div> */
-}
+export default PreviousBooking;

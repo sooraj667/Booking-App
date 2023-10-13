@@ -481,7 +481,67 @@ class GetWalletAmount(APIView):
   
     
         
+class GetPreviousBookings(APIView):
+    
+    def post(self,request):
+ 
+        custid=request.data.get("custid")
 
+        try:
+            custobj=Customer.objects.get(id=custid)
+  
+            appointmentsobjs=Appointment.objects.filter(customer=custobj,date__lt=date.today())
+            appointmentsobjs_serialized=Appointmentserializer(appointmentsobjs,many=True)
+
+            # studioobjs=Studio.objects.filter(beautician=beautobj)
+            # studioobjs_serialized=StudioSerializer(studioobjs,many=True)
+
+            # serviceobjs=Servicefees.objects.filter(beautician=beautobj)
+            # serviceobjs_serialized=ServicefeesSerializer(serviceobjs,many=True)
+   
+     
+            for item in appointmentsobjs:
+                serviceobj=item.service
+                beauticianobj=item.beautician
+                studioobj=item.studio
+
+                baseservice=serviceobj.service
+                baseservice_serialized=ServicesSerializer(baseservice)
+               
+                
+
+                serviceobj_serialized=ServicefeesSerializer(serviceobj)
+                beauticianobj_serialized=BeauticianSerializer(beauticianobj)
+                studioobj_serialized=StudioSerializer(studioobj)
+                
+
+                
+                
+                serviceid=serviceobj.id
+                beauticianid=beauticianobj.id
+                studioid=studioobj.id
+               
+                for item in appointmentsobjs_serialized.data:
+                    if item["service"]==serviceid:
+                        item["service"]=serviceobj_serialized.data
+                        item["service"]["service"]=baseservice_serialized.data
+                    if  item["beautician"]==beauticianid:
+                        item["beautician"]=beauticianobj_serialized.data
+                    if  item["studio"]==studioid:
+                        item["studio"]=studioobj_serialized.data
+
+
+                
+
+                        
+
+                
+            print(appointmentsobjs_serialized.data)
+
+           
+            return Response({"message":"success","appointmentdata":appointmentsobjs_serialized.data})
+        except:
+            return Response({"message":"not success"})
 
 
 

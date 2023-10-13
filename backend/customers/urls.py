@@ -21,6 +21,7 @@ urlpatterns = [
     path("booking-completed-beautdetails/",Bookingbeautdetails.as_view(),name="Bookingbeautdetails"),
     path("cancel-booking/",CancelBooking.as_view(),name="CancelBooking"),
     path("get-wallet-amount/",GetWalletAmount.as_view(),name="GetWalletAmount"),
+    path("get-previous-bookings/",GetPreviousBookings.as_view(),name="GetPreviousBookings"),
 
 
     

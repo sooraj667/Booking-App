@@ -568,6 +568,7 @@ body {
     font-size: 30px;
     
     
+    
 }
 
 
@@ -999,6 +1000,28 @@ body {
     align-items: center;
     font-size: 30px;
     font-weight: 600;
+}
+.previous-booking{
+    display: flex;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 20px;
+    cursor: pointer;
+    
+}
+.booking-hero{
+   
+    height: 20vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 30px;
+    cursor:pointer;
+    
+    
+    
 }
   
 

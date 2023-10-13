@@ -12,6 +12,7 @@ import Booking from './bookings/Booking';
 import Profile from './profile/Profile';
 import Servicepreview from './services/Servicepreview';
 import WalletCust from './wallet/WalletCust';
+import PreviousBooking from './bookings/PreviousBooking';
 const Customerdashboard = () => {
     const details = useSelector((state) => state.login);
     const navigationdatas = useSelector((state) => state.custnavigation);
@@ -73,6 +74,10 @@ const Customerdashboard = () => {
       }
        {
         navigationdatas.value.wallet && <WalletCust/>
+
+      }
+        {
+        navigationdatas.value.previousbooking && <PreviousBooking/>
 
       }
      
