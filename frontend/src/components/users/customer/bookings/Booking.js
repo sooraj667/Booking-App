@@ -16,6 +16,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import toast, { Toaster } from 'react-hot-toast';
 
 const Booking = () => {
   const custdata = useSelector((state) => state.login);
@@ -76,6 +77,7 @@ const Booking = () => {
 
 
       setRender((prev)=>!prev)
+      toast.success("Booking Cancelled! Amount added to your wallet")
 
     }).catch((error)=>alert(error))
     
@@ -100,6 +102,7 @@ const Booking = () => {
   
   return (
     <div className="booking-outer">
+      <Toaster/>
       <div className="hero">BOOKINGS</div>
       <hr />
       <div className="flex">

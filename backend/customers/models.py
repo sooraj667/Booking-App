@@ -9,6 +9,7 @@ class Customer(models.Model):
     password=models.CharField(max_length=200)
     image=models.CharField(max_length=300,blank=True,null=True)
     isblocked=models.CharField(max_length=200,default="False")
+    wallet_amount=models.DecimalField(max_digits=10,decimal_places=2)
 
 
     def __str__(self):

@@ -461,12 +461,21 @@ class CancelBooking(APIView):
         appointment=Appointment.objects.get(id=id)
         servicefee=appointment.service.servicefee
         appointment.beautician.wallet_amount-=servicefee
+        appointment.customer.wallet_amount+=servicefee
         appointment.beautician.save()
+        appointment.customer.save()
         appointment.delete()
     
         
         
         return Response({"message":"Success"})
+    
+class GetWalletAmount(APIView):
+    def post(self,request): 
+        custid=request.data.get("id")
+        amount=Customer.objects.get(id=custid).wallet_amount
+        
+        return Response({"message":'success',"amount":amount})
         
 
   

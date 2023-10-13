@@ -21,6 +21,7 @@ import {
   toggleFavouritestylists,
   toggleBrowse,
   toggleProfile,
+  toggleWallet
 } from "../../../feautures/customer/customernavigationslice";
 import Button  from "@mui/material/Button";
 import "./Contents.css"
@@ -122,6 +123,18 @@ const Contents = () => {
         </div>
         <div className="col-md-9">
           <div class="title">Explore</div>
+        </div>
+      </li>
+
+
+      <li className="item" onClick={() => dispatch(toggleWallet())}>
+        <div className="col-md-3">
+          <div class="icon">
+            <ExploreIcon />
+          </div>
+        </div>
+        <div className="col-md-9">
+          <div class="title">Wallet</div>
         </div>
       </li>
     </ul>

@@ -9,6 +9,7 @@ const INITIALSTATE={
    profile:false,
    booknowbeauticianid:"",
    servicepreview:false,
+   wallet:false
 
    
 
@@ -29,6 +30,7 @@ const customernavigationslice=createSlice(
                 state.value.booknow=false
                 state.value.profile=false
                 state.value.servicepreview=false
+                state.value.wallet=false
             },
             toggleBookings:(state)=>{
                 state.value.bookings=true
@@ -38,6 +40,7 @@ const customernavigationslice=createSlice(
                 state.value.booknow=false
                 state.value.profile=false
                 state.value.servicepreview=false
+                state.value.wallet=false
             },
             toggleBrowse:(state)=>{
                 state.value.browse=true
@@ -47,6 +50,7 @@ const customernavigationslice=createSlice(
                 state.value.booknow=false
                 state.value.profile=false
                 state.value.servicepreview=false
+                state.value.wallet=false
             },
             toggleBooknow:(state,action)=>{
                 state.value.booknow=true
@@ -57,6 +61,7 @@ const customernavigationslice=createSlice(
                 state.value.profile=false
                 state.value.servicepreview=false
                 state.value.booknowbeauticianid=action.payload
+                state.value.wallet=false
             },
             toggleProfile:(state,action)=>{
                 state.value.profile=true
@@ -66,6 +71,7 @@ const customernavigationslice=createSlice(
                 state.value.browse=false
                 state.value.booknow=false
                 state.value.servicepreview=false
+                state.value.wallet=false
             },
             toggleServicePreview:(state,action)=>{
                 state.value.servicepreview=true
@@ -75,6 +81,7 @@ const customernavigationslice=createSlice(
                 state.value.browse=false
                 state.value.booknow=false
                 state.value.profile=false
+                state.value.wallet=false
             },
             toggleLandingPart:(state,action)=>{
                 state.value.landingpart=true
@@ -84,6 +91,17 @@ const customernavigationslice=createSlice(
                 state.value.browse=false
                 state.value.booknow=false
                 state.value.profile=false
+                state.value.wallet=false
+            },
+            toggleWallet:(state,action)=>{
+                state.value.wallet=true
+                state.value.servicepreview=false
+                state.value.favouritestylists=false
+                state.value.bookings=false
+                state.value.browse=false
+                state.value.booknow=false
+                state.value.profile=false
+                state.value.landingpart=false
             }
 
            
@@ -99,5 +117,5 @@ const customernavigationslice=createSlice(
 
 )
 
-export const {toggleFavouritestylists,toggleBookings,toggleBrowse,toggleBooknow,toggleProfile,toggleServicePreview,toggleLandingPart} = customernavigationslice.actions
+export const {toggleFavouritestylists,toggleBookings,toggleBrowse,toggleBooknow,toggleProfile,toggleServicePreview,toggleLandingPart,toggleWallet} = customernavigationslice.actions
 export default customernavigationslice.reducer
