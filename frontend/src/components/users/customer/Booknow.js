@@ -47,40 +47,6 @@ const Booknow = () => {
   const paymentdatas = useSelector((state) => state.paymentdatas);
   const dispatch = useDispatch();
 
-  const handleDateChange = (date) => {
-    dispatch(setDate(date));
-  };
-  const handleTimeChange = (e) => {
-    console.log(e.target.value, "TIME");
-    dispatch(setTime(e.target.value));
-  };
-
-  const handleStudioChange = (e) => {
-    console.log(e.target.value, "STUDIO");
-    dispatch(setStudio(e.target.value));
-  };
-
-  const handleServiceChange = (e) => {
-    console.log(e.target.value, "SERVICE");
-    dispatch(setService(e.target.value));
-  };
-
-  const handleConfirm = () => {
-    const datas = {
-      beautid: reqdatas.value.bookbeautdata.id,
-      custid: statedatas.value.custdetails.id,
-      date: startDate,
-      time: selectedTime,
-      studio: selectedStudio,
-      servicename: selectedService,
-    };
-
-    axiosInstance
-      .post("cust/booknow/", datas)
-      .then((res) => {})
-      .catch((err) => alert(err));
-  };
-
   useEffect(() => {
     const allBeauticians = localStorage.getItem("allbeauticians-C");
 
@@ -131,43 +97,23 @@ const Booknow = () => {
       </div>
       <div className="flex">
         <div className="box">
-        <Stack
-        spacing={2}
-        sx={{
-          marginTop: "70px",
-          
-        }}
-      >
-        <Avatar
-          src={reqdatas.value.bookbeautdata.image}
-          sx={{
-            width: 225,
-            height: 225,
-          }}
-        />
+          <Stack
+            spacing={2}
+            sx={{
+              marginTop: "70px",
+            }}
+          >
+            <Avatar
+              src={reqdatas.value.bookbeautdata.image}
+              sx={{
+                width: 225,
+                height: 225,
+              }}
+            />
 
-        <Paypal
-
-        />
-
-        {/* <Button
-          variant="contained"
-          sx={{
-            width: "15%",
-            marginLeft: "590px",
-          }}
-          onClick={handleConfirm}
-        >
-          Confirm
-        </Button> */}
-      </Stack>
-
+            <Paypal />
+          </Stack>
         </div>
-    
-      
-
-
-
       </div>
     </div>
   );
@@ -185,34 +131,34 @@ export default Booknow;
 //             <p key={item.id}> {item.service.name} </p>
 //           ))}
 //       </div>
-      // <Stack
-      //   spacing={2}
-      //   sx={{
-      //     marginTop: "70px",
-      //     marginLeft: "320px",
-      //   }}
-      // >
-      //   <Avatar
-      //     src={reqdatas.value.bookbeautdata.image}
-      //     sx={{
-      //       width: 225,
-      //       height: 225,
-      //     }}
-      //   />
+// <Stack
+//   spacing={2}
+//   sx={{
+//     marginTop: "70px",
+//     marginLeft: "320px",
+//   }}
+// >
+//   <Avatar
+//     src={reqdatas.value.bookbeautdata.image}
+//     sx={{
+//       width: 225,
+//       height: 225,
+//     }}
+//   />
 
-      //   <Paypal
+//   <Paypal
 
-      //   />
+//   />
 
-      //   <Button
-      //     variant="contained"
-      //     sx={{
-      //       width: "15%",
-      //       marginLeft: "590px",
-      //     }}
-      //     onClick={handleConfirm}
-      //   >
-      //     Confirm
-      //   </Button>
-      // </Stack>
+//   <Button
+//     variant="contained"
+//     sx={{
+//       width: "15%",
+//       marginLeft: "590px",
+//     }}
+//     onClick={handleConfirm}
+//   >
+//     Confirm
+//   </Button>
+// </Stack>
 //     </div>

@@ -153,6 +153,8 @@ class Booknow(APIView):
 
         service_obj=Services.objects.get(name=servicename)
         service_obj_req=Servicefees.objects.get(beautician=beautobj,service=service_obj)
+        beautobj.wallet_amount+=service_obj_req.servicefee
+        beautobj.save()
         
         try:
             Blockeddate.objects.get(beautician=beautobj,date=parseddate)
