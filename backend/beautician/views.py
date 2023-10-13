@@ -417,6 +417,14 @@ class ChangePassword(APIView):
 #         print(beautid,"ITHAAN ID")
 #         appointment_count=Appointment.objects.filter(beautician=Beautician.objects.get(id=beautid)).count()      
 #         return Response({"message":'success',"count":str(appointment_count)})
+
+
+class Getwalletamount(APIView):
+    def post(self,request): 
+        beautid=request.data.get("id")
+        amount=Beautician.objects.get(id=beautid).wallet_amount
+        
+        return Response({"message":'success',"amount":amount})
  
         
 

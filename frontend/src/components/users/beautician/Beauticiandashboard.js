@@ -12,6 +12,7 @@ import Appointments from "./appointments/Appointments";
 import Studio from "./studio/Studio";
 import axiosInstance from "../../../axios/axiosconfig";
 import { useState } from "react";
+import WalletBeaut from "./wallet/WalletBeaut";
 
 const Beauticiandashboard = () => {
   const statedatas=useSelector((state)=>state.beautnavigation)
@@ -97,6 +98,10 @@ const Beauticiandashboard = () => {
           }
           {
             navigationdatas.value.studio && <Studio/>
+
+          }
+          {
+            navigationdatas.value.wallet && <WalletBeaut/>
 
           }
           

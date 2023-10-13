@@ -993,6 +993,13 @@ body {
 .countdiv:hover {
     background: linear-gradient(to right, #6d7087, #3498db); /* Change the background colors on hover */
 }
+.wallet-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    font-weight: 600;
+}
   
 
 
