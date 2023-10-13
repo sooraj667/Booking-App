@@ -19,6 +19,7 @@ urlpatterns = [
     path("changepassword/",ChangePassword.as_view(),name="ChangePassword"),
     path("check-availability/",Checkavailability.as_view(),name="Checkavailability"),
     path("booking-completed-beautdetails/",Bookingbeautdetails.as_view(),name="Bookingbeautdetails"),
+    path("cancel-booking/",CancelBooking.as_view(),name="CancelBooking"),
 
 
     

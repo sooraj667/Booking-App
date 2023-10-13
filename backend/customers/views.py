@@ -453,6 +453,17 @@ class Bookingbeautdetails(APIView):
         recent_appointment_serialized=Appointmentserializer(recent_appointment)
         beautname=beautobj.name
         return Response({"beauticianname":beautname,"recentappointment":recent_appointment_serialized.data})
+    
+class CancelBooking(APIView):
+  
+    def post(self,request): 
+        id=request.data.get("bookingid")
+        appointment=Appointment.objects.get(id=id)
+        appointment.delete()
+    
+        
+        
+        return Response({"message":"Success"})
         
 
   

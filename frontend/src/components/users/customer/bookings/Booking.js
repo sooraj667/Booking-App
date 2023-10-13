@@ -9,12 +9,22 @@ import Stack from "@mui/material/Stack";
 import Avatar from "@mui/material/Avatar";
 import "./Bookings.css";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import Button from "@mui/material/Button";
+
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 const Booking = () => {
   const custdata = useSelector((state) => state.login);
   const reqdatas = useSelector((state) => state.custreqdata);
   const dispatch = useDispatch();
   const [address, setAddress] = useState("");
+  const [cancelItemId, setCancelItemID] = useState("");
+  const [open, setOpen] = useState(false);
+  const[render,setRender]=useState(false)
 
   useEffect(() => {
     const custdetails = JSON.parse(localStorage.getItem("singledetails-C"));
@@ -38,7 +48,7 @@ const Booking = () => {
         }
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [render]);
 
   const addressHandler = (id) => {
     if (address == "") {
@@ -47,6 +57,47 @@ const Booking = () => {
       setAddress("");
     }
   };
+
+  
+  
+  
+  
+  const handleCancelItem = (id) => {
+    setCancelItemID(id)
+    handleClickOpen()
+  };
+
+  const handleSubmit = () => {
+    const datas={
+      bookingid:cancelItemId
+    }
+    axiosInstance.post("cust/cancel-booking/",datas).then((response)=>{
+      console.log(response.data,"FRESHHH");
+
+
+      setRender((prev)=>!prev)
+
+    }).catch((error)=>alert(error))
+    
+    handleClose()
+  };
+
+
+  
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+
+  
+
+
+  
   return (
     <div className="booking-outer">
       <div className="hero">BOOKINGS</div>
@@ -75,6 +126,55 @@ const Booking = () => {
                               Service -{val.service.service.name} <br />
                               Amount Paid - {val.service.servicefee}
                             </p>
+                            {/* <Button
+                            onClick={()=>handleCancelItem(val.id)}
+                            sx={{
+                              marginTop: "10px",
+                              backgroundColor: "inherit",
+                              color: "#900603",
+                              "&:hover": {
+                                backgroundColor: "#212529",
+                                color: "#D0D4D9", // Specify the desired background color on hover
+                              },
+                            }}>
+                          Cancel Booking
+                        </Button> */}
+                        <div>
+      <Button variant="outlined" onClick={()=>handleCancelItem(val.id)}
+      sx={{
+        marginTop: "10px",
+        backgroundColor: "inherit",
+        color: "#900603",
+        "&:hover": {
+          backgroundColor: "#212529",
+          color: "#D0D4D9", // Specify the desired background color on hover
+        },
+      }}
+      >
+        Open alert dialog
+      </Button>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Cancel Booking? "}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Are You sure you want to cancel?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Disagree</Button>
+          <Button onClick={handleSubmit} autoFocus>
+            Confirm
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </div>
                           </div>
                         </div>
                         <div className="text">
@@ -96,6 +196,7 @@ const Booking = () => {
                             </p>
                           )}
                         </div>
+                        
                       </div>
                     </>
                   );
@@ -105,6 +206,12 @@ const Booking = () => {
           </div>
         </section>
       </div>
+
+      
+
+
+
+
     </div>
   );
 };
