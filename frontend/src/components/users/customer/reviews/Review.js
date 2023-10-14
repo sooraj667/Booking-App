@@ -30,6 +30,7 @@ const Review = () => {
           setReviews(res.data.reviews);
         }
         if (res.data.message === "empty") {
+            setReviews(false)
         }
       })
       .catch((err) => console.log(err));
@@ -39,7 +40,7 @@ const Review = () => {
     <div>
 
       <div className="review-outer">
-        {reviews.map((item) => {
+        { reviews ? reviews.map((item) => {
           return (
             <>
               <div className="box">
@@ -63,7 +64,7 @@ const Review = () => {
               </div>
             </>
           );
-        })}
+        }) : <h2>No reviews Yet!</h2>}
       </div>
     </div>
   );
