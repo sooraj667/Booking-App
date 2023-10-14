@@ -125,7 +125,7 @@ class Changeimage(APIView):
 class Booknow(APIView):
     
     def post(self,request):
-        print("VIEW REACHEDDDDDDDDDDDD NEWWEWEWE")
+     
         beautid=request.data.get("beautid")
         custid=request.data.get("custid")
         date=request.data.get("date")
@@ -134,7 +134,7 @@ class Booknow(APIView):
         servicename=request.data.get("servicename")
 
         servicename=servicename.split(" - ")[0]
-        print(servicename,"SERVEEEEEEEEEEEEEEEEE")
+      
 
 
         
@@ -195,7 +195,7 @@ class Getbeautdatas(APIView):
                 
             
 
-            # print(studioobjs_serialized.data,"STUDIOS")
+          
             return Response({"message":"success","studiodata":studioobjs_serialized.data,"servicedata":serviceobjs_serialized.data})
         except:
             return Response({"message":"not success"})
@@ -259,9 +259,9 @@ class Getbookings(APIView):
                         
 
                 
-            print(appointmentsobjs_serialized.data)
+           
 
-            # print(studioobjs_serialized.data,"STUDIOS")
+           
             return Response({"message":"success","appointmentdata":appointmentsobjs_serialized.data})
         except:
             return Response({"message":"not success"})
@@ -269,13 +269,13 @@ class Getbookings(APIView):
 class Getlandingpage(APIView):
    
     def post(self,request):
-        print("LANDINGG")
+ 
         custid=request.data.get("custid")
        
         try:
             custobj=Customer.objects.get(id=custid)
             
-            print(date.today())
+ 
             appointmentsobjs=Appointment.objects.filter(customer=custobj,date=date.today())
             
             appointmentsobjs_serialized=Appointmentserializer(appointmentsobjs,many=True)
@@ -285,8 +285,8 @@ class Getlandingpage(APIView):
 
             # serviceobjs=Servicefees.objects.filter(beautician=beautobj)
             # serviceobjs_serialized=ServicefeesSerializer(serviceobjs,many=True)
-            print("ALLSET")
-            print(appointmentsobjs,"LOOKKKKKKKKKKKKK")
+       
+   
             for item in appointmentsobjs:
                 serviceobj=item.service
                 beauticianobj=item.beautician
@@ -294,7 +294,7 @@ class Getlandingpage(APIView):
 
                 baseservice=serviceobj.service
                 baseservice_serialized=ServicesSerializer(baseservice)
-                print(f"{serviceobj},{beauticianobj},{studioobj} ############3")
+
                 
 
                 serviceobj_serialized=ServicefeesSerializer(serviceobj)
@@ -323,9 +323,9 @@ class Getlandingpage(APIView):
                         
 
                 
-            print(appointmentsobjs_serialized.data)
+ 
 
-            # print(studioobjs_serialized.data,"STUDIOS")
+        
             return Response({"message":"success","todays_appointmentdata":appointmentsobjs_serialized.data})
         except:
             return Response({"message":"not success"})
@@ -358,7 +358,7 @@ class Getsingleservice(APIView):
  
     def post(self,request): 
         serviceid=request.data.get("serviceid")
-        print(serviceid,"PRINTED")
+      
         serviceobj=Services.objects.get(id=serviceid)
         service_serialized=ServicesSerializer(serviceobj)
         return Response({"message":'Added',"service":service_serialized.data})
@@ -413,7 +413,7 @@ class ChangePassword(APIView):
         custobj=Customer.objects.get(id=id)
         custobj.password=make_password(password)
         custobj.save()
-        print("Saved")
+      
         return Response({"message":'success'})
        
 
@@ -429,7 +429,7 @@ class Checkavailability(APIView):
         parseddate=parseddateandtime.date()
         parsed_time = datetime.strptime(time, "%I:%M %p").time()    
 
-        print(f"{parsed_time} ANDDDDDDDD{parseddate}")
+     
 
         try:
             Appointment.objects.get(date=parseddate,time=parsed_time)
@@ -444,7 +444,7 @@ class Checkavailability(APIView):
 class Bookingbeautdetails(APIView):
   
     def post(self,request): 
-        print("REACHED CURRENT VIEW")
+     
         beautid=request.data.get("beautid")
         custid=request.data.get("custid")
         beautobj=Beautician.objects.get(id=beautid)
@@ -536,12 +536,22 @@ class GetPreviousBookings(APIView):
                         
 
                 
-            print(appointmentsobjs_serialized.data)
+
 
            
             return Response({"message":"success","appointmentdata":appointmentsobjs_serialized.data})
         except:
             return Response({"message":"not success"})
+        
+class AddReview(APIView):
+  
+    def post(self,request): 
+        id=request.data.get("bookingid")
+        content=request.data.get("reviewcontent")
+        print(content,"ITH CONTENT ADAAAAAAAAAAAAAAAAAAAAAAAaaa")
+        appointment=Appointment.objects.get(id=id)
+        Review.objects.create(beautician=appointment.beautician,customer=appointment.customer,content=content)
+        return Response({"message":"Success"})
 
 
 

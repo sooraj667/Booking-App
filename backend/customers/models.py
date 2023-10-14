@@ -30,7 +30,11 @@ class Appointment(models.Model):
     def __str__(self):
         return f"{self.customer.email} - {self.beautician.name}"
 
-
+class Review(models.Model):
+    beautician=models.ForeignKey(Beautician,on_delete=models.CASCADE)
+    customer=models.ForeignKey(Customer,on_delete=models.CASCADE)
+    content=models.CharField(max_length=200)
+   
 
 
    

@@ -425,6 +425,8 @@ class Getwalletamount(APIView):
         amount=Beautician.objects.get(id=beautid).wallet_amount
         
         return Response({"message":'success',"amount":amount})
+    
+
  
         
 

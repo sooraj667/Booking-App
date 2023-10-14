@@ -13,7 +13,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import toast, { Toaster } from "react-hot-toast";
 import { toggleBookings } from "../../../../feautures/customer/customernavigationslice";
-import DoneAllIcon from '@mui/icons-material/DoneAll';
+import DoneAllIcon from "@mui/icons-material/DoneAll";
 
 const PreviousBooking = () => {
   const reqdatas = useSelector((state) => state.custreqdata);
@@ -23,6 +23,7 @@ const PreviousBooking = () => {
   const [open, setOpen] = useState(false);
   const [render, setRender] = useState(false);
   const [bookingToggleHandler, setBookingToggleHandler] = useState(false);
+  const [reviewContent, setReviewContent] = useState("myr");
 
   useEffect(() => {
     const custdetails = JSON.parse(localStorage.getItem("singledetails-C"));
@@ -64,14 +65,15 @@ const PreviousBooking = () => {
   const handleSubmit = () => {
     const datas = {
       bookingid: cancelItemId,
+      reviewcontent: reviewContent,
     };
     axiosInstance
-      .post("cust/cancel-booking/", datas)
+      .post("cust/add-review/", datas)
       .then((response) => {
         console.log(response.data, "FRESHHH");
 
         setRender((prev) => !prev);
-        toast.success("Booking Cancelled! Amount added to your wallet");
+        toast.success("Review Added!");
       })
       .catch((error) => alert(error));
 
@@ -89,9 +91,9 @@ const PreviousBooking = () => {
   const previouBookingClickHandler = () => {
     dispatch(toggleBookings());
   };
+
   return (
     <div className="booking-outer">
-   
       <Toaster />
       <div
         className="booking-hero"
@@ -128,9 +130,13 @@ const PreviousBooking = () => {
                             <hr />
                             <p>
                               Service -{val.service.service.name} <br />
-                              Amount Paid - {val.service.servicefee}<br />
-                              Status - <span className="text-success">Completed <DoneAllIcon/></span> <br />
-                              
+                              Amount Paid - {val.service.servicefee}
+                              <br />
+                              Status -{" "}
+                              <span className="text-success">
+                                Completed <DoneAllIcon />
+                              </span>{" "}
+                              <br />
                             </p>
                             {/* <Button
                             onClick={()=>handleCancelItem(val.id)}
@@ -173,14 +179,17 @@ const PreviousBooking = () => {
                                 <DialogContent>
                                   <DialogContentText id="alert-dialog-description">
                                     How was your experience?
-                                    <input type="text" className="form-control mt-3"/>
-                                    
+                                    <input
+                                      type="text"
+                                      className="form-control mt-3"
+                                      onChange={(e) => {
+                                        setReviewContent(e.target.value);
+                                      }}
+                                    />
                                   </DialogContentText>
                                 </DialogContent>
                                 <DialogActions>
-                                  <Button onClick={handleClose}>
-                                    CLOSE
-                                  </Button>
+                                  <Button onClick={handleClose}>CLOSE</Button>
                                   <Button onClick={handleSubmit} autoFocus>
                                     CONFIRM
                                   </Button>
@@ -191,9 +200,14 @@ const PreviousBooking = () => {
                         </div>
                         <div className="text">
                           <p>
+                            {console.log(reviewContent)}
                             Date - {val.date} <br />
                             Time - {val.time}
+                            
                           </p>
+
+                          
+                          
                           <hr />
                           <div onClick={() => addressHandler(val.id)}>
                             ADDRESS <ArrowDropDownIcon />
