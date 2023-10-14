@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import axiosInstance from "../../../axios/axiosconfig";
-import "./Browse.css";
+
 import { toggleBooknow } from "../../../feautures/customer/customernavigationslice";
 const Browse = () => {
   const dispatch = useDispatch();

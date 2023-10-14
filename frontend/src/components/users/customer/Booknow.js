@@ -16,14 +16,16 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Button from "@mui/material/Button";
 import axiosInstance from "../../../axios/axiosconfig";
-import "./Browse.css";
+
 import MenuItem from "@mui/material/MenuItem";
 // import FormControl from '@mui/material/FormControl';
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
-import "./Browse.css";
 import Paypal from "../../paypal/Paypal";
+import Review from "./reviews/Review";
 // import {setService,setDate,setTime,setStudio} from "../../../feautures/customer/paymentdataslice"
+import Fab from '@mui/material/Fab';
+import ThumbsUpDownIcon from '@mui/icons-material/ThumbsUpDown';
 
 const Booknow = () => {
   const [startDate, setStartDate] = useState("");
@@ -31,6 +33,8 @@ const Booknow = () => {
   const [selectedStudio, setSelectedStudio] = useState("");
   const [selectedService, setSelectedService] = useState("");
   const [beautStudios, setBeautStudios] = useState("DEYY");
+  const [showReview, setShowReview] = useState(false);
+
   const [alltime, setAlltime] = useState([
     "10:00 AM",
     "11:00 AM",
@@ -114,7 +118,39 @@ const Booknow = () => {
             <Paypal />
           </Stack>
         </div>
+      
       </div>
+      <hr />
+
+      <div className="review-toggle" onClick={()=>setShowReview((prev)=>!prev)}> 
+        <Button
+        sx={{
+          marginTop: "10px",
+          backgroundColor: "inherit",
+          border:"black",
+          color: "black",
+          "&:hover": {
+            backgroundColor: "#212529",
+            color: "#D0D4D9", // Specify the desired background color on hover
+          },
+        }}
+        variant="oulined"
+        >
+          Show Reviews
+        </Button>
+      {/* <Fab color="secondary" aria-label="edit" sx={{width:35,height:30}}>
+        <ThumbsUpDownIcon/>
+        
+      </Fab> */}
+      </div>
+      {
+        showReview &&
+        <div className="review">
+          <Review/>
+        </div>
+
+      }
+      
     </div>
   );
 };

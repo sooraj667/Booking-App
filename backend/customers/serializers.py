@@ -17,3 +17,13 @@ class Appointmentserializer(ModelSerializer):
     class Meta:
         model=Appointment
         fields= "__all__"
+
+
+class Reviewserializer(ModelSerializer):
+    beautician=BeauticianSerializer()
+    customer=Customerserializer()
+
+
+    class Meta:
+        model=Review
+        fields= "__all__"

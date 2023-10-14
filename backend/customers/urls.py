@@ -23,6 +23,7 @@ urlpatterns = [
     path("get-wallet-amount/",GetWalletAmount.as_view(),name="GetWalletAmount"),
     path("get-previous-bookings/",GetPreviousBookings.as_view(),name="GetPreviousBookings"),
     path("add-review/",AddReview.as_view(),name="AddReview"),
+    path("getreviews/",GetReviews.as_view(),name="GetReviews"),
 
 
     

@@ -557,4 +557,21 @@ class AddReview(APIView):
 
 
 
+class GetReviews(APIView):
+   
+    def post(self,request):
+     
+        beautid=request.data.get("beautid")
+        allreviews=Review.objects.filter(beautician=Beautician.objects.get(id=beautid))
+        print(allreviews,"NOKKKKK")
+        allreviews_serialized=Reviewserializer(allreviews,many=True)
+        if allreviews==[]:
+            return Response({"message":"empty"})
+        else:
+            return Response({"message":"notempty","reviews":allreviews_serialized.data})
+
+
         
+
+        
+       
