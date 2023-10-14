@@ -1046,6 +1046,10 @@ body {
   display: flex;
   justify-content: center;
 }
+.booknow-outer .toggle-buttons{
+  display: flex;
+  justify-content: center;
+}
   
 
 

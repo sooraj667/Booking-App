@@ -34,6 +34,7 @@ const Booknow = () => {
   const [selectedService, setSelectedService] = useState("");
   const [beautStudios, setBeautStudios] = useState("DEYY");
   const [showReview, setShowReview] = useState(false);
+  const [bookNowToggle, setBookNowToggle] = useState(false);
 
   const [alltime, setAlltime] = useState([
     "10:00 AM",
@@ -99,8 +100,15 @@ const Booknow = () => {
             <p key={item.id}> {item.service.name} </p>
           ))}
       </div>
+      <div className="toggle-buttons">
+          <Button onClick={()=>setBookNowToggle((prev)=>!prev)}>
+            Book Now
+          </Button>
+
+        </div>
       <div className="flex">
-        <div className="box">
+    
+        {bookNowToggle && <div className="box">
           <Stack
             spacing={2}
             sx={{
@@ -117,7 +125,10 @@ const Booknow = () => {
 
             <Paypal />
           </Stack>
-        </div>
+        </div> 
+
+        }
+        
       
       </div>
       <hr />
