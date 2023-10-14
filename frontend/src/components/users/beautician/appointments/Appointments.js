@@ -9,14 +9,16 @@ import Stack from "@mui/material/Stack";
 import Avatar from "@mui/material/Avatar";
 // import "./Bookings.css";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-
-
+import toast, { Toaster } from "react-hot-toast";
+import PreviousBeautBookings from "./PreviousBeautBookings";
+import {togglePreviousBooking} from "../../../../feautures/beautician/beautnavigationslice"
 const Appointments = () => {
   const custdata = useSelector((state) => state.login);
   const reqdatas = useSelector((state) => state.custreqdata);
   const[allAppointments,setAllAppointments]=useState([])
   const dispatch = useDispatch();
   const [address, setAddress] = useState("");
+  const [bookingToggleHandler, setBookingToggleHandler] = useState(false);
 
   useEffect(() => {
     const beautdetails = JSON.parse(localStorage.getItem("singledetails-B"));
@@ -49,9 +51,24 @@ const Appointments = () => {
       setAddress("");
     }
   };
+
+  const previouBookingClickHandler = () => {
+    dispatch(togglePreviousBooking());
+  };
   return (
     <div className="booking-outer">
-      <div className="hero">BOOKINGS</div>
+      <Toaster />
+      <div
+        className="booking-hero"
+        onClick={() => setBookingToggleHandler((prev) => !prev)}
+      >
+        BOOKINGS <ArrowDropDownIcon />
+      </div>
+      {bookingToggleHandler && (
+        <div className="previous-booking" onClick={previouBookingClickHandler}>
+          PREVIOUS BOOKINGS
+        </div>
+      )}
       <hr />
       <div className="flex">
         {console.log(reqdatas.value.allappointments, "BYDUBAI")}

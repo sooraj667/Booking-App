@@ -11,6 +11,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 import random
 from datetime import datetime
+from datetime import date
 
 
 
@@ -223,14 +224,10 @@ class Getbookings(APIView):
         try:
             beautobj=Beautician.objects.get(id=beautid)
   
-            appointmentsobjs=Appointment.objects.filter(beautician=beautobj)
+            appointmentsobjs=Appointment.objects.filter(beautician=beautobj,date__gte=date.today())
             appointmentsobjs_serialized=Appointmentserializer(appointmentsobjs,many=True)
 
-            # studioobjs=Studio.objects.filter(beautician=beautobj)
-            # studioobjs_serialized=StudioSerializer(studioobjs,many=True)
 
-            # serviceobjs=Servicefees.objects.filter(beautician=beautobj)
-            # serviceobjs_serialized=ServicefeesSerializer(serviceobjs,many=True)
    
      
             for item in appointmentsobjs:
@@ -271,7 +268,7 @@ class Getbookings(APIView):
                 
             print(appointmentsobjs_serialized.data)
 
-            # print(studioobjs_serialized.data,"STUDIOS")
+           
             return Response({"message":"success","appointmentdata":appointmentsobjs_serialized.data})
         except:
             return Response({"message":"not success"})
@@ -427,7 +424,62 @@ class Getwalletamount(APIView):
         return Response({"message":'success',"amount":amount})
     
 
+class GetPreviousBookings(APIView):
+    def post(self,request):
  
+        beautid=request.data.get("beautid")
+
+        try:
+            beautobj=Beautician.objects.get(id=beautid)
+  
+            appointmentsobjs=Appointment.objects.filter(beautician=beautobj,date__lt=date.today())
+            appointmentsobjs_serialized=Appointmentserializer(appointmentsobjs,many=True)
+
+
+   
+     
+            for item in appointmentsobjs:
+                serviceobj=item.service
+                customerobj=item.customer
+                studioobj=item.studio
+
+                baseservice=serviceobj.service
+                baseservice_serialized=ServicesSerializer(baseservice)
+               
+                
+
+                serviceobj_serialized=ServicefeesSerializer(serviceobj)
+                customerobj_serialized=Customerserializer(customerobj)
+                studioobj_serialized=StudioSerializer(studioobj)
+                
+
+                
+                
+                serviceid=serviceobj.id
+                customerid=customerobj.id
+                studioid=studioobj.id
+               
+                for item in appointmentsobjs_serialized.data:
+                    if item["service"]==serviceid:
+                        item["service"]=serviceobj_serialized.data
+                        item["service"]["service"]=baseservice_serialized.data
+                    if  item["customer"]==customerid:
+                        item["customer"]=customerobj_serialized.data
+                    if  item["studio"]==studioid:
+                        item["studio"]=studioobj_serialized.data
+
+
+                
+
+                        
+
+                
+     
+
+           
+            return Response({"message":"success","appointmentdata":appointmentsobjs_serialized.data})
+        except:
+            return Response({"message":"not success"})
         
 
 
