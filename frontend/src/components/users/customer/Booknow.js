@@ -94,7 +94,7 @@ const Booknow = () => {
       <div className="expertin">
         <p>{reqdatas.value.bookbeautdata.name}</p>
         Expert In
-        {reqdatas.value.beautservices
+        {reqdatas.value.beautservices 
           .filter((item) => item.topservice === true)
           .map((item) => (
             <p key={item.id}> {item.service.name} </p>

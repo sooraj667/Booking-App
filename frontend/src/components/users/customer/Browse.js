@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import axiosInstance from "../../../axios/axiosconfig";
+import './Contents.css'
 
 import { toggleBooknow } from "../../../feautures/customer/customernavigationslice";
 const Browse = () => {
@@ -44,28 +45,39 @@ const Browse = () => {
         EXPLORE
       </div>
       <hr />
-      <div className="flex">
+      <div className="flex" style={{
+        display: "flex",
+        flexDirection: "row",  /* Display items in a row */
+        flexWrap: "wrap",  /* Allow items to wrap to the next line */
+        justifyContent: "space-between",  /* Distribute items evenly along the row */
+        gap:"2px",
+      }}>
       {statedatas.value.allbeauticians.map((item) => {
           return (
-            <Stack spacing={3} className="mt-3">
+            <Stack spacing={3} className="mt-3" >
               <Paper
+                key={item.id}  // Add a unique key for each item
                 elevation={24}
+                className="card" 
+            
                 sx={{
-                  width: 700,
+                  width: 400,
                   height: 190,
                   backgroundColor: "inherit",
                   // backgroundImage:'url("https://img.freepik.com/premium-photo/close-up-hair-supplies-flat-lay_23-2148352942.jpg?w=900")',
                   objectFit: "cover",
                   backgroundRepeat: "no-repeat",
-                  marginLeft: "20%",
+                  // marginLeft: "20%",
                   marginTop: "30px",
                   marginBottom: "30%",
-                  opacity: [0.9, 0.8, 0.8],
-
+                  opacity: [0.3, 0.9, 0.9],
+                  cursor:"pointer",
                   "&:hover": {
-                    backgroundColor: "inherit",
-                    opacity: [0.9, 0.8, 0.7],
+                    backgroundColor: "grey",
+                    opacity:  [0.3, 1, 1],
+                    color:"white"
                   },
+            
                 }}
               >
                 <Grid container spacing={4} >
@@ -75,12 +87,12 @@ const Browse = () => {
                         width: 125,
                         height: 125,
                         marginLeft: "30px",
-                        marginTop: "10px",
+                        marginTop: "30px",
                       }}
                       src={item.image}
                     />
                   </Grid>
-                  <Grid item xs={4}>
+                  <Grid item xs={9}>
                     <Typography
                     className="textclass"
                       variant="h5"
@@ -88,26 +100,32 @@ const Browse = () => {
                       sx={{
                         fontSize: "24px", // Adjust the font size as needed
                         fontWeight: "bold", // Make the text bold if desired
-                        // Change the text color based on your color palette
-                        marginBottom: "16px", // Add some spacing at the bottom
+                        marginLeft: "55px",
+                        marginTop:"45px",
+                        whiteSpace: "nowrap", // Prevent text from wrapping to multiple lines
+                        // overflow: "hidden", // Hide any overflow text
+                        // textOverflow: "ellipsis",
+                        // marginBottom: "16px", // Add some spacing at the bottom
                         // You can add more styles as needed, such as fontFamily, letterSpacing, etc.
                       }}
                     >
                       {item.name}
+                      <br/>
                       <Button
                       variant="contained"
                       sx={{
+                        marginLeft:"20px",
                         marginTop: "10px",
                         backgroundColor: "inherit",
                         color: "black",
                         "&:hover": {
-                          backgroundColor: "#212529",
-                          color: "#D0D4D9", // Specify the desired background color on hover
-                        },
+                          backgroundColor: "grey",
+                          opacity:  [0.3, 1, 1],
+                          color:"white" },
                       }}
                       onClick={() => booknowHandler(item.id)}
                     >
-                      Book Now
+                      VIEW MORE 
                     </Button> 
                       
                     </Typography>

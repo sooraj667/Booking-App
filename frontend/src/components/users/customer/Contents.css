@@ -1,0 +1,11 @@
+@media (max-width: 768px) {
+    .card {
+      width: calc(100% - 20px); /* Full width for cards on screens <= 768px */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .flex {
+      justify-content: center; /* Center items on screens <= 480px */
+    }
+  }
