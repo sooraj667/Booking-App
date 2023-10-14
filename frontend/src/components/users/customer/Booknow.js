@@ -100,10 +100,10 @@ const Booknow = () => {
 
 
 
-      <div className={bookNowToggle ? "expertin_minimized" : "expertin"}>
+      <div className={bookNowToggle || showReview ? "expertin_minimized" : "expertin"}>
         <p>{reqdatas.value.bookbeautdata.name}</p>
         {
-          bookNowToggle ?
+          bookNowToggle || showReview?
           <Avatar
               src={reqdatas.value.bookbeautdata.image}
               sx={{
@@ -131,7 +131,11 @@ const Booknow = () => {
             <p key={item.id}>  {item.service.name} </p>
           ))}
            <div className="toggle-buttons">
-          <Button onClick={()=>setBookNowToggle((prev)=>!prev)}
+          <Button onClick={()=>{
+            setBookNowToggle((prev)=>!prev)
+            setShowReview(false)
+
+          }}
           sx={{
             marginLeft:"20px",
             marginTop: "10px",
@@ -145,7 +149,12 @@ const Booknow = () => {
             Book Now
           </Button>
 
-          <div className="review-toggle" onClick={()=>setShowReview((prev)=>!prev)}> 
+          <div className="review-toggle" onClick={()=>{
+            setShowReview((prev)=>!prev)
+            setBookNowToggle(false)
+
+
+          }}> 
         <Button
         sx={{
           marginTop: "10px",
