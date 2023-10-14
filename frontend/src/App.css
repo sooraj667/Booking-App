@@ -284,9 +284,41 @@ body {
     margin-right: 50px;
     transition: all 0.3s ease;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     
   }
   .expertin:hover {
+    transform: scale(1.03); /* Scale the element on hover */
+
+    color: #212529; /* Change the text color on hover */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a larger box shadow on hover */
+  }
+
+  .expertin_minimized{
+    font-size: 10px; /* Adjust the font size as needed */
+    font-weight: bold; /* Adjust the font weight if desired */
+    color: #212529; /* Choose a text color */
+    text-align: center; /* Center the text horizontally */
+    text-transform: uppercase; /* Convert text to uppercase */
+    letter-spacing: 2px; /* Add letter spacing for emphasis */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Add a subtle text shadow */
+    background-color: "inherit"; /* Add a background color */
+    padding: 10px; /* Add padding around the text */
+    border-radius: 5px; /* Round the corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a box shadow */
+    margin-right: 50px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+  }
+  .expertin_minimized:hover {
     transform: scale(1.03); /* Scale the element on hover */
 
     color: #212529; /* Change the text color on hover */
@@ -1049,6 +1081,12 @@ body {
 .booknow-outer .toggle-buttons{
   display: flex;
   justify-content: center;
+}
+.booknow-outer .box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
   
 

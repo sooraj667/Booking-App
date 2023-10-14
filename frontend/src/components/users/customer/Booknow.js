@@ -91,49 +91,61 @@ const Booknow = () => {
 
   return (
     <div className="booknow-outer">
-      <div className="expertin">
-        <p>{reqdatas.value.bookbeautdata.name}</p>
-        Expert In
-        {reqdatas.value.beautservices 
-          .filter((item) => item.topservice === true)
-          .map((item) => (
-            <p key={item.id}> {item.service.name} </p>
-          ))}
+      <div className="hero">
+        DETAILS
       </div>
-      <div className="toggle-buttons">
-          <Button onClick={()=>setBookNowToggle((prev)=>!prev)}>
-            Book Now
-          </Button>
+      <hr />
+      
 
-        </div>
-      <div className="flex">
-    
-        {bookNowToggle && <div className="box">
-          <Stack
-            spacing={2}
-            sx={{
-              marginTop: "70px",
-            }}
-          >
+
+
+
+      <div className={bookNowToggle ? "expertin_minimized" : "expertin"}>
+        <p>{reqdatas.value.bookbeautdata.name}</p>
+        {
+          bookNowToggle ?
+          <Avatar
+              src={reqdatas.value.bookbeautdata.image}
+              sx={{
+                width: 105,
+                height: 105,
+               
+              }}
+            />
+            :
             <Avatar
               src={reqdatas.value.bookbeautdata.image}
               sx={{
                 width: 225,
                 height: 225,
+               
               }}
             />
-
-            <Paypal />
-          </Stack>
-        </div> 
-
         }
-        
       
-      </div>
-      <hr />
+        
+        Expert In
+        {reqdatas.value.beautservices 
+          .filter((item) => item.topservice === true)
+          .map((item) => (
+            <p key={item.id}>  {item.service.name} </p>
+          ))}
+           <div className="toggle-buttons">
+          <Button onClick={()=>setBookNowToggle((prev)=>!prev)}
+          sx={{
+            marginLeft:"20px",
+            marginTop: "10px",
+            backgroundColor: "inherit",
+            color: "black",
+            "&:hover": {
+              backgroundColor: "grey",
+              opacity:  [0.3, 1, 1],
+              color:"white" },
+          }}>
+            Book Now
+          </Button>
 
-      <div className="review-toggle" onClick={()=>setShowReview((prev)=>!prev)}> 
+          <div className="review-toggle" onClick={()=>setShowReview((prev)=>!prev)}> 
         <Button
         sx={{
           marginTop: "10px",
@@ -149,11 +161,36 @@ const Booknow = () => {
         >
           Show Reviews
         </Button>
-      {/* <Fab color="secondary" aria-label="edit" sx={{width:35,height:30}}>
-        <ThumbsUpDownIcon/>
-        
-      </Fab> */}
+   
       </div>
+
+
+
+        </div>
+      </div>
+     
+      <div className="flex">
+    
+        {bookNowToggle && <div className="box">
+          <Stack
+            spacing={2}
+            sx={{
+              marginTop: "70px",
+            }}
+          >
+            
+
+            <Paypal />
+          </Stack>
+        </div> 
+
+        }
+        
+      
+      </div>
+      <hr />
+
+      
       {
         showReview &&
         <div className="review">
