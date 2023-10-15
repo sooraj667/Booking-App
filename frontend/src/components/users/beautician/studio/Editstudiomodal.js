@@ -85,7 +85,16 @@ const Editstudiomodal = ({studioId}) => {
       <Button
         onClick={handleOpen}
         variant="contained"
-        sx={{ marginBottom: "0px", marginLeft: "10px", marginTop: "50px" ,backgroundColor:"#eec60a" }}
+        sx={{
+          marginTop: "10px",
+          backgroundColor: "inherit",
+          color: "black",
+          marginLeft:2,
+          "&:hover": {
+            backgroundColor: "#212529",
+            color: "#D0D4D9",
+          },
+        }}
       >
         Edit
       </Button>

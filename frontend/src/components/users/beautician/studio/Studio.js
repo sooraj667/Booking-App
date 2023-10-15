@@ -49,46 +49,125 @@ const Studio = () => {
     setChanged(true);
   };
   return (
-    <div>
-      <div className="row">
-        <div className="col-md-10">
-          <h2>Your Studios</h2>
-        </div>
+    <div className="studio-outer">
+      <div className="hero">Your Studios</div>
+      <hr />
 
-        <div className="col-md-2 mt-2">
-          <Addstudiomodal />
-        </div>
-      </div>
-      <div className="row">
-        <Stack spacing={2}>
-          {studiodatas.value.studiodetails.map((item) => {
-            return (
-              <>
-                <div class="address-container">
-                  <p class="address-text">
-                    <span class="locality">{item.locality}</span>-
-                    <span class="place">{item.place}</span>-
-                    <span class="district">{item.district}</span>-
-                    <span class="state">{item.state}</span>-
-                    <span class="state">{item.country}</span>-
-                    <span class="state"> Pincode:{item.pincode}</span>
-                  </p>
-                  <div className="row">
-                    <Editstudiomodal studioId={item.id} />
+      <div className="outerbox">
+        {
+          studiodatas.value.studiodetails.map((item)=>{
+            return(
+              <section className="aboutHome">
+          <div className="container flexSB">
+            <div className="right row">
+              <div className="items">
+                <>
+                  <div className="item flexSB">
+                    <div className="img">
+                      <img alt=""  />
+                      
+
+                      <div>
+                        
+                      </div>
+                      <div className="text mt-3">
+                        <h2>Mwone</h2>
+                        <hr />
+                        <div className="row">
+                        <Editstudiomodal studioId={item.id} />
                     <Deleteconfirmationmodal
                       id={item.id}
                       item_to_delete="studio"
                       rerenderit={handleChildStateChange}
-                      
+
                     />
+
+                        </div>
+                       
+                        
+                        <p></p>
+                      </div>
+                    </div>
+                    <div className="text">
+                      <p>
+                        LOCALITY - {item.locality} 
+                      </p>
+                      <p>
+                      PLACE - {item.place}
+                      
+                      </p>
+                      <p>
+                      DISTRICT - {item.district}
+                      
+                      </p>
+                      <p>
+                      STATE - {item.state}
+                      
+                      </p>
+                      <p>
+                      COUNTRY - {item.country}
+                      
+                      </p>
+                      <p>
+                      PINCODE - {item.pincode}
+                      
+                      </p>
+                     
+                     
+                    </div>
                   </div>
-                </div>
-              </>
-            );
-          })}
-        </Stack>
+                </>
+              </div>
+            </div>
+          </div>
+        </section>
+
+            )
+          })
+        }
+        
       </div>
     </div>
+    // <div>
+    //   <div className="row">
+    //     <div className="col-md-10">
+    //       <h2>Your Studios</h2>
+    //     </div>
+
+    //     <div className="col-md-2 mt-2">
+    //       <Addstudiomodal />
+    //     </div>
+    //   </div>
+    //   <div className="row">
+    //     <Stack spacing={2}>
+    //       {studiodatas.value.studiodetails.map((item) => {
+    //         return (
+    //           <>
+    //             <div class="address-container">
+    //               <p class="address-text">
+    //                 <span class="locality">{item.locality}</span>-
+    //                 <span class="place">{item.place}</span>-
+    //                 <span class="district">{item.district}</span>-
+    //                 <span class="state">{item.state}</span>-
+    //                 <span class="state">{item.country}</span>-
+    //                 <span class="state"> Pincode:{item.pincode}</span>
+    //               </p>
+    //               <div className="row">
+                    // <Editstudiomodal studioId={item.id} />
+                    // <Deleteconfirmationmodal
+                    //   id={item.id}
+                    //   item_to_delete="studio"
+                    //   rerenderit={handleChildStateChange}
+
+                    // />
+    //               </div>
+    //             </div>
+    //           </>
+    //         );
+    //       })}
+    //     </Stack>
+    //   </div>
+    // </div>
   );
 };
 

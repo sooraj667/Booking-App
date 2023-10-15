@@ -1116,6 +1116,20 @@ body {
   /* Adding transition for smooth animation */
   transition: text-decoration 0.5s ease;
 }
+.studio-outer .outerbox{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.studio-outer .box{
+  height: 30vh;
+  width: 40vw;
+  border: 2px solid black;
+  font-size: 17px;
+  font-weight: 600;
+
+}
 
 
 
