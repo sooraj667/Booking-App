@@ -25,11 +25,10 @@ const Paypal = () => {
   const [selectedService, setSelectedService] = useState("");
   const [dateError, setDateError] = useState(false);
   const [slotNotAvailable, setSlotNotAvailable] = useState(false);
-  const [selectedFeeForPayment, setSelectedFeeForPayment] = useState("IVDE ONNULA");
+  const [selectedFeeForPayment, setSelectedFeeForPayment] =
+    useState("IVDE ONNULA");
 
-  const navigate=useNavigate()
-
-
+  const navigate = useNavigate();
 
   const [alltime, setAlltime] = useState([
     "10:00 AM",
@@ -48,7 +47,7 @@ const Paypal = () => {
     const currentdate = new Date();
     if (date < currentdate) {
       setDateError(true);
-      setSlotNotAvailable(false)
+      setSlotNotAvailable(false);
     } else {
       setDateError(false);
     }
@@ -57,27 +56,23 @@ const Paypal = () => {
     console.log(e.target.value, "TIME");
     setSelectedTime(e.target.value);
     localStorage.setItem("time", e.target.value);
-    
+
     const datas = {
       time: e.target.value,
       date: localStorage.getItem("date"),
     };
-    console.log(datas,"LETS SEEll")
+    console.log(datas, "LETS SEEll");
     axiosInstance
       .post("cust/check-availability/", datas)
-      .then((response) =>{
-        console.log(response.data, "AVAILABILITY")
-        if(response.data.message=="Not Available"){
-          setSlotNotAvailable(true)
-          setDateError(false)
+      .then((response) => {
+        console.log(response.data, "AVAILABILITY");
+        if (response.data.message == "Not Available") {
+          setSlotNotAvailable(true);
+          setDateError(false);
+        } else {
+          setSlotNotAvailable(false);
         }
-        else{
-          setSlotNotAvailable(false)
-
-        }
-
-      } 
-      )
+      })
       .catch((error) => console.log("AVAILABILITY ERROR"));
   };
 
@@ -91,84 +86,100 @@ const Paypal = () => {
     console.log(e.target.value, "SERVICE");
     setSelectedService(e.target.value);
     localStorage.setItem("service", e.target.value);
-    const numberValue = parseFloat(e.target.value.replace(/[^0-9.]/g, ''));
-    setSelectedFeeForPayment((numberValue).toString())
-
+    const numberValue = parseFloat(e.target.value.replace(/[^0-9.]/g, ""));
+    setSelectedFeeForPayment(numberValue.toString());
   };
   return (
     <>
       {console.log(
         `${selectedService}${selectedStudio} ${startDate} ${selectedTime} deyyyy`
       )}
+      <div className="booking-form-outer">
+        <div className="sub-heading mb-3">
+          BOOK YOUR SLOT
+        </div>
+        <div className="row ">
+          <div className="col-md-6 ">
+            <div className="title ">Choose Date</div>
+            <DatePicker
+              selected={paymentdatas.value.date}
+              onChange={handleDateChange}
+              dateFormat="MM/dd/yyyy"
+              className=" inputform form-control"
+            />
 
-      <div className="title">Choose Date</div>
-      <DatePicker
-        selected={paymentdatas.value.date}
-        onChange={handleDateChange}
-        dateFormat="MM/dd/yyyy"
-        className=" inputform form-control"
-      />
+            {dateError && (
+              <Alert
+                severity="error"
+                sx={{
+                  marginTop: "20px",
+                  marginLeft: "70px",
+                }}
+              >
+                Please Choose Valid Date
+              </Alert>
+            )}
+          </div>
+          <div className="col-md-6">
+            <div className="title">Select Time</div>
 
-      {dateError && (
-        <Alert
-          severity="error"
-          sx={{
-            marginTop: "20px",
-            marginLeft: "70px",
-          }}
-        >
-          Please Choose Valid Date
-        </Alert>
-      )}
+            <select
+              name="selectedTime"
+              onChange={handleTimeChange}
+              className=" form-control inputform"
+            >
+              {alltime.map((item) => {
+                return <option>{item}</option>;
+              })}
+            </select>
 
-      <div className="title">Select Time</div>
-
-      <select
-        name="selectedTime"
-        onChange={handleTimeChange}
-        className=" form-control inputform"
-      >
-        {alltime.map((item) => {
-          return <option>{item}</option>;
-        })}
-      </select>
-
-      {
-        slotNotAvailable && 
-        <Alert
-          severity="error"
-          sx={{
-            marginTop: "20px",
-            marginLeft: "70px",
-          }}
-        >
-          Slot Already Booked! Choose Another Slot
-        </Alert>
-      }
-
-      <div className="title">Choose Studio</div>
-      <select
-        name="selectedStudio"
-        onChange={handleStudioChange}
-        className=" form-control inputform "
-      >
-        {reqdatas.value.beautstudios.map((item) => {
-          return <option>{item.place}</option>;
-        })}
-      </select>
-
-      <div className="title">Select Service</div>
-      <select
-        name="selectedService"
-        onChange={handleServiceChange}
-        className=" form-control inputform"
-      >
-        {console.log(reqdatas.value.beautservices,"NOKKEDAADAAADADAD")}
-        {reqdatas.value.beautservices.map((item) => {
-          return <option>{item.service.name}  - $ {item.servicefee}/-</option>;
-        })}
-      </select>
-      {(dateError || slotNotAvailable) ? (
+            {slotNotAvailable && (
+              <Alert
+                severity="error"
+                sx={{
+                  marginTop: "20px",
+                  marginLeft: "70px",
+                }}
+              >
+                Slot Already Booked! Choose Another Slot
+              </Alert>
+            )}
+          </div>
+        </div>
+        <div className="row mt-5 mb-5" >
+          <div className="col-md-6">
+            <div className="title">Choose Studio</div>
+            <select
+              name="selectedStudio"
+              onChange={handleStudioChange}
+              className=" form-control inputform "
+            >
+              {reqdatas.value.beautstudios.map((item) => {
+                return <option>{item.place}</option>;
+              })}
+            </select>
+          </div>
+          <div className="col-md-6">
+            <div className="title">Select Service</div>
+            <select
+              name="selectedService"
+              onChange={handleServiceChange}
+              className=" form-control inputform"
+            >
+              {console.log(reqdatas.value.beautservices, "NOKKEDAADAAADADAD")}
+              {reqdatas.value.beautservices.map((item) => {
+                return (
+                  <option>
+                    {item.service.name} - $ {item.servicefee}/-
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+        </div>
+      </div>
+              <hr />
+      {dateError || slotNotAvailable ? (
         ""
       ) : (
         <PayPalScriptProvider
@@ -191,9 +202,15 @@ const Paypal = () => {
             }}
             onApprove={() => {
               toast.success("Payment successfully completed!");
-              localStorage.setItem("bookedbeautid",reqdatas.value.bookbeautdata.id)
-              localStorage.setItem("bookedcustid",statedatas.value.custdetails.id)
-              
+              localStorage.setItem(
+                "bookedbeautid",
+                reqdatas.value.bookbeautdata.id
+              );
+              localStorage.setItem(
+                "bookedcustid",
+                statedatas.value.custdetails.id
+              );
+
               const datas = {
                 beautid: reqdatas.value.bookbeautdata.id,
                 custid: statedatas.value.custdetails.id,
@@ -203,14 +220,13 @@ const Paypal = () => {
                 servicename: localStorage.getItem("service"),
               };
               console.log(datas, "MWONEEEEEEEEEEEEE");
-              axiosInstance
-                .post("cust/booknow/", datas)
-                .then((response) => {
-                  console.log(response, "RESRERSRERSRERSR");
-                })
-                
-                setTimeout(navigate("../booking-completed"),2000)
-                .catch((error) => alert(error));
+              axiosInstance.post("cust/booknow/", datas).then((response) => {
+                console.log(response, "RESRERSRERSRERSR");
+              });
+
+              setTimeout(navigate("../booking-completed"), 2000).catch(
+                (error) => alert(error)
+              );
             }}
             onCancel={() => {
               toast.error("You cancelled the payment!");
@@ -222,9 +238,8 @@ const Paypal = () => {
           <Toaster />
         </PayPalScriptProvider>
       )}
-      {console.log(selectedFeeForPayment,"FEEEE")}
-      {console.log(typeof selectedFeeForPayment,"TYPE" )}
-   
+      {console.log(selectedFeeForPayment, "FEEEE")}
+      {console.log(typeof selectedFeeForPayment, "TYPE")}
     </>
   );
 };
