@@ -40,6 +40,7 @@ const Profile = () => {
     // console.log(datas.value.beautdetails.id);
   };
   const uploadImageHandler = () => {
+    const toastId = toast.loading('Uploading Image... Please Wait');
     const reference = ref(storage, `customer/${selectedImage.name + v4()}`);
     uploadBytes(reference, selectedImage)
       .then((res) => {
@@ -58,6 +59,7 @@ const Profile = () => {
                 JSON.stringify(response.data.custdata)
               );
               dispatch(setCustDetails(response.data.custdata));
+              toast.dismiss(toastId);
               setTimeout(()=>{
                 toast.success("Profile Image Changed!")
       

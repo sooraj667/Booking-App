@@ -8,6 +8,7 @@ import Box from "@mui/material/Box";
 import { useSelector, useDispatch } from "react-redux";
 import "./Profile.css";
 import Editdetailsmodal from "./Editdetailsmodal";
+import HourglassTopIcon from '@mui/icons-material/HourglassTop';
 
 import { storage } from "../../../../firebase/firebaseconfig";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -41,6 +42,7 @@ const Profile = () => {
   };
 
   const uploadImageHandler = () => {
+    const toastId = toast.loading('Uploading Image... Please Wait');
     const reference = ref(storage, `beautician/${selectedImage.name + v4()}`);
     uploadBytes(reference, selectedImage)
       .then((res) => {
@@ -59,6 +61,7 @@ const Profile = () => {
                 JSON.stringify(response.data.beautdata)
               );
               dispatch(setBeautDetails(response.data.beautdata));
+              toast.dismiss(toastId);
               setTimeout(()=>{
                 toast.success("Profile Image Changed!")
       
