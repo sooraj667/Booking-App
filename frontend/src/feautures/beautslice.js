@@ -41,11 +41,7 @@ const beautslice=createSlice(
                     state.value.error.submiterror=null
                     state.value.errorcheck=true
                 }
-                // else if (action.payload!=="*"){
-                //     state.value.error.pname=null
-                //     state.value.errorcheck=false
-            
-                // }
+              
              
                 else{
                     state.value.error.pname=null

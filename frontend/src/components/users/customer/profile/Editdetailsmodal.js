@@ -16,19 +16,19 @@ import {
 } from "../../../../feautures/beautslice";
 
 const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 400,
-    bgcolor: "background.paper",
-    border: "1px solid #000",
-    boxShadow: 24,
-    p: 4,
-  };
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "1px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
 
 const Editdetailsmodal = () => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const statedatas = useSelector((state) => state.login);
   const formdatas = useSelector((state) => state.signup);
   const [open, setOpen] = useState(false);
@@ -36,6 +36,10 @@ const Editdetailsmodal = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+
+  const [nameError, setNameError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [phoneError, setPhoneError] = useState("");
 
   const handleOpen = () => {
     setOpen(true);
@@ -48,25 +52,27 @@ const Editdetailsmodal = () => {
     const allcustdatas = localStorage.getItem("singledetails-C");
     const parsed = JSON.parse(allcustdatas);
     dispatch(setCustDetails(parsed));
+    setName(parsed.name);
+    setEmail(parsed.email);
+    setPhone(parsed.phone);
   }, [changed]);
 
   const handleUpdate = () => {
-      const datas = {
+    const datas = {
       id: statedatas.value.custdetails.id,
-      name: formdatas.value.pname,
-      email: formdatas.value.email,
-      phone: formdatas.value.phone,
+      name: name,
+      email: email,
+      phone: phone,
     };
     console.log(formdatas.value.pname, "##############333");
     axiosInstance
       .post("cust/editdetails/", datas)
       .then((res) => {
-      
         localStorage.setItem(
           "singledetails-C",
           JSON.stringify(res.data.allcustdatas)
         );
-       
+
         setChanged((prev) => !prev);
         handleClose();
       })
@@ -77,9 +83,17 @@ const Editdetailsmodal = () => {
       <Button
         onClick={handleOpen}
         variant="contained"
-        sx={{ marginBottom: "0px", marginLeft: "10px", marginTop: "50px",backgroundColor:"inherit",color:"black",'&:hover': {
-          backgroundColor: '#212529',color:"#D0D4D9" // Specify the desired background color on hover
-        } }}
+        sx={{
+          marginBottom: "0px",
+          marginLeft: "10px",
+          marginTop: "50px",
+          backgroundColor: "inherit",
+          color: "black",
+          "&:hover": {
+            backgroundColor: "#212529",
+            color: "#D0D4D9", // Specify the desired background color on hover
+          },
+        }}
       >
         Edit Details
       </Button>
@@ -110,11 +124,22 @@ const Editdetailsmodal = () => {
                     Name:
                   </label>
                   <TextField
+                    value={name}
                     variant="standard"
-                    onChange={(e) => dispatch(changePName(e.target.value))}
+                    onChange={(e) => {
+                      if (!/^[a-zA-Z ]+$/.test(e.target.value)) {
+                        setNameError("Name can only have alphabets");
+                      } else {
+                        setNameError(false);
+                      }
+
+                      setName(e.target.value);
+                    }}
                   />
+                  {nameError && (
+                    <span className="text-danger"> {nameError} </span>
+                  )}
                 </div>
-                <span className="text-danger">{formdatas.value.error.pname}</span>
               </div>
 
               <div class="form-group">
@@ -123,11 +148,25 @@ const Editdetailsmodal = () => {
                     Email:
                   </label>
                   <TextField
+                    value={email}
                     variant="standard"
-                    onChange={(e) => dispatch(changeEmail(e.target.value))}
+                    onChange={(e) => {
+                      if (
+                        !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
+                          e.target.value
+                        )
+                      ) {
+                        setEmailError("Wrong Email");
+                      } else {
+                        setEmailError(false);
+                      }
+                      setEmail(e.target.value);
+                    }}
                   />
+                  {emailError && (
+                    <span className="text-danger"> {emailError} </span>
+                  )}
                 </div>
-                <span className="text-danger">{formdatas.value.error.email}</span>
               </div>
 
               <div class="form-group">
@@ -136,32 +175,49 @@ const Editdetailsmodal = () => {
                     Phone:
                   </label>
                   <TextField
+                    value={phone}
                     type="numtextber"
                     variant="standard"
                     required
-                    onChange={(e) => dispatch(changePhone(e.target.value))}
+                    onChange={(e) => {
+                      if (!/^(?!([0-9])\1{9})[0-9]{10}$/.test(e.target.value)) {
+                        setPhoneError("Invalid Phone Number!");
+                      } else {
+                        setPhoneError(false);
+                      }
+
+                      setPhone(e.target.value);
+                    }}
                   />
+                  {phoneError && (
+                    <span className="text-danger"> {phoneError} </span>
+                  )}
                 </div>
-                <span className="text-danger">{formdatas.value.error.phone}</span>
+                <span className="text-danger">
+                  {formdatas.value.error.phone}
+                </span>
               </div>
-              <Button variant="contained" onClick={handleUpdate}>
-                Update
-
-              </Button>
-
-              
-
-              
-               
-              
-
-            
             </div>
+            <div className="modal-btns">
+              <div className="">
+                {nameError || emailError || phoneError ? null : (
+                  <Button variant="contained" onClick={handleUpdate}>
+                    Update
+                  </Button>
+                )}
+              </div>
+              <div className="">
+                <Button variant="contained" onClick={handleClose}>Close</Button>
+              </div>
+            </div>
+            
           </Typography>
+          
         </Box>
+        
       </Modal>
     </div>
-  )
-}
+  );
+};
 
-export default Editdetailsmodal
+export default Editdetailsmodal;

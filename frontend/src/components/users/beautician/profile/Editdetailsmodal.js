@@ -36,6 +36,10 @@ const Editdetailsmodal = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+
+  const [nameError, setNameError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [phoneError, setPhoneError] = useState("");
   const handleOpen = () => {
     setOpen(true);
   };
@@ -47,14 +51,17 @@ const Editdetailsmodal = () => {
     const allbeautdatas = localStorage.getItem("singledetails-B");
     const parsed = JSON.parse(allbeautdatas);
     dispatch(setBeautDetails(parsed));
+    setName(parsed.name);
+    setEmail(parsed.email);
+    setPhone(parsed.phone);
   }, [changed]);
 
   const handleUpdate = () => {
     const datas = {
       id: statedatas.value.beautdetails.id,
-      name: formdatas.value.pname,
-      email: formdatas.value.email,
-      phone: formdatas.value.phone,
+      name: name,
+      email: email,
+      phone: phone,
     };
     console.log(formdatas.value.pname, "##############333");
     axiosInstance
@@ -107,11 +114,23 @@ const Editdetailsmodal = () => {
                     Name:
                   </label>
                   <TextField
+                    value={name}
                     variant="standard"
-                    onChange={(e) => dispatch(changePName(e.target.value))}
+                    onChange={(e) => {
+                      if (!/^[a-zA-Z ]+$/.test(e.target.value)) {
+                        setNameError("Name can only have alphabets");
+                      } else {
+                        setNameError(false);
+                      }
+
+                      setName(e.target.value);
+                    }}
                   />
+                  {nameError && (
+                    <span className="text-danger"> {nameError} </span>
+                  )}
                 </div>
-                <span className="text-danger">{formdatas.value.error.pname}</span>
+                
               </div>
 
               <div class="form-group">
@@ -120,11 +139,26 @@ const Editdetailsmodal = () => {
                     Email:
                   </label>
                   <TextField
+                    value={email}
                     variant="standard"
-                    onChange={(e) => dispatch(changeEmail(e.target.value))}
+                    onChange={(e) => {
+                      if (
+                        !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
+                          e.target.value
+                        )
+                      ) {
+                        setEmailError("Wrong Email");
+                      } else {
+                        setEmailError(false);
+                      }
+                      setEmail(e.target.value);
+                    }}
                   />
+                  {emailError && (
+                    <span className="text-danger"> {emailError} </span>
+                  )}
                 </div>
-                <span className="text-danger">{formdatas.value.error.email}</span>
+                
               </div>
 
               <div class="form-group">
@@ -133,26 +167,44 @@ const Editdetailsmodal = () => {
                     Phone:
                   </label>
                   <TextField
+                    value={phone}
                     type="numtextber"
                     variant="standard"
                     required
-                    onChange={(e) => dispatch(changePhone(e.target.value))}
+                    onChange={(e) => {
+                      if (!/^(?!([0-9])\1{9})[0-9]{10}$/.test(e.target.value)) {
+                        setPhoneError("Invalid Phone Number!");
+                      } else {
+                        setPhoneError(false);
+                      }
+
+                      setPhone(e.target.value);
+                    }}
                   />
+                  {phoneError && (
+                    <span className="text-danger"> {phoneError} </span>
+                  )}
                 </div>
-                <span className="text-danger">{formdatas.value.error.phone}</span>
+                
               </div>
-              <Button variant="contained" onClick={handleUpdate}>
-                Update
-
-              </Button>
-
-              
-
+             
               
                
               
 
             
+            </div>
+            <div className="modal-btns">
+              <div className="">
+                {nameError || emailError || phoneError ? null : (
+                  <Button variant="contained" onClick={handleUpdate}>
+                    Update
+                  </Button>
+                )}
+              </div>
+              <div className="">
+                <Button variant="contained" onClick={handleClose}>Close</Button>
+              </div>
             </div>
           </Typography>
         </Box>
