@@ -848,6 +848,8 @@ body {
 }
 .inputform{
     background-color: inherit;
+    cursor: pointer;
+    border: 1px solid black;
 }
 /* .booknow-outer .box{
     border: 1px solid black;
