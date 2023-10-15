@@ -969,7 +969,7 @@ body {
     margin-bottom: 15px;
   }
   .aboutHome .item p {
-    color: #999999;
+    color: rgb(31, 30, 30);
   }
   .aboutHome .item:hover {
     background-color: #959bb2;

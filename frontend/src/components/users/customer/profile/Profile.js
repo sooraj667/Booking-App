@@ -18,6 +18,8 @@ import { useState } from "react";
 import { setCustDetails } from "../../../../feautures/loginslice";
 import { useDispatch } from "react-redux";
 import axiosInstance from "../../../../axios/axiosconfig";
+import EmailIcon from "@mui/icons-material/Email";
+import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 
 const Profile = () => {
   const statedatas = useSelector((state) => state.login);
@@ -73,109 +75,219 @@ const Profile = () => {
       <div className="profile-outer">
         <div className="profile-box">
           <div className="top">
-            {/* <div className="col-md-8 headingg">
-              SCHEDULES
-
-            </div> */}
             <div className="col-md-4 datee"></div>
           </div>
           <hr />
-          <div className="sch-content">
-            <div style={{}}>
-              <Typography
-                variant="h6"
-                component="h1"
-                sx={{ marginBottom: "1.9rem" }}
-              >
-                EDIT DETAILS
-              </Typography>
-              <div className="row ">
-                <Avatar
-                  src={statedatas.value.custdetails.image}
-                  sx={{ width: 125, height: 125 }}
-                />
-              </div>
-              <Button
-                type="file"
-                onClick={addImageHandler}
-                variant="contained"
-                startIcon={<InsertPhotoIcon />}
-                sx={{
-                  marginTop: "10px",
-                  backgroundColor: "inherit",
-                  color: "black",
-                  "&:hover": {
-                    backgroundColor: "#212529",
-                    color: "#D0D4D9", // Specify the desired background color on hover
-                  },
-                }}
-                size="small"
-              >
-                Change
-              </Button>
-              {console.log(statedatas.value.beautdetails.image)}
-              <div>
-                {addImage && (
-                  <>
-                    <input
-                      className="selectimage"
-                      accept="image/*"
-                      id="upload-button"
-                      type="file"
-                      onChange={handleFileChange}
-                    />
-                    <div>
-                      <Button
-                        type="file"
-                        onClick={uploadImageHandler}
-                        variant="contained"
-                        startIcon={<DriveFolderUploadIcon />}
-                        sx={{ marginTop: "10px" }}
-                        size="small"
-                      >
-                        Upload
-                      </Button>
-                    </div>
-                  </>
-                )}
-              </div>
-              <div className="row  mt-3 ">
-                <Typography variant="h6" component="h1">
-                  {" "}
-                  Name :{" "}
-                </Typography>
-                <Typography variant="h6" component="h1">
-                  {" "}
-                  {statedatas.value.custdetails.name}{" "}
-                </Typography>
-              </div>
-              <div className="row  mt-3">
-                <Typography variant="h6" component="h1">
-                  {" "}
-                  Email :{" "}
-                </Typography>
-                <Typography variant="h6" component="h1">
-                  {" "}
-                  {statedatas.value.custdetails.email}{" "}
-                </Typography>
-              </div>
 
-              <div className="row  mt-3">
-                <Typography variant="h6" component="h1">
-                  {" "}
-                  Phone :{" "}
-                </Typography>
-                <Typography variant="h6" component="h1">
-                  {" "}
-                  {statedatas.value.custdetails.phone}{" "}
-                </Typography>
+          <div className="flex">
+            <section className="aboutHome">
+              <div className="container flexSB">
+                <div className="right row">
+                  <div className="items">
+                    <>
+                      <div className="item flexSB">
+                        <div className="img">
+                          <img
+                            src={statedatas.value.custdetails.image}
+                            alt=""
+                          />
+                          <Button
+                            type="file"
+                            onClick={addImageHandler}
+                            variant="contained"
+                            startIcon={<InsertPhotoIcon />}
+                            sx={{
+                              marginTop: "10px",
+                              backgroundColor: "inherit",
+                              color: "black",
+                              "&:hover": {
+                                backgroundColor: "#212529",
+                                color: "#D0D4D9",
+                              },
+                            }}
+                            size="small"
+                          >
+                            Change
+                          </Button>
+
+                          <div>
+                            {addImage && (
+                              <>
+                                <input
+                                  className="selectimage"
+                                  accept="image/*"
+                                  id="upload-button"
+                                  type="file"
+                                  onChange={handleFileChange}
+                                />
+                                <div>
+                                  <Button
+                                    type="file"
+                                    onClick={uploadImageHandler}
+                                    variant="contained"
+                                    startIcon={<DriveFolderUploadIcon />}
+                                    sx={{ marginTop: "10px" }}
+                                    size="small"
+                                  >
+                                    Upload
+                                  </Button>
+                                </div>
+                              </>
+                            )}
+                          </div>
+                          <div className="text mt-3">
+                            <h2>{statedatas.value.custdetails.name}</h2>
+                            <hr />
+                            <p></p>
+                          </div>
+                        </div>
+                        <div className="text">
+                          <p>
+                            <EmailIcon /> {statedatas.value.custdetails.email}{" "}
+                            <br />
+                            <LocalPhoneIcon />{" "}
+                            {statedatas.value.custdetails.phone}
+                          </p>
+                          <Editdetailsmodal />
+                          <hr />
+                        </div>
+                      </div>
+                    </>
+                  </div>
+                </div>
               </div>
-              <Editdetailsmodal />
-            </div>
+            </section>
           </div>
         </div>
       </div>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // <div>
+    //   <div className="hero">PROFILE</div>
+    //   <hr />
+
+    //   <div className="profile-outer">
+    //     <div className="profile-box">
+    //       <div className="top">
+    //         {/* <div className="col-md-8 headingg">
+    //           SCHEDULES
+
+    //         </div> */}
+    //         <div className="col-md-4 datee"></div>
+    //       </div>
+    //       <hr />
+    //       <div className="sch-content">
+    //         <div style={{}}>
+    //           <Typography
+    //             variant="h6"
+    //             component="h1"
+    //             sx={{ marginBottom: "1.9rem" }}
+    //           >
+    //             EDIT DETAILS
+    //           </Typography>
+    //           <div className="row ">
+    //             <Avatar
+    //               src={statedatas.value.custdetails.image}
+    //               sx={{ width: 125, height: 125 }}
+    //             />
+    //           </div>
+    //           <Button
+    //             type="file"
+    //             onClick={addImageHandler}
+    //             variant="contained"
+    //             startIcon={<InsertPhotoIcon />}
+    //             sx={{
+    //               marginTop: "10px",
+    //               backgroundColor: "inherit",
+    //               color: "black",
+    //               "&:hover": {
+    //                 backgroundColor: "#212529",
+    //                 color: "#D0D4D9", // Specify the desired background color on hover
+    //               },
+    //             }}
+    //             size="small"
+    //           >
+    //             Change
+    //           </Button>
+    //           {console.log(statedatas.value.beautdetails.image)}
+    //           <div>
+    //             {addImage && (
+    //               <>
+    //                 <input
+    //                   className="selectimage"
+    //                   accept="image/*"
+    //                   id="upload-button"
+    //                   type="file"
+    //                   onChange={handleFileChange}
+    //                 />
+    //                 <div>
+    //                   <Button
+    //                     type="file"
+    //                     onClick={uploadImageHandler}
+    //                     variant="contained"
+    //                     startIcon={<DriveFolderUploadIcon />}
+    //                     sx={{ marginTop: "10px" }}
+    //                     size="small"
+    //                   >
+    //                     Upload
+    //                   </Button>
+    //                 </div>
+    //               </>
+    //             )}
+    //           </div>
+    //           <div className="row  mt-3 ">
+    //             <Typography variant="h6" component="h1">
+    //               {" "}
+    //               Name :{" "}
+    //             </Typography>
+    //             <Typography variant="h6" component="h1">
+    //               {" "}
+    //               {statedatas.value.custdetails.name}{" "}
+    //             </Typography>
+    //           </div>
+    //           <div className="row  mt-3">
+    //             <Typography variant="h6" component="h1">
+    //               {" "}
+    //               Email :{" "}
+    //             </Typography>
+    //             <Typography variant="h6" component="h1">
+    //               {" "}
+    //               {statedatas.value.custdetails.email}{" "}
+    //             </Typography>
+    //           </div>
+
+    //           <div className="row  mt-3">
+    //             <Typography variant="h6" component="h1">
+    //               {" "}
+    //               Phone :{" "}
+    //             </Typography>
+    //             <Typography variant="h6" component="h1">
+    //               {" "}
+    //               {statedatas.value.custdetails.phone}{" "}
+    //             </Typography>
+    //           </div>
+    //           <Editdetailsmodal />
+    //         </div>
+    //       </div>
+    //     </div>
+    //   </div>
+    // </div>
     
     
   )
