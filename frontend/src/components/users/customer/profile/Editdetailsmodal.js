@@ -14,7 +14,7 @@ import {
   changePName,
   changePhone,
 } from "../../../../feautures/beautslice";
-
+import toast, { Toaster } from "react-hot-toast";
 const style = {
   position: "absolute",
   top: "50%",
@@ -72,6 +72,10 @@ const Editdetailsmodal = () => {
           "singledetails-C",
           JSON.stringify(res.data.allcustdatas)
         );
+        setTimeout(()=>{
+          toast.success("Profile Details Updated!")
+
+        },200)
 
         setChanged((prev) => !prev);
         handleClose();
@@ -80,6 +84,7 @@ const Editdetailsmodal = () => {
   };
   return (
     <div>
+      <Toaster />
       <Button
         onClick={handleOpen}
         variant="contained"

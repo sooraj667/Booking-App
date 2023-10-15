@@ -15,6 +15,7 @@ import {
   changePhone,
 } from "../../../../feautures/beautslice";
 import Input from "@mui/joy/Input";
+import toast, { Toaster } from "react-hot-toast";
 
 const style = {
   position: "absolute",
@@ -71,13 +72,20 @@ const Editdetailsmodal = () => {
           "singledetails-B",
           JSON.stringify(res.data.allbeautdatas)
         );
+        setTimeout(()=>{
+          toast.success("Profile Details Updated!")
+
+        },200)
         setChanged((prev) => !prev);
+        
+        
         handleClose();
       })
       .catch((error) => alert(error));
   };
   return (
     <div>
+      <Toaster />
       <Button
         onClick={handleOpen}
         variant="contained"
