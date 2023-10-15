@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import axiosInstance from "../../../axios/axiosconfig";
-import './Contents.css'
+import "./Contents.css";
 
 import { toggleBooknow } from "../../../feautures/customer/customernavigationslice";
 const Browse = () => {
@@ -21,7 +21,7 @@ const Browse = () => {
 
   const booknowHandler = (id) => {
     dispatch(toggleBooknow(id));
-    localStorage.setItem("id",id)
+    localStorage.setItem("id", id);
     // const datas={
     //     beautid:id,
     //     custid:statedatas.value.custdetails.id
@@ -41,25 +41,26 @@ const Browse = () => {
   }, []);
   return (
     <div className="browse-outer">
-      <div className="hero">
-        EXPLORE
-      </div>
+      <div className="hero">EXPLORE</div>
       <hr />
-      <div className="flex" style={{
-        display: "flex",
-        flexDirection: "row",  /* Display items in a row */
-        flexWrap: "wrap",  /* Allow items to wrap to the next line */
-        justifyContent: "space-between",  /* Distribute items evenly along the row */
-        gap:"2px",
-      }}>
-      {statedatas.value.allbeauticians.map((item) => {
+      <div
+        className="flex"
+        style={{
+          display: "flex",
+          flexDirection: "row" /* Display items in a row */,
+          flexWrap: "wrap" /* Allow items to wrap to the next line */,
+          justifyContent:
+            "space-between" /* Distribute items evenly along the row */,
+          gap: "2px",
+        }}
+      >
+        {statedatas.value.allbeauticians.map((item) => {
           return (
-            <Stack spacing={3} className="mt-3" >
+            <Stack spacing={3} className="mt-3">
               <Paper
-                key={item.id}  // Add a unique key for each item
+                key={item.id} // Add a unique key for each item
                 elevation={24}
-                className="card" 
-            
+                className="card"
                 sx={{
                   width: 400,
                   height: 190,
@@ -71,16 +72,15 @@ const Browse = () => {
                   marginTop: "30px",
                   marginBottom: "30%",
                   opacity: [0.3, 0.9, 0.9],
-                  cursor:"pointer",
+                  cursor: "pointer",
                   "&:hover": {
                     backgroundColor: "grey",
-                    opacity:  [0.3, 1, 1],
-                    color:"white"
+                    opacity: [0.3, 1, 1],
+                    color: "white",
                   },
-            
                 }}
               >
-                <Grid container spacing={4} >
+                <Grid container spacing={4}>
                   <Grid item xs={3}>
                     <Avatar
                       sx={{
@@ -94,14 +94,14 @@ const Browse = () => {
                   </Grid>
                   <Grid item xs={9}>
                     <Typography
-                    className="textclass"
+                      className="textclass"
                       variant="h5"
                       component="h1"
                       sx={{
                         fontSize: "24px", // Adjust the font size as needed
                         fontWeight: "bold", // Make the text bold if desired
                         marginLeft: "55px",
-                        marginTop:"45px",
+                        marginTop: "45px",
                         whiteSpace: "nowrap", // Prevent text from wrapping to multiple lines
                         // overflow: "hidden", // Hide any overflow text
                         // textOverflow: "ellipsis",
@@ -110,27 +110,27 @@ const Browse = () => {
                       }}
                     >
                       {item.name}
-                      <br/>
+                      <br />
                       <Button
-                      variant="contained"
-                      sx={{
-                        marginLeft:"20px",
-                        marginTop: "10px",
-                        backgroundColor: "inherit",
-                        color: "black",
-                        "&:hover": {
-                          backgroundColor: "grey",
-                          opacity:  [0.3, 1, 1],
-                          color:"white" },
-                      }}
-                      onClick={() => booknowHandler(item.id)}
-                    >
-                      VIEW MORE 
-                    </Button> 
-                      
+                        variant="contained"
+                        sx={{
+                          marginLeft: "20px",
+                          marginTop: "10px",
+                          backgroundColor: "inherit",
+                          color: "black",
+                          "&:hover": {
+                            backgroundColor: "grey",
+                            opacity: [0.3, 1, 1],
+                            color: "white",
+                          },
+                        }}
+                        onClick={() => booknowHandler(item.id)}
+                      >
+                        VIEW MORE
+                      </Button>
                     </Typography>
                   </Grid>
-                 
+
                   {/* <Grid item xs={4}>
                     <Button
                       variant="contained"
@@ -147,24 +147,15 @@ const Browse = () => {
             </Stack>
           );
         })}
-
       </div>
     </div>
-    
   );
 };
 
 export default Browse;
 
-
-
-
-
-
-
-
-
-{/* <div>
+{
+  /* <div>
       <div className="row">
       <div className="heading1">
         Explore
@@ -245,11 +236,12 @@ export default Browse;
                     >
                       Book Now
                     </Button>
-                  </Grid> */}
-      //           </Grid>
-      //         </Paper>
-      //       </Stack>
-      //     );
-      //   })}
-      // </Box>
-    // </div> */}
+                  </Grid> */
+}
+//           </Grid>
+//         </Paper>
+//       </Stack>
+//     );
+//   })}
+// </Box>
+// </div> */}

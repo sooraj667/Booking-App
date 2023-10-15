@@ -1095,6 +1095,12 @@ body {
   display: flex;
   justify-content: space-around;
 }
+.intermediates-heading{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2vh;
+}
 
 
 
