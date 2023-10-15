@@ -26,6 +26,7 @@ import PRforBeauticianLogin from "./components/users/beautician/protectedroute/P
 import PRforAdminDashboard from "./components/admin/protectedroute/PRforAdminDashboard";
 import PRforAdminLogin from "./components/admin/protectedroute/PRforAdminLogin";
 import BookingCompleted from "./components/users/customer/booking-completed/BookingCompleted";
+import ZegoVideocall from "./components/zego_cloud/ZegoVideocall";
 
 const Allroutes = () => {
   const dispatch =useDispatch()
@@ -135,6 +136,8 @@ const Allroutes = () => {
             <Route path="/forgotpassword" element={<ChangePasswordUI />} />
 
             <Route path="/booking-completed" element={<BookingCompleted />} />  
+
+            <Route path="/video-call" element={<ZegoVideocall />} /> 
             
             
             
