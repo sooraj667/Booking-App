@@ -19,6 +19,7 @@ import axiosInstance from "../../../../axios/axiosconfig";
 import { setBeautDetails } from "../../../../feautures/loginslice";
 import EmailIcon from "@mui/icons-material/Email";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
+import toast, { Toaster } from "react-hot-toast";
 
 const Profile = () => {
   const statedatas = useSelector((state) => state.login);
@@ -58,6 +59,10 @@ const Profile = () => {
                 JSON.stringify(response.data.beautdata)
               );
               dispatch(setBeautDetails(response.data.beautdata));
+              setTimeout(()=>{
+                toast.success("Profile Image Changed!")
+      
+              },200)
             } else {
               alert("NOT SET");
             }
@@ -71,6 +76,7 @@ const Profile = () => {
 
   return (
     <div>
+      <Toaster />
       <div className="hero">PROFILE</div>
       <hr />
 
