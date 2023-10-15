@@ -318,7 +318,7 @@ body {
     align-items: center;
 
   }
-  .expertin_minimized:hover {
+  .expertin:hover {
     transform: scale(1.03); /* Scale the element on hover */
 
     color: #212529; /* Change the text color on hover */

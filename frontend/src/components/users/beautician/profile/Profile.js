@@ -17,6 +17,8 @@ import DriveFolderUploadIcon from "@mui/icons-material/DriveFolderUpload";
 import Topstack from "../Topstack";
 import axiosInstance from "../../../../axios/axiosconfig";
 import { setBeautDetails } from "../../../../feautures/loginslice";
+import EmailIcon from '@mui/icons-material/Email';
+import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 
 const Profile = () => {
   const statedatas = useSelector((state) => state.login);
@@ -82,7 +84,98 @@ const Profile = () => {
             <div className="col-md-4 datee"></div>
           </div>
           <hr />
-          <div className="sch-content">
+
+          <div className="flex">
+            
+
+            <section className="aboutHome">
+              <div className="container flexSB">
+                {/* <div className='left row'>
+            <img src={"https://images.unsplash.com/photo-1600948836101-f9ffda59d250?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2036&q=80"} alt='' />
+          </div> */}
+                <div className="right row">
+                  {/* <Heading subtitle='LEARN ANYTHING' title='Benefits About Online Learning Expertise' /> */}
+                  <div className="items">
+                 
+                        <>
+                          <div className="item flexSB">
+                            <div className="img">
+                              <img src={statedatas.value.beautdetails.image} alt="" />
+                              <Button
+                type="file"
+                onClick={addImageHandler}
+                variant="contained"
+                startIcon={<InsertPhotoIcon />}
+                sx={{
+                  marginTop: "10px",
+                  backgroundColor: "inherit",
+                  color: "black",
+                  "&:hover": {
+                    backgroundColor: "#212529",
+                    color: "#D0D4D9", // Specify the desired background color on hover
+                  },
+                }}
+                size="small"
+              >
+                Change
+              </Button>
+              
+              <div>
+                {addImage && (
+                  <>
+                    <input
+                      className="selectimage"
+                      accept="image/*"
+                      id="upload-button"
+                      type="file"
+                      onChange={handleFileChange}
+                    />
+                    <div>
+                      <Button
+                        type="file"
+                        onClick={uploadImageHandler}
+                        variant="contained"
+                        startIcon={<DriveFolderUploadIcon />}
+                        sx={{ marginTop: "10px" }}
+                        size="small"
+                      >
+                        Upload
+                      </Button>
+                    </div>
+                  </>
+                )}
+              </div>
+                              <div className="text mt-3">
+                                <h2 >{statedatas.value.beautdetails.name}</h2>
+                                <hr />
+                                <p>
+                                 
+                                </p>
+                              </div>
+                            </div>
+                            <div className="text">
+                              <p>
+                               <EmailIcon/> {statedatas.value.beautdetails.email} <br />
+                                 <LocalPhoneIcon/>  {statedatas.value.beautdetails.phone}
+                              </p>
+                              <Editdetailsmodal />
+                              <hr />
+                              {/* <div onClick={() => addressHandler(val.id)}>
+                                ADDRESS <ArrowDropDownIcon />
+                              </div> */}
+                              
+                            </div>
+                          </div>
+                          
+                        </>
+                   
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          {/* <div className="sch-content">
             <div style={{}}>
               <Typography
                 variant="h6"
@@ -115,7 +208,7 @@ const Profile = () => {
               >
                 Change
               </Button>
-              {console.log(statedatas.value.beautdetails.image)}
+              
               <div>
                 {addImage && (
                   <>
@@ -174,7 +267,7 @@ const Profile = () => {
               </div>
               <Editdetailsmodal />
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
