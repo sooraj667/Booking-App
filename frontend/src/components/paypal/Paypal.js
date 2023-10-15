@@ -102,7 +102,8 @@ const Paypal = () => {
           <div className="col-md-6 ">
             <div className="title ">Choose Date</div>
             <DatePicker
-              selected={paymentdatas.value.date}
+              
+              selected={startDate}
               onChange={handleDateChange}
               dateFormat="MM/dd/yyyy"
               className=" inputform form-control"
@@ -113,7 +114,7 @@ const Paypal = () => {
                 severity="error"
                 sx={{
                   marginTop: "20px",
-                  marginLeft: "70px",
+                  // marginLeft: "70px",
                 }}
               >
                 Please Choose Valid Date
