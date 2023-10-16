@@ -104,15 +104,15 @@ const Addstudiomodal = () => {
       country: country,
       pincode: pincode,
     };
-    const req_values = Object.values(datas);
-    req_values.map((item) => {
-      if (item === "") {
-        setCannotUpdate(true);
-        return;
-      } else {
-        setCannotUpdate(false);
-      }
-    });
+    // const req_values = Object.values(datas);
+    // req_values.map((item) => {
+    //   if (item === "") {
+    //     setCannotUpdate(true);
+    //     return;
+    //   } else {
+    //     setCannotUpdate(false);
+    //   }
+    // });
     console.log(formdatas.value.pname, "##############333");
     axiosInstance
       .post("beaut/addstudio/", datas)

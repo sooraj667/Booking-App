@@ -71,7 +71,7 @@ const Studio = () => {
 
                           <div></div>
                           <div className="text mt-3">
-                            <h2>Mwone</h2>
+                            <h2>{item.studio_name}</h2>
                             <p>LOCALITY - {item.locality}</p>
                             <p>PLACE - {item.place}</p>
                             <hr />

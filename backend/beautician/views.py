@@ -294,7 +294,7 @@ class Addstudio(APIView):
     def post(self,request):
         
         beautid=request.data.get("beautid")
-        print(beautid,"FUNDA")
+        name=request.data.get("name")
         locality=request.data.get("locality")
         place=request.data.get("place")
         district=request.data.get("district")
@@ -305,7 +305,7 @@ class Addstudio(APIView):
 
         try:
             beautobj=Beautician.objects.get(id=beautid)
-            Studio.objects.create(beautician=beautobj,locality=locality,place=place,district=district,state=state,country=country,pincode=pincode)
+            Studio.objects.create(beautician=beautobj,studio_name=name,locality=locality,place=place,district=district,state=state,country=country,pincode=pincode)
             studioobjs=Studio.objects.filter(beautician=beautobj)
             studioobjs_serialized=StudioSerializer(studioobjs,many=True)
             return Response({"message":"success","studios":studioobjs_serialized.data})

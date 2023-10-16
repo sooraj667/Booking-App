@@ -5,6 +5,9 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import axiosInstance from "../../axios/axiosconfig";
 import { setReRender } from "../../feautures/rerenderslice";
+import { setStudiodatas } from "../../feautures/beautician/studioformslice";
+import { useDispatch } from "react-redux";
+import toast, { Toaster } from "react-hot-toast";
 const style = {
   position: "absolute",
   top: "50%",
@@ -21,6 +24,7 @@ const Deleteconfirmationmodal = ({ item_to_delete, id, rerenderit }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const dispatch=useDispatch()
 
   const handleSubmit = () => {
     if (item_to_delete == "studio") {
@@ -33,8 +37,27 @@ const Deleteconfirmationmodal = ({ item_to_delete, id, rerenderit }) => {
         .post("beaut/deletestudio/", datas)
         .then((response) => {
           console.log(response.data);
+
+          const beautdetails = localStorage.getItem("singledetails-B");
+          const parsed = JSON.parse(beautdetails);
+      
+          const datas = {
+            beautid: parsed.id,
+          };
+          axiosInstance
+      .post("beaut/getstudios/", datas)
+      .then((res) => {
+        console.log(res.data);
+        localStorage.setItem("studios-B", JSON.stringify(res.data.studios));
+        dispatch(setStudiodatas(res.data.studios));
+        toast.success("Address Deleted!")
+      })
+      .catch((err) => alert(err));
+
+
+
           handleClose();
-          rerenderit();
+          // rerenderit();
         })
         .catch((error) => {
           alert(error);
@@ -43,6 +66,7 @@ const Deleteconfirmationmodal = ({ item_to_delete, id, rerenderit }) => {
   };
   return (
     <div>
+      <Toaster/>
       <Button
         variant="contained"
         onClick={handleOpen}
