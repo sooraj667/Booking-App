@@ -197,7 +197,7 @@ const Addstudiomodal = () => {
                       onChange={(e) => {
                         setCannotUpdate(false);
 
-                        if (!/^[a-zA-Z]+$/.test(e.target.value)) {
+                        if (!/^[a-zA-Z ]+$/.test(e.target.value)) {
                           setNameError("Studio name can only have alphabets!");
                         } else {
                           setNameError(false);
@@ -218,7 +218,7 @@ const Addstudiomodal = () => {
                       variant="standard"
                       onChange={(e) => {
                         setCannotUpdate(false);
-                        if (!/^[a-zA-Z]+$/.test(e.target.value)) {
+                        if (!/^[a-zA-Z ]+$/.test(e.target.value)) {
                           setLocalityError(
                             "Locality name can only have alphabets!"
                           );
@@ -241,7 +241,7 @@ const Addstudiomodal = () => {
                       variant="standard"
                       onChange={(e) => {
                         setCannotUpdate(false);
-                        if (!/^[a-zA-Z]+$/.test(e.target.value)) {
+                        if (!/^[a-zA-Z ]+$/.test(e.target.value)) {
                           setPlaceError("Place name can only have alphabets!");
                         } else {
                           setPlaceError(false);
@@ -264,7 +264,7 @@ const Addstudiomodal = () => {
                       required
                       onChange={(e) => {
                         setCannotUpdate(false);
-                        if (!/^[a-zA-Z]+$/.test(e.target.value)) {
+                        if (!/^[a-zA-Z ]+$/.test(e.target.value)) {
                           setDistrictError(
                             "District name can only have alphabets!"
                           );
@@ -289,7 +289,7 @@ const Addstudiomodal = () => {
                       required
                       onChange={(e) => {
                         setCannotUpdate(false);
-                        if (!/^[a-zA-Z]+$/.test(e.target.value)) {
+                        if (!/^[a-zA-Z ]+$/.test(e.target.value)) {
                           setStateError("State name can only have alphabets!");
                         } else {
                           setStateError(false);
@@ -312,7 +312,7 @@ const Addstudiomodal = () => {
                       required
                       onChange={(e) => {
                         setCannotUpdate(false);
-                        if (!/^[a-zA-Z]+$/.test(e.target.value)) {
+                        if (!/^[a-zA-Z ]+$/.test(e.target.value)) {
                           setCountryError(
                             "Country name can only have alphabets!"
                           );
