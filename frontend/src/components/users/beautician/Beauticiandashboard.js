@@ -73,6 +73,7 @@ const Beauticiandashboard = () => {
   
   return (
     <div class="beautouter">
+      
      
         {/* <HeaderDashboard/> */}
         <div className="row outer">

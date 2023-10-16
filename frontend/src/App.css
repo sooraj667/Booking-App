@@ -30,7 +30,7 @@ html{
 .sidebar{
     height: 100%;
     width:20vw;
-    background-color:#070202;
+    background-color:#0E1A45;
     position: fixed;
     z-index: 1000;
     border: 1px solid black;
@@ -118,12 +118,15 @@ html{
     /* background-image: url("https://img.freepik.com/free-photo/blue-smooth-wall-textured-background_53876-106133.jpg?w=900&t=st=1697104029~exp=1697104629~hmac=9dccfe4a217a6cc50f13a4a940e02e8eb99acc6ade0c38d0f6260560f2213893"); */
     /* background:linear-gradient(65deg,rgb(13, 12, 39),#114e7a); */
     /* background: linear-gradient(65deg, rgb(13, 12, 39), #0a558a, #a3779f); */
-    background-image: url("https://www.shutterstock.com/shutterstock/videos/1107261555/thumb/1.jpg?ip=x480");
+    /* background-image: url("https://www.shutterstock.com/shutterstock/videos/1107261555/thumb/1.jpg?ip=x480"); */
 
-    height: 1000px;
+    background-color: #F3F5F8;
+
+    min-height: 100vh;
     background-repeat: no-repeat;
     background-size: cover;
 }
+
 
 
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import toast, { Toaster } from "react-hot-toast";
 import axiosInstance from "../../axios/axiosconfig";
@@ -25,8 +25,7 @@ const Paypal = () => {
   const [selectedService, setSelectedService] = useState("");
   const [dateError, setDateError] = useState(false);
   const [slotNotAvailable, setSlotNotAvailable] = useState(false);
-  const [selectedFeeForPayment, setSelectedFeeForPayment] =
-    useState("IVDE ONNULA");
+  const [selectedFeeForPayment, setSelectedFeeForPayment] = useState("IVDE ONNULA");
 
   const navigate = useNavigate();
 
@@ -84,13 +83,26 @@ const Paypal = () => {
 
   const handleServiceChange = (e) => {
     console.log(e.target.value, "SERVICE");
+
+    const parts = (e.target.value).split('Rs ')
+    const part1=parts[1]
+    const fee=(part1.split("/-"))[0]
+    console.log("FEE IS ",fee);
+    setSelectedFeeForPayment(fee)
+
     setSelectedService(e.target.value);
     localStorage.setItem("service", e.target.value);
-    const numberValue = parseFloat(e.target.value.replace(/[^0-9.]/g, ""));
-    setSelectedFeeForPayment(numberValue.toString());
+    // const numberValue = parseFloat(e.target.value.replace(/[^0-9.]/g, ""));
+    // setSelectedFeeForPayment(numberValue.toString());
   };
+  useEffect(
+    ()=>{
+      console.log("Changed");
+    },[selectedFeeForPayment]
+  )
   return (
     <>
+    {console.log(selectedFeeForPayment,"#######################")}
       {console.log(
         `${selectedService}${selectedStudio} ${startDate} ${selectedTime} deyyyy`
       )}
@@ -171,7 +183,7 @@ const Paypal = () => {
               {reqdatas.value.beautservices.map((item) => {
                 return (
                   <option>
-                    {item.service.name} - $ {item.servicefee}/-
+                    {item.service.name} - Rs {item.servicefee}/-
                   </option>
                 );
               })}
