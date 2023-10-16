@@ -318,7 +318,7 @@ class Editstudio(APIView):
         
         beautid=request.data.get("beautid")
         studioid=request.data.get("studioid")
-
+        studio_name=request.data.get("name")
         locality=request.data.get("locality")
         place=request.data.get("place")
         district=request.data.get("district")
@@ -330,6 +330,7 @@ class Editstudio(APIView):
         try:
             beautobj=Beautician.objects.get(id=beautid)
             studioobj=Studio.objects.get(id=studioid)
+            studioobj.studio_name=studio_name
             studioobj.locality=locality
             studioobj.place=place
             studioobj.district=district
@@ -486,6 +487,13 @@ class GetPreviousBookings(APIView):
 
 
 
-
+class GetSingleStudio(APIView):
+    def post(self,request): 
+       
+        id=request.data.get("id")
+        studioobj=Studio.objects.get(id=id)
+        serialized=StudioSerializer(studioobj)
+        
+        return Response({"message":'success',"studiodetails":serialized.data})
 
 
