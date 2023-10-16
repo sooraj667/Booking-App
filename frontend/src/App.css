@@ -30,7 +30,9 @@ html{
 .sidebar{
     height: 100%;
     width:20vw;
-    background-color:#0E1A45;
+    /* background-color:#432b92; */
+    background: linear-gradient(to right, rgba(17, 17, 17, 0.9), rgba(2, 8, 34, 0.9));
+
     position: fixed;
     z-index: 1000;
     border: 1px solid black;
@@ -120,7 +122,11 @@ html{
     /* background: linear-gradient(65deg, rgb(13, 12, 39), #0a558a, #a3779f); */
     /* background-image: url("https://www.shutterstock.com/shutterstock/videos/1107261555/thumb/1.jpg?ip=x480"); */
 
-    background-color: #F3F5F8;
+    /* background-color: #b2a8a8; */
+    /* background: linear-gradient(to right, #595454, rgb(38, 44, 129)); */
+    background-color: #234E70;
+    background-color: #FFFFFF;
+    
 
     min-height: 100vh;
     background-repeat: no-repeat;
@@ -1144,7 +1150,9 @@ body {
 .justify-center{
   justify-content: center;
 }
-
+html{
+  background-color: #115194;
+}
 
 
 

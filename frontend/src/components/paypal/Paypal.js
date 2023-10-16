@@ -161,7 +161,7 @@ const Paypal = () => {
         </div>
         <div className="row mt-5 mb-5" >
           <div className="col-md-6">
-            <div className="title">Choose Studio</div>
+            <div className="title">Choose Studio</div>  
             <select
               name="selectedStudio"
               onChange={handleStudioChange}
