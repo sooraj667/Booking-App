@@ -2,7 +2,7 @@ import {createSlice} from "@reduxjs/toolkit"
 
 
 const INITIALSTATE={
-    
+        name:"",
         locality:"",
         place:"",
         district:"",
@@ -10,6 +10,7 @@ const INITIALSTATE={
         country:"",
         pincode:"",
         error:{
+            name:null,
             locality:null,
             place:null,
             district:null,
@@ -29,6 +30,27 @@ const studioformslice=createSlice(
             value:INITIALSTATE
          },
          reducers:{
+
+            changeName:(state,action)=>{
+            
+                
+              
+              
+            
+                    
+                if (!/^[a-zA-Z]+$/.test(action.payload)){
+                    state.value.error.name="Studio name can only have alphabets!"
+                    state.value.errorcheck=true
+                }
+            
+             
+                else{
+                    state.value.error.name=null
+                    state.value.name=action.payload
+                    state.value.errorcheck=false
+                }
+                
+            },
             changeLocality:(state,action)=>{
             
                 
@@ -147,7 +169,7 @@ const studioformslice=createSlice(
 
 )
 
-export const {changeState,changeDistrict,changePlace,changeLocality,changeCountry,changePincode,setStudiodatas} = studioformslice.actions
+export const {changeState,changeDistrict,changePlace,changeLocality,changeCountry,changePincode,setStudiodatas,changeName} = studioformslice.actions
 
 
 

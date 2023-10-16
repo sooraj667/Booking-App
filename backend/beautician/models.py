@@ -45,6 +45,7 @@ class Blockeddate(models.Model):
 
 class Studio(models.Model):
     beautician=models.ForeignKey(Beautician,on_delete=models.CASCADE)
+    studio_name=models.CharField(max_length=200)
     locality=models.CharField(max_length=200)
     place=models.CharField(max_length=200)
     district=models.CharField(max_length=200)
@@ -52,7 +53,7 @@ class Studio(models.Model):
     country=models.CharField(max_length=200)
     pincode=models.PositiveIntegerField(blank=True,null=True)
 
-    def __str__(self):
+    def __str__(self):  
         return f"{self.beautician.name} - {self.locality} -{self.place}"
 
 class OTP(models.Model):

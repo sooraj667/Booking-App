@@ -1130,6 +1130,17 @@ body {
   font-weight: 600;
 
 }
+.add-studio{
+  display: flex;
+  justify-content: center;
+}
+.justify-around{
+  justify-content: space-around;
+}
+
+.justify-center{
+  justify-content: center;
+}
 
 
 
