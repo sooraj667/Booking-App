@@ -12,6 +12,7 @@ from django.conf import settings
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.hashers import check_password
 import random
+from rest_framework.serializers import Serializer
 
 
 def generate_otp():
@@ -164,6 +165,8 @@ class Booknow(APIView):
          
 
             Appointment.objects.create(customer=custobj,beautician=beautobj,date=parseddate,time=parsed_time,studio=studioobj,service=service_obj_req)
+            beautobj.appointment_count+=1
+            beautobj.save()
             return Response({"message":'Appointmentdone'})
 
         
@@ -578,6 +581,51 @@ class GetAllServiceFee(APIView):
         allservices_serialized=ServicefeesSerializer(allservices,many=True)
         return Response({"message":"success","allservices":allservices_serialized.data})
 
+
+class GetTopBeauticians(APIView):
+   
+    def get(self,request):
+        allbeauts=Beautician.objects.all()
+        maximum=0
+
+        ranking_dict={}
+        req_beautobj1=None
+        req_beautobj2=None
+        req_beautobj3=None
+
+
+        for item in allbeauts:
+            if item.appointment_count>=maximum:
+                req_beautobj1=item
+        req_beautobj1_ser=BeauticianSerializer(req_beautobj1)
+        ranking_dict["first"]=req_beautobj1_ser.data
+
+        for item in allbeauts:
+            if item==req_beautobj1:
+                continue
+            if item.appointment_count>=maximum:
+                req_beautobj2=item
+        req_beautobj2_ser=BeauticianSerializer(req_beautobj2)
+        ranking_dict["second"]=req_beautobj2_ser.data
+
+
+        for item in allbeauts:
+            if item==req_beautobj1 or item==req_beautobj2:
+                continue
+            if item.appointment_count>=maximum:
+                req_beautobj3=item
+        req_beautobj3_ser=BeauticianSerializer(req_beautobj3)
+        ranking_dict["third"]=req_beautobj3_ser.data
+
+        ranking_dict_serialized=Serializer(ranking_dict)
+
+
+
+        
+
+
+        
+        return Response({"message":"success","topbeauticians":ranking_dict_serialized})
 
         
 

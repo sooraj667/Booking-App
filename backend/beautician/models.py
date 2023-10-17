@@ -23,6 +23,7 @@ class Beautician(models.Model):
     # services=models.ManyToManyField(Services,related_name='beauticians_providing_services')
     isblocked=models.CharField(max_length=200,default="False")
     wallet_amount=models.DecimalField(max_digits=10,decimal_places=2)
+    appointment_count=models.PositiveIntegerField(default=0)
    
 
     def __str__(self):

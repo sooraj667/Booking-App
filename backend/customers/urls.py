@@ -25,6 +25,7 @@ urlpatterns = [
     path("add-review/",AddReview.as_view(),name="AddReview"),
     path("getreviews/",GetReviews.as_view(),name="GetReviews"),
     path("getallservicefee/",GetAllServiceFee.as_view(),name="GetAllServiceFee"),
+    path("gettopbeauticians/",GetTopBeauticians.as_view(),name="GetTopBeauticians"),
 
 
     
