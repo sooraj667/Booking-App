@@ -215,7 +215,7 @@ const Landingpartcust = () => {
             {allServices.map((item) => {
               return (
                 <div className="col-md-4">
-                  <Card className="team" sx={{ maxWidth: 375, height: 370, marginTop: 7 }}>
+                  <Card className="team" sx={{ maxWidth: 375, height: 370, marginTop: 7, '&:hover': { boxShadow: '0px 4px 20px 0px rgba(0,0,0,0.2)' } }}  >
                     <CardMedia
                       sx={{ height: 240 }}
                       image={item.image}

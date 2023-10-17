@@ -617,9 +617,47 @@ body {
 
 
 
-.team{
-    height: 100%;
+.team {
+  height: 100%;
+  width: 100%; /* Set a specific width for your cards */
+  background-color: #ffffff; /* Card background color */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow effect */
+  transition: all 0.3s ease; /* Smooth transition for all properties */
+
+  /* Other styles for your cards go here */
+
+  /* Hover effect and popup */
+  transform: scale(1); /* Initial scale value for the cards */
 }
+
+.team:hover {
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+  transform: scale(1.05); /* Enlarge the card on hover */
+  cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+/* Optional: Add styles for the popup */
+.team .popup {
+  display: none; /* Initially hide the popup */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  opacity: 0; /* Initially set the opacity to 0 (fully transparent) */
+  transition: opacity 0.5s ease; /* Apply smooth transition effect to the opacity property */
+  /* Other styles for the popup content go here */
+}
+
+.team:hover .popup {
+  display: block; /* Show the popup on card hover */
+  opacity: 1; /* Set the opacity to 1 (fully visible) to make it appear slowly */
+}
+
+
+
 
 .team .items {
     transition: 0.5s;
@@ -1151,7 +1189,7 @@ body {
   justify-content: center;
 }
 html{
-  background-color: #115194;
+  background-color: #ffffff;
 }
 
 
