@@ -16,6 +16,7 @@ import Profile from "./profile/Profile";
 import Servicepreview from "./services/Servicepreview";
 import WalletCust from "./wallet/WalletCust";
 import PreviousBooking from "./bookings/PreviousBooking";
+import CustomerHeader from "./customer-header/CustomerHeader";
 const Customerdashboard = () => {
   const details = useSelector((state) => state.login);
   const navigationdatas = useSelector((state) => state.custnavigation);
@@ -39,6 +40,7 @@ const Customerdashboard = () => {
     // <HeaderDashboard/>
     <div className="beautouter">
       <div className="row outer">
+        <CustomerHeader/>
         <div className="col-md-3 sidebar">
           <Contents />
         </div>

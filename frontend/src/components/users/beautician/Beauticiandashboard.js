@@ -14,6 +14,7 @@ import axiosInstance from "../../../axios/axiosconfig";
 import { useState } from "react";
 import WalletBeaut from "./wallet/WalletBeaut";
 import PreviousBeautBookings from "./appointments/PreviousBeautBookings";
+import BeauticianHeader from "./beautician-header/BeauticianHeader";
 
 const Beauticiandashboard = () => {
   const statedatas=useSelector((state)=>state.beautnavigation)
@@ -73,10 +74,12 @@ const Beauticiandashboard = () => {
   
   return (
     <div class="beautouter">
+
       
      
         {/* <HeaderDashboard/> */}
         <div className="row outer">
+          <BeauticianHeader/>
           <div className="col-md-3 sidebar">
           <Contents/>
 
