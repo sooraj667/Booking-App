@@ -178,15 +178,23 @@ const Landingpartcust = () => {
         )}
       </div> */}
       <div class="landouter">
+        <div className="sub-heading-div flex justify-center align-center py-3 text-small fw-2 sgfont">
+          What are you looking for?
+        
+
+
+        </div>
+
         
           
        
-        <div className="hero">
-    
-          SERVICES
-       
+          {/* <div className="hero">
+            What are you looking for?
+      
+            SERVICES
+        
 
-        </div>
+          </div> */}
         <hr />
         <Container
           elevation={24}

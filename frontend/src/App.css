@@ -11,6 +11,12 @@ body{
 }
 html{
   color: #e3e1eb;
+  /* font-family: 'Outfit', sans-serif; */
+  font-family: 'Space Grotesk', sans-serif;
+}
+.sgfont{
+  font-family: 'Space Grotesk', sans-serif;
+
 }
 .signupbeautpage{
     background-color: rgb(13, 9, 2);
@@ -892,7 +898,7 @@ body {
 .flex{
     display: flex ;
     flex-direction: row;
-    justify-content: center;
+   
 }
 .inputform{
     background-color: inherit;
@@ -1182,6 +1188,10 @@ body {
   display: flex;
   justify-content: center;
 }
+
+
+
+/* utilities */
 .justify-around{
   justify-content: space-around;
 }
@@ -1189,9 +1199,56 @@ body {
 .justify-center{
   justify-content: center;
 }
+.justify-around{
+  justify-content: space-around;
+}
+.justify-between{
+  justify-content: space-between;
+}
 html{
   background-color: #ffffff;
 }
+.align-center{
+  align-items: center;
+}
+
+.py-3{
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+}
+.text-large{
+  font-size: 3rem;
+}
+.text-medium{
+  font-size: 2rem;
+}
+.text-small{
+  font-size: 1.2rem;
+}
+
+.fw-1{
+  font-weight: 400;
+}
+.fw-2{
+  font-weight: 500;
+}
+.fw-3{
+  font-weight: 600;
+}
+.fw-4{
+  font-weight: 700;
+}
+.fw-5{
+  font-weight: 800;
+}
+
+
+
+
+
+
+
+
 
 
 
