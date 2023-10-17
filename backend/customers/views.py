@@ -569,6 +569,14 @@ class GetReviews(APIView):
             return Response({"message":"empty"})
         else:
             return Response({"message":"notempty","reviews":allreviews_serialized.data})
+        
+
+class GetAllServiceFee(APIView):
+   
+    def get(self,request):
+        allservices=Servicefees.objects.all()
+        allservices_serialized=ServicefeesSerializer(allservices,many=True)
+        return Response({"message":"success","allservices":allservices_serialized.data})
 
 
         

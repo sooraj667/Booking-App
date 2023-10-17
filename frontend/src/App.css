@@ -9,6 +9,10 @@ body{
     
     
 }
+*{
+  font-family: 'Space Grotesk', sans-serif;
+
+}
 html{
   color: #e3e1eb;
   /* font-family: 'Outfit', sans-serif; */
@@ -1240,6 +1244,13 @@ html{
 }
 .fw-5{
   font-weight: 800;
+}
+.title1{
+  font-size: 17px;
+}
+.allservices{
+  color: #230246;
+  text-decoration: underline;
 }
 
 
