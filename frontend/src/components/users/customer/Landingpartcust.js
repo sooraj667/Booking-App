@@ -42,6 +42,7 @@ import Typography from "@mui/joy/Typography";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 
 import "./Landingpartcust.css";
+import TopBeauticians from "./topbeauticians/TopBeauticians";
 
 // function srcset(image, width, height, rows = 1, cols = 1) {
 //   return {
@@ -324,6 +325,8 @@ const Landingpartcust = () => {
             TOP BEAUTICIANS
 
           </div>
+
+          <TopBeauticians/>
 
           {/* <ImageList sx={{ width: 700, height: 450 }}>
             <ImageListItem key="Subheader" cols={2}>

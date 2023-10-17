@@ -1,4 +1,4 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer,Serializer,DictField
 from .models import *
 from beautician.serializers import *
 
@@ -27,3 +27,9 @@ class Reviewserializer(ModelSerializer):
     class Meta:
         model=Review
         fields= "__all__"
+
+
+class RankingDictSerializer(Serializer):
+    first = DictField()
+    second = DictField()
+    third = DictField()

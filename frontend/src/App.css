@@ -40,7 +40,7 @@ html{
 
 .sidebar{
     height: 100%;
-    width:20vw;
+    width:16vw;
     /* background-color:#432b92; */
     background: linear-gradient(to right, rgba(17, 17, 17, 0.9), rgba(2, 8, 34, 0.9));
 
@@ -1257,6 +1257,9 @@ html{
 }
 .underline{
   text-decoration: underline;
+}
+.max-w{
+  width: 50vw;
 }
 
 

@@ -586,6 +586,7 @@ class GetTopBeauticians(APIView):
    
     def get(self,request):
         allbeauts=Beautician.objects.all()
+        
         maximum=0
 
         ranking_dict={}
@@ -597,35 +598,44 @@ class GetTopBeauticians(APIView):
         for item in allbeauts:
             if item.appointment_count>=maximum:
                 req_beautobj1=item
+                maximum=req_beautobj1.appointment_count
         req_beautobj1_ser=BeauticianSerializer(req_beautobj1)
         ranking_dict["first"]=req_beautobj1_ser.data
-
+        maximum=0
         for item in allbeauts:
             if item==req_beautobj1:
                 continue
             if item.appointment_count>=maximum:
                 req_beautobj2=item
+                maximum=req_beautobj2.appointment_count
         req_beautobj2_ser=BeauticianSerializer(req_beautobj2)
         ranking_dict["second"]=req_beautobj2_ser.data
 
-
+        maximum=0
         for item in allbeauts:
             if item==req_beautobj1 or item==req_beautobj2:
                 continue
             if item.appointment_count>=maximum:
                 req_beautobj3=item
+                maximum=req_beautobj3.appointment_count
         req_beautobj3_ser=BeauticianSerializer(req_beautobj3)
         ranking_dict["third"]=req_beautobj3_ser.data
 
-        ranking_dict_serialized=Serializer(ranking_dict)
 
 
 
+
+
+
+
+
+
+        ranking_dict_serialized=RankingDictSerializer(ranking_dict)
         
 
 
         
-        return Response({"message":"success","topbeauticians":ranking_dict_serialized})
+        return Response({"message":"success","topbeauticians":ranking_dict_serialized.data})
 
         
 
