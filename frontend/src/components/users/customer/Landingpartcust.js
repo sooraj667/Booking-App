@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
-import { Input, Typography } from "@mui/material";
+
 import { useSelector, useDispatch } from "react-redux";
-import Button from "@mui/material/Button";
+// import Button from "@mui/material/Button";
 import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
 import DriveFolderUploadIcon from "@mui/icons-material/DriveFolderUpload";
 import axiosInstance from "../../../axios/axiosconfig";
@@ -24,12 +24,22 @@ import InfoIcon from "@mui/icons-material/Info";
 import { setServiceId } from "../../../feautures/customer/servicepreviewslice";
 import { toggleServicePreview } from "../../../feautures/customer/customernavigationslice";
 
-import Card from "@mui/material/Card";
+// import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
+
 import CardMedia from "@mui/material/CardMedia";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import StarHalfIcon from "@mui/icons-material/StarHalf";
+
+import AspectRatio from "@mui/joy/AspectRatio";
+import Button from "@mui/joy/Button";
+import Card from "@mui/joy/Card";
+import CardContent from "@mui/joy/CardContent";
+import CardOverflow from "@mui/joy/CardOverflow";
+import Chip from "@mui/joy/Chip";
+import Link from "@mui/joy/Link";
+import Typography from "@mui/joy/Typography";
+import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 
 import "./Landingpartcust.css";
 
@@ -180,28 +190,26 @@ const Landingpartcust = () => {
       <div class="landouter">
         <div className="sub-heading-div flex justify-center align-center py-3 text-small fw-2 sgfont">
           What are you looking for?
-        
-
-
         </div>
 
-        
-          
-       
-          {/* <div className="hero">
+        <div className="sub-heading-div flex justify-center align-center py-3 text-small fw-2 sgfont themecolor underline">
+          SERVICES
+        </div>
+
+        {/* <div className="hero">
             What are you looking for?
       
             SERVICES
         
 
           </div> */}
-        <hr />
+        
         <Container
           elevation={24}
           sx={{
             width: 800,
             height: "100vh",
-            
+
             // backgroundImage:'url("https://img.freepik.com/premium-photo/close-up-hair-supplies-flat-lay_23-2148352942.jpg?w=900")',
             objectFit: "cover",
             backgroundRepeat: "no-repeat",
@@ -222,8 +230,61 @@ const Landingpartcust = () => {
           <div className="row ">
             {allServices.map((item) => {
               return (
-                <div className="col-md-4">
-                  <Card className="team" sx={{ maxWidth: 375, height: 370, marginTop: 7, '&:hover': { boxShadow: '0px 4px 20px 0px rgba(0,0,0,0.2)' } }}  >
+                <div className="col-md-4 mb-3">
+                  <Card sx={{ width: 320, maxWidth: "100%", boxShadow: "lg" }} onClick={() => handleServiceClick(item.id)}>
+                    <CardOverflow>
+                      <AspectRatio sx={{ minWidth: 200 }}>
+                        <img
+                          src={item.image}
+                          srcSet={item.image}
+                          loading="lazy"
+                          alt=""
+                        />
+                      </AspectRatio>
+                    </CardOverflow>
+                    <CardContent>
+                      <Typography level="body-xs"></Typography>
+                      <Link
+                        href="#product-card"
+                        fontWeight="md"
+                        color="neutral"
+                        textColor="text.primary"
+                        overlay 
+                        // endDecorator={<ArrowOutwardIcon />}
+                      >
+                        {item.name}
+                      </Link>
+
+                      <Typography
+                        level="title-lg"
+                        sx={{ mt: 1, fontWeight: "xl" }}
+                        endDecorator={
+                          <Chip
+                            component="span"
+                            size="sm"
+                            variant="soft"
+                            color="success"
+                          >
+                           {item.description}
+                          </Chip>
+                        }
+                      >
+                      
+                      </Typography>
+                      <Typography level="body-sm">
+                        (Only <b>7</b> left in stock!)
+                      </Typography>
+                    </CardContent>
+                    <CardOverflow>
+                      <Button variant="solid"  size="lg" sx={{
+                        backgroundColor:"#0C0335"
+                      }}> 
+                        View
+                      </Button>
+                    </CardOverflow>
+                  </Card>
+
+                  {/* <Card className="team" sx={{ maxWidth: 375, height: 370, marginTop: 7, '&:hover': { boxShadow: '0px 4px 20px 0px rgba(0,0,0,0.2)' } }}  >
                     <CardMedia
                       sx={{ height: 240 }}
                       image={item.image}
@@ -235,12 +296,7 @@ const Landingpartcust = () => {
                         {item.name}
                       </Typography>
                       <div className="row ml-1 ">
-                        {/* <Typography gutterBottom component="div" variant="h6">
-                          Fee :
-                        </Typography>
-                        <Typography gutterBottom component="div" variant="h5">
-                          {item.servicefee}/-
-                        </Typography> */}
+           
                       </div>
                       <Button
                         size="small"
@@ -254,12 +310,19 @@ const Landingpartcust = () => {
                       </Button>
                     </CardContent>
                     <CardActions>
-                      {/* <Button size="small" onClick={()=>handleServiceClick(item.id)}>Check Beauticians</Button> */}
+            
                     </CardActions>
-                  </Card>
+                  </Card> */}
                 </div>
               );
             })}
+          </div>
+
+          <hr />
+
+          <div className="sub-heading-div flex justify-center align-center py-3 text-small fw-2 sgfont  themecolor underline">
+            TOP BEAUTICIANS
+
           </div>
 
           {/* <ImageList sx={{ width: 700, height: 450 }}>
@@ -361,12 +424,9 @@ const Landingpartcust = () => {
             )
           } */}
         </Container>
+
+    
       </div>
-
-      
-      
-
-      
     </div>
   );
 };
