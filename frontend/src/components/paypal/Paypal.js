@@ -286,10 +286,42 @@ const Paypal = () => {
           />
           <Toaster />
         </PayPalScriptProvider>
-      )}
+      ) }
+    
+
+
+
+
+
+
+
+      
+   
+
+
+
+
+
+
+
             </Button>
+
+         
+
+           
+
+            
           </CardActions>
+
+          
         </CardContent>
+        {
+              dateError || slotNotAvailable ? ("") :
+              (
+                <Button sx={{bgcolor:"#FFC439"}}>Pay Using Wallet</Button>
+              )
+            }
+        
       </Card>
 
       {/* <div className="booking-form-outer">
@@ -374,6 +406,7 @@ const Paypal = () => {
           </div>
         </div>
       </div> */}
+      
       <hr />
       
       {console.log(selectedFeeForPayment, "FEEEE")}
