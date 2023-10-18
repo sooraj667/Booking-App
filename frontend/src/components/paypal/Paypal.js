@@ -4,11 +4,28 @@ import toast, { Toaster } from "react-hot-toast";
 import axiosInstance from "../../axios/axiosconfig";
 import { useSelector } from "react-redux";
 import DatePicker from "react-datepicker";
-import Select from "@mui/material/Select";
+
 import InputLabel from "@mui/material/InputLabel";
 import moment from "moment";
 import MuiAlert from "@mui/material/Alert";
 import { useNavigate } from "react-router-dom";
+
+import Card from "@mui/joy/Card";
+import CardActions from "@mui/joy/CardActions";
+import CardContent from "@mui/joy/CardContent";
+import Checkbox from "@mui/joy/Checkbox";
+import Divider from "@mui/joy/Divider";
+import FormControl from "@mui/joy/FormControl";
+import FormLabel from "@mui/joy/FormLabel";
+import Input from "@mui/joy/Input";
+import Typography from "@mui/joy/Typography";
+import Button from "@mui/joy/Button";
+import InfoOutlined from "@mui/icons-material/InfoOutlined";
+import CreditCardIcon from "@mui/icons-material/CreditCard";
+import BookIcon from '@mui/icons-material/Book';
+
+import Select from "@mui/joy/Select";
+import Option from "@mui/joy/Option";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -25,7 +42,8 @@ const Paypal = () => {
   const [selectedService, setSelectedService] = useState("");
   const [dateError, setDateError] = useState(false);
   const [slotNotAvailable, setSlotNotAvailable] = useState(false);
-  const [selectedFeeForPayment, setSelectedFeeForPayment] = useState("IVDE ONNULA");
+  const [selectedFeeForPayment, setSelectedFeeForPayment] =
+    useState("IVDE ONNULA");
 
   const navigate = useNavigate();
 
@@ -84,43 +102,59 @@ const Paypal = () => {
   const handleServiceChange = (e) => {
     console.log(e.target.value, "SERVICE");
 
-    const parts = (e.target.value).split('Rs ')
-    const part1=parts[1]
-    const fee=(part1.split("/-"))[0]
-    console.log("FEE IS ",fee);
-    setSelectedFeeForPayment(fee)
+    const fee = e.target.value
+    // const part1 = parts[1];
+    // const fee = part1.split("/-")[0];
+    // console.log("FEE IS ", fee);
+    setSelectedFeeForPayment(fee);
 
     setSelectedService(e.target.value);
     localStorage.setItem("service", e.target.value);
     // const numberValue = parseFloat(e.target.value.replace(/[^0-9.]/g, ""));
     // setSelectedFeeForPayment(numberValue.toString());
   };
-  useEffect(
-    ()=>{
-      console.log("Changed");
-    },[selectedFeeForPayment]
-  )
+  useEffect(() => {
+    console.log("Changed");
+  }, [selectedFeeForPayment]);
   return (
     <>
-    {console.log(selectedFeeForPayment,"#######################")}
+      {console.log(selectedFeeForPayment, "#######################")}
       {console.log(
         `${selectedService}${selectedStudio} ${startDate} ${selectedTime} deyyyy`
       )}
-      <div className="booking-form-outer">
-        <div className="sub-heading mb-3">
-          BOOK YOUR SLOT
-        </div>
-        <div className="row ">
-          <div className="col-md-6 ">
-            <div className="title ">Choose Date</div>
+
+      <Card
+        variant="outlined"
+        sx={{
+          maxHeight: "max-content",
+          maxWidth: "100%",
+          width:"40vw",
+          mx: "auto",
+          // to make the demo resizable
+          overflow: "auto",
+          resize: "horizontal",
+          
+        }}
+      >
+        <Typography level="title-lg" startDecorator={<BookIcon />} >
+          Book Now
+        </Typography>
+        <Divider inset="none" />
+        <CardContent
+          sx={{
+            display: "grid",
+            gridTemplateColumns: "repeat(2, minmax(80px, 1fr))",
+            gap: 1.5,
+          }}
+        >
+          <FormControl sx={{ gridColumn: "1/-1" }}>
+            <FormLabel>Select Date</FormLabel>
             <DatePicker
-              
               selected={startDate}
               onChange={handleDateChange}
               dateFormat="MM/dd/yyyy"
               className=" inputform form-control"
             />
-
             {dateError && (
               <Alert
                 severity="error"
@@ -132,10 +166,10 @@ const Paypal = () => {
                 Please Choose Valid Date
               </Alert>
             )}
-          </div>
-          <div className="col-md-6">
-            <div className="title">Select Time</div>
-
+            {/* <Input endDecorator={<CreditCardIcon />} /> */}
+          </FormControl >
+          <FormControl sx={{ gridColumn: "1/-1" }}>
+            <FormLabel>Select Time</FormLabel>
             <select
               name="selectedTime"
               onChange={handleTimeChange}
@@ -145,7 +179,6 @@ const Paypal = () => {
                 return <option>{item}</option>;
               })}
             </select>
-
             {slotNotAvailable && (
               <Alert
                 severity="error"
@@ -157,11 +190,13 @@ const Paypal = () => {
                 Slot Already Booked! Choose Another Slot
               </Alert>
             )}
-          </div>
-        </div>
-        <div className="row mt-5 mb-5" >
-          <div className="col-md-6">
-            <div className="title">Choose Studio</div>  
+          </FormControl>
+          {/* <FormControl >
+            <FormLabel>NIL</FormLabel>
+            <Input endDecorator={<InfoOutlined />} />
+          </FormControl> */}
+          <FormControl sx={{ gridColumn: "1/-1" }}>
+            <FormLabel>Choose Studio</FormLabel>
             <select
               name="selectedStudio"
               onChange={handleStudioChange}
@@ -171,9 +206,10 @@ const Paypal = () => {
                 return <option>{item.place}</option>;
               })}
             </select>
-          </div>
-          <div className="col-md-6">
-            <div className="title">Select Service</div>
+          </FormControl>
+
+          <FormControl sx={{ gridColumn: "1/-1" }}>
+            <FormLabel>Choose Service</FormLabel>
             <select
               name="selectedService"
               onChange={handleServiceChange}
@@ -188,11 +224,11 @@ const Paypal = () => {
                 );
               })}
             </select>
-          </div>
-        </div>
-      </div>
-              <hr />
-      {dateError || slotNotAvailable ? (
+          </FormControl>
+          <Checkbox label="Save card" sx={{ gridColumn: "1/-1", my: 1 }} />
+          <CardActions sx={{ gridColumn: "1/-1" }}>
+            <Button variant="solid"  sx={{backgroundColor:"#0C0335"}}>
+            {dateError || slotNotAvailable ? (
         ""
       ) : (
         <PayPalScriptProvider
@@ -251,6 +287,95 @@ const Paypal = () => {
           <Toaster />
         </PayPalScriptProvider>
       )}
+            </Button>
+          </CardActions>
+        </CardContent>
+      </Card>
+
+      {/* <div className="booking-form-outer">
+        <div className="sub-heading mb-3">BOOK YOUR SLOT</div>
+        <div className="row ">
+          <div className="col-md-6 ">
+            <div className="title ">Choose Date</div>
+            <DatePicker
+              selected={startDate}
+              onChange={handleDateChange}
+              dateFormat="MM/dd/yyyy"
+              className=" inputform form-control"
+            />
+
+            {dateError && (
+              <Alert
+                severity="error"
+                sx={{
+                  marginTop: "20px",
+                  // marginLeft: "70px",
+                }}
+              >
+                Please Choose Valid Date
+              </Alert>
+            )}
+          </div>
+          <div className="col-md-6">
+            <div className="title">Select Time</div>
+
+            <select
+              name="selectedTime"
+              onChange={handleTimeChange}
+              className=" form-control inputform"
+            >
+              {alltime.map((item) => {
+                return <option>{item}</option>;
+              })}
+            </select>
+
+            {slotNotAvailable && (
+              <Alert
+                severity="error"
+                sx={{
+                  marginTop: "20px",
+                  marginLeft: "70px",
+                }}
+              >
+                Slot Already Booked! Choose Another Slot
+              </Alert>
+            )}
+          </div>
+        </div>
+        <div className="row mt-5 mb-5">
+          <div className="col-md-6">
+            <div className="title">Choose Studio</div>
+            <select
+              name="selectedStudio"
+              onChange={handleStudioChange}
+              className=" form-control inputform "
+            >
+              {reqdatas.value.beautstudios.map((item) => {
+                return <option>{item.place}</option>;
+              })}
+            </select>
+          </div>
+          <div className="col-md-6">
+            <div className="title">Select Service</div>
+            <select
+              name="selectedService"
+              onChange={handleServiceChange}
+              className=" form-control inputform"
+            >
+              {console.log(reqdatas.value.beautservices, "NOKKEDAADAAADADAD")}
+              {reqdatas.value.beautservices.map((item) => {
+                return (
+                  <option>
+                    {item.service.name} - Rs {item.servicefee}/-
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+        </div>
+      </div> */}
+      <hr />
+      
       {console.log(selectedFeeForPayment, "FEEEE")}
       {console.log(typeof selectedFeeForPayment, "TYPE")}
     </>
