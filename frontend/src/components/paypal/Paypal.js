@@ -272,6 +272,7 @@ const Paypal = () => {
                 time: localStorage.getItem("time"),
                 studio: localStorage.getItem("studio"),
                 servicename: localStorage.getItem("service"),
+                type:"paypal",
               };
              
               axiosInstance.post("cust/booknow/", datas).then((response) => {

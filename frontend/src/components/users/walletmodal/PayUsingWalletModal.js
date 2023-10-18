@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 import axiosInstance from '../../../axios/axiosconfig';
 
 const PayUsingWalletModal = () => {
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
     const [bookingFee,setBookingFee]=useState(localStorage.getItem("selected_service_fee"))
     const reqdatas = useSelector((state) => state.custreqdata);
     const statedatas = useSelector((state) => state.login);
@@ -23,11 +23,15 @@ const PayUsingWalletModal = () => {
             time: localStorage.getItem("time"),
             studio: localStorage.getItem("studio"),
             servicename: localStorage.getItem("service"),
+            type:"wallet",
           };
          
           axiosInstance.post("cust/booknow/", datas).then((response) => {
             console.log(response, "RESRERSRERSRERSR");
+          }).catch((error)=>{
+            alert(error)
           });
+          setOpen(false)
     }
   return (
     <React.Fragment>

@@ -133,6 +133,7 @@ class Booknow(APIView):
         time=request.data.get("time")
         studio=request.data.get("studio")
         servicename=request.data.get("servicename")
+        typeofpayment=request.data.get("type")
 
         servicename=servicename.split(" - ")[0]
       
@@ -167,6 +168,9 @@ class Booknow(APIView):
             Appointment.objects.create(customer=custobj,beautician=beautobj,date=parseddate,time=parsed_time,studio=studioobj,service=service_obj_req)
             beautobj.appointment_count+=1
             beautobj.save()
+            if typeofpayment=="wallet":
+                custobj.wallet_amount-=service_obj_req.servicefee
+                custobj.save()
             return Response({"message":'Appointmentdone'})
 
         
