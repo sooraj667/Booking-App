@@ -652,6 +652,23 @@ class GetTopBeauticians(APIView):
 
         
         return Response({"message":"success","topbeauticians":ranking_dict_serialized.data})
+    
+
+
+
+class AddToFavourites(APIView):
+  
+    def post(self,request): 
+        id=request.data.get("bookingid")
+        
+        appointment=Appointment.objects.get(id=id)
+        try:
+            FavouriteStylists.objects.get(beautician=appointment.beautician,customer=appointment.customer)
+            return Response({"message":"already_present"})
+
+        except:
+            FavouriteStylists.objects.create(beautician=appointment.beautician,customer=appointment.customer)
+            return Response({"message":"done"})
 
         
 

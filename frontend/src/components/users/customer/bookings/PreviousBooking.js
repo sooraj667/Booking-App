@@ -14,6 +14,8 @@ import DialogTitle from "@mui/material/DialogTitle";
 import toast, { Toaster } from "react-hot-toast";
 import { toggleBookings } from "../../../../feautures/customer/customernavigationslice";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
+import {setAddToFavouritesBookingId} from "../../../../feautures/variableSlice"
+import AddToFavouritesModal from "./AddToFavouritesModal";
 
 const PreviousBooking = () => {
   const reqdatas = useSelector((state) => state.custreqdata);
@@ -60,6 +62,11 @@ const PreviousBooking = () => {
   const handleCancelItem = (id) => {
     setCancelItemID(id);
     handleClickOpen();
+  };
+
+  const handleAddToFavouritesItem = (id) => {
+    dispatch(setAddToFavouritesBookingId(id))
+    // handleClickOpen();
   };
 
   const handleSubmit = () => {
@@ -167,6 +174,12 @@ const PreviousBooking = () => {
                               >
                                 ADD REVIEW
                               </Button>
+
+
+                              
+                              <AddToFavouritesModal id={val.id}/>
+
+
                               <Dialog
                                 open={open}
                                 onClose={handleClose}

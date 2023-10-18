@@ -37,5 +37,9 @@ class Review(models.Model):
     content=models.CharField(max_length=200)
    
 
+class FavouriteStylists(models.Model):
+    beautician=models.ForeignKey(Beautician,on_delete=models.CASCADE)
+    customer=models.ForeignKey(Customer,on_delete=models.CASCADE)
+
 
    
