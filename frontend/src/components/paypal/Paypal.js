@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import toast, { Toaster } from "react-hot-toast";
 import axiosInstance from "../../axios/axiosconfig";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import DatePicker from "react-datepicker";
 
 import InputLabel from "@mui/material/InputLabel";
@@ -26,6 +26,8 @@ import BookIcon from '@mui/icons-material/Book';
 
 import Select from "@mui/joy/Select";
 import Option from "@mui/joy/Option";
+import PayUsingWalletModal from "../users/walletmodal/PayUsingWalletModal";
+import {setBookingFee} from "../../feautures/variableSlice"
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -35,6 +37,7 @@ const Paypal = () => {
   const reqdatas = useSelector((state) => state.custreqdata);
   const statedatas = useSelector((state) => state.login);
   const paymentdatas = useSelector((state) => state.paymentdatas);
+  const dispatch=useDispatch()
 
   const [startDate, setStartDate] = useState(new Date());
   const [selectedTime, setSelectedTime] = useState("");
@@ -102,11 +105,12 @@ const Paypal = () => {
   const handleServiceChange = (e) => {
     console.log(e.target.value, "SERVICE");
 
-    const fee = e.target.value
-    // const part1 = parts[1];
-    // const fee = part1.split("/-")[0];
-    // console.log("FEE IS ", fee);
+    const parts = e.target.value.split("Rs ")
+    const part1 = parts[1];
+    const fee = part1.split("/-")[0];
+    console.log("FEE IS ", fee);
     setSelectedFeeForPayment(fee);
+    dispatch(setBookingFee(fee))
 
     setSelectedService(e.target.value);
     localStorage.setItem("service", e.target.value);
@@ -168,6 +172,7 @@ const Paypal = () => {
             )}
             {/* <Input endDecorator={<CreditCardIcon />} /> */}
           </FormControl >
+          {console.log(selectedFeeForPayment,"MAINFEE IPOLATHE")}
           <FormControl sx={{ gridColumn: "1/-1" }}>
             <FormLabel>Select Time</FormLabel>
             <select
@@ -268,7 +273,7 @@ const Paypal = () => {
                 studio: localStorage.getItem("studio"),
                 servicename: localStorage.getItem("service"),
               };
-              console.log(datas, "MWONEEEEEEEEEEEEE");
+             
               axiosInstance.post("cust/booknow/", datas).then((response) => {
                 console.log(response, "RESRERSRERSRERSR");
               });
@@ -318,7 +323,8 @@ const Paypal = () => {
         {
               dateError || slotNotAvailable ? ("") :
               (
-                <Button sx={{bgcolor:"#FFC439"}}>Pay Using Wallet</Button>
+                // <Button sx={{bgcolor:"#FFC439"}}>Pay Using Wallet</Button>
+                <PayUsingWalletModal />
               )
             }
         

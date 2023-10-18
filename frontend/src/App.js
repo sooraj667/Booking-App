@@ -19,6 +19,7 @@ import otpslice from "./feautures/otpslice";
 import paymentdataslice from "./feautures/customer/paymentdataslice";
 import servicepreviewslice from "./feautures/customer/servicepreviewslice";
 import forgotpasswordslice from "./feautures/forgotpassword/forgotpasswordslice";
+import variableSlice from "./feautures/variableSlice";
 function App() {
   const store = configureStore({
     reducer: {
@@ -35,7 +36,8 @@ function App() {
       otp:otpslice,
       paymentdatas:paymentdataslice,
       servicepreview:servicepreviewslice,
-      forgotpassword:forgotpasswordslice
+      forgotpassword:forgotpasswordslice,
+      variables:variableSlice,
     },
   });
 
