@@ -477,9 +477,12 @@ class CancelBooking(APIView):
         servicefee=appointment.service.servicefee
         appointment.beautician.wallet_amount-=servicefee
         appointment.customer.wallet_amount+=servicefee
+        appointment.status="Cancelled"
+
         appointment.beautician.save()
         appointment.customer.save()
-        appointment.delete()
+        appointment.save()
+        
     
         
         

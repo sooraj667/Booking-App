@@ -128,6 +128,7 @@ const Booking = () => {
                             <p>
                               Service -{val.service.service.name} <br />
                               Amount Paid - {val.service.servicefee}
+                              Order Status - {val.status==="Confirmed" ? <span className="text-success">Confirmed</span> : <span className="text-danger">Cancelled</span>  } 
                             </p>
                             {/* <Button
                             onClick={()=>handleCancelItem(val.id)}
@@ -143,7 +144,9 @@ const Booking = () => {
                           Cancel Booking
                         </Button> */}
                             <div>
-                              <Button
+                              {
+                                val.status==="Confirmed" && 
+                                <Button
                                 variant="outlined"
                                 onClick={() => handleCancelItem(val.id)}
                                 sx={{
@@ -158,6 +161,8 @@ const Booking = () => {
                               >
                                 CANCEL BOOKING
                               </Button>
+                              }
+                              
                               <Dialog
                                 open={open}
                                 onClose={handleClose}

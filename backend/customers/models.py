@@ -25,6 +25,7 @@ class Appointment(models.Model):
     studio=models.ForeignKey(Studio,on_delete=models.CASCADE)
     service=models.ForeignKey(Servicefees,on_delete=models.CASCADE)
     booked_timing=models.DateTimeField(auto_now_add=True)
+    status=models.CharField(max_length=200,default="Confirmed")
 
 
     def __str__(self):
