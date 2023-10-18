@@ -155,6 +155,14 @@ class Booknow(APIView):
 
         service_obj=Services.objects.get(name=servicename)
         service_obj_req=Servicefees.objects.get(beautician=beautobj,service=service_obj)
+
+        if typeofpayment=="wallet":
+                if custobj.wallet_amount<service_obj_req.servicefee:
+                    return Response({"message":'not_enough_wallet_amount' ,"available_amount":custobj.wallet_amount})
+
+
+
+
         beautobj.wallet_amount+=service_obj_req.servicefee
         beautobj.save()
         
