@@ -7,6 +7,10 @@ import DialogTitle from '@mui/joy/DialogTitle';
 import DialogContent from '@mui/joy/DialogContent';
 import { useSelector } from 'react-redux';
 import axiosInstance from '../../../axios/axiosconfig';
+import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from 'react-router-dom';
+
+
 
 const PayUsingWalletModal = () => {
     const [open, setOpen] = useState(false);
@@ -14,8 +18,17 @@ const PayUsingWalletModal = () => {
     const reqdatas = useSelector((state) => state.custreqdata);
     const statedatas = useSelector((state) => state.login);
     const variables=useSelector((state)=>state.variables)
+    const navigate=useNavigate()
 
     const handleSubmit=()=>{
+        localStorage.setItem(
+            "bookedbeautid",
+            reqdatas.value.bookbeautdata.id
+          );
+          localStorage.setItem(
+            "bookedcustid",
+            statedatas.value.custdetails.id
+          );
         const datas = {
             beautid: reqdatas.value.bookbeautdata.id,
             custid: statedatas.value.custdetails.id,
@@ -32,12 +45,17 @@ const PayUsingWalletModal = () => {
             alert(error)
           });
           setOpen(false)
+          toast.success("Booking Confirmed!")
+          setTimeout(() => {
+            navigate("../booking-completed");
+        }, 2000);
     }
   return (
     <React.Fragment>
       <Button variant="contained"  onClick={() => setOpen(true)} sx={{bgcolor:"#FFC439"}}>
         Pay Using Wallet
       </Button>
+      <Toaster/>
     
       <Transition in={open} timeout={400}>
         {(state) => (
