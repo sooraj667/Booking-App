@@ -12,9 +12,18 @@ import CardActions from '@mui/joy/CardActions';
 import IconButton from '@mui/joy/IconButton';
 import Typography from '@mui/joy/Typography';
 import SvgIcon from '@mui/joy/SvgIcon';
+import { toggleBooknow } from "../../../../feautures/customer/customernavigationslice";
+import { useDispatch } from "react-redux";
 
 const Favouritestylists = () => {
   const [allFavourites, setAllFavourites] = useState([]);
+  const dispatch=useDispatch()
+
+  const booknowHandler = (id) => {
+    dispatch(toggleBooknow(id));
+    localStorage.setItem("id", id);
+ 
+  };
 
   useEffect(() => {
     const datas = {
@@ -50,6 +59,7 @@ const Favouritestylists = () => {
         width: 320,
         maxWidth: '100%',
         boxShadow: 'lg',
+        height:300,
       }}
     >
       <CardContent sx={{ alignItems: 'center', textAlign: 'center' }}>
@@ -69,8 +79,7 @@ const Favouritestylists = () => {
         </Chip>
         <Typography level="title-lg">{item.beautician.name}</Typography>
         <Typography level="body-sm" sx={{ maxWidth: '24ch' }}>
-          Hello, this is my bio and I am a PRO member of MUI. I am a developer and I
-          love to code.
+          {item.beautician.bio}
         </Typography>
         <Box
           sx={{
@@ -150,7 +159,7 @@ const Favouritestylists = () => {
         <CardActions buttonFlex="1">
           <ButtonGroup variant="outlined" sx={{ bgcolor: 'background.surface' }}>
             <Button>Remove</Button>
-            <Button>Book Now</Button>
+            <Button onClick={() => booknowHandler(item.beautician.id)}>Book Now</Button>
           </ButtonGroup>
         </CardActions>
       </CardOverflow>

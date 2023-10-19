@@ -24,6 +24,7 @@ class Beautician(models.Model):
     isblocked=models.CharField(max_length=200,default="False")
     wallet_amount=models.DecimalField(max_digits=10,decimal_places=2,default=0)
     appointment_count=models.PositiveIntegerField(default=0)
+    bio=models.CharField(max_length=200,default="")
    
 
     def __str__(self):
