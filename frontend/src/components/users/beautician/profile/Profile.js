@@ -162,10 +162,16 @@ const Profile = () => {
                           </p>
                           <Editdetailsmodal />
                           {
-                            (statedatas.value.beautdetails.bio==="") && 
-                            <AddBioModal/>
+                            (statedatas.value.beautdetails.bio===" ") ?
+                            <AddBioModal id={statedatas.value.beautdetails.id}/> :
+                            <h2>HEY</h2>
+                      
+                           
+                           
+                            
 
                           }
+                          {console.log(statedatas.value.beautdetails ,"FRESH SCN")}
                           
                           <hr />
                         </div>

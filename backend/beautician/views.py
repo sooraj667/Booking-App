@@ -497,3 +497,20 @@ class GetSingleStudio(APIView):
         return Response({"message":'success',"studiodetails":serialized.data})
 
 
+class AddBio(APIView):
+    def post(self,request): 
+       
+        id=request.data.get("id")
+        content=request.data.get("content")
+        obj=Beautician.objects.get(id=id)
+        obj.bio=content
+        obj.save()
+
+        obj_serialized=BeauticianSerializer(obj)
+
+
+       
+        
+        return Response({"message":'success',"allbeautdatas":obj_serialized.data})
+
+

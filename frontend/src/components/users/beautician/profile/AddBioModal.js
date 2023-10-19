@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import { Transition } from "react-transition-group";
 import Button from "@mui/joy/Button";
 import Modal from "@mui/joy/Modal";
@@ -10,13 +10,45 @@ import axiosInstance from '../../../../axios/axiosconfig';
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import MuiAlert from "@mui/material/Alert";
+import { useDispatch } from "react-redux";
+import { setBeautDetails } from "../../../../feautures/loginslice";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
 
-const AddBioModal = () => {
+const AddBioModal = (props) => {
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
+  const [content, setContent] = useState(false);
+  const [changed, setChanged] = useState(false);
+
+  useEffect(() => {
+    const allbeautdatas = localStorage.getItem("singledetails-B");
+    const parsed = JSON.parse(allbeautdatas);
+    dispatch(setBeautDetails(parsed));
+  }, [changed]);
+
+  const handleBioChange=(e)=>{
+    setContent(e.target.value)
+  }
+
+  const handleBioSubmit=()=>{
+    const datas={
+        id:props.id,
+        content:content
+    }
+    axiosInstance.post("beaut/add-bio/",datas).then((response)=>{
+        localStorage.setItem(
+            "singledetails-B",
+            JSON.stringify(response.data.allbeautdatas)
+          );
+          setChanged((prev) => !prev);
+
+    }).catch((error)=>{
+        alert(error)
+    })
+  }
 
   return (
     <React.Fragment>
@@ -68,15 +100,16 @@ const AddBioModal = () => {
                 }[state],
               }}
             >
-              <DialogTitle>Wallet Payment</DialogTitle>
+              <DialogTitle>Add Bio</DialogTitle>
               <hr />
 
               <DialogContent>
-                Confirm Booking for Rs.
+                Please add a catching bio which describes your skill in your field!
+                <input type="text" className='form-control' onChange={handleBioChange}/>
               
                 <br />
                 <br />
-                <Button >Confirm</Button>
+                <Button onClick={handleBioSubmit}>Confirm</Button>
                 <Button onClick={()=>setOpen(false)} >Close</Button>
                 {/* {walletError && (
                   <Alert

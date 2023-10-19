@@ -19,6 +19,9 @@ urlpatterns = [
     path("get-wallet-amount/",Getwalletamount.as_view(),name="Getwalletamount"),
     path("get-previous-booking/",GetPreviousBookings.as_view(),name="GetPreviousBookings"),
     path("get-single-studio/",GetSingleStudio.as_view(),name="GetSingleStudio"),
+    path("get-single-studio/",GetSingleStudio.as_view(),name="GetSingleStudio"),
+    path("add-bio/",AddBio.as_view(),name="AddBio"),
+
 
     
 
