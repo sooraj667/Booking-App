@@ -1261,6 +1261,18 @@ html{
 .max-w{
   width: 50vw;
 }
+.border-b1{
+  border-bottom: 1px solid black;
+
+
+
+}
+.border-b2{
+  border-bottom: 2px solid black;
+  width: 70%;
+  margin-left: 15%;
+
+}
 
 
 
