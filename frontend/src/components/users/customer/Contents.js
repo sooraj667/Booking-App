@@ -126,6 +126,17 @@ const Contents = () => {
         </div>
       </li>
 
+      <li className="item" onClick={() => dispatch(toggleFavouritestylists())}>
+        <div className="col-md-3">
+          <div class="icon">
+            <ExploreIcon />
+          </div>
+        </div>
+        <div className="col-md-9">
+          <div class="title">Favourites</div>
+        </div>
+      </li>
+
 
       <li className="item" onClick={() => dispatch(toggleWallet())}>
         <div className="col-md-3">
@@ -138,7 +149,7 @@ const Contents = () => {
         </div>
       </li>
     </ul>
-    {
+    {/* {
       accessToken &&
       <div className="logout">
       <Button onClick={handleLogout} sx={{backgroundColor:"#b23b3b",color:"#D0D4D9"}} >
@@ -147,7 +158,7 @@ const Contents = () => {
       </Button>
 
     </div>
-    }
+    } */}
     
     
 

@@ -33,6 +33,7 @@ const Booknow = () => {
   const [selectedStudio, setSelectedStudio] = useState("");
   const [selectedService, setSelectedService] = useState("");
   const [beautStudios, setBeautStudios] = useState("DEYY");
+  const [allBeauticians, setAllbeauticians] = useState([]);
   const [showReview, setShowReview] = useState(false);
   const [bookNowToggle, setBookNowToggle] = useState(false);
 
@@ -53,11 +54,12 @@ const Booknow = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const allBeauticians = localStorage.getItem("allbeauticians-C");
+    //const allBeauticians = localStorage.getItem("allbeauticians-C");
 
-    if (allBeauticians) {
-      const allbeaut_parsed = JSON.parse(allBeauticians);
-      allbeaut_parsed.filter((item) => {
+    axiosInstance
+    .get("cust/getallbeauticians/").then((response)=>{
+      setAllbeauticians(response.data.allbeauticians);
+      response.data.allbeauticians.filter((item) => {
         if (navdatas.value.booknowbeauticianid == item.id) {
           const reqbeaut = item;
 
@@ -66,7 +68,15 @@ const Booknow = () => {
           return reqbeaut;
         }
       });
-    }
+  
+    }).catch((error)=>{
+      alert("ERROR")
+    })
+
+  
+      
+      
+  
   }, []);
 
   useEffect(() => {

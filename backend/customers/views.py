@@ -670,7 +670,23 @@ class AddToFavourites(APIView):
             FavouriteStylists.objects.create(beautician=appointment.beautician,customer=appointment.customer)
             return Response({"message":"done"})
 
+
+class GetAllFavourites(APIView):
+  
+    def post(self,request): 
+        id=request.data.get("custid")
+        all_favourites=FavouriteStylists.objects.filter(customer=Customer.objects.get(id=id))
+        all_favourites_serialized=FavouriteStylistsSerializer(all_favourites,many=True)
+        return Response({"message":"done","allfavourites":all_favourites_serialized.data})
+
+class GetAllBeauticians(APIView):
+  
+    def get(self,request): 
+        all=Beautician.objects.all()
+        all_serialized=BeauticianSerializer(all,many=True)
         
+        return Response({"message":"done","allbeauticians":all_serialized.data})
+       
 
         
        

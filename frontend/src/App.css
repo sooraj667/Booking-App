@@ -56,7 +56,7 @@ html{
 }
 .sidebarlist .item{
     width: 100%;
-    height: 60px;
+    height: 50px;
     list-style-type: none;
     margin: 0;
     display: flex;

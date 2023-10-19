@@ -36,12 +36,20 @@ const Browse = () => {
   };
 
   useEffect(() => {
-    const allBeauticians = localStorage.getItem("allbeauticians-C");
+    //const allBeauticians = localStorage.getItem("allbeauticians-C");
 
-    if (allBeauticians) {
-      const allbeaut_parsed = JSON.parse(allBeauticians);
-      dispatch(setAllBeauticiansC(allbeaut_parsed));
-    }
+    axiosInstance
+    .get("cust/getallbeauticians/").then((response)=>{
+      dispatch(setAllBeauticiansC(response.data.allbeauticians));
+  
+    }).catch((error)=>{
+      alert("ERROR")
+    })
+
+    // if (allBeauticians) {
+    //   const allbeaut_parsed = JSON.parse(allBeauticians);
+    //   dispatch(setAllBeauticiansC(allbeaut_parsed));
+    // }
 
     axiosInstance
     .get("cust/getallservicefee/").then((response)=>{

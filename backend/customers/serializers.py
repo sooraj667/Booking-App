@@ -28,6 +28,15 @@ class Reviewserializer(ModelSerializer):
         model=Review
         fields= "__all__"
 
+class FavouriteStylistsSerializer(ModelSerializer):
+    beautician=BeauticianSerializer()
+    customer=Customerserializer()
+
+
+    class Meta:
+        model=FavouriteStylists
+        fields= "__all__"
+
 
 class RankingDictSerializer(Serializer):
     first = DictField()

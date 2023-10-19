@@ -22,7 +22,7 @@ class Beautician(models.Model):
     image=models.CharField(max_length=300,blank=True,null=True)
     # services=models.ManyToManyField(Services,related_name='beauticians_providing_services')
     isblocked=models.CharField(max_length=200,default="False")
-    wallet_amount=models.DecimalField(max_digits=10,decimal_places=2)
+    wallet_amount=models.DecimalField(max_digits=10,decimal_places=2,default=0)
     appointment_count=models.PositiveIntegerField(default=0)
    
 

@@ -55,6 +55,7 @@ const Customerdashboard = () => {
           {navigationdatas.value.servicepreview && <Servicepreview />}
           {navigationdatas.value.wallet && <WalletCust />}
           {navigationdatas.value.previousbooking && <PreviousBooking />}
+         
         </div>
       </div>
     </div>
