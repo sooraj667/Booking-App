@@ -374,7 +374,7 @@ class Todaysschedule(APIView):
         print(request.data.get("beautid"),"NOKK")
         beautid=request.data.get("beautid")
         beautobj=Beautician.objects.get(id=beautid)
-        appointments=Appointment.objects.filter(beautician=beautobj)
+        appointments=Appointment.objects.filter(beautician=beautobj,date=today_date )
         appointment_count=appointments.count() 
         if appointments.count()==0:
             return Response({"message":"failed", "date":str(today_date) , "day":str(day_name), "count":str(appointment_count)})
