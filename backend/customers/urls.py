@@ -29,6 +29,7 @@ urlpatterns = [
     path("add-to-favourites/",AddToFavourites.as_view(),name="AddToFavourites"),
     path("all-favourites/",GetAllFavourites.as_view(),name="GetAllFavourites"),
     path("getallbeauticians/",GetAllBeauticians.as_view(),name="GetAllBeauticians"),
+    path("remove-from-favourties/",RemoveFromFavourites.as_view(),name="RemoveFromFavourites"),
 
 
     

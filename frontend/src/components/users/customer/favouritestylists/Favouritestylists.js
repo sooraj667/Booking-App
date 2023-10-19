@@ -14,14 +14,34 @@ import Typography from '@mui/joy/Typography';
 import SvgIcon from '@mui/joy/SvgIcon';
 import { toggleBooknow } from "../../../../feautures/customer/customernavigationslice";
 import { useDispatch } from "react-redux";
+import toast, { Toaster } from 'react-hot-toast';
 
 const Favouritestylists = () => {
   const [allFavourites, setAllFavourites] = useState([]);
+  const [rerender, setRerender] = useState(false);
   const dispatch=useDispatch()
 
   const booknowHandler = (id) => {
     dispatch(toggleBooknow(id));
     localStorage.setItem("id", id);
+ 
+  };
+
+  const removeFavouriteHandler = (id) => {
+    const datas = {
+      id: id,
+    };
+    axiosInstance
+      .post("cust/remove-from-favourties/", datas)
+      .then((response) => {
+        toast.success("Removed from favourites")
+        setRerender(true)
+        
+      })
+      .catch((error) => {
+        alert(error);
+      });
+    
  
   };
 
@@ -38,9 +58,10 @@ const Favouritestylists = () => {
       .catch((error) => {
         alert(error);
       });
-  },[]);
+  },[rerender]);
   return (
     <div className="landouter">
+      <Toaster/>
       <div className="sub-heading-div flex justify-center align-center py-3 text-small fw-2 sgfont">
         Your favourite stylists are shown below
       </div>
@@ -158,7 +179,7 @@ const Favouritestylists = () => {
       <CardOverflow sx={{ bgcolor: 'background.level1' }}>
         <CardActions buttonFlex="1">
           <ButtonGroup variant="outlined" sx={{ bgcolor: 'background.surface' }}>
-            <Button>Remove</Button>
+            <Button onClick={() => removeFavouriteHandler(item.id)}>Remove</Button>
             <Button onClick={() => booknowHandler(item.beautician.id)}>Book Now</Button>
           </ButtonGroup>
         </CardActions>

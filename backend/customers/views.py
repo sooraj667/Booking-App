@@ -686,6 +686,16 @@ class GetAllBeauticians(APIView):
         all_serialized=BeauticianSerializer(all,many=True)
         
         return Response({"message":"done","allbeauticians":all_serialized.data})
+    
+class RemoveFromFavourites(APIView):
+  
+    def post(self,request): 
+        id=request.data.get("id")
+        obj=FavouriteStylists.objects.get(id=id)
+        obj.delete()
+        
+        return Response({"message":"done"})
+
        
 
         
