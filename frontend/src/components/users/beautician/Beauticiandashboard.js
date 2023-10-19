@@ -1,6 +1,12 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setBeautDetails,setAccessToken,setExpertIn,setServices,setAllservices } from "../../../feautures/loginslice";
+import {
+  setBeautDetails,
+  setAccessToken,
+  setExpertIn,
+  setServices,
+  setAllservices,
+} from "../../../feautures/loginslice";
 import Header from "../header/Header";
 import Cookies from "js-cookie";
 import Contents from "./Contents";
@@ -15,44 +21,37 @@ import { useState } from "react";
 import WalletBeaut from "./wallet/WalletBeaut";
 import PreviousBeautBookings from "./appointments/PreviousBeautBookings";
 import BeauticianHeader from "./beautician-header/BeauticianHeader";
+import Workshops from "./workshops/Workshops";
 
 const Beauticiandashboard = () => {
-  const statedatas=useSelector((state)=>state.beautnavigation)
+  const statedatas = useSelector((state) => state.beautnavigation);
   const dispatch = useDispatch();
   const details = useSelector((state) => state.login);
   const navigationdatas = useSelector((state) => state.beautnavigation);
-  const logindatas=useSelector((state)=>state.login)
-
-
+  const logindatas = useSelector((state) => state.login);
 
   useEffect(() => {
     const beautDetails = localStorage.getItem("singledetails-B");
     // const expertin = localStorage.getItem("expertin-B");
-    const services=localStorage.getItem("services-B");
-    const allservices=localStorage.getItem("allservices-B");
+    const services = localStorage.getItem("services-B");
+    const allservices = localStorage.getItem("allservices-B");
     if (beautDetails) {
-      const parsed=JSON.parse(beautDetails)
+      const parsed = JSON.parse(beautDetails);
       dispatch(setBeautDetails(parsed));
-      
     }
     // if (expertin) {
     //   const parsedexpert=JSON.parse(expertin)
     //   dispatch(setExpertIn(parsedexpert));
     // }
     if (services) {
-      const parsedservices=JSON.parse(services)
+      const parsedservices = JSON.parse(services);
       dispatch(setServices(parsedservices));
     }
     if (allservices) {
-      const parsedallservices=JSON.parse(allservices)
+      const parsedallservices = JSON.parse(allservices);
       dispatch(setAllservices(parsedallservices));
     }
- 
-
-
-  },[]);
-
-  
+  }, []);
 
   // useEffect(
   //   ()=>{
@@ -66,65 +65,27 @@ const Beauticiandashboard = () => {
   //   }
   // )
 
-
-
-
-  
-  
-  
   return (
     <div class="beautouter">
-
-      
-     
-        {/* <HeaderDashboard/> */}
-        <div className="row outer">
-          <BeauticianHeader/>
-          <div className="col-md-3 sidebar">
-          <Contents/>
-
-          </div>
-          <div className="col-md-9 rightsection">
-          {
-            navigationdatas.value.landingpart && <Landingpartbeaut/>
-          }
-         
-          {
-            navigationdatas.value.services && <Services/>
-
-          }
-           {
-            navigationdatas.value.profile && <Profile/>
-
-          }
-            {
-            navigationdatas.value.appointments && <Appointments/>
-
-          }
-          {
-            navigationdatas.value.studio && <Studio/>
-
-          }
-          {
-            navigationdatas.value.wallet && <WalletBeaut/>
-
-          }
-              {
-            navigationdatas.value.previousbooking && <PreviousBeautBookings/>
-
-          }
-          
-         
-            
-          </div>
-
-
-
+      {/* <HeaderDashboard/> */}
+      <div className="row outer">
+        <BeauticianHeader />
+        <div className="col-md-3 sidebar">
+          <Contents />
         </div>
-        
-  
-      
-  
+        <div className="col-md-9 rightsection">
+          {navigationdatas.value.landingpart && <Landingpartbeaut />}
+
+          {navigationdatas.value.services && <Services />}
+          {navigationdatas.value.profile && <Profile />}
+          {navigationdatas.value.appointments && <Appointments />}
+          {navigationdatas.value.studio && <Studio />}
+          {navigationdatas.value.wallet && <WalletBeaut />}
+          {navigationdatas.value.previousbooking && <PreviousBeautBookings />}
+
+          {navigationdatas.value.workshops && <Workshops />}
+        </div>
+      </div>
     </div>
   );
 };

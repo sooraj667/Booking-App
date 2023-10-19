@@ -8,6 +8,7 @@ const INITIALSTATE={
    studio:false,
    wallet:false,
    previousbooking:false,
+   workshops:false,
 
    
 
@@ -29,6 +30,7 @@ const beautnavigationslice=createSlice(
                 state.value.studio=false
                 state.value.wallet=false
                 state.value.previousbooking=false
+                state.value.workshops=false
                 
             },
             toggleAppointments:(state)=>{
@@ -39,6 +41,7 @@ const beautnavigationslice=createSlice(
                 state.value.studio=false
                 state.value.wallet=false
                 state.value.previousbooking=false
+                state.value.workshops=false
             },
             toggleProfile:(state)=>{
                 state.value.profile=true
@@ -48,6 +51,7 @@ const beautnavigationslice=createSlice(
                 state.value.studio=false
                 state.value.wallet=false
                 state.value.previousbooking=false
+                state.value.workshops=false
             },
             toggleStudio:(state)=>{
                 state.value.studio=true
@@ -57,6 +61,7 @@ const beautnavigationslice=createSlice(
                 state.value.profile=false
                 state.value.wallet=false
                 state.value.previousbooking=false
+                state.value.workshops=false
             },
             toggleWallet:(state)=>{
                 state.value.wallet=true
@@ -66,6 +71,7 @@ const beautnavigationslice=createSlice(
                 state.value.profile=false
                 state.value.studio=false
                 state.value.previousbooking=false
+                state.value.workshops=false
             },
             togglePreviousBooking:(state)=>{
                 state.value.previousbooking=true
@@ -75,6 +81,17 @@ const beautnavigationslice=createSlice(
                 state.value.profile=false
                 state.value.studio=false
                 state.value.wallet=false
+                state.value.workshops=false
+            },
+            toggleWorkshops:(state)=>{
+                state.value.workshops=true
+                state.value.services=false
+                state.value.landingpart=false
+                state.value.appointments=false
+                state.value.profile=false
+                state.value.studio=false
+                state.value.wallet=false
+                state.value.previousbooking=false
             },
            
        
@@ -89,5 +106,5 @@ const beautnavigationslice=createSlice(
 
 )
 
-export const {toggleServices,toggleAppointments,toggleProfile,toggleStudio,toggleWallet,togglePreviousBooking} = beautnavigationslice.actions
+export const {toggleServices,toggleAppointments,toggleProfile,toggleStudio,toggleWallet,togglePreviousBooking,toggleWorkshops} = beautnavigationslice.actions
 export default beautnavigationslice.reducer

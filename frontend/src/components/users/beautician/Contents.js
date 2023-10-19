@@ -12,7 +12,7 @@ import WorkIcon from '@mui/icons-material/Work';
 import BeachAccessIcon from '@mui/icons-material/BeachAccess';
 import Divider from '@mui/material/Divider';
 import { useNavigate } from "react-router-dom";
-import {toggleServices,toggleAppointments,toggleProfile,toggleStudio,toggleWallet} from "../../../feautures/beautician/beautnavigationslice"
+import {toggleServices,toggleAppointments,toggleProfile,toggleStudio,toggleWallet,toggleWorkshops} from "../../../feautures/beautician/beautnavigationslice"
 import { useDispatch } from "react-redux";
 import Cookies from "js-cookie";
 import  Button  from "@mui/material/Button";
@@ -103,6 +103,19 @@ const Contents = () => {
           <div class="title">Studio</div>
         </div>
       </li>
+
+      <li className="item" onClick={() => dispatch(toggleWorkshops())}>
+        <div className="col-md-3">
+          <div class="icon">
+            <StoreIcon />
+          </div>
+        </div>
+        <div className="col-md-9">
+          <div class="title">Workshops</div>
+        </div>
+      </li>
+
+
 
 
       <li className="item" onClick={() => dispatch(toggleWallet())}>
