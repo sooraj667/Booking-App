@@ -22,6 +22,7 @@ import EmailIcon from "@mui/icons-material/Email";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import toast, { Toaster } from "react-hot-toast";
 import AddBioModal from "./AddBioModal";
+import DescriptionIcon from '@mui/icons-material/Description';
 
 const Profile = () => {
   const statedatas = useSelector((state) => state.login);
@@ -159,12 +160,15 @@ const Profile = () => {
                             <br />
                             <LocalPhoneIcon />{" "}
                             {statedatas.value.beautdetails.phone}
+                            <br />
+                            <DescriptionIcon />{" "}
+                            {statedatas.value.beautdetails.bio}
                           </p>
                           <Editdetailsmodal />
                           {
                             (statedatas.value.beautdetails.bio===" ") ?
                             <AddBioModal id={statedatas.value.beautdetails.id}/> :
-                            <h2>HEY</h2>
+                            ""
                       
                            
                            
