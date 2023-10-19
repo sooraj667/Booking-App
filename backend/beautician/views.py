@@ -520,3 +520,30 @@ class AddBio(APIView):
         return Response({"message":'success',"allbeautdatas":obj_serialized.data})
 
 
+class AddToExpertise(APIView):
+    def post(self,request): 
+       
+        id=request.data.get("id")
+        obj=Servicefees.objects.get(id=id)
+        try:
+            currentobj=Servicefees.objects.get(beautician=obj.beautician,topservice=True)
+            if currentobj==obj:
+                return Response({"message":'already-it-is'})
+
+            
+            currentobj.topservice=False
+            currentobj.save()
+        except:
+            pass
+        obj.topservice=True
+        obj.save()
+        beautservices=Servicefees.objects.filter(beautician=obj.beautician)
+        beautservices_serialized=ServicefeesSerializer(beautservices,many=True)
+        return Response({"message":'success',"services":beautservices_serialized.data})
+       
+
+
+       
+        
+        
+

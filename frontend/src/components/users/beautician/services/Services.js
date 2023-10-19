@@ -26,6 +26,8 @@ import Divider from '@mui/material/Divider';
 import Addservicemodal from "./Addservicemodal";
 import "./Services.css"
 import expertpng from "../../../../images/Beauty salon-rafiki.png"
+import AddIcon from '@mui/icons-material/Add';
+import AddToExpertiseModal from "./AddToExpertiseModal";
 
 const Services = () => {
   
@@ -112,6 +114,7 @@ const Services = () => {
                           />
                           {/* <Avatar src={item.service.image}></Avatar> */}
                           {/* {item.service.name} */}
+                          <AddToExpertiseModal id={item.id}/>
                       
                         </ListItem>
                         <Divider variant="inset" component="li" />
