@@ -144,6 +144,8 @@ const Landingpartbeaut = () => {
           
         );
       })}
+
+    {noSchedule && <div className="no-schedule">No Bookings for today!</div> }
      
       </Card>
 
