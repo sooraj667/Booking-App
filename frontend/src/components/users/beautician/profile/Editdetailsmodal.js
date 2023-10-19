@@ -37,10 +37,12 @@ const Editdetailsmodal = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [bio, setBio] = useState(false);
 
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [phoneError, setPhoneError] = useState("");
+  const [bioError, setBioError] = useState("");
   const handleOpen = () => {
     setOpen(true);
   };
@@ -55,15 +57,36 @@ const Editdetailsmodal = () => {
     setName(parsed.name);
     setEmail(parsed.email);
     setPhone(parsed.phone);
+    if (parsed.bio!==" "){
+      setBio(parsed.bio)
+    }
   }, [changed]);
 
   const handleUpdate = () => {
-    const datas = {
-      id: statedatas.value.beautdetails.id,
-      name: name,
-      email: email,
-      phone: phone,
-    };
+
+    let datas={}
+    if (bio===false){
+
+      datas = {
+        id: statedatas.value.beautdetails.id,
+        name: name,
+        email: email,
+        phone: phone,
+      }
+
+
+    }
+    else{
+      datas = {
+        id: statedatas.value.beautdetails.id,
+        name: name,
+        email: email,
+        phone: phone,
+        bio:bio,
+      }
+
+    }
+    
     console.log(formdatas.value.pname, "##############333");
     axiosInstance
       .post("beaut/editdetails/", datas)
@@ -87,7 +110,13 @@ const Editdetailsmodal = () => {
     <div>
       <Toaster />
       <Button
-        onClick={handleOpen}
+        onClick={()=>{
+
+          setChanged((prev) => !prev);
+
+          handleOpen()
+
+        } }
         variant="contained"
         sx={{ marginBottom: "0px", marginLeft: "10px", marginTop: "50px",backgroundColor:"inherit",color:"black",'&:hover': {
           backgroundColor: '#212529',color:"#D0D4D9" // Specify the desired background color on hover
@@ -195,6 +224,40 @@ const Editdetailsmodal = () => {
                 </div>
                 
               </div>
+
+              {
+                bio &&
+                <div class="form-group">
+                <div className="row">
+                  <label for="password" className="mr-3">
+                    Bio:
+                  </label>
+                  <TextField
+                    value={bio}
+                    type="numtextber"
+                    variant="standard"
+                    required
+                    onChange={(e) => {
+                      if (!/^[a-zA-Z ]+$/.test(e.target.value)) {
+                        setBioError("Bio can only have alphabets!");
+                      } else {
+                        setBioError(false);
+                      }
+
+                      setBio(e.target.value);
+                    }}
+                  />
+                  {bioError && (
+                    <span className="text-danger"> {bioError} </span>
+                  )}
+                </div>
+                
+              </div>
+              }
+
+
+              
+             
              
               
                

@@ -206,10 +206,16 @@ class Editdetails(APIView):
         name=request.data.get("name")
         email=request.data.get("email")
         phone=request.data.get("phone")
+      
+
+            
         beautobj=Beautician.objects.get(id=id)
         beautobj.name=name
         beautobj.email=email
         beautobj.phone=phone
+        if request.data.get("bio"):
+            bio=request.data.get("bio")
+            beautobj.bio=bio
         beautobj.save()
         beautician_serialized=BeauticianSerializer(beautobj)
         return Response({"message":'Added',"allbeautdatas":beautician_serialized.data})
