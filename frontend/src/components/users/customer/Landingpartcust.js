@@ -23,6 +23,7 @@ import ListSubheader from "@mui/material/ListSubheader";
 import InfoIcon from "@mui/icons-material/Info";
 import { setServiceId } from "../../../feautures/customer/servicepreviewslice";
 import { toggleServicePreview } from "../../../feautures/customer/customernavigationslice";
+import toast, { Toaster } from "react-hot-toast";
 
 // import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -150,6 +151,7 @@ const Landingpartcust = () => {
   }, []);
   return (
     <div>
+      <Toaster/>
       {/* <Topstackcust /> */}
 
       {/* <Button

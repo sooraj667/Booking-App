@@ -11,6 +11,7 @@ import axiosInstance from "../../../../axios/axiosconfig";
 import Avatar from "@mui/joy/Avatar";
 import { toggleBooknow } from "../../../../feautures/customer/customernavigationslice";
 import { useDispatch } from "react-redux";
+import AddToFavouritesModal from "../bookings/AddToFavouritesModal";
 
 const TopBeauticians = () => {
   const [ranking, setRanking] = useState(false);
@@ -105,9 +106,7 @@ const TopBeauticians = () => {
                 <Button variant="solid" color="warning" onClick={() => booknowHandler(ranking.second.id)}>
                   Book Now
                 </Button>
-                <Button variant="plain" color="neutral">
-                  Add to favourites
-                </Button>
+                <AddToFavouritesModal myid={ranking.second.id}/>
               </CardActions>
             </Card>
           </div>
@@ -176,9 +175,9 @@ const TopBeauticians = () => {
                 <Button variant="solid" color="primary" onClick={() => booknowHandler(ranking.first.id)}>
                 Book Now
                 </Button>
-                <Button variant="plain" color="neutral">
-                Add to Favourites
-                </Button>
+           
+                <AddToFavouritesModal myid={ranking.first.id}/>
+                
               </CardActions>
             </Card>
           </div>
@@ -237,9 +236,7 @@ const TopBeauticians = () => {
         <Button variant="solid" color="warning"  onClick={() => booknowHandler(ranking.third.id)}>
         Book Now
         </Button>
-        <Button variant="plain" color="neutral">
-          Add to Favourites
-        </Button>
+        <AddToFavouritesModal myid={ranking.third.id}/>
       </CardActions>
     </Card>
 

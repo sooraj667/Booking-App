@@ -35,7 +35,7 @@ const Favouritestylists = () => {
       .post("cust/remove-from-favourties/", datas)
       .then((response) => {
         toast.success("Removed from favourites")
-        setRerender(true)
+        setRerender((prev)=>!prev)
         
       })
       .catch((error) => {

@@ -659,15 +659,31 @@ class GetTopBeauticians(APIView):
 class AddToFavourites(APIView):
   
     def post(self,request): 
-        id=request.data.get("bookingid")
+
+      
+
+        if request.data.get("bookingid"):
+            bookingid=request.data.get("bookingid")
+            appointment=Appointment.objects.get(id=bookingid)
+            beaut=appointment.beautician
+            cust=appointment.customer
+       
+           
+
+        if request.data.get("myid"):
+            myid=request.data.get("myid")
+            custid=request.data.get("custid")
+            beaut=Beautician.objects.get(id=myid)
+            cust=Customer.objects.get(id=custid)
+
         
-        appointment=Appointment.objects.get(id=id)
+        
         try:
-            FavouriteStylists.objects.get(beautician=appointment.beautician,customer=appointment.customer)
+            FavouriteStylists.objects.get(beautician=beaut,customer=cust)
             return Response({"message":"already_present"})
 
         except:
-            FavouriteStylists.objects.create(beautician=appointment.beautician,customer=appointment.customer)
+            FavouriteStylists.objects.create(beautician=beaut,customer=cust)
             return Response({"message":"done"})
 
 

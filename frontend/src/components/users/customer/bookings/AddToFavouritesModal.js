@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import MuiAlert from "@mui/material/Alert";
 
 
+
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
@@ -27,12 +28,30 @@ const AddToFavouritesModal = (props) => {
 
     const handleSubmit = () => {
 
-        
-        
-        const datas = {
+
+      let datas={}
+
+      if (props.id){
+       datas = {
           bookingid: props.id,
           
         };
+
+      }
+      else if(props.myid){
+        datas = {
+          myid: props.myid,
+          custid:JSON.parse(localStorage.getItem("singledetails-C")).id
+          
+        };
+
+      }
+
+      console.log(datas,"HEYNIMA");
+
+        
+        
+     
     
         axiosInstance
           .post("cust/add-to-favourites/", datas)
@@ -58,21 +77,21 @@ const AddToFavouritesModal = (props) => {
     <React.Fragment>
         {console.log(props.id,"ITHANID")}
       <Button
-        variant="outlined"
+        variant="plain"
         onClick={() =>{
             
             setOpen(true)
 
         } }
-        sx={{
-            marginTop: "10px",
-            backgroundColor: "inherit",
-            color: "#900603",
-            "&:hover": {
-              backgroundColor: "#212529",
-              color: "#D0D4D9", // Specify the desired background color on hover
-            },
-          }}
+        // sx={{
+        //     marginTop: "10px",
+        //     backgroundColor: "inherit",
+        //     color: "#900603",
+        //     "&:hover": {
+        //       backgroundColor: "#212529",
+        //       color: "#D0D4D9", // Specify the desired background color on hover
+        //     },
+        //   }}
       >
         ADD TO FAVOURITES
       </Button>
