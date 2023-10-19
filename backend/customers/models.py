@@ -43,3 +43,20 @@ class FavouriteStylists(models.Model):
 
 
    
+class Workshop(models.Model):
+    beautician=models.ForeignKey(Beautician,on_delete=models.CASCADE)
+    customers=models.ManyToManyField(Customer)
+    subject=models.CharField(max_length=200)
+    total_seats=models.PositiveIntegerField()
+    date = models.DateField()
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+    status=models.CharField(max_length=200)
+    description=models.CharField(max_length=200)
+    price = models.DecimalField(max_digits=10, decimal_places=2) 
+    registration_deadline = models.DateField()
+
+
+   
+    def __str__(self):  
+        return f"{self.beautician.name} - {self.subject} -{self.date}"
