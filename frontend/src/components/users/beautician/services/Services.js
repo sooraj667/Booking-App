@@ -25,6 +25,7 @@ import WorkIcon from '@mui/icons-material/Work';
 import Divider from '@mui/material/Divider';
 import Addservicemodal from "./Addservicemodal";
 import "./Services.css"
+import expertpng from "../../../../images/Beauty salon-rafiki.png"
 
 const Services = () => {
   
@@ -53,11 +54,41 @@ const Services = () => {
       <hr />
       <div className="services-outer">
         <div className="services-box">
-          <div className="services-heading">
-            Your Services
+          
+          <div className="sub-heading-div flex justify-center align-center py-3 text-small fw-2 sgfont  themecolor underline">
+            EXPERTISE
+            
+
           </div>
+          <div className="flex justify-center"><Avatar src={expertpng} alt="" sx={{width:220,height:220}}/></div>
+          
+          
+          <div className="flex justify-center align-center themecolor">
+          {
+            statedatas.value.services.filter((item)=>{
+              return(item.topservice==true)
+            }).map((val)=>{
+              return(
+                <>
+                <div className="">
+                  <h1>{val.service.name}</h1>
+
+
+                </div>
+                </>
+              )
+            })
+
+          }
+
+
+          </div>
+          
           <hr />
           <div className="services-body">
+          <div className="services-heading">
+            All Services
+          </div>
           <List
                   sx={{
                     width: "100%",
