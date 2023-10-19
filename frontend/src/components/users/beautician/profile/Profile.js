@@ -21,6 +21,7 @@ import { setBeautDetails } from "../../../../feautures/loginslice";
 import EmailIcon from "@mui/icons-material/Email";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import toast, { Toaster } from "react-hot-toast";
+import AddBioModal from "./AddBioModal";
 
 const Profile = () => {
   const statedatas = useSelector((state) => state.login);
@@ -160,6 +161,12 @@ const Profile = () => {
                             {statedatas.value.beautdetails.phone}
                           </p>
                           <Editdetailsmodal />
+                          {
+                            (statedatas.value.beautdetails.bio==="") && 
+                            <AddBioModal/>
+
+                          }
+                          
                           <hr />
                         </div>
                       </div>
