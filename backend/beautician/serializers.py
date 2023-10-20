@@ -24,3 +24,4 @@ class ServicefeesSerializer(ModelSerializer):
     class Meta:
         model=Servicefees
         fields= "__all__"
+

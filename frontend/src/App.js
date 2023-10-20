@@ -20,6 +20,7 @@ import paymentdataslice from "./feautures/customer/paymentdataslice";
 import servicepreviewslice from "./feautures/customer/servicepreviewslice";
 import forgotpasswordslice from "./feautures/forgotpassword/forgotpasswordslice";
 import variableSlice from "./feautures/variableSlice";
+import workshopslice from "./feautures/beautician/workshopslice";
 function App() {
   const store = configureStore({
     reducer: {
@@ -38,6 +39,7 @@ function App() {
       servicepreview:servicepreviewslice,
       forgotpassword:forgotpasswordslice,
       variables:variableSlice,
+      workshops:workshopslice
     },
   });
 

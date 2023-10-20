@@ -38,6 +38,13 @@ class FavouriteStylistsSerializer(ModelSerializer):
         fields= "__all__"
 
 
+class WorkshopSerializer(ModelSerializer):
+    beautician=BeauticianSerializer()
+    customers=Customerserializer(many=True)
+    class Meta:
+        model=Workshop
+        fields= "__all__"
+
 class RankingDictSerializer(Serializer):
     first = DictField()
     second = DictField()

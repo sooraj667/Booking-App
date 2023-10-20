@@ -1273,6 +1273,9 @@ html{
   margin-left: 15%;
 
 }
+.justify-end{
+  justify-content: end;
+}
 
 
 

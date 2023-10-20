@@ -13,6 +13,8 @@ import MuiAlert from "@mui/material/Alert";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import DatePicker from "react-datepicker";
+import {useDispatch } from "react-redux";
+import { setAllWorkshops } from "../../../../feautures/beautician/workshopslice";
 
 
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -20,6 +22,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 });
 
 const AddWorkshopModal = () => {
+  const dispatch=useDispatch()
   const [open, setOpen] = useState(false);
   const [subject, setSubject] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
@@ -111,6 +114,7 @@ const AddWorkshopModal = () => {
             else{
                 // setSlotNotAvailable(false)
                 toast.success("WorkShop Added")
+                dispatch(setAllWorkshops(response.data.allworkshops))
                 setOpen(false)
                 
 

@@ -24,6 +24,7 @@ urlpatterns = [
     path("add-to-expertise/",AddToExpertise.as_view(),name="AddToExpertise"),
     path("check-workshop-time/",CheckWorkshopTIme.as_view(),name="CheckWorkshopTIme"),
     path("add-workshop/",AddWorkshop.as_view(),name="AddWorkshop"),
+    path("get-beaut-workshops/",GetBeautWorkshops.as_view(),name="GetBeautWorkshops"),
 
 
     

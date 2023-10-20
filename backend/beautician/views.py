@@ -592,10 +592,24 @@ class AddWorkshop(APIView):
             return Response({"message":'already-present'})
         except:
             Workshop.objects.create(beautician=Beautician.objects.get(id=id),subject=subject,description=description,price=price,date=selectedDate,registration_deadline=selectedRegDate,start_time=starttime,end_time=endtime,total_seats=totalseats)
-            return Response({"message":'success'})
+            all=Workshop.objects.filter(beautician=Beautician.objects.get(id=id))
+            all_serialized=WorkshopSerializer(all,many=True)
+            all_serialized.data
+            return Response({"message":'success',"allworkshops":all_serialized.data})
        
 
 
         
         
 
+class GetBeautWorkshops(APIView):
+    def post(self,request): 
+        all_workshops=Workshop.objects.filter(beautician_id=request.data.get("id"))
+        all_workshops_serialized=WorkshopSerializer(all_workshops,many=True)
+
+       
+        
+
+
+        
+        return Response({"message":'success',"allworkshops":all_workshops_serialized.data})
