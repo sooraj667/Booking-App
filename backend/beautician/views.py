@@ -613,3 +613,14 @@ class GetBeautWorkshops(APIView):
 
         
         return Response({"message":'success',"allworkshops":all_workshops_serialized.data})
+    
+class CancelWorkshop(APIView):
+    def post(self,request): 
+        id=request.data.get("id")
+        obj=Workshop.objects.get(id=id)
+        beaut=obj.beautician
+        
+        obj.delete()
+        all=Workshop.objects.filter(beautician=beaut)
+        all_serialized=WorkshopSerializer(all,many=True)
+        return Response({"message":'success',"allworkshops":all_serialized.data})

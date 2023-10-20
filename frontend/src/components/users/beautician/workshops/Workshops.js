@@ -23,6 +23,9 @@ import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import ReportIcon from "@mui/icons-material/Report";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import CreditScoreIcon from "@mui/icons-material/CreditScore";
+import DeleteWorkshopModal from "./DeleteWorkshopModal";
+
+
 const Workshops = () => {
   const dispatch = useDispatch();
   const workshops = useSelector((state) => state.workshops);
@@ -41,6 +44,8 @@ const Workshops = () => {
         alert("ERROR");
       });
   }, []);
+
+
 
   return (
     <div>
@@ -165,9 +170,10 @@ const Workshops = () => {
                 <Button variant="outlined" color="neutral">
                   Boost
                 </Button>
-                <Button variant="solid" color="danger" onClick>
+                <DeleteWorkshopModal id={item.id}/>
+                {/* <Button variant="solid" color="danger" onClick={()=> handleCancelWorkshopConfirm()}>
                   Cancel
-                </Button>
+                </Button> */}
               </CardActions>
             </Card>
           );

@@ -25,6 +25,7 @@ urlpatterns = [
     path("check-workshop-time/",CheckWorkshopTIme.as_view(),name="CheckWorkshopTIme"),
     path("add-workshop/",AddWorkshop.as_view(),name="AddWorkshop"),
     path("get-beaut-workshops/",GetBeautWorkshops.as_view(),name="GetBeautWorkshops"),
+    path("cancel-workshop/",CancelWorkshop.as_view(),name="CancelWorkshop"),
 
 
     
