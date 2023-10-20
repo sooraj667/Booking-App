@@ -73,7 +73,7 @@ const Workshops = () => {
                   alignItems: "center",
                 }}
               >
-                <Avatar src="/static/images/avatar/1.jpg" size="lg" />
+                {/* <Avatar src="/static/images/avatar/1.jpg" size="lg" /> */}
                 <AvatarGroup size="sm" sx={{ "--Avatar-size": "28px" }}>
                     {
                         item.customers.map((val)=>{
@@ -155,18 +155,18 @@ const Workshops = () => {
                 </div>
               </CardContent>
               <CardActions buttonFlex="0 1 120px">
-                <IconButton
+                {/* <IconButton
                   variant="outlined"
                   color="neutral"
                   sx={{ mr: "auto" }}
                 >
                   <FavoriteBorder />
-                </IconButton>
+                </IconButton> */}
                 <Button variant="outlined" color="neutral">
-                  View
+                  Boost
                 </Button>
-                <Button variant="solid" color="primary">
-                  Join
+                <Button variant="solid" color="danger" onClick>
+                  Cancel
                 </Button>
               </CardActions>
             </Card>
