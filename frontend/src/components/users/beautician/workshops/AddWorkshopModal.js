@@ -14,24 +14,34 @@ import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import DatePicker from "react-datepicker";
 
+
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
 const AddWorkshopModal = () => {
   const [open, setOpen] = useState(false);
-  const [subject, setSubject] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(false);
+  const [subject, setSubject] = useState("");
+  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedRegDate, setSelectedRegDate] = useState("");
   const [startTime, setStartTime] = useState("10:00 AM");
-  const [endTime, setEndTime] = useState("10:00 AM");
-  // const [open, setOpen] = useState(false);
+  const [endTime, setEndTime] = useState("11:00 AM");
+  const [price, setPrice] = useState("");
+  const [description, setDescription] = useState("");
+  const [totalSeats, setTotalSeats] = useState("");
+
+
+  
   // const [open, setOpen] = useState(false);
   // const [open, setOpen] = useState(false);
   // const [open, setOpen] = useState(false);
 
   const [dateError, setDateError] = useState(false);
+  const [regDateError, setRegDateError] = useState(false);
   const [timeError, setTimeError] = useState(false);
-  const [slotNotAvailable, setSlotNotAvailable] = useState(false);
+  const [priceError, setPriceError] = useState(false);
+  const [totalSeatsError, setTotalSeatsError] = useState(false);
+//   const [slotNotAvailable, setSlotNotAvailable] = useState(false);
 
   const [alltime, setAlltime] = useState([
     "10:00 AM",
@@ -70,6 +80,47 @@ const AddWorkshopModal = () => {
       });
   };
 
+  const handleSubmit=()=>{
+    if (subject==="" ||description==="" || price===""||selectedRegDate==="" || selectedDate==="" ){
+        toast.error("Please Fill All fields")
+    }
+    else if(dateError||regDateError||timeError||priceError){
+        toast.error("Please add the values wihtout error")
+
+    }
+    else{
+    
+        const datas={
+            id:JSON.parse(localStorage.getItem("singledetails-B")).id,
+            totalseats:totalSeats,
+            subject:subject,
+            description:description,
+            price:price,
+            selectedRegDate:selectedRegDate,
+            selectedDate:selectedDate,
+            endtime:endTime,
+            starttime:startTime,
+
+        }
+        axiosInstance.post("beaut/add-workshop/",datas).then((response)=>{
+            if(response.data.message==="already-present"){
+                // setSlotNotAvailable(true)
+                toast.error("Slot already booked by you! ")
+                
+            }
+            else{
+                // setSlotNotAvailable(false)
+                toast.success("WorkShop Added")
+                
+
+            }
+            
+        }).catch(()=>{
+            alert("Error")
+        })
+    }
+  }
+
   const handleEndTimeChange = (e) => {
     console.log(e.target.value, "TIME");
     setEndTime(e.target.value);
@@ -97,20 +148,49 @@ const AddWorkshopModal = () => {
     const currentdate = new Date();
     if (date < currentdate) {
       setDateError(true);
-      setSlotNotAvailable(false);
+    //   setSlotNotAvailable(false);
     } else {
       setDateError(false);
     }
   };
 
+  const handleRegDateChange = (date) => {
+    setSelectedRegDate(date);
+    localStorage.setItem("reg-date", date);
+    const currentdate = new Date();
+    if (date < currentdate) {
+      setRegDateError(true);
+      //setSlotNotAvailable(false);
+    } else {
+        setRegDateError(false);
+    }
+  };
+
   return (
     <React.Fragment>
+        <Toaster/>
       <Fab
         size="small"
         color="secondary"
         aria-label="add"
         className="ml-2"
-        onClick={() => setOpen(true)}
+        onClick={() =>{
+            //setSlotNotAvailable(false)
+            setPriceError(false)
+            setTimeError(false)
+            setDateError(false)
+            setRegDateError(false)
+
+            setPrice(false)
+            setEndTime("11:00 AM")
+            setStartTime("10:00 AM")
+            setSelectedRegDate("")
+            setSelectedDate("")
+            setSubject("")
+            setDescription("")
+
+            setOpen(true)
+        } }
       >
         <AddIcon />
       </Fab>
@@ -158,6 +238,7 @@ const AddWorkshopModal = () => {
                     Workshop Subject
                     <input
                       type="text"
+                      value={subject}
                       className="form-control"
                       onChange={(e) => setSubject(e.target.value)}
                     />
@@ -191,6 +272,7 @@ const AddWorkshopModal = () => {
                     Choose Start Time
                     <select
                       name="selectedTime"
+                      value={startTime}
                       onChange={handleStartTimeChange}
                       className=" form-control inputform"
                     >
@@ -198,7 +280,7 @@ const AddWorkshopModal = () => {
                         return <option>{item}</option>;
                       })}
                     </select>
-                    {slotNotAvailable && (
+                    {/* {slotNotAvailable && (
                       <Alert
                         severity="error"
                         sx={{
@@ -208,12 +290,13 @@ const AddWorkshopModal = () => {
                       >
                         Slot Already Booked! Choose Another Slot
                       </Alert>
-                    )}
+                    )} */}
                   </div>
 
                   <div className="col-md-6">
                     Choose End Time
                     <select
+                      value={endTime}
                       name="selectedTime"
                       onChange={handleEndTimeChange}
                       className=" form-control inputform"
@@ -238,8 +321,119 @@ const AddWorkshopModal = () => {
                   )}
                 </div>
 
+                <div className="row">
+                <div className="col-md-6">
+                    Registration Deadline
+                    <DatePicker
+                      selected={selectedRegDate}
+                      onChange={handleRegDateChange}
+                      dateFormat="MM/dd/yyyy"
+                      className=" inputform form-control"
+                    />
+                    {regDateError && (
+                      <Alert
+                        severity="error"
+                        sx={{
+                          marginTop: "20px",
+                          // marginLeft: "70px",
+                        }}
+                      >
+                        Please Choose Valid Date
+                      </Alert>
+                    )}
+                  </div>
+
+                  <div className="col-md-6">
+                    Price
+                    <input
+              
+                      type="number"
+                      className="form-control"
+                      
+                      onChange={(e) =>{
+                        if(!/^\d+(\.\d+)?$/.test(e.target.value)){
+                            setPriceError(true)
+
+                        }
+                        else if(parseInt(e.target.value)===0){
+                            setPriceError(true)
+
+                        }
+                        else{
+                            setPriceError(false)
+                            setPrice(e.target.value)
+
+                        }
+
+                      } }
+                    />
+                    {priceError && (
+                      <Alert
+                        severity="error"
+                        sx={{
+                          marginTop: "20px",
+                          // marginLeft: "70px",
+                        }}
+                      >
+                        Invalid Price
+                      </Alert>
+                    )}
+                  </div>
+                </div>
+                <div className=" row">
+                    <div className="col-md-6">
+                    Description
+                    <input
+                 
+                      type="text"
+                      className="form-control"
+                      onChange={(e) => setDescription(e.target.value)}
+                    />
+
+                    </div>
+                    <div className="col-md-6">
+                    Total Seats
+                    <input
+              
+                      type="number"
+                      className="form-control"
+                      
+                      onChange={(e) =>{
+                        if(!/^\d+(\.\d+)?$/.test(e.target.value)){
+                            setTotalSeatsError(true)
+
+                        }
+                        else if(parseInt(e.target.value)===0){
+                            setTotalSeatsError(true)
+
+                        }
+                        else{
+                            setTotalSeatsError(false)
+                            setTotalSeats(e.target.value)
+
+                        }
+
+                      } }
+                    />
+                    {totalSeatsError && (
+                      <Alert
+                        severity="error"
+                        sx={{
+                          marginTop: "20px",
+                          // marginLeft: "70px",
+                        }}
+                      >
+                        Invalid Seat Number
+                      </Alert>
+                    )}
+
+                    </div>
+                    
+                    <br />
+                  </div>
+
                 <br />
-                <Button>Confirm</Button>
+                <Button onClick={handleSubmit}>Confirm</Button>
                 <Button onClick={() => setOpen(false)}>Close</Button>
               </DialogContent>
             </ModalDialog>

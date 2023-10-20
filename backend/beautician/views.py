@@ -10,7 +10,7 @@ from django.contrib.auth.hashers import check_password
 from django.core.mail import send_mail
 from django.conf import settings
 import random
-from datetime import datetime
+from datetime import datetime,timedelta
 from datetime import date
 
 
@@ -557,10 +557,45 @@ class CheckWorkshopTIme(APIView):
 
         
         return Response({"message":'success'})
+    
+class AddWorkshop(APIView):
+    def post(self,request): 
+
+        id=request.data.get("id")
+        subject=request.data.get("subject")
+        starttime=request.data.get("starttime")
+        endtime=request.data.get("endtime")
+        description=request.data.get("description")
+        price=request.data.get("price")
+        selectedDate=request.data.get("selectedDate")
+        selectedRegDate=request.data.get("selectedRegDate")
+        totalseats=request.data.get("totalseats")
+
+        date_format = '%Y-%m-%dT%H:%M:%S.%fZ'
+        parseddateandtime = datetime.strptime(selectedDate, date_format)
+        selectedDate=parseddateandtime.date() + timedelta(days=1)
+
+
+        parsed_reg_date= datetime.strptime(selectedRegDate, date_format)
+        selectedRegDate=parsed_reg_date.date() + timedelta(days=1)
+      
+    
+
+
+        starttime = datetime.strptime(starttime, "%I:%M %p").time()
+        endtime = datetime.strptime(endtime, "%I:%M %p").time()
+
+
+
+        try:
+            Workshop.objects.get(beautician=Beautician.objects.get(id=id),start_time=starttime,end_time=endtime,date=selectedDate)
+            return Response({"message":'already-present'})
+        except:
+            Workshop.objects.create(beautician=Beautician.objects.get(id=id),subject=subject,description=description,price=price,date=selectedDate,registration_deadline=selectedRegDate,start_time=starttime,end_time=endtime,total_seats=totalseats)
+            return Response({"message":'success'})
        
 
 
-       
         
         
 

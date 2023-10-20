@@ -23,6 +23,7 @@ urlpatterns = [
     path("add-bio/",AddBio.as_view(),name="AddBio"),
     path("add-to-expertise/",AddToExpertise.as_view(),name="AddToExpertise"),
     path("check-workshop-time/",CheckWorkshopTIme.as_view(),name="CheckWorkshopTIme"),
+    path("add-workshop/",AddWorkshop.as_view(),name="AddWorkshop"),
 
 
     

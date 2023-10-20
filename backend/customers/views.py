@@ -151,6 +151,7 @@ class Booknow(APIView):
 
         
         parseddate=parseddateandtime.date()
+     
         studioobj=Studio.objects.get(beautician=beautobj,place=studio)
 
         service_obj=Services.objects.get(name=servicename)
