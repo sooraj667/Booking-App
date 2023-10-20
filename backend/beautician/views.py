@@ -540,6 +540,23 @@ class AddToExpertise(APIView):
         beautservices=Servicefees.objects.filter(beautician=obj.beautician)
         beautservices_serialized=ServicefeesSerializer(beautservices,many=True)
         return Response({"message":'success',"services":beautservices_serialized.data})
+    
+
+
+class CheckWorkshopTIme(APIView):
+    def post(self,request): 
+       
+        starttime=request.data.get("starttime")
+        endtime=request.data.get("endtime")
+
+        parsed_starttime = datetime.strptime(starttime, "%I:%M %p").time()
+        parsed_endtime = datetime.strptime(endtime, "%I:%M %p").time()
+        if parsed_endtime<=parsed_starttime:
+            return Response({"message":"endtime-greater"})
+
+
+        
+        return Response({"message":'success'})
        
 
 

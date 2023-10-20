@@ -22,6 +22,7 @@ urlpatterns = [
     path("get-single-studio/",GetSingleStudio.as_view(),name="GetSingleStudio"),
     path("add-bio/",AddBio.as_view(),name="AddBio"),
     path("add-to-expertise/",AddToExpertise.as_view(),name="AddToExpertise"),
+    path("check-workshop-time/",CheckWorkshopTIme.as_view(),name="CheckWorkshopTIme"),
 
 
     

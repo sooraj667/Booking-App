@@ -58,7 +58,7 @@ const Paypal = () => {
     "2:00 PM",
     "3:00 PM",
     "4:00 PM",
-    // Add more times as needed
+
   ]);
 
   const handleDateChange = (date) => {
