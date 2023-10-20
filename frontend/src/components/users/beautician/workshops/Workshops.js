@@ -75,6 +75,14 @@ const Workshops = () => {
               >
                 <Avatar src="/static/images/avatar/1.jpg" size="lg" />
                 <AvatarGroup size="sm" sx={{ "--Avatar-size": "28px" }}>
+                    {
+                        item.customers.map((val)=>{
+                            return(
+                                <Avatar src={val.image} />
+
+                            )
+                        })
+                    }
                   <Avatar src="/static/images/avatar/2.jpg" />
                   <Avatar src="/static/images/avatar/3.jpg" />
                   <Avatar src="/static/images/avatar/4.jpg" />
