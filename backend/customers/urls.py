@@ -30,6 +30,8 @@ urlpatterns = [
     path("all-favourites/",GetAllFavourites.as_view(),name="GetAllFavourites"),
     path("getallbeauticians/",GetAllBeauticians.as_view(),name="GetAllBeauticians"),
     path("remove-from-favourties/",RemoveFromFavourites.as_view(),name="RemoveFromFavourites"),
+    path("get-beaut-workshops/",GetBeautWorkshops.as_view(),name="GetBeautWorkshops"),
+   
 
 
     

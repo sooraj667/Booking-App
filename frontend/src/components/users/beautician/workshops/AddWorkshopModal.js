@@ -167,8 +167,8 @@ const AddWorkshopModal = () => {
       setRegDateError("Please choose valid date!");
       //setSlotNotAvailable(false);
     }
-    else if(date<=selectedDate){
-        setRegDateError("Deadline should be after the conducting date!");
+    else if(date>=selectedDate){
+        setRegDateError("Deadline should be before the conducting date!");
 
     }
     

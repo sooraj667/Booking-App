@@ -712,6 +712,18 @@ class RemoveFromFavourites(APIView):
         obj.delete()
         
         return Response({"message":"done"})
+    
+class GetBeautWorkshops(APIView):
+  
+    def post(self,request): 
+        id=request.data.get("beautid")
+        obj=Beautician.objects.get(id=id)
+        all=Workshop.objects.filter(beautician=obj)
+        if all.count()==0:
+            return Response({"message":"no-workshops"})
+        else:
+            all_serialized=WorkshopSerializer(all,many=True)
+            return Response({"message":"done","allworkshops":all_serialized.data})
 
        
 
