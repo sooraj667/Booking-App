@@ -111,6 +111,7 @@ const AddWorkshopModal = () => {
             else{
                 // setSlotNotAvailable(false)
                 toast.success("WorkShop Added")
+                setOpen(false)
                 
 
             }
@@ -159,9 +160,15 @@ const AddWorkshopModal = () => {
     localStorage.setItem("reg-date", date);
     const currentdate = new Date();
     if (date < currentdate) {
-      setRegDateError(true);
+      setRegDateError("Please choose valid date!");
       //setSlotNotAvailable(false);
-    } else {
+    }
+    else if(date<=selectedDate){
+        setRegDateError("Deadline should be after the conducting date!");
+
+    }
+    
+    else {
         setRegDateError(false);
     }
   };
@@ -338,7 +345,7 @@ const AddWorkshopModal = () => {
                           // marginLeft: "70px",
                         }}
                       >
-                        Please Choose Valid Date
+                        {regDateError}
                       </Alert>
                     )}
                   </div>
