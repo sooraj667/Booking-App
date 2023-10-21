@@ -192,7 +192,9 @@ const Booknow = () => {
             >
               Show Reviews
             </Button>
-            {workshopsPresent && (
+
+          </div>
+          {workshopsPresent && (
               <Fab
                 color="secondary"
                 aria-label="edit"
@@ -202,7 +204,6 @@ const Booknow = () => {
                 <MoreHorizIcon />
               </Fab>
             )}
-          </div>
         </div>
       </div>
 
