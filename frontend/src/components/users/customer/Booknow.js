@@ -26,6 +26,7 @@ import Review from "./reviews/Review";
 // import {setService,setDate,setTime,setStudio} from "../../../feautures/customer/paymentdataslice"
 import Fab from "@mui/material/Fab";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import WorkShopSpeedDial from "./workshops/WorkShopSpeedDial";
 
 const Booknow = () => {
   const [startDate, setStartDate] = useState("");
@@ -37,6 +38,7 @@ const Booknow = () => {
   const [showReview, setShowReview] = useState(false);
   const [bookNowToggle, setBookNowToggle] = useState(false);
   const [workshopsPresent, setWorkshopsPresent] = useState(false);
+  const [workshopToggle, setWorkshopToggle] = useState(false);
 
   const [alltime, setAlltime] = useState([
     "10:00 AM",
@@ -122,11 +124,13 @@ const Booknow = () => {
 
       <div
         className={
-          bookNowToggle || showReview ? "expertin_minimized" : "expertin"
+          bookNowToggle || showReview || workshopToggle
+            ? "expertin_minimized"
+            : "expertin"
         }
       >
         <p>{reqdatas.value.bookbeautdata.name}</p>
-        {bookNowToggle || showReview ? (
+        {bookNowToggle || showReview || workshopToggle ? (
           <Avatar
             src={reqdatas.value.bookbeautdata.image}
             sx={{
@@ -149,61 +153,71 @@ const Booknow = () => {
           .map((item) => (
             <p key={item.id}> {item.service.name} </p>
           ))}
-        <div className="toggle-buttons">
-          <Button
-            onClick={() => {
-              setBookNowToggle((prev) => !prev);
-              setShowReview(false);
-            }}
-            sx={{
-              marginLeft: "20px",
-              marginTop: "10px",
-              backgroundColor: "inherit",
-              color: "black",
-              "&:hover": {
-                backgroundColor: "grey",
-                opacity: [0.3, 1, 1],
-                color: "white",
-              },
-            }}
-          >
-            Book Now
-          </Button>
-
-          <div
-            className="review-toggle"
-            onClick={() => {
-              setShowReview((prev) => !prev);
-              setBookNowToggle(false);
-            }}
-          >
+          
+          
+          
+        <div className="flex">
+          <div className="toggle-buttons">
             <Button
+              onClick={() => {
+                setBookNowToggle((prev) => !prev);
+                setShowReview(false);
+                setWorkshopToggle(false);
+              }}
               sx={{
+                marginLeft: "20px",
                 marginTop: "10px",
                 backgroundColor: "inherit",
-                border: "black",
                 color: "black",
                 "&:hover": {
-                  backgroundColor: "#212529",
-                  color: "#D0D4D9", // Specify the desired background color on hover
+                  backgroundColor: "grey",
+                  opacity: [0.3, 1, 1],
+                  color: "white",
                 },
               }}
-              variant="oulined"
             >
-              Show Reviews
+              Book Now
             </Button>
 
-          </div>
-          {workshopsPresent && (
-              <Fab
-                color="secondary"
-                aria-label="edit"
-                size="small"
-                sx={{ margin: 2 }}
+            <div
+              className="review-toggle"
+              onClick={() => {
+                setShowReview((prev) => !prev);
+                setBookNowToggle(false);
+                setWorkshopToggle(false);
+              }}
+            >
+              <Button
+                sx={{
+                  marginTop: "10px",
+                  backgroundColor: "inherit",
+                  border: "black",
+                  color: "black",
+                  "&:hover": {
+                    backgroundColor: "#212529",
+                    color: "#D0D4D9", // Specify the desired background color on hover
+                  },
+                }}
+                variant="oulined"
               >
-                <MoreHorizIcon />
-              </Fab>
+                Show Reviews
+              </Button>
+            </div>
+
+            <div className="">
+            {workshopsPresent && (
+            <WorkShopSpeedDial toggleW={setWorkshopToggle} toggleBN={setBookNowToggle} toggleR={setShowReview}/>
+              // <Fab
+              //   color="secondary"
+              //   aria-label="edit"
+              //   size="small"
+              //   sx={{ margin: 2 }}
+              // >
+              //   <MoreHorizIcon />
+              // </Fab>
             )}
+            </div>
+          </div>
         </div>
       </div>
 
