@@ -25,7 +25,6 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import CreditScoreIcon from "@mui/icons-material/CreditScore";
 import DeleteWorkshopModal from "./DeleteWorkshopModal";
 
-
 const Workshops = () => {
   const dispatch = useDispatch();
   const workshops = useSelector((state) => state.workshops);
@@ -44,8 +43,6 @@ const Workshops = () => {
         alert("ERROR");
       });
   }, []);
-
-
 
   return (
     <div>
@@ -80,14 +77,9 @@ const Workshops = () => {
               >
                 {/* <Avatar src="/static/images/avatar/1.jpg" size="lg" /> */}
                 <AvatarGroup size="sm" sx={{ "--Avatar-size": "28px" }}>
-                    {
-                        item.customers.map((val)=>{
-                            return(
-                                <Avatar src={val.image} />
-
-                            )
-                        })
-                    }
+                  {item.customers.map((val) => {
+                    return <Avatar src={val.image} />;
+                  })}
                   <Avatar src="/static/images/avatar/2.jpg" />
                   <Avatar src="/static/images/avatar/3.jpg" />
                   <Avatar src="/static/images/avatar/4.jpg" />
@@ -111,8 +103,8 @@ const Workshops = () => {
                 </div>
 
                 <div className="flex justify-around">
-                <div className="col-md-2"></div>
-                <div className="col-md-5">
+                  <div className="col-md-2"></div>
+                  <div className="col-md-5">
                     <AccessTimeIcon />
                   </div>
                   <div className="col-md-5">
@@ -124,8 +116,8 @@ const Workshops = () => {
                 </div>
 
                 <div className="flex justify-around">
-                <div className="col-md-2"></div>
-                <div className="col-md-5">
+                  <div className="col-md-2"></div>
+                  <div className="col-md-5">
                     <CurrencyRupeeIcon />
                   </div>
                   <div className="col-md-5">
@@ -135,8 +127,8 @@ const Workshops = () => {
                 </div>
 
                 <div className="flex justify-around">
-                <div className="col-md-2"></div>
-                <div className="col-md-5">
+                  <div className="col-md-2"></div>
+                  <div className="col-md-5">
                     <CreditScoreIcon />
                   </div>
                   <div className="col-md-5">
@@ -146,8 +138,8 @@ const Workshops = () => {
                 </div>
 
                 <div className="flex justify-around">
-                <div className="col-md-2"></div>
-                <div className="col-md-5">
+                  <div className="col-md-2"></div>
+                  <div className="col-md-5">
                     <ReportIcon />
                   </div>
                   <div className="col-md-5">
@@ -170,7 +162,7 @@ const Workshops = () => {
                 <Button variant="outlined" color="neutral">
                   Boost
                 </Button>
-                <DeleteWorkshopModal id={item.id}/>
+                <DeleteWorkshopModal id={item.id} />
                 {/* <Button variant="solid" color="danger" onClick={()=> handleCancelWorkshopConfirm()}>
                   Cancel
                 </Button> */}

@@ -27,6 +27,7 @@ import Review from "./reviews/Review";
 import Fab from "@mui/material/Fab";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import WorkShopSpeedDial from "./workshops/WorkShopSpeedDial";
+import BeautWorkshops from "./workshops/BeautWorkshops";
 
 const Booknow = () => {
   const [startDate, setStartDate] = useState("");
@@ -153,9 +154,6 @@ const Booknow = () => {
           .map((item) => (
             <p key={item.id}> {item.service.name} </p>
           ))}
-          
-          
-          
         <div className="flex">
           <div className="toggle-buttons">
             <Button
@@ -205,17 +203,21 @@ const Booknow = () => {
             </div>
 
             <div className="">
-            {workshopsPresent && (
-            <WorkShopSpeedDial toggleW={setWorkshopToggle} toggleBN={setBookNowToggle} toggleR={setShowReview}/>
-              // <Fab
-              //   color="secondary"
-              //   aria-label="edit"
-              //   size="small"
-              //   sx={{ margin: 2 }}
-              // >
-              //   <MoreHorizIcon />
-              // </Fab>
-            )}
+              {workshopsPresent && (
+                <WorkShopSpeedDial
+                  toggleW={setWorkshopToggle}
+                  toggleBN={setBookNowToggle}
+                  toggleR={setShowReview}
+                />
+                // <Fab
+                //   color="secondary"
+                //   aria-label="edit"
+                //   size="small"
+                //   sx={{ margin: 2 }}
+                // >
+                //   <MoreHorizIcon />
+                // </Fab>
+              )}
             </div>
           </div>
         </div>
@@ -240,6 +242,12 @@ const Booknow = () => {
       {showReview && (
         <div className="review">
           <Review />
+        </div>
+      )}
+
+      {workshopToggle && (
+        <div className="review">
+          <BeautWorkshops />
         </div>
       )}
     </div>
