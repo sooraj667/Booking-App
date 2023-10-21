@@ -15,6 +15,7 @@ import ReportIcon from "@mui/icons-material/Report";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import CreditScoreIcon from "@mui/icons-material/CreditScore";
 import axiosInstance from '../../../../axios/axiosconfig';
+import WorkShopBookingFullScreenDialog from './WorkShopBookingFullScreenDialog';
 
 const BeautWorkshops = () => {
 
@@ -155,10 +156,17 @@ const BeautWorkshops = () => {
                   Boost
                 </Button> */}
                 {/* <DeleteWorkshopModal id={item.id} /> */}
-                {/* <Button variant="solid" color="danger" onClick={()=> handleCancelWorkshopConfirm()}>
-                  Cancel
+                {/* <Button variant="solid" color="danger" onClick={()=> handleWorkShopBookNow(item.id)}>
+                  Book Now
                 </Button> */}
+          
+               
               </CardActions>
+              <div className="flex justify-center">
+                <WorkShopBookingFullScreenDialog id={item.id} allWorkShops={allWorkShops}/>
+
+
+                </div>
             </Card>
           );
         })}
