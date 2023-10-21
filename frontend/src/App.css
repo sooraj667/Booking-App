@@ -1276,7 +1276,9 @@ html{
 .justify-end{
   justify-content: end;
 }
-
+.cur{
+  cursor: pointer;
+}
 
 
 

@@ -12,7 +12,8 @@ import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
 import axiosInstance from "../../../../axios/axiosconfig";
-import ImageListItem from '@mui/material/ImageListItem';
+import ImageListItem from "@mui/material/ImageListItem";
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -23,7 +24,7 @@ const WorkShopBookingFullScreenDialog = (props) => {
   const [subject, setSubject] = useState("");
   const [beautName, setBeautName] = useState("");
   const [beautImage, setBeautImage] = useState("");
-
+  const [paymentToggle, setPaymentToggle] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -40,10 +41,10 @@ const WorkShopBookingFullScreenDialog = (props) => {
       })
       .map((val) => {
         return (
-            setSubject(val.subject),
-            setBeautName(val.beautician.name),
-            setBeautImage(val.beautician.image)
-        )
+          setSubject(val.subject),
+          setBeautName(val.beautician.name),
+          setBeautImage(val.beautician.image)
+        );
       });
   });
 
@@ -83,23 +84,30 @@ const WorkShopBookingFullScreenDialog = (props) => {
           ONLINE WORKSHOP BY
         </div>
         <div className="flex justify-center align-center py-3 text-small">
-            {beautName}
-            
+          {beautName}
         </div>
         <div className="flex justify-center align-center py-3 ">
-        <ImageListItem  sx={{width:200}}>
-          <img
-            srcSet={beautImage}
-            src={beautImage}
-           
-            
-            loading="lazy"
-          />
-        </ImageListItem>
-          
-            
+          <ImageListItem sx={{ width: 200 }}>
+            <img srcSet={beautImage} src={beautImage} loading="lazy" />
+          </ImageListItem>
         </div>
-        
+        <hr />
+        <h4 className="flex justify-center align-center py-3 text-small" onClick={()=>setPaymentToggle((prev=>!prev))}>
+          Choose Payment <ArrowDropDownIcon/>
+        </h4>
+        {
+            paymentToggle && 
+            <div className="flex justify-center cur">
+                <Button>
+                    Wallet
+                </Button>
+                <Button>
+                    Razorpay
+                </Button>
+
+            </div>
+        }
+
 
         <List>
           <ListItem button>
