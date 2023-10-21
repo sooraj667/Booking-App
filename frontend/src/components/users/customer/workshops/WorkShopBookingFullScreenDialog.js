@@ -12,6 +12,7 @@ import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
 import axiosInstance from "../../../../axios/axiosconfig";
+import ImageListItem from '@mui/material/ImageListItem';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -21,6 +22,7 @@ const WorkShopBookingFullScreenDialog = (props) => {
   const [open, setOpen] = useState(false);
   const [subject, setSubject] = useState("");
   const [beautName, setBeautName] = useState("");
+  const [beautImage, setBeautImage] = useState("");
 
 
   const handleClickOpen = () => {
@@ -39,7 +41,8 @@ const WorkShopBookingFullScreenDialog = (props) => {
       .map((val) => {
         return (
             setSubject(val.subject),
-            setBeautName(val.beautician.name)
+            setBeautName(val.beautician.name),
+            setBeautImage(val.beautician.image)
         )
       });
   });
@@ -83,6 +86,20 @@ const WorkShopBookingFullScreenDialog = (props) => {
             {beautName}
             
         </div>
+        <div className="flex justify-center align-center py-3 ">
+        <ImageListItem  sx={{width:200}}>
+          <img
+            srcSet={beautImage}
+            src={beautImage}
+           
+            
+            loading="lazy"
+          />
+        </ImageListItem>
+          
+            
+        </div>
+        
 
         <List>
           <ListItem button>
