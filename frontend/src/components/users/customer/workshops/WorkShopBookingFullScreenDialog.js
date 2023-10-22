@@ -13,20 +13,27 @@ import CloseIcon from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
 import axiosInstance from "../../../../axios/axiosconfig";
 import ImageListItem from "@mui/material/ImageListItem";
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-import toast, { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import TaskAltIcon from '@mui/icons-material/TaskAlt';
+
+
+
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
 const WorkShopBookingFullScreenDialog = (props) => {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [subject, setSubject] = useState("");
   const [beautName, setBeautName] = useState("");
   const [beautImage, setBeautImage] = useState("");
   const [paymentToggle, setPaymentToggle] = useState(false);
+  const [allReadyBooked, setAllReadyBoooked] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -48,11 +55,22 @@ const WorkShopBookingFullScreenDialog = (props) => {
           setBeautImage(val.beautician.image)
         );
       });
-  });
+      const datas={
+        workshopid:props.id,
+        custid:JSON.parse(localStorage.getItem("singledetails-C")).id
+      }
+    axiosInstance.post("cust/check-if-workshop-booked/",datas).then((res) => {
+      if (res.data.message === "already-present") {
+        setAllReadyBoooked(true);
+      } else {
+        setAllReadyBoooked(false);
+      }
+    });
+  },[]);
 
   return (
     <div>
-        <Toaster/>
+      <Toaster />
       <Button variant="outlined" onClick={handleClickOpen}>
         Book Now
       </Button>
@@ -95,96 +113,93 @@ const WorkShopBookingFullScreenDialog = (props) => {
           </ImageListItem>
         </div>
         <hr />
-        <h4 className="flex justify-center align-center py-3 text-small" onClick={()=>setPaymentToggle((prev=>!prev))}>
-          Choose Payment <ArrowDropDownIcon/>
-        </h4>
         {
-            paymentToggle && 
+            !allReadyBooked ?
+            <div className="">
+          <h4
+            className="flex justify-center align-center py-3 text-small"
+            onClick={() => setPaymentToggle((prev) => !prev)}
+          >
+            Choose Payment <ArrowDropDownIcon />
+          </h4>
+          {paymentToggle && (
             <>
-            <div className="flex justify-center cur">
-             
-
+              <div className="flex justify-center cur">
                 <PayPalScriptProvider
-          options={{
-            clientId:
-              "AeaCyw6WUYkOvfUXMp0ScN2r6KEfhVvxWytZvEAlbUXH_NoQsJ70TyTabFoedoIEkqTTwI5kUtFoaauE",
-          }}
-        >
-          <PayPalButtons
-            createOrder={(data, actions) => {
-              return actions.order.create({
-                purchase_units: [
-                  {
-                    amount: {
-                      value: "1",
-                    },
-                  },
-                ],
-              });
-            }}
-            onApprove={() => {
-            //   toast.success("Payment successfully completed!");
-            //   localStorage.setItem(
-            //     "bookedbeautid",
-            //     reqdatas.value.bookbeautdata.id
-            //   );
-            //   localStorage.setItem(
-            //     "bookedcustid",
-            //     statedatas.value.custdetails.id
-            //   );
+                  options={{
+                    clientId:
+                      "AeaCyw6WUYkOvfUXMp0ScN2r6KEfhVvxWytZvEAlbUXH_NoQsJ70TyTabFoedoIEkqTTwI5kUtFoaauE",
+                  }}
+                >
+                  <PayPalButtons
+                    createOrder={(data, actions) => {
+                      return actions.order.create({
+                        purchase_units: [
+                          {
+                            amount: {
+                              value: "1",
+                            },
+                          },
+                        ],
+                      });
+                    }}
+                    onApprove={() => {
+                      toast.success("Payment successfully completed!");
+                      const datas = {
+                        workshopid: props.id,
+                        custid: JSON.parse(
+                          localStorage.getItem("singledetails-C")
+                        ).id,
+                        type: "paypal",
+                      };
 
-            //   const datas = {
-            //     beautid: reqdatas.value.bookbeautdata.id,
-            //     custid: statedatas.value.custdetails.id,
-            //     date: localStorage.getItem("date"),
-            //     time: localStorage.getItem("time"),
-            //     studio: localStorage.getItem("studio"),
-            //     servicename: localStorage.getItem("service"),
-            //     type:"paypal",
-            //   };
-             
-            //   axiosInstance.post("cust/booknow/", datas).then((response) => {
-            //     console.log(response, "RESRERSRERSRERSR");
-            //   });
+                      axiosInstance
+                        .post("cust/workshop-booknow/", datas)
+                        .then((response) => {
+                          console.log(response, "RESRERSRERSRERSR");
+                        });
 
-            //   setTimeout(navigate("../booking-completed"), 2000).catch(
-            //     (error) => alert(error)
-            //   );
-            }}
-            onCancel={() => {
-              toast.error("You cancelled the payment!");
-            }}
-            onError={() => {
-              toast.error("Error!");
-            }}
-          />
-          <Toaster />
-        </PayPalScriptProvider>
-                
-
-            </div>
-            <div className="flex justify-center">
-            <Button variant="contained" color="primary" >
-                    Pay Using Wallet
+                      setTimeout(
+                        navigate("../workshop-booking-completed"),
+                        2000
+                      ).catch((error) => alert(error));
+                    }}
+                    onCancel={() => {
+                      toast.error("You cancelled the payment!");
+                    }}
+                    onError={() => {
+                      toast.error("Error!");
+                    }}
+                  />
+                  <Toaster />
+                </PayPalScriptProvider>
+              </div>
+              <div className="flex justify-center">
+                <Button variant="contained" color="primary">
+                  Pay Using Wallet
                 </Button>
-
-            </div>
+              </div>
             </>
+          )}
+
+          <List>
+            <ListItem button>
+              <ListItemText primary="Phone ringtone" secondary="Titania" />
+            </ListItem>
+            <Divider />
+            <ListItem button>
+              <ListItemText
+                primary="Default notification ringtone"
+                secondary="Tethys"
+              />
+            </ListItem>
+          </List>
+        </div>: <div className="sub-heading-div flex justify-center align-center py-3 text-small fw-2 sgfont  themecolor ">
+           You have already booked for this workshop! <TaskAltIcon className="text-success ml-2"/>
+
+        </div>
         }
-
-
-        <List>
-          <ListItem button>
-            <ListItemText primary="Phone ringtone" secondary="Titania" />
-          </ListItem>
-          <Divider />
-          <ListItem button>
-            <ListItemText
-              primary="Default notification ringtone"
-              secondary="Tethys"
-            />
-          </ListItem>
-        </List>
+        
       </Dialog>
     </div>
   );

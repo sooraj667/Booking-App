@@ -31,6 +31,8 @@ urlpatterns = [
     path("getallbeauticians/",GetAllBeauticians.as_view(),name="GetAllBeauticians"),
     path("remove-from-favourties/",RemoveFromFavourites.as_view(),name="RemoveFromFavourites"),
     path("get-beaut-workshops/",GetBeautWorkshops.as_view(),name="GetBeautWorkshops"),
+    path("workshop-booknow/",WorkShopBooknow.as_view(),name="WorkShopBooknow"),
+    path("check-if-workshop-booked/",CheckWorkshopBooked.as_view(),name="CheckWorkshopBooked"),
    
 
 

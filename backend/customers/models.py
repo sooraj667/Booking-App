@@ -60,3 +60,16 @@ class Workshop(models.Model):
    
     def __str__(self):  
         return f"{self.beautician.name} - {self.subject} -{self.date}"
+    
+
+class WorkshopBooking(models.Model):
+    workshop=models.ForeignKey(Workshop,on_delete=models.CASCADE)
+    customer=models.ForeignKey(Customer,on_delete=models.CASCADE)
+    booked_date=models.DateField(auto_now_add=True)
+    booked_time=models.TimeField(auto_now_add=True)
+    status=models.CharField(max_length=200)
+    
+
+   
+    def __str__(self):  
+        return f"{self.customer.name},{self.booked_time} "

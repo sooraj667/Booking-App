@@ -724,6 +724,37 @@ class GetBeautWorkshops(APIView):
         else:
             all_serialized=WorkshopSerializer(all,many=True)
             return Response({"message":"done","allworkshops":all_serialized.data})
+        
+class WorkShopBooknow(APIView):
+  
+    def post(self,request): 
+        workshopid=request.data.get("workshopid")
+        custid=request.data.get("custid")
+        type=request.data.get("type")
+      
+        workshop_obj=Workshop.objects.get(id=workshopid)
+        cust_obj=Customer.objects.get(id=custid)
+        workshop_obj.customers.add(cust_obj)
+        workshop_obj.save()
+        WorkshopBooking.objects.create(customer=cust_obj,workshop=workshop_obj)
+       
+        return Response({"message":"done"})
+    
+
+class CheckWorkshopBooked(APIView):
+  
+    def post(self,request): 
+        workshopid=request.data.get("workshopid")
+        custid=request.data.get("custid")
+       
+      
+        workshop_obj=Workshop.objects.get(id=workshopid)
+        cust_obj=Customer.objects.get(id=custid)
+        try:
+            WorkshopBooking.objects.get(workshop=workshop_obj,customer_id=custid)
+            return Response({"message":"already-present"})
+        except:
+            return Response({"message":"not-present"})
 
        
 
