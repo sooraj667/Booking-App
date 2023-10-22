@@ -17,6 +17,7 @@ import Servicepreview from "./services/Servicepreview";
 import WalletCust from "./wallet/WalletCust";
 import PreviousBooking from "./bookings/PreviousBooking";
 import CustomerHeader from "./customer-header/CustomerHeader";
+import AllWorkshops from "./workshops/AllWorkshops";
 const Customerdashboard = () => {
   const details = useSelector((state) => state.login);
   const navigationdatas = useSelector((state) => state.custnavigation);
@@ -55,6 +56,7 @@ const Customerdashboard = () => {
           {navigationdatas.value.servicepreview && <Servicepreview />}
           {navigationdatas.value.wallet && <WalletCust />}
           {navigationdatas.value.previousbooking && <PreviousBooking />}
+          {navigationdatas.value.allworkshops && <AllWorkshops />}
          
         </div>
       </div>

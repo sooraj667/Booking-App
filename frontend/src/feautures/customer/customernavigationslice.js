@@ -11,6 +11,7 @@ const INITIALSTATE={
    servicepreview:false,
    wallet:false,
    previousbooking:false,
+   allworkshops:false,
 
 
    
@@ -34,6 +35,7 @@ const customernavigationslice=createSlice(
                 state.value.servicepreview=false
                 state.value.wallet=false
                 state.value.previousbooking=false
+                state.value.allworkshops=false
             },
             toggleBookings:(state)=>{
                 state.value.bookings=true
@@ -45,6 +47,7 @@ const customernavigationslice=createSlice(
                 state.value.servicepreview=false
                 state.value.wallet=false
                 state.value.previousbooking=false
+                state.value.allworkshops=false
             },
             toggleBrowse:(state)=>{
                 state.value.browse=true
@@ -56,6 +59,7 @@ const customernavigationslice=createSlice(
                 state.value.servicepreview=false
                 state.value.wallet=false
                 state.value.previousbooking=false
+                state.value.allworkshops=false
             },
             toggleBooknow:(state,action)=>{
                 state.value.booknow=true
@@ -68,6 +72,7 @@ const customernavigationslice=createSlice(
                 state.value.booknowbeauticianid=action.payload
                 state.value.wallet=false
                 state.value.previousbooking=false
+                state.value.allworkshops=false
             },
             toggleProfile:(state,action)=>{
                 state.value.profile=true
@@ -79,6 +84,7 @@ const customernavigationslice=createSlice(
                 state.value.servicepreview=false
                 state.value.wallet=false
                 state.value.previousbooking=false
+                state.value.allworkshops=false
             },
             toggleServicePreview:(state,action)=>{
                 state.value.servicepreview=true
@@ -90,6 +96,7 @@ const customernavigationslice=createSlice(
                 state.value.profile=false
                 state.value.wallet=false
                 state.value.previousbooking=false
+                state.value.allworkshops=false
             },
             toggleLandingPart:(state,action)=>{
                 state.value.landingpart=true
@@ -101,6 +108,7 @@ const customernavigationslice=createSlice(
                 state.value.profile=false
                 state.value.wallet=false
                 state.value.previousbooking=false
+                state.value.allworkshops=false
             },
             toggleWallet:(state,action)=>{
                 state.value.wallet=true
@@ -112,6 +120,7 @@ const customernavigationslice=createSlice(
                 state.value.profile=false
                 state.value.landingpart=false
                 state.value.previousbooking=false
+                state.value.allworkshops=false
             },
             togglePreviousBooking:(state,action)=>{
                 state.value.previousbooking=true
@@ -123,6 +132,19 @@ const customernavigationslice=createSlice(
                 state.value.profile=false
                 state.value.landingpart=false
                 state.value.wallet=false
+                state.value.allworkshops=false
+            },
+            toggleAllWorkShops:(state,action)=>{
+                state.value.allworkshops=true
+                state.value.servicepreview=false
+                state.value.favouritestylists=false
+                state.value.bookings=false
+                state.value.browse=false
+                state.value.booknow=false
+                state.value.profile=false
+                state.value.landingpart=false
+                state.value.wallet=false
+                state.value.previousbooking=false
             }
             
 
@@ -139,5 +161,5 @@ const customernavigationslice=createSlice(
 
 )
 
-export const {toggleFavouritestylists,toggleBookings,toggleBrowse,toggleBooknow,toggleProfile,toggleServicePreview,toggleLandingPart,toggleWallet,togglePreviousBooking} = customernavigationslice.actions
+export const {toggleFavouritestylists,toggleBookings,toggleBrowse,toggleBooknow,toggleProfile,toggleServicePreview,toggleLandingPart,toggleWallet,togglePreviousBooking,toggleAllWorkShops} = customernavigationslice.actions
 export default customernavigationslice.reducer

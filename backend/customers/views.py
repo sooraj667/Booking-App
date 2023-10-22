@@ -778,6 +778,18 @@ class WorkShopBookNowWallet(APIView):
        
         return Response({"message":"done"})
     
+class GetAllWorkshops(APIView):
+  
+    def get(self,request): 
+        all=Workshop.objects.all()
+        if all.count()==0:
+            return Response({"message":"no-workshops"})
+        
+        all_serialized=WorkshopSerializer(all,many=True)
+        
+       
+        return Response({"message":"done","allworkshops":all_serialized.data})
+    
 
         
        
