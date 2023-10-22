@@ -10,6 +10,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 const CustomerHeader = () => {
     const navigate=useNavigate()
@@ -42,7 +43,13 @@ const CustomerHeader = () => {
           <Link to="/" className="groomup">
           Groom Up
           </Link>
+         
           </Typography>
+          <div className="cur">
+          ONLINE WORKSHOPS <ArrowDropDownIcon className='mr-3 cur'/>
+
+          </div>
+           
     
 
 
