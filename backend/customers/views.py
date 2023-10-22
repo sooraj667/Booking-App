@@ -756,7 +756,28 @@ class CheckWorkshopBooked(APIView):
         except:
             return Response({"message":"not-present"})
 
+
+
+class WorkShopBookNowWallet(APIView):
+  
+    def post(self,request): 
+        workshopid=request.data.get("workshopid")
+        custid=request.data.get("custid")
+        type="Wallet Payment"
+      
+        workshop_obj=Workshop.objects.get(id=workshopid)
+        cust_obj=Customer.objects.get(id=custid)
+        if cust_obj.wallet_amount < workshop_obj.price:
+            return Response({"message":"not-enough-wallet-money"})
+        
+        workshop_obj.customers.add(cust_obj)
+        workshop_obj.save()
+        WorkshopBooking.objects.create(customer=cust_obj,workshop=workshop_obj)
+        cust_obj.wallet_amount-=workshop_obj.price
+        cust_obj.save()
        
+        return Response({"message":"done"})
+    
 
         
        

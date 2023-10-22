@@ -18,6 +18,7 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
+import WorkshopPayUsingWalletModal from "./WorkshopPayUsingWalletModal";
 
 
 
@@ -34,6 +35,7 @@ const WorkShopBookingFullScreenDialog = (props) => {
   const [beautImage, setBeautImage] = useState("");
   const [paymentToggle, setPaymentToggle] = useState(false);
   const [allReadyBooked, setAllReadyBoooked] = useState(false);
+  const [amount, setAmount] = useState("");
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -52,7 +54,8 @@ const WorkShopBookingFullScreenDialog = (props) => {
         return (
           setSubject(val.subject),
           setBeautName(val.beautician.name),
-          setBeautImage(val.beautician.image)
+          setBeautImage(val.beautician.image),
+          setAmount(val.price)
         );
       });
       const datas={
@@ -175,9 +178,8 @@ const WorkShopBookingFullScreenDialog = (props) => {
                 </PayPalScriptProvider>
               </div>
               <div className="flex justify-center">
-                <Button variant="contained" color="primary">
-                  Pay Using Wallet
-                </Button>
+                <WorkshopPayUsingWalletModal id={props.id} price={amount}/>
+               
               </div>
             </>
           )}

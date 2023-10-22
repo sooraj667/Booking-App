@@ -33,6 +33,7 @@ urlpatterns = [
     path("get-beaut-workshops/",GetBeautWorkshops.as_view(),name="GetBeautWorkshops"),
     path("workshop-booknow/",WorkShopBooknow.as_view(),name="WorkShopBooknow"),
     path("check-if-workshop-booked/",CheckWorkshopBooked.as_view(),name="CheckWorkshopBooked"),
+    path("workshop-booknow-using-wallet/",WorkShopBookNowWallet.as_view(),name="WorkShopBookNowWallet"),
    
 
 
