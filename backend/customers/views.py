@@ -790,6 +790,16 @@ class GetAllWorkshops(APIView):
        
         return Response({"message":"done","allworkshops":all_serialized.data})
     
+class GetCurrentUserWorkShops(APIView):
+  
+    def post(self,request): 
+        cust_obj=Customer.objects.get(id=request.data.get("custid"))
+        all=Workshop.objects.filter(customer=cust_obj)
+      
+        
+       
+        return Response({"message":"done"})
+    
 
         
        

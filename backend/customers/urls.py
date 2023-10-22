@@ -35,6 +35,7 @@ urlpatterns = [
     path("check-if-workshop-booked/",CheckWorkshopBooked.as_view(),name="CheckWorkshopBooked"),
     path("workshop-booknow-using-wallet/",WorkShopBookNowWallet.as_view(),name="WorkShopBookNowWallet"),
     path("getallworkshops/",GetAllWorkshops.as_view(),name="GetAllWorkshops"),
+    path("get-currentuser-workshops/",GetCurrentUserWorkShops.as_view(),name="GetCurrentUserWorkShops"),
    
 
 
