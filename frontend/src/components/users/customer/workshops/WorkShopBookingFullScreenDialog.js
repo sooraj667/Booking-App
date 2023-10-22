@@ -14,6 +14,8 @@ import Slide from "@mui/material/Slide";
 import axiosInstance from "../../../../axios/axiosconfig";
 import ImageListItem from "@mui/material/ImageListItem";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import toast, { Toaster } from 'react-hot-toast';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -50,6 +52,7 @@ const WorkShopBookingFullScreenDialog = (props) => {
 
   return (
     <div>
+        <Toaster/>
       <Button variant="outlined" onClick={handleClickOpen}>
         Book Now
       </Button>
@@ -97,15 +100,76 @@ const WorkShopBookingFullScreenDialog = (props) => {
         </h4>
         {
             paymentToggle && 
+            <>
             <div className="flex justify-center cur">
-                <Button>
-                    Wallet
-                </Button>
-                <Button>
-                    Razorpay
+             
+
+                <PayPalScriptProvider
+          options={{
+            clientId:
+              "AeaCyw6WUYkOvfUXMp0ScN2r6KEfhVvxWytZvEAlbUXH_NoQsJ70TyTabFoedoIEkqTTwI5kUtFoaauE",
+          }}
+        >
+          <PayPalButtons
+            createOrder={(data, actions) => {
+              return actions.order.create({
+                purchase_units: [
+                  {
+                    amount: {
+                      value: "1",
+                    },
+                  },
+                ],
+              });
+            }}
+            onApprove={() => {
+            //   toast.success("Payment successfully completed!");
+            //   localStorage.setItem(
+            //     "bookedbeautid",
+            //     reqdatas.value.bookbeautdata.id
+            //   );
+            //   localStorage.setItem(
+            //     "bookedcustid",
+            //     statedatas.value.custdetails.id
+            //   );
+
+            //   const datas = {
+            //     beautid: reqdatas.value.bookbeautdata.id,
+            //     custid: statedatas.value.custdetails.id,
+            //     date: localStorage.getItem("date"),
+            //     time: localStorage.getItem("time"),
+            //     studio: localStorage.getItem("studio"),
+            //     servicename: localStorage.getItem("service"),
+            //     type:"paypal",
+            //   };
+             
+            //   axiosInstance.post("cust/booknow/", datas).then((response) => {
+            //     console.log(response, "RESRERSRERSRERSR");
+            //   });
+
+            //   setTimeout(navigate("../booking-completed"), 2000).catch(
+            //     (error) => alert(error)
+            //   );
+            }}
+            onCancel={() => {
+              toast.error("You cancelled the payment!");
+            }}
+            onError={() => {
+              toast.error("Error!");
+            }}
+          />
+          <Toaster />
+        </PayPalScriptProvider>
+                
+
+            </div>
+            <div className="flex justify-center">
+            <Button variant="contained" color="primary" >
+                    Pay Using Wallet
                 </Button>
 
             </div>
+            </>
         }
 
 
