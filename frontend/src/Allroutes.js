@@ -28,6 +28,7 @@ import PRforAdminLogin from "./components/admin/protectedroute/PRforAdminLogin";
 import BookingCompleted from "./components/users/customer/booking-completed/BookingCompleted";
 import ZegoVideocall from "./components/zego_cloud/ZegoVideocall";
 import TopBeauticians from "./components/users/customer/topbeauticians/TopBeauticians";
+import WorkShopBookingCompleted from "./components/users/customer/workshops/WorkShopBookingCompleted";
 
 const Allroutes = () => {
   const dispatch =useDispatch()
@@ -141,6 +142,8 @@ const Allroutes = () => {
             <Route path="/video-call" element={<ZegoVideocall />} /> 
 
             <Route path="/top-beauticians" element={<TopBeauticians />} /> 
+
+            <Route path="/workshop-booking-completed" element={<WorkShopBookingCompleted />} /> 
             
             
             
