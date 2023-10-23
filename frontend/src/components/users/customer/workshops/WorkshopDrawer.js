@@ -11,7 +11,7 @@ import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { toggleAllWorkShops,toggleBookedWorkShops } from "../../../../feautures/customer/customernavigationslice";
+import { toggleAllWorkShops,toggleBookedWorkShops,toggleAttendedWorkShops } from "../../../../feautures/customer/customernavigationslice";
 import { useDispatch } from "react-redux";
 
 const WorkshopDrawer = () => {
@@ -65,7 +65,7 @@ const WorkshopDrawer = () => {
             <ListItemIcon>
               <MailIcon />
             </ListItemIcon>
-            <ListItemText primary="CANCELLED WORKSHOPS" />
+            <ListItemText primary="ATTENDED WORKSHOPS"   onClick={()=>dispatch(toggleAttendedWorkShops())}/>
           </ListItemButton>
         </ListItem>
         {/* {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (

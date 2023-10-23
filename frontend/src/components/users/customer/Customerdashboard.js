@@ -19,6 +19,7 @@ import PreviousBooking from "./bookings/PreviousBooking";
 import CustomerHeader from "./customer-header/CustomerHeader";
 import AllWorkshops from "./workshops/AllWorkshops";
 import BookedWorkshops from "./workshops/BookedWorkshops";
+import AttendedWorkshops from "./workshops/AttendedWorkshops";
 const Customerdashboard = () => {
   const details = useSelector((state) => state.login);
   const navigationdatas = useSelector((state) => state.custnavigation);
@@ -59,6 +60,7 @@ const Customerdashboard = () => {
           {navigationdatas.value.previousbooking && <PreviousBooking />}
           {navigationdatas.value.allworkshops && <AllWorkshops />}
           {navigationdatas.value.bookedworkshops && <BookedWorkshops />}
+          {navigationdatas.value.attendedworkshops && <AttendedWorkshops />}
          
         </div>
       </div>
