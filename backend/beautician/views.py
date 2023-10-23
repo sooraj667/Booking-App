@@ -607,12 +607,19 @@ class GetBeautWorkshops(APIView):
         all_workshops=Workshop.objects.filter(beautician_id=request.data.get("id"))
         all_workshops_serialized=WorkshopSerializer(all_workshops,many=True)
 
-       
+        c_date=datetime.now().date()
+        c_time=datetime.now().time()
+        
+        todays_workshops=Workshop.objects.filter(beautician_id=request.data.get("id"),conducting_date=c_date,start_time__gt=c_time)
+        todays_workshops_serialized=WorkshopSerializer(todays_workshops,many=True)
+        if todays_workshops.count()==0:
+            return Response({"message":'success',"allworkshops":all_workshops_serialized.data,"ws_for_today":"no"})
+
         
 
 
         
-        return Response({"message":'success',"allworkshops":all_workshops_serialized.data})
+        return Response({"message":'success',"allworkshops":all_workshops_serialized.data,"todays_workshops":todays_workshops_serialized.data,"ws_for_today":"yes"})
     
 class CancelWorkshop(APIView):
     def post(self,request): 

@@ -24,10 +24,20 @@ import ReportIcon from "@mui/icons-material/Report";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import CreditScoreIcon from "@mui/icons-material/CreditScore";
 import DeleteWorkshopModal from "./DeleteWorkshopModal";
+import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
+import WhatshotIcon from '@mui/icons-material/Whatshot';
+
+
+
+
+import CircularProgress from '@mui/joy/CircularProgress';
+
+import SvgIcon from '@mui/joy/SvgIcon';
 
 const Workshops = () => {
   const dispatch = useDispatch();
   const workshops = useSelector((state) => state.workshops);
+  const [todaysWS, setTodaysWS] = useState(false);
 
   const datas = {
     id: JSON.parse(localStorage.getItem("singledetails-B")).id,
@@ -37,6 +47,11 @@ const Workshops = () => {
     axiosInstance
       .post("beaut/get-beaut-workshops/", datas)
       .then((response) => {
+        if (response.data.ws_for_today === "no") {
+          setTodaysWS(false);
+        } else {
+          setTodaysWS(response.data.todays_workshops);
+        }
         dispatch(setAllWorkshops(response.data.allworkshops));
       })
       .catch(() => {
@@ -54,6 +69,51 @@ const Workshops = () => {
         UPCOMING WORKSHOPS
         <AddWorkshopModal />
       </div>
+      {todaysWS && (
+        <div className="flex">
+          {todaysWS.map((item) => {
+            return (
+              <div className="col-4">
+                <Card variant="solid" color="primary" invertedColors>
+                  <CardContent orientation="horizontal">
+                    {/* <CircularProgress size="lg" determinate value={20}>
+                      <SvgIcon>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"
+                          />
+                        </svg>
+                      </SvgIcon>
+                    </CircularProgress> */}
+                    <WhatshotIcon />
+                    <CardContent>
+                    <Typography level="body-md">TODAY'S WORKSHOP  </Typography>
+                      <Typography level="body-md">{item.subject}  </Typography>
+                      <Typography level="h2"><AccessTimeFilledIcon/> {item.start_time}</Typography>
+                    </CardContent>
+                  </CardContent>
+                  <CardActions>
+                    <Button variant="soft" size="sm">
+                      Add to Watchlist
+                    </Button>
+                    <Button variant="solid" size="sm">
+                      See breakdown
+                    </Button>
+                  </CardActions>
+                </Card>
+              </div>
+            );
+          })}
+        </div>
+      )}
 
       <div className="row justify-around">
         {workshops.value.allworkshops.map((item) => {
