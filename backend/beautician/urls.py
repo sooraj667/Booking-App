@@ -26,6 +26,7 @@ urlpatterns = [
     path("add-workshop/",AddWorkshop.as_view(),name="AddWorkshop"),
     path("get-beaut-workshops/",GetBeautWorkshops.as_view(),name="GetBeautWorkshops"),
     path("cancel-workshop/",CancelWorkshop.as_view(),name="CancelWorkshop"),
+    path("send-email-link/",SendEmailLink.as_view(),name="SendEmailLink"),
 
 
     

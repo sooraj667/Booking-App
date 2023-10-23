@@ -631,3 +631,21 @@ class CancelWorkshop(APIView):
         all=Workshop.objects.filter(beautician=beaut)
         all_serialized=WorkshopSerializer(all,many=True)
         return Response({"message":'success',"allworkshops":all_serialized.data})
+    
+class SendEmailLink(APIView):
+    def post(self,request): 
+        id=request.data.get("workshop_id")
+        obj=Workshop.objects.get(id=id)
+        booked_customers=obj.customers.all()
+
+        subject = "Link for your registered workshop"
+        message = f"Your link is"
+        for item in booked_customers:
+            
+            
+            recipient = item.email
+            send_mail(subject, 
+                message, settings.EMAIL_HOST_USER, [recipient], fail_silently=False)
+
+      
+        return Response({"message":'success'})

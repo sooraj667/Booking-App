@@ -73,3 +73,13 @@ class WorkshopBooking(models.Model):
    
     def __str__(self):  
         return f"{self.customer.name},{self.booked_time} "
+    
+class WorkshopLink(models.Model):
+    workshop=models.ForeignKey(Workshop,on_delete=models.CASCADE)
+    link_id=models.CharField(max_length=200)
+    
+    
+
+   
+    def __str__(self):  
+        return f"{self.link_id},{self.workshop.subject} "

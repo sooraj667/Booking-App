@@ -26,6 +26,7 @@ import CreditScoreIcon from "@mui/icons-material/CreditScore";
 import DeleteWorkshopModal from "./DeleteWorkshopModal";
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 import WhatshotIcon from '@mui/icons-material/Whatshot';
+import toast, { Toaster } from 'react-hot-toast';
 
 
 
@@ -59,8 +60,27 @@ const Workshops = () => {
       });
   }, []);
 
+  const handleSendEmail=(id)=>{
+    const datas={
+      workshop_id:id,
+    }
+    axiosInstance.post("beaut/send-email-link/",datas).then((res)=>{
+      if(res.data.message==="already-sent"){
+        toast("Email Already Send")
+      }
+      else{
+        toast.success("Mail Sent")
+      }
+    }).catch((error)=>{
+      alert(error)
+    })
+    
+
+  }
+
   return (
     <div>
+      <Toaster/>
       <div className="hero">WORKSHOPS</div>
       <div className="flex justify-center">
         <Avatar src={workshop_png} sx={{ width: 220, height: 220 }} />
@@ -104,8 +124,8 @@ const Workshops = () => {
                     <Button variant="soft" size="sm">
                       Add to Watchlist
                     </Button>
-                    <Button variant="solid" size="sm">
-                      See breakdown
+                    <Button variant="solid" size="sm" onClick={()=>handleSendEmail(item.id)}>
+                      Send Link Via Mail
                     </Button>
                   </CardActions>
                 </Card>
