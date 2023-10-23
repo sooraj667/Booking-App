@@ -781,7 +781,8 @@ class WorkShopBookNowWallet(APIView):
 class GetAllWorkshops(APIView):
   
     def get(self,request): 
-        all=Workshop.objects.all()
+        current_date=datetime.now().date()
+        all=Workshop.objects.filter(conducting_date__gt=current_date)
         if all.count()==0:
             return Response({"message":"no-workshops"})
         
