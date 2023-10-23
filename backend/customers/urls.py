@@ -38,6 +38,7 @@ urlpatterns = [
     path("get-currentuser-workshops/",GetCurrentUserWorkShops.as_view(),name="GetCurrentUserWorkShops"),
     path("cancel-workshop-booking/",CancelWorkshopBooking.as_view(),name="CancelWorkshopBooking"),
     path("get-currentuser-attended-workshops/",GetAttendedWorkshops.as_view(),name="GetAttendedWorkshops"),
+    path("get-currentuser-cancelled-workshops/",GetCancelledWorkshops.as_view(),name="GetCancelledWorkshops"),
    
 
 

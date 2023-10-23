@@ -13,7 +13,8 @@ const INITIALSTATE={
    previousbooking:false,
    allworkshops:false,
    bookedworkshops:false,
-   attendedworkshops:false
+   attendedworkshops:false,
+   cancelledworkshops:false
 
 
    
@@ -40,6 +41,7 @@ const customernavigationslice=createSlice(
                 state.value.allworkshops=false
                 state.value.bookedworkshops=false
                 state.value.attendedworkshops=false
+                state.value.cancelledworkshops=false
             },
             toggleBookings:(state)=>{
                 state.value.bookings=true
@@ -54,6 +56,7 @@ const customernavigationslice=createSlice(
                 state.value.allworkshops=false
                 state.value.bookedworkshops=false
                 state.value.attendedworkshops=false
+                state.value.cancelledworkshops=false
             },
             toggleBrowse:(state)=>{
                 state.value.browse=true
@@ -68,6 +71,7 @@ const customernavigationslice=createSlice(
                 state.value.allworkshops=false
                 state.value.bookedworkshops=false
                 state.value.attendedworkshops=false
+                state.value.cancelledworkshops=false
             },
             toggleBooknow:(state,action)=>{
                 state.value.booknow=true
@@ -83,6 +87,7 @@ const customernavigationslice=createSlice(
                 state.value.allworkshops=false
                 state.value.bookedworkshops=false
                 state.value.attendedworkshops=false
+                state.value.cancelledworkshops=false
             },
             toggleProfile:(state,action)=>{
                 state.value.profile=true
@@ -97,6 +102,7 @@ const customernavigationslice=createSlice(
                 state.value.allworkshops=false
                 state.value.bookedworkshops=false
                 state.value.attendedworkshops=false
+                state.value.cancelledworkshops=false
             },
             toggleServicePreview:(state,action)=>{
                 state.value.servicepreview=true
@@ -111,6 +117,7 @@ const customernavigationslice=createSlice(
                 state.value.allworkshops=false
                 state.value.bookedworkshops=false
                 state.value.attendedworkshops=false
+                state.value.cancelledworkshops=false
             },
             toggleLandingPart:(state,action)=>{
                 state.value.landingpart=true
@@ -125,6 +132,7 @@ const customernavigationslice=createSlice(
                 state.value.allworkshops=false
                 state.value.bookedworkshops=false
                 state.value.attendedworkshops=false
+                state.value.cancelledworkshops=false
             },
             toggleWallet:(state,action)=>{
                 state.value.wallet=true
@@ -139,6 +147,7 @@ const customernavigationslice=createSlice(
                 state.value.allworkshops=false
                 state.value.bookedworkshops=false
                 state.value.attendedworkshops=false
+                state.value.cancelledworkshops=false
             },
             togglePreviousBooking:(state,action)=>{
                 state.value.previousbooking=true
@@ -153,6 +162,7 @@ const customernavigationslice=createSlice(
                 state.value.allworkshops=false
                 state.value.bookedworkshops=false
                 state.value.attendedworkshops=false
+                state.value.cancelledworkshops=false
             },
             toggleAllWorkShops:(state,action)=>{
                 state.value.allworkshops=true
@@ -167,6 +177,7 @@ const customernavigationslice=createSlice(
                 state.value.previousbooking=false
                 state.value.bookedworkshops=false
                 state.value.attendedworkshops=false
+                state.value.cancelledworkshops=false
             },
             toggleBookedWorkShops:(state,action)=>{
                 state.value.bookedworkshops=true
@@ -181,10 +192,28 @@ const customernavigationslice=createSlice(
                 state.value.wallet=false
                 state.value.previousbooking=false
                 state.value.attendedworkshops=false
+                state.value.cancelledworkshops=false
                 
             },
             toggleAttendedWorkShops:(state,action)=>{
                 state.value.attendedworkshops=true
+                state.value.bookedworkshops=false
+                state.value.allworkshops=false
+                state.value.servicepreview=false
+                state.value.favouritestylists=false
+                state.value.bookings=false
+                state.value.browse=false
+                state.value.booknow=false
+                state.value.profile=false
+                state.value.landingpart=false
+                state.value.wallet=false
+                state.value.previousbooking=false
+                state.value.cancelledworkshops=false
+                
+            },
+            toggleCancelledWorkShops:(state,action)=>{
+                state.value.cancelledworkshops=true
+                state.value.attendedworkshops=false
                 state.value.bookedworkshops=false
                 state.value.allworkshops=false
                 state.value.servicepreview=false
@@ -214,5 +243,5 @@ const customernavigationslice=createSlice(
 
 )
 
-export const {toggleFavouritestylists,toggleBookings,toggleBrowse,toggleBooknow,toggleProfile,toggleServicePreview,toggleLandingPart,toggleWallet,togglePreviousBooking,toggleAllWorkShops,toggleBookedWorkShops,toggleAttendedWorkShops} = customernavigationslice.actions
+export const {toggleFavouritestylists,toggleBookings,toggleBrowse,toggleBooknow,toggleProfile,toggleServicePreview,toggleLandingPart,toggleWallet,togglePreviousBooking,toggleAllWorkShops,toggleBookedWorkShops,toggleAttendedWorkShops,toggleCancelledWorkShops} = customernavigationslice.actions
 export default customernavigationslice.reducer

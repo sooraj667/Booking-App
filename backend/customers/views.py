@@ -838,6 +838,19 @@ class GetAttendedWorkshops(APIView):
             all_serialized=WorkshopSerializer(all,many=True)
 
             return Response({"message":"done","allworkshops":all_serialized.data})
+        
+class GetCancelledWorkshops(APIView):
+  
+    def post(self,request): 
+        all_bookings=WorkshopBooking.objects.filter(customer_id=request.data.get("custid"),status="Cancelled")
+
+        
+        if all_bookings.count()==0:
+            return Response({"message":"no-workshops"})
+        else:
+            all_bookings_serialized=WorkshopBookingSerializer(all_bookings,many=True)
+
+            return Response({"message":"done","all_bookings":all_bookings_serialized.data})
 
 
       
