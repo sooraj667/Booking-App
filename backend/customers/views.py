@@ -804,6 +804,25 @@ class GetCurrentUserWorkShops(APIView):
             all_serialized=WorkshopSerializer(all,many=True)
 
             return Response({"message":"done","allworkshops":all_serialized.data})
+        
+class CancelWorkshopBooking(APIView):
+  
+    def post(self,request): 
+        id=request.data.get("id")
+        cust_id=request.data.get("cust_id")
+        workshop_obj=Workshop.objects.get(id=id)
+        cust_obj=Customer.objects.get(id=cust_id)
+        workshop_obj.customers.remove(cust_obj)
+
+        ws_booking_obj=WorkshopBooking.objects.get(workshop=workshop_obj,customer=cust_obj)
+        ws_booking_obj.status="Cancelled"
+        ws_booking_obj.save()
+       
+        
+       
+
+        return Response({"message":"done"})
+
 
 
       

@@ -11,9 +11,12 @@ import Avatar from "@mui/joy/Avatar";
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import CurrencyRupeeRoundedIcon from '@mui/icons-material/CurrencyRupeeRounded';
 import AccessTimeRoundedIcon from '@mui/icons-material/AccessTimeRounded';
+import CancelBookedWorkshopModal from "./CancelBookedWorkshopModal";
+import toast, { Toaster } from 'react-hot-toast';
 const BookedWorkshops = () => {
   const [allWorkshops, setAllWorkShops] = useState([]);
   const [noWS, setNoWS] = useState(false);
+  const [reRender, setReRender] = useState(false);
   useEffect(() => {
     const datas = {
       custid: JSON.parse(localStorage.getItem("singledetails-C")).id,
@@ -26,9 +29,10 @@ const BookedWorkshops = () => {
         setAllWorkShops(res.data.allworkshops);
       }
     });
-  }, []);
+  }, [reRender]);
   return (
     <div>
+        <Toaster/>
       <div className="hero">BOOKED WORKSHOPS</div>
       <hr />
       <div className="sub-heading-div flex justify-center align-center py-3 text-small fw-2 sgfont  themecolor underline">
@@ -76,7 +80,7 @@ const BookedWorkshops = () => {
                     </AspectRatio>
                   
                     <Button color="danger">
-                      Cancel booking
+                      <CancelBookedWorkshopModal id={item.id} setReRender={setReRender}/>
                       
                     </Button>
                   </Card>
