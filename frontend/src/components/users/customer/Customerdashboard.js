@@ -18,6 +18,7 @@ import WalletCust from "./wallet/WalletCust";
 import PreviousBooking from "./bookings/PreviousBooking";
 import CustomerHeader from "./customer-header/CustomerHeader";
 import AllWorkshops from "./workshops/AllWorkshops";
+import BookedWorkshops from "./workshops/BookedWorkshops";
 const Customerdashboard = () => {
   const details = useSelector((state) => state.login);
   const navigationdatas = useSelector((state) => state.custnavigation);
@@ -57,6 +58,7 @@ const Customerdashboard = () => {
           {navigationdatas.value.wallet && <WalletCust />}
           {navigationdatas.value.previousbooking && <PreviousBooking />}
           {navigationdatas.value.allworkshops && <AllWorkshops />}
+          {navigationdatas.value.bookedworkshops && <BookedWorkshops />}
          
         </div>
       </div>

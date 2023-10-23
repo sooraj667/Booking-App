@@ -794,11 +794,22 @@ class GetCurrentUserWorkShops(APIView):
   
     def post(self,request): 
         cust_obj=Customer.objects.get(id=request.data.get("custid"))
-        all=Workshop.objects.filter(customer=cust_obj)
+        current_date = datetime.now().date()  
+        current_time = datetime.now().time()
+        all=cust_obj.workshop.filter(conducting_date__gte=current_date)
+        
+        if all.count()==0:
+            return Response({"message":"no-workshops"})
+        else:
+            all_serialized=WorkshopSerializer(all,many=True)
+
+            return Response({"message":"done","allworkshops":all_serialized.data})
+
+
       
         
        
-        return Response({"message":"done"})
+        
     
 
         

@@ -45,13 +45,13 @@ class FavouriteStylists(models.Model):
    
 class Workshop(models.Model):
     beautician=models.ForeignKey(Beautician,on_delete=models.CASCADE)
-    customers=models.ManyToManyField(Customer)
+    customers=models.ManyToManyField(Customer,related_name="workshop")
     subject=models.CharField(max_length=200)
     total_seats=models.PositiveIntegerField()
-    date = models.DateField()
+    conducting_date = models.DateField()
     start_time = models.TimeField()
     end_time = models.TimeField()
-    status=models.CharField(max_length=200)
+    status=models.CharField(max_length=200,default="To be conducted")
     description=models.CharField(max_length=200)
     price = models.DecimalField(max_digits=10, decimal_places=2) 
     registration_deadline = models.DateField()
@@ -59,7 +59,7 @@ class Workshop(models.Model):
 
    
     def __str__(self):  
-        return f"{self.beautician.name} - {self.subject} -{self.date}"
+        return f"{self.beautician.name} - {self.subject} -{self.conducting_date}"
     
 
 class WorkshopBooking(models.Model):
@@ -67,7 +67,7 @@ class WorkshopBooking(models.Model):
     customer=models.ForeignKey(Customer,on_delete=models.CASCADE)
     booked_date=models.DateField(auto_now_add=True)
     booked_time=models.TimeField(auto_now_add=True)
-    status=models.CharField(max_length=200)
+    status=models.CharField(max_length=200,default="Confirmed")
     
 
    
