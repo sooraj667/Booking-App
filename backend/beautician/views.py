@@ -12,6 +12,7 @@ from django.conf import settings
 import random
 from datetime import datetime,timedelta
 from datetime import date
+import string
 
 
 
@@ -636,16 +637,27 @@ class SendEmailLink(APIView):
     def post(self,request): 
         id=request.data.get("workshop_id")
         obj=Workshop.objects.get(id=id)
-        booked_customers=obj.customers.all()
-
-        subject = "Link for your registered workshop"
-        message = f"Your link is"
-        for item in booked_customers:
+        try:
+            WorkshopLink.objects.get(workshop=obj)
+            return Response({"message":"already-sent"})
+        except:
+            booked_customers=obj.customers.all()
             
-            
-            recipient = item.email
-            send_mail(subject, 
-                message, settings.EMAIL_HOST_USER, [recipient], fail_silently=False)
 
-      
-        return Response({"message":'success'})
+            characters = string.ascii_letters + string.digits
+            link=""
+            for i in range(8):
+                link+=random.choice(characters)
+            WorkshopLink.objects.create(workshop=obj,link_id=link)
+
+            subject = f"Link for your registered workshop"
+            message = f"The meeting link for the workshop {obj.subject} is {link}.Please join the link on {obj.start_time}"
+            for item in booked_customers:
+                
+                
+                recipient = item.email
+                send_mail(subject, 
+                    message, settings.EMAIL_HOST_USER, [recipient], fail_silently=False)
+
+        
+            return Response({"message":'success'})

@@ -66,7 +66,7 @@ const Workshops = () => {
     }
     axiosInstance.post("beaut/send-email-link/",datas).then((res)=>{
       if(res.data.message==="already-sent"){
-        toast("Email Already Send")
+        toast("Email Already Sent!")
       }
       else{
         toast.success("Mail Sent")
