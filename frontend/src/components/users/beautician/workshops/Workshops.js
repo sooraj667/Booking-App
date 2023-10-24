@@ -133,6 +133,7 @@ const Workshops = () => {
                         .then((response) => {
                           if (response.data.message === "success") {
                             console.log(response.data.link,"VERY FRESH");
+                            localStorage.setItem("videocall-roomid-B",response.data.link)
                             dispatch(setVideoCallLink(response.data.link))
                           } else {
                             alert("else")

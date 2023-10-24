@@ -651,7 +651,7 @@ class SendEmailLink(APIView):
             WorkshopLink.objects.create(workshop=obj,link_id=link)
 
             subject = f"Link for your registered workshop"
-            message = f"The meeting link for the workshop {obj.subject} is {link}.Please join the link on {obj.start_time}"
+            message = f"The meeting link for the workshop {obj.subject} is  http://localhost:3000/video-call?roomID={link}  Please join the link on {obj.start_time}"
             for item in booked_customers:
                 
                 

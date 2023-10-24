@@ -20,13 +20,13 @@ export function getUrlParams(url = window.location.href) {
   return new URLSearchParams(urlStr);
 }
 
-const ZegoVideocall = (props) => {
-  const [link,setLink]=useState(false)
+const ZegoVideocall = () => {
+  const [roomid,setRoomid]=useState(localStorage.getItem("videocall-roomid-B")? localStorage.getItem("videocall-roomid-B"):false)
   const variables=useSelector((state)=>state.variables)
 
   
 
-  const roomID = variables.value.video_call_link;
+  const roomID = roomid;
   let myMeeting = async (element) => {
     // generate Kit Token
     const appID = 1730732412;
