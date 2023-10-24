@@ -28,6 +28,7 @@ urlpatterns = [
     path("cancel-workshop/",CancelWorkshop.as_view(),name="CancelWorkshop"),
     path("send-email-link/",SendEmailLink.as_view(),name="SendEmailLink"),
     path("video-call-link/",VideoCallLink.as_view(),name="VideoCallLink"),
+    path("generate-roomid/",GenerateRoomId.as_view(),name="GenerateRoomId"),
 
 
     

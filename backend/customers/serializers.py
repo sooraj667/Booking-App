@@ -53,6 +53,13 @@ class WorkshopBookingSerializer(ModelSerializer):
         model=WorkshopBooking
         fields= "__all__"
 
+class WorkshopLinkSerializer(ModelSerializer):
+    workshop=WorkshopSerializer()
+
+    class Meta:
+        model=WorkshopLink
+        fields= "__all__"
+
 class RankingDictSerializer(Serializer):
     first = DictField()
     second = DictField()

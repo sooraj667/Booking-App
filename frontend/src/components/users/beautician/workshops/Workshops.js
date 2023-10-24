@@ -25,23 +25,25 @@ import ReportIcon from "@mui/icons-material/Report";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import CreditScoreIcon from "@mui/icons-material/CreditScore";
 import DeleteWorkshopModal from "./DeleteWorkshopModal";
-import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
-import WhatshotIcon from '@mui/icons-material/Whatshot';
-import toast, { Toaster } from 'react-hot-toast';
-
+import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
+import WhatshotIcon from "@mui/icons-material/Whatshot";
+import toast, { Toaster } from "react-hot-toast";
 
 import { useNavigate } from "react-router-dom";
 
-import CircularProgress from '@mui/joy/CircularProgress';
+import CircularProgress from "@mui/joy/CircularProgress";
 
-import SvgIcon from '@mui/joy/SvgIcon';
+import SvgIcon from "@mui/joy/SvgIcon";
 import ZegoVideocall from "../../../zego_cloud/ZegoVideocall";
+import AutorenewIcon from '@mui/icons-material/Autorenew';
 
 const Workshops = () => {
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const workshops = useSelector((state) => state.workshops);
   const [todaysWS, setTodaysWS] = useState(false);
+  const [workshopLinks, setWorkshopLinks] = useState([]);
+  const [reRender, setReRender] = useState(false);
 
   const datas = {
     id: JSON.parse(localStorage.getItem("singledetails-B")).id,
@@ -55,35 +57,61 @@ const Workshops = () => {
           setTodaysWS(false);
         } else {
           setTodaysWS(response.data.todays_workshops);
+          setWorkshopLinks(response.data.workshop_links);
         }
         dispatch(setAllWorkshops(response.data.allworkshops));
       })
       .catch(() => {
         alert("ERROR");
       });
-  }, []);
+  }, [reRender]);
 
-  const handleSendEmail=(id)=>{
-    const datas={
-      workshop_id:id,
-    }
-    axiosInstance.post("beaut/send-email-link/",datas).then((res)=>{
-      if(res.data.message==="already-sent"){
-        toast("Email Already Sent!")
-      }
-      else{
-        toast.success("Mail Sent")
-      }
-    }).catch((error)=>{
-      alert(error)
-    })
+  const handleSendEmail = (id) => {
+    const datas = {
+      workshop_id: id,
+    };
+    axiosInstance
+      .post("beaut/send-email-link/", datas)
+      .then((res) => {
+        if (res.data.message === "already-sent") {
+          toast("Email Already Sent!");
+        } else {
+          toast.success("Mail Sent");
+        }
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  };
+
+
+  const generateRoomId=(id)=>{
+    const datas = {
+      workshop_id: id,
+    };
+    axiosInstance
+    .post("beaut/generate-roomid/", datas)
+    .then((res) => {
+      const toastId = toast.loading('Generating Id... Please Wait');
+      
+      setTimeout(()=>{
+        toast.dismiss(toastId);
+        toast.success("Room Id generated!")
+        setReRender((prev)=>!prev)
+
+      },2000)
+      
+      
     
-
+    })
+    .catch((error) => {
+      alert(error);
+    });
   }
 
   return (
     <div>
-      <Toaster/>
+      <Toaster />
       <div className="hero">WORKSHOPS</div>
       <div className="flex justify-center">
         <Avatar src={workshop_png} sx={{ width: 220, height: 220 }} />
@@ -118,42 +146,68 @@ const Workshops = () => {
                     </CircularProgress> */}
                     <WhatshotIcon />
                     <CardContent>
-                    <Typography level="body-md">TODAY'S WORKSHOP  </Typography>
-                      <Typography level="body-md">{item.subject}  </Typography>
-                      <Typography level="h2"><AccessTimeFilledIcon/> {item.start_time}</Typography>
+                      <Typography level="body-md">TODAY'S WORKSHOP </Typography>
+                      <Typography level="body-md">{item.subject} </Typography>
+                      <Typography level="h2">
+                        <AccessTimeFilledIcon /> {item.start_time}
+                      </Typography>
                     </CardContent>
                   </CardContent>
                   <CardActions>
-                    <Button variant="soft" size="sm" onClick={()=>{
-                       const datas={
-                        id:item.id
-                      }
-                      axiosInstance
-                        .post("beaut/video-call-link/", datas)
-                        .then((response) => {
-                          if (response.data.message === "success") {
-                            console.log(response.data.link,"VERY FRESH");
-                            localStorage.setItem("videocall-roomid-B",response.data.link)
-                            dispatch(setVideoCallLink(response.data.link))
-                          } else {
-                            alert("else")
-                          }
-                          
-                        })
-                        .catch(() => {
-                          alert("ERROR");
-                        });
-                      
-                      navigate("../video-call")
-                    }}>
-                      Video Call 
-                     
-                      
+                    <Button
+                      variant="soft"
+                      size="sm"
+                      onClick={() => {
+                        const datas = {
+                          id: item.id,
+                        };
+                        axiosInstance
+                          .post("beaut/video-call-link/", datas)
+                          .then((response) => {
+                            if (response.data.message === "success") {
+                              console.log(response.data.link, "VERY FRESH");
+                              localStorage.setItem(
+                                "videocall-roomid-B",
+                                response.data.link
+                              );
+                              dispatch(setVideoCallLink(response.data.link));
+                            } else {
+                              alert("else");
+                            }
+                          })
+                          .catch(() => {
+                            alert("ERROR");
+                          });
+
+                        navigate("../video-call");
+                      }}
+                    >
+                      Video Call
                     </Button>
-                    <Button variant="solid" size="sm" onClick={()=>handleSendEmail(item.id)}>
+                    <Button
+                      variant="solid"
+                      size="sm"
+                      onClick={() => handleSendEmail(item.id)}
+                    >
                       Send Link Via Mail
                     </Button>
                   </CardActions>
+                  <div className="flex justify-center">
+                    {workshopLinks.filter((i) => i.workshop.id === item.id)
+                      .length > 0 ? (
+                      workshopLinks
+                        .filter((i) => i.workshop.id === item.id)
+                        .map((val) => (
+                          <Typography level="body-md" key={val.link_id}>
+                            Room ID - {val.link_id}
+                          </Typography>
+                        ))
+                    ) : (
+                      <Typography level="body-md" className="cur" >
+                        Room Id Not generated <AutorenewIcon onClick={()=> generateRoomId(item.id)}/>
+                      </Typography>
+                    )}
+                  </div>
                 </Card>
               </div>
             );
@@ -203,7 +257,9 @@ const Workshops = () => {
                     <CalendarMonthIcon />
                   </div>
                   <div className="col-md-5">
-                    <Typography level="title-sm">{item.conducting_date}</Typography>
+                    <Typography level="title-sm">
+                      {item.conducting_date}
+                    </Typography>
                   </div>
                   <div className="col-md-2"></div>
                 </div>

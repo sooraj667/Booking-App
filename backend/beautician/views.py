@@ -19,6 +19,14 @@ import string
 def generate_otp():
     return str(random.randint(1000, 9999))
 
+def generate_link():
+    characters = string.ascii_letters + string.digits
+    link=""
+    for i in range(8):
+        link+=random.choice(characters)
+
+    return link
+
 
 class Confirmotp(APIView):
     def post(self,request):
@@ -612,6 +620,8 @@ class GetBeautWorkshops(APIView):
         c_time=datetime.now().time()
         
         todays_workshops=Workshop.objects.filter(beautician_id=request.data.get("id"),conducting_date=c_date,start_time__gt=c_time)
+        all_links=WorkshopLink.objects.all()
+        all_links_serialized=WorkshopLinkSerializer(all_links,many=True)
         todays_workshops_serialized=WorkshopSerializer(todays_workshops,many=True)
         if todays_workshops.count()==0:
             return Response({"message":'success',"allworkshops":all_workshops_serialized.data,"ws_for_today":"no"})
@@ -620,7 +630,7 @@ class GetBeautWorkshops(APIView):
 
 
         
-        return Response({"message":'success',"allworkshops":all_workshops_serialized.data,"todays_workshops":todays_workshops_serialized.data,"ws_for_today":"yes"})
+        return Response({"message":'success',"allworkshops":all_workshops_serialized.data,"todays_workshops":todays_workshops_serialized.data,"ws_for_today":"yes","workshop_links":all_links_serialized.data})
     
 class CancelWorkshop(APIView):
     def post(self,request): 
@@ -644,10 +654,7 @@ class SendEmailLink(APIView):
             booked_customers=obj.customers.all()
             
 
-            characters = string.ascii_letters + string.digits
-            link=""
-            for i in range(8):
-                link+=random.choice(characters)
+            link=generate_link()
             WorkshopLink.objects.create(workshop=obj,link_id=link)
 
             subject = f"Link for your registered workshop"
@@ -672,4 +679,15 @@ class VideoCallLink(APIView):
             return Response({"message":"success","link":link})
         except:
             return Response({"message":"link_not_generated"})
+
+class GenerateRoomId(APIView):
+    def post(self,request): 
+        id=request.data.get("workshop_id")
+        obj=Workshop.objects.get(id=id)
+        link=generate_link()
+     
+        WorkshopLink.objects.create(workshop=obj,link_id=link)
+       
+        return Response({"message":"success","link":link})
+     
            
