@@ -31,7 +31,7 @@ const Header = () => {
         }}
       >
         <Toolbar>
-          <IconButton
+          {/* <IconButton
             size="large"
             edge="start"
             color="inherit"
@@ -39,7 +39,7 @@ const Header = () => {
             sx={{ mr: 2 }}
           >
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
           
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           <Link to="/" className="groomup">

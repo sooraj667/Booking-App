@@ -3,6 +3,7 @@ import "./Landingbody.css";
 import { Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
+import HomePageAnimation from "../../animation/HomePageAnimation";
 const Landingbody = () => {
   const BootstrapButton = styled(Button)({
     boxShadow: "none",
@@ -13,7 +14,7 @@ const Landingbody = () => {
     lineHeight: 0.8,
     backgroundColor: "#191970",
     border: "none",
-    marginLeft: "150px",
+   
     marginTop: "30px",
     "&:hover": {
       backgroundColor: "#4169E1",
@@ -31,17 +32,24 @@ const Landingbody = () => {
   });
   return (
     <div className="">
-      <div className="row">
-        <div className="col-md-6">
-          <div className="content">
+     
+       
+          <div className="content flex justify-center">
             Find the best beauticians in Town!
             <br />
             Book Appointments Now..
+            <br />
+           
           </div>
+        
+          <div className="flex justify-center mb-3">
           <Link className="getstarted" to="/signup">
             <BootstrapButton variant="contained">Get Started</BootstrapButton>
           </Link>
-        </div>
+          </div>
+         
+         
+  
         {/* <div className="col-md-6">
           <img
             className="imagecls"
@@ -51,6 +59,9 @@ const Landingbody = () => {
             alt=""
           />
         </div> */}
+
+      <div className="flex justify-center">
+        <HomePageAnimation />
       </div>
     </div>
   );
