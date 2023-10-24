@@ -589,10 +589,10 @@ class AddWorkshop(APIView):
 
 
         try:
-            Workshop.objects.get(beautician=Beautician.objects.get(id=id),start_time=starttime,end_time=endtime,date=selectedDate)
+            Workshop.objects.get(beautician=Beautician.objects.get(id=id),start_time=starttime,end_time=endtime,conducting_date=selectedDate)
             return Response({"message":'already-present'})
         except:
-            Workshop.objects.create(beautician=Beautician.objects.get(id=id),subject=subject,description=description,price=price,date=selectedDate,registration_deadline=selectedRegDate,start_time=starttime,end_time=endtime,total_seats=totalseats)
+            Workshop.objects.create(beautician=Beautician.objects.get(id=id),subject=subject,description=description,price=price,conducting_date=selectedDate,registration_deadline=selectedRegDate,start_time=starttime,end_time=endtime,total_seats=totalseats)
             all=Workshop.objects.filter(beautician=Beautician.objects.get(id=id))
             all_serialized=WorkshopSerializer(all,many=True)
             all_serialized.data
@@ -661,3 +661,15 @@ class SendEmailLink(APIView):
 
         
             return Response({"message":'success'})
+        
+class VideoCallLink(APIView):
+    def post(self,request): 
+        id=request.data.get("id")
+        obj=Workshop.objects.get(id=id)
+        try:
+            linkobj=WorkshopLink.objects.get(workshop=obj)
+            link=linkobj.link_id
+            return Response({"message":"success","link":link})
+        except:
+            return Response({"message":"link_not_generated"})
+           

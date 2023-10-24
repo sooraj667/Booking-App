@@ -4,6 +4,7 @@ const INITIALSTATE={
 
     booking_fee:false,
     add_to_favourites_booking_id:false,
+    video_call_link:"",
    
 }
 
@@ -20,6 +21,9 @@ const variableSlice=createSlice(
             setAddToFavouritesBookingId:(state,action)=>{
                 state.value.add_to_favourites_booking_id=action.payload
             },
+            setVideoCallLink:(state,action)=>{
+                state.value.video_call_link=action.payload
+            },
             
           
 
@@ -33,5 +37,5 @@ const variableSlice=createSlice(
 
 )
 
-export const {setBookingFee,setAddToFavouritesBookingId} = variableSlice.actions
+export const {setBookingFee,setAddToFavouritesBookingId,setVideoCallLink} = variableSlice.actions
 export default variableSlice.reducer

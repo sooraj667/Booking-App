@@ -52,6 +52,8 @@ function App() {
     <Provider store={store}>
 
       <Allroutes/>
+
+      
       
     </Provider>
   );

@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import axiosInstance from "../../../../axios/axiosconfig";
 import { setAllWorkshops } from "../../../../feautures/beautician/workshopslice";
+import { setVideoCallLink } from "../../../../feautures/variableSlice";
 
 import Avatar from "@mui/joy/Avatar";
 import AvatarGroup from "@mui/joy/AvatarGroup";
@@ -29,13 +30,15 @@ import WhatshotIcon from '@mui/icons-material/Whatshot';
 import toast, { Toaster } from 'react-hot-toast';
 
 
-
+import { useNavigate } from "react-router-dom";
 
 import CircularProgress from '@mui/joy/CircularProgress';
 
 import SvgIcon from '@mui/joy/SvgIcon';
+import ZegoVideocall from "../../../zego_cloud/ZegoVideocall";
 
 const Workshops = () => {
+  const navigate=useNavigate()
   const dispatch = useDispatch();
   const workshops = useSelector((state) => state.workshops);
   const [todaysWS, setTodaysWS] = useState(false);
@@ -121,8 +124,30 @@ const Workshops = () => {
                     </CardContent>
                   </CardContent>
                   <CardActions>
-                    <Button variant="soft" size="sm">
-                      Add to Watchlist
+                    <Button variant="soft" size="sm" onClick={()=>{
+                       const datas={
+                        id:item.id
+                      }
+                      axiosInstance
+                        .post("beaut/video-call-link/", datas)
+                        .then((response) => {
+                          if (response.data.message === "success") {
+                            console.log(response.data.link,"VERY FRESH");
+                            dispatch(setVideoCallLink(response.data.link))
+                          } else {
+                            alert("else")
+                          }
+                          
+                        })
+                        .catch(() => {
+                          alert("ERROR");
+                        });
+                      
+                      navigate("../video-call")
+                    }}>
+                      Video Call 
+                     
+                      
                     </Button>
                     <Button variant="solid" size="sm" onClick={()=>handleSendEmail(item.id)}>
                       Send Link Via Mail
@@ -177,7 +202,7 @@ const Workshops = () => {
                     <CalendarMonthIcon />
                   </div>
                   <div className="col-md-5">
-                    <Typography level="title-sm">{item.date}</Typography>
+                    <Typography level="title-sm">{item.conducting_date}</Typography>
                   </div>
                   <div className="col-md-2"></div>
                 </div>
