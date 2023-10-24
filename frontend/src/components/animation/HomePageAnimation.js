@@ -4,15 +4,15 @@ import Switch from '@mui/material/Switch';
 import Paper from '@mui/material/Paper';
 import Zoom from '@mui/material/Zoom';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import b from "../../images/Beauty salon-rafiki.png"
-import c from "../../images/Wallet-rafiki.png"
+import b from "../../images/hairdresser team-pana.png"
+import c from "../../images/Barber-bro.png"
 const icon1 = (
     <Paper sx={{ m: 1, width: 250, height: 250,background:"inherit" }} elevation={4}>
     <svg width="100%" height="100%">
       {/* Define the pattern with the image */}
       <defs>
         <pattern
-          id="image-pattern"
+          id="image-pattern1"
           x="0"
           y="0"
           patternUnits="objectBoundingBox"
@@ -24,12 +24,7 @@ const icon1 = (
       </defs>
 
       {/* Use the pattern as fill for the polygon */}
-      <polygon
-        points="0,100 50,0, 1000,1000"
-        fill="url(#image-pattern)"
-        stroke="black"
-        strokeWidth="1"
-      />
+      <rect x="0" y="0" width="100%" height="100%" fill="url(#image-pattern1)" />
     </svg>
   </Paper>
 );
@@ -43,7 +38,7 @@ const icon2 = (
       {/* Define the pattern with the image */}
       <defs>
         <pattern
-          id="image-pattern3"
+          id="image-pattern2"
           x="0"
           y="0"
           patternUnits="objectBoundingBox"
@@ -55,12 +50,7 @@ const icon2 = (
       </defs>
 
       {/* Use the pattern as fill for the polygon */}
-      <polygon
-        points="0,100 50,0, 1000,1000, "
-        fill="url(#image-pattern3)"
-        stroke="black"
-        strokeWidth="1"
-      />
+      <rect x="0" y="0" width="100%" height="100%" fill="url(#image-pattern2)" />
     </svg>
   </Paper>
 );
