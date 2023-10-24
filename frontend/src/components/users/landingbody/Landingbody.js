@@ -4,6 +4,7 @@ import { Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import HomePageAnimation from "../../animation/HomePageAnimation";
+import TypeWriter from "../../animation/TypeWriter";
 const Landingbody = () => {
   const BootstrapButton = styled(Button)({
     boxShadow: "none",
@@ -46,6 +47,11 @@ const Landingbody = () => {
           <Link className="getstarted" to="/signup">
             <BootstrapButton variant="contained">Get Started</BootstrapButton>
           </Link>
+          </div>
+
+          <div className="flex justify-center">
+            
+            <TypeWriter/>
           </div>
          
          

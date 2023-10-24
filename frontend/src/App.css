@@ -188,9 +188,9 @@ html{
     
 }
 
-body {
+/* body {
     background-color: #f0f0f0;
-}
+} */
 
 .navbar-dark .navbar-brand {
     color: #ffffff; /* Brand color */
@@ -845,9 +845,9 @@ body {
     padding-top: 1vh;
 }
 
-body {
+/* body {
     background-color: #f0f0f0;
-}
+} */
 
 .navbar-dark .navbar-brand {
     color: #ffffff; /* Brand color */
@@ -1210,7 +1210,7 @@ body {
   justify-content: space-between;
 }
 html{
-  background-color: #ffffff;
+  background-color: #ffffff !important;
 }
 .align-center{
   align-items: center;
