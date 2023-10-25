@@ -86,7 +86,7 @@ const Loginform = () => {
                 </Link>
               </Grid> */}
               <Grid item>
-                <Link  >
+                <Link to="../signup" >
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

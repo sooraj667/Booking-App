@@ -126,20 +126,6 @@ const Loginbeautician = () => {
               </Alert>
             )}
           </div>
-
-          {/* <div className="mb-5 ml-5">
-            {formdatas.value.error.submiterror && (
-              <Alert severity="error" sx={{}}>
-                {formdatas.value.error.submiterror}
-              </Alert>
-            )}
-
-            {alreadyTaken && (
-              <Alert severity="error" sx={{}}>
-                {alreadyTaken}
-              </Alert>
-            )}
-          </div> */}
         </div>
       </div>
     </div>
