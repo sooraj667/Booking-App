@@ -21,6 +21,19 @@ const beautnavigationslice=createSlice(
             value:INITIALSTATE
          },
          reducers:{
+            toggleHome:(state)=>{
+                state.value.landingpart=true
+                state.value.services=false
+                state.value.appointments=false
+                state.value.appointments=false
+                state.value.profile=false
+                state.value.studio=false
+                state.value.wallet=false
+                state.value.previousbooking=false
+                state.value.workshops=false
+                
+            },
+            
             toggleServices:(state)=>{
                 state.value.services=true
                 state.value.appointments=false
@@ -106,5 +119,5 @@ const beautnavigationslice=createSlice(
 
 )
 
-export const {toggleServices,toggleAppointments,toggleProfile,toggleStudio,toggleWallet,togglePreviousBooking,toggleWorkshops} = beautnavigationslice.actions
+export const {toggleServices,toggleAppointments,toggleProfile,toggleStudio,toggleWallet,togglePreviousBooking,toggleWorkshops,toggleHome} = beautnavigationslice.actions
 export default beautnavigationslice.reducer

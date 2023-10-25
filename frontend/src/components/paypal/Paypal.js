@@ -240,6 +240,8 @@ const Paypal = () => {
           options={{
             clientId:
               "AeaCyw6WUYkOvfUXMp0ScN2r6KEfhVvxWytZvEAlbUXH_NoQsJ70TyTabFoedoIEkqTTwI5kUtFoaauE",
+
+              
           }}
         >
           <PayPalButtons

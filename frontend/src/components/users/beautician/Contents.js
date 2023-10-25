@@ -12,13 +12,15 @@ import WorkIcon from '@mui/icons-material/Work';
 import BeachAccessIcon from '@mui/icons-material/BeachAccess';
 import Divider from '@mui/material/Divider';
 import { useNavigate } from "react-router-dom";
-import {toggleServices,toggleAppointments,toggleProfile,toggleStudio,toggleWallet,toggleWorkshops} from "../../../feautures/beautician/beautnavigationslice"
+import {toggleServices,toggleAppointments,toggleProfile,toggleStudio,toggleWallet,toggleWorkshops,toggleHome} from "../../../feautures/beautician/beautnavigationslice"
 import { useDispatch } from "react-redux";
 import Cookies from "js-cookie";
 import  Button  from "@mui/material/Button";
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import ContentCutIcon from '@mui/icons-material/ContentCut';
 import StoreIcon from '@mui/icons-material/Store';
+import HomeIcon from '@mui/icons-material/Home';
+
 const Contents = () => {
   const [accessToken,setAccessToken]=useState(Cookies.get("accesstoken-B"))
   const dispatch=useDispatch()
@@ -54,6 +56,18 @@ const Contents = () => {
 
     <div class="divide"></div>
     <ul className="sidebarlist">
+
+
+    <li className="item" onClick={() => dispatch(toggleHome())}>
+        <div className="col-md-3">
+          <div class="icon">
+            <HomeIcon />
+          </div>
+        </div>
+        <div className="col-md-9">
+          <div class="title">Home</div>
+        </div>
+      </li>
 
    
 

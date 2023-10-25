@@ -384,9 +384,11 @@ class Todaysschedule(APIView):
         beautid=request.data.get("beautid")
         beautobj=Beautician.objects.get(id=beautid)
         appointments=Appointment.objects.filter(beautician=beautobj,date=today_date )
+        appointments_cancelled=Appointment.objects.filter(beautician=beautobj,date=today_date,status="Cancelled" )
         appointment_count=appointments.count() 
+        amount=beautobj.wallet_amount
         if appointments.count()==0:
-            return Response({"message":"failed", "date":str(today_date) , "day":str(day_name), "count":str(appointment_count)})
+            return Response({"message":"failed", "date":str(today_date) , "day":str(day_name), "count":str(appointment_count),"wallet_amount":str(amount)})
 
         appointments_serialized=Appointmentserializer(appointments,many=True)
 
@@ -396,7 +398,7 @@ class Todaysschedule(APIView):
 
        
 
-        return Response({"message":"success","schedules":appointments_serialized.data ,"date":str(today_date) , "day":str(day_name),"count":str(appointment_count)})
+        return Response({"message":"success","schedules":appointments_serialized.data ,"date":str(today_date) , "day":str(day_name),"count":str(appointment_count),"wallet_amount":str(amount)})
     
 class Forgotpassword(APIView):
     def post(self,request): 

@@ -1077,7 +1077,9 @@ html{
     align-items: center;
     width: 20vw;
     height: 30vh;
-    background: linear-gradient(to right, #3498db, #6d7087);
+    /* background: linear-gradient(to right, #3498db, #6d7087); */
+    background-color: #0C0335;
+    /* background: linear-gradient(to right, rgba(17, 17, 17, 0.9), rgba(2, 8, 34, 0.9)); */
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     color: white;
