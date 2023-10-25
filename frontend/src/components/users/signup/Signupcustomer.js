@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../../axios/axiosconfig";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
-import {setCustotp} from "../../../feautures/otpslice"
+import { setCustotp } from "../../../feautures/otpslice";
 import { submitForm } from "../../../feautures/beautslice";
 import MuiAlert from "@mui/material/Alert";
 import toast, { Toaster } from "react-hot-toast";
@@ -19,7 +19,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 const Signupcustomer = () => {
   const formdatas = useSelector((state) => state.signup);
   const navigate = useNavigate();
-  const [alreadyTaken,setAlreadyTaken]=useState(null)
+  const [alreadyTaken, setAlreadyTaken] = useState(null);
   const [signupError, setSignupError] = useState(false);
   const dispatch = useDispatch();
 
@@ -61,13 +61,10 @@ const Signupcustomer = () => {
         }
         console.log("SUCCESSFULL");
         dispatch(setCustotp());
-        toast.success('Otp Sent to your mail! Check')
-        setTimeout(()=>{
-                    
-        navigate("../otp/")
-
-          },3000)
-       
+        toast.success("Otp Sent to your mail! Check");
+        setTimeout(() => {
+          navigate("../otp/");
+        }, 3000);
       })
       .catch((error) => {
         alert("ERROR");
@@ -75,7 +72,6 @@ const Signupcustomer = () => {
   };
 
   return (
-
     <div className="">
       <Toaster />
       <div className="sub-heading-div flex justify-center align-center py-3 text-small fw-2 sgfont  themecolor ">
@@ -89,25 +85,23 @@ const Signupcustomer = () => {
           <Signupform />
           {formdatas.value.errorcheck == false ? (
             <Button
-              
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 ,ml:3}}
+              sx={{ mt: 3, mb: 2, ml: 3 }}
               onClick={handleSubmit}
-             
             >
               Sign Up
             </Button>
-          ) :  <Button
-              
-          fullWidth
-          variant="contained"
-          sx={{ mt: 3, mb: 2 ,ml:3}}
-          onClick={()=>toast.error("Please resolve the errors!")}
-         
-        >
-          Sign Up
-        </Button>}
+          ) : (
+            <Button
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2, ml: 3 }}
+              onClick={() => toast.error("Please resolve the errors!")}
+            >
+              Sign Up
+            </Button>
+          )}
           <div className="mb-5 ml-5">
             {formdatas.value.error.submiterror && (
               <Alert severity="error" sx={{}}>
@@ -127,18 +121,6 @@ const Signupcustomer = () => {
         </div>
       </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
 
     // <div className="row">
     //   <Toaster />

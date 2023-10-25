@@ -10,7 +10,7 @@ import { setBeautotp } from "../../../feautures/otpslice";
 import { submitForm } from "../../../feautures/beautslice";
 import MuiAlert from "@mui/material/Alert";
 import toast, { Toaster } from "react-hot-toast";
-import signuppic from "../../../images/Barber-rafiki (1).png";
+import signuppic from "../../../images/hairdresser team-amico.png"
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -116,8 +116,7 @@ const Signupbeautician = () => {
               </Alert>
             )}
 
-            {/* <div className="text-danger ml-5 pb-5 ">{formdatas.value.error.submiterror}</div>
-                  <div className="text-danger ml-5 pb-5">{alreadyTaken}</div> */}
+           
           </div>
         </div>
       </div>
