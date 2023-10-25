@@ -61,7 +61,7 @@ class Signup(APIView):
 
         hashed_password=make_password(password)
 
-        newobj=Customer.objects.create(name=pname,email=email,phone=phone,password=hashed_password)
+        newobj=Customer.objects.create(name=pname,email=email,phone=phone,password=hashed_password,wallet_amount=0)
         serialized_object=Customerserializer(newobj)
         return Response({"message":'Created',"beautdata":serialized_object.data})
     
