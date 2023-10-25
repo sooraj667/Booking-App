@@ -7,7 +7,6 @@ import Button from "@mui/material/Button";
 import thinking from "../../../images/Thinking face-bro.png";
 import Avatar from "@mui/material/Avatar";
 
-
 const Signup = () => {
   return (
     <div className="row mainrow">
@@ -84,12 +83,13 @@ const Signup = () => {
               Your Beauty, Your Way <br /> Signup Now for <br />
               Tailored Experiences!
             </div>
-
           </div>
           <div className="sub-heading-div flex justify-center align-center py-3  fw-2 sgfont  themecolor underline  ">
-              Already an user? <Link to="../login"><span className="cur ml-2">Login</span></Link>
-           
-            </div>
+            Already an user?{" "}
+            <Link to="../login">
+              <span className="cur ml-2">Login</span>
+            </Link>
+          </div>
         </Paper>
       </div>
       <div className="col-3 "></div>

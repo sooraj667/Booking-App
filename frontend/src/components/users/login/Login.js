@@ -4,6 +4,8 @@ import Loginbeauticianpage from "../../../pages/users/login/Loginbeauticianpage"
 import Logincustomerpage from "../../../pages/users/login/Logincustomerpage";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
+import loginpic from "../../../images/Tablet login-pana.png";
+import Avatar from "@mui/material/Avatar";
 import "./Login.css"
 const Login = () => {
   return (
@@ -69,6 +71,18 @@ const Login = () => {
               </Link>
             </div>
           </div>
+          <div className="flex justify-center mt-4">
+            <Avatar src={loginpic} sx={{ width: 250, height: 250 }}></Avatar>
+            <div className="sub-heading-div flex justify-center align-center py-3 text-small fw-2 sgfont  themecolor ">
+            Log in and unlock your <br /> beauty journey!
+            </div>
+          </div>
+          {/* <div className="sub-heading-div flex justify-center align-center py-3  fw-2 sgfont  themecolor underline  ">
+            Already an user?{" "}
+            <Link to="../login">
+              <span className="cur ml-2">Login</span>
+            </Link>
+          </div> */}
         </Paper>
       </div>
       <div className="col-3"></div>
