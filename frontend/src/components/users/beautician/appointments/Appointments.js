@@ -183,7 +183,7 @@ const Appointments = () => {
           </div>
         </section>
         {!allAppointments && (
-          <div className="flex justify-end">
+          <div className=" justify-end">
             <Avatar src={emptypic} sx={{ width: 350, height: 350 }}></Avatar>
             <div className="sub-heading-div flex justify-center align-center py-3 text-small fw-2 sgfont  themecolor ">
               NO BOOKINGS

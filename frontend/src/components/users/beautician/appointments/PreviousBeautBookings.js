@@ -28,11 +28,12 @@ import Avatar from "@mui/joy/Avatar";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import CurrencyRupeeRoundedIcon from "@mui/icons-material/CurrencyRupeeRounded";
 import AccessTimeRoundedIcon from "@mui/icons-material/AccessTimeRounded";
+import emptypic from "../../../../images/Empty-pana.png";
 
 const PreviousBeautBookings = () => {
   const custdata = useSelector((state) => state.login);
   const reqdatas = useSelector((state) => state.custreqdata);
-  const [allAppointments, setAllAppointments] = useState([]);
+  const [allAppointments, setAllAppointments] = useState(false);
   const dispatch = useDispatch();
   const [address, setAddress] = useState("");
   const [bookingToggleHandler, setBookingToggleHandler] = useState(false);
@@ -56,6 +57,7 @@ const PreviousBeautBookings = () => {
         }
         if (res.data.message === "notsuccess") {
           console.log("not success");
+          setAllAppointments(false)
         }
       })
       .catch((err) => console.log(err));
@@ -102,7 +104,8 @@ const PreviousBeautBookings = () => {
             <div className="right row">
               {/* <Heading subtitle='LEARN ANYTHING' title='Benefits About Online Learning Expertise' /> */}
               <div className="items">
-                {allAppointments.map((val) => {
+                
+                {allAppointments && allAppointments.map((val) => {
                   return (
                     <>
                       <div className="flex justify-center mb-4">
@@ -213,6 +216,14 @@ const PreviousBeautBookings = () => {
             </div>
           </div>
         </section>
+        {!allAppointments && (
+          <div className=" justify-end">
+            <Avatar src={emptypic} sx={{ width: 350, height: 350 }}></Avatar>
+            <div className="sub-heading-div flex justify-center align-center py-3 text-small fw-2 sgfont  themecolor ">
+              NO BOOKINGS
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
