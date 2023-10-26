@@ -33,7 +33,7 @@ const BookedWorkshops = () => {
   return (
     <div>
         <Toaster/>
-      <div className="hero">BOOKED WORKSHOPS</div>
+      <div className="hero">BOOKED  WORKSHOPS</div>
       <hr />
       <div className="sub-heading-div flex justify-center align-center py-3 text-small fw-2 sgfont  themecolor underline">
         The upcoming workshops booked by you are shown here

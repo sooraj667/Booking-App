@@ -13,6 +13,19 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import toast, { Toaster } from "react-hot-toast";
 import { togglePreviousBooking } from "../../../../feautures/customer/customernavigationslice";
+import ImageListItem from "@mui/material/ImageListItem";
+
+import AspectRatio from "@mui/joy/AspectRatio";
+import Stack from "@mui/joy/Stack";
+
+import Card from "@mui/joy/Card";
+import CardContent from "@mui/joy/CardContent";
+import Skeleton from "@mui/joy/Skeleton";
+import Typography from "@mui/joy/Typography";
+import Avatar from "@mui/joy/Avatar";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import CurrencyRupeeRoundedIcon from "@mui/icons-material/CurrencyRupeeRounded";
+import AccessTimeRoundedIcon from "@mui/icons-material/AccessTimeRounded";
 
 const Booking = () => {
   const reqdatas = useSelector((state) => state.custreqdata);
@@ -90,7 +103,7 @@ const Booking = () => {
   };
 
   return (
-    <div className="booking-outer">
+    <div className="booking-outer ">
       <Toaster />
       <div
         className="booking-hero"
@@ -105,51 +118,85 @@ const Booking = () => {
       )}
 
       <hr />
-      <div className="flex">
+      <div className="flex justify-center">
         {console.log(reqdatas.value.allappointments, "BYDUBAI")}
 
-        <section className="aboutHome flex justify-center">
-          <div className="container flexSB ">
+        <section className="">
+          <div className="">
             {/* <div className='left row'>
             <img src={"https://images.unsplash.com/photo-1600948836101-f9ffda59d250?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2036&q=80"} alt='' />
           </div> */}
-            <div className="right row ">
+            <div className="">
               {/* <Heading subtitle='LEARN ANYTHING' title='Benefits About Online Learning Expertise' /> */}
-              <div className="items ">
-                
+              <div className=" ">
                 {reqdatas.value.allappointments.map((val) => {
                   return (
                     <>
-                      <div className="item flexSB">
-                        <div className="img">
-                          <img src={val.beautician.image} alt="" />
-                          <div className="text">
-                            <h2 key={val.id}>{val.beautician.name}</h2>
-                            <hr />
-                            <p>
-                              Service -{val.service.service.name} <br />
-                              Amount Paid - {val.service.servicefee}
-                              Order Status - {val.status==="Confirmed" ? <span className="text-success">Confirmed</span> : <span className="text-danger">Cancelled</span>  } 
-                              {/* <br />
-                              Payment Type - {val.service.servicefee} */}
-                            </p>
-                            {/* <Button
-                            onClick={()=>handleCancelItem(val.id)}
-                            sx={{
-                              marginTop: "10px",
-                              backgroundColor: "inherit",
-                              color: "#900603",
-                              "&:hover": {
-                                backgroundColor: "#212529",
-                                color: "#D0D4D9", // Specify the desired background color on hover
-                              },
-                            }}>
-                          Cancel Booking
-                        </Button> */}
-                            <div>
-                              {
-                                val.status==="Confirmed" && 
-                                <Button
+                      <div className="flex justify-center mb-4">
+                        <Stack spacing={2} useFlexGap>
+                          <Card variant="outlined" sx={{ width: 643 }}>
+                            <CardContent orientation="horizontal">
+                              <ImageListItem sx={{ width: 200 }}>
+                                <img
+                                  srcSet={val.beautician.image}
+                                  src={val.beautician.image}
+                                  loading="lazy"
+                                />
+                              </ImageListItem>
+                              <div>
+                                <Typography sx={{ overflow: "hidden" }}>
+                                  <span className="text-info"> Service</span>-{val.service.service.name}
+                                </Typography>
+                                <Typography sx={{ overflow: "hidden" }}>
+                                <span className="text-info"> Appointment With - </span>{val.beautician.name}
+
+                                  <hr />
+                                </Typography>
+                                <Typography sx={{ overflow: "hidden" }}>
+                                  <CalendarMonthIcon className="mr-2" />{" "}
+                                  {val.date}
+                                </Typography>
+                                <Typography sx={{ overflow: "hidden" }}>
+                                  <AccessTimeRoundedIcon className="mr-2" />
+                                  {val.time}
+                                </Typography>
+                                <Typography sx={{ overflow: "hidden" }}>
+                                  <CurrencyRupeeRoundedIcon className="mr-2" />
+                                  {val.service.servicefee}/-
+                                </Typography>
+                                {val.status === "Cancelled" && (
+                                  <span className="text-danger">
+                                    Booking Cancelled
+                                  </span>
+                                )}
+                                {/* <Typography sx={{ overflow: "hidden" }}>
+                        <CalendarMonthIcon className="mr-2"/>{item.status}
+                        </Typography> */}
+                              </div>
+                            </CardContent>
+                            <AspectRatio ratio="29/9">
+                              <Typography sx={{ overflowY: "auto" }}>
+                                <div
+                                  onClick={() => addressHandler(val.id)}
+                                  className="cur"
+                                >
+                                  STUDIO ADDRESS <ArrowDropDownIcon />
+                                  {address === val.id && (
+                                    <p>
+                                      Address - {val.studio.locality} <br />{" "}
+                                      {val.studio.place} <br />{" "}
+                                      {val.studio.district} <br />{" "}
+                                      {val.studio.state} <br />{" "}
+                                      {val.studio.country} <br /> pincode -{" "}
+                                      {val.studio.pincode} <br />{" "}
+                                    </p>
+                                  )}
+                                </div>
+                              </Typography>
+                            </AspectRatio>
+
+                            {val.status === "Confirmed" && (
+                              <Button
                                 variant="outlined"
                                 onClick={() => handleCancelItem(val.id)}
                                 sx={{
@@ -164,8 +211,68 @@ const Booking = () => {
                               >
                                 CANCEL BOOKING
                               </Button>
-                              }
-                              
+                            )}
+
+                            <Dialog
+                              open={open}
+                              onClose={handleClose}
+                              aria-labelledby="alert-dialog-title"
+                              aria-describedby="alert-dialog-description"
+                            >
+                              <DialogTitle id="alert-dialog-title">
+                                {"Cancel Booking? "}
+                              </DialogTitle>
+                              <DialogContent>
+                                <DialogContentText id="alert-dialog-description">
+                                  Are You sure you want to cancel?
+                                </DialogContentText>
+                              </DialogContent>
+                              <DialogActions>
+                                <Button onClick={handleClose}>CLOSE</Button>
+                                <Button onClick={handleSubmit} autoFocus>
+                                  CONFIRM
+                                </Button>
+                              </DialogActions>
+                            </Dialog>
+                          </Card>
+                        </Stack>
+                      </div>
+
+                      {/* <div className="item flexSB">
+                        <div className="img">
+                          <img src={val.beautician.image} alt="" />
+                          <div className="text">
+                            <h2 key={val.id}>{val.beautician.name}</h2>
+                            <hr />
+                            <p>
+                              Service -{val.service.service.name} <br />
+                              Amount Paid - {val.service.servicefee}
+                              Order Status -{" "}
+                              {val.status === "Confirmed" ? (
+                                <span className="text-success">Confirmed</span>
+                              ) : (
+                                <span className="text-danger">Cancelled</span>
+                              )}
+                            
+                            <div>
+                              {val.status === "Confirmed" && (
+                                <Button
+                                  variant="outlined"
+                                  onClick={() => handleCancelItem(val.id)}
+                                  sx={{
+                                    marginTop: "10px",
+                                    backgroundColor: "inherit",
+                                    color: "#900603",
+                                    "&:hover": {
+                                      backgroundColor: "#212529",
+                                      color: "#D0D4D9", // Specify the desired background color on hover
+                                    },
+                                  }}
+                                >
+                                  CANCEL BOOKING
+                                </Button>
+                              )}
+
                               <Dialog
                                 open={open}
                                 onClose={handleClose}
@@ -181,11 +288,9 @@ const Booking = () => {
                                   </DialogContentText>
                                 </DialogContent>
                                 <DialogActions>
-                                  <Button onClick={handleClose}>
-                                   CLOSE
-                                  </Button>
+                                  <Button onClick={handleClose}>CLOSE</Button>
                                   <Button onClick={handleSubmit} autoFocus>
-                                   CONFIRM
+                                    CONFIRM
                                   </Button>
                                 </DialogActions>
                               </Dialog>
@@ -211,7 +316,7 @@ const Booking = () => {
                             </p>
                           )}
                         </div>
-                      </div>
+                      </div> */}
                     </>
                   );
                 })}
