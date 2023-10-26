@@ -20,6 +20,7 @@ import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import toast, { Toaster } from "react-hot-toast";
 import AddBioModal from "./AddBioModal";
 import DescriptionIcon from "@mui/icons-material/Description";
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 
 import Avatar from "@mui/joy/Avatar";
 import Chip from "@mui/joy/Chip";
@@ -130,7 +131,7 @@ const Profile = () => {
               }}
               size="small"
             >
-              <EditIcon />
+              <AddPhotoAlternateIcon />
             </Button>
 
             <div>
