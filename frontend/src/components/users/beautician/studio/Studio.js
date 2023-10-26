@@ -12,6 +12,8 @@ import "./Studio.css";
 import Editstudiomodal from "./Editstudiomodal";
 import Deleteconfirmationmodal from "../../../modals/Deleteconfirmationmodal";
 // import {setReRender} from "../../../../feautures/rerenderslice"
+import emptypic from "../../../../images/Empty-pana.png";
+import Avatar from "@mui/joy/Avatar";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -23,6 +25,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const Studio = () => {
   const [changed, setChanged] = useState(false);
+  const [noStudios, setNoStudios] = useState(false);
   const studiodatas = useSelector((state) => state.studioform);
   const rerender = useSelector((state) => state.rerender);
   const dispatch = useDispatch();
@@ -39,8 +42,13 @@ const Studio = () => {
       .post("beaut/getstudios/", datas)
       .then((res) => {
         console.log(res.data);
-        localStorage.setItem("studios-B", JSON.stringify(res.data.studios));
-        dispatch(setStudiodatas(res.data.studios));
+        if (res.data.message === "success") {
+          localStorage.setItem("studios-B", JSON.stringify(res.data.studios));
+          dispatch(setStudiodatas(res.data.studios));
+          setNoStudios(false);
+        } else {
+          setNoStudios(true);
+        }
       })
       .catch((err) => alert(err));
   }, [changed]);
@@ -52,10 +60,19 @@ const Studio = () => {
     <div className="studio-outer">
       <div className="hero">Your Studios</div>
       <hr />
-      <div className="add-studio">
-      <Addstudiomodal />
 
+      <div className="add-studio">
+        <Addstudiomodal />
       </div>
+
+      {noStudios && (
+        <div className="justify-end">
+          <Avatar src={emptypic} sx={{ width: 350, height: 350 }}></Avatar>
+          <div className="sub-heading-div flex justify-center align-center py-3 text-small fw-2 sgfont  themecolor ">
+            NO BOOKINGS
+          </div>
+        </div>
+      )}
 
       <div className="outerbox">
         {studiodatas.value.studiodetails.map((item) => {
@@ -67,8 +84,6 @@ const Studio = () => {
                     <>
                       <div className="item flexSB">
                         <div className="">
-                         
-
                           <div></div>
                           <div className="text mt-3">
                             <h2>{item.studio_name}</h2>
@@ -88,8 +103,6 @@ const Studio = () => {
                           </div>
                         </div>
                         <div className="text">
-                         
-                          
                           <p>DISTRICT - {item.district}</p>
                           <p>STATE - {item.state}</p>
                           <p>COUNTRY - {item.country}</p>
@@ -112,7 +125,7 @@ const Studio = () => {
     //     </div>
 
     //     <div className="col-md-2 mt-2">
-    //       
+    //
     //     </div>
     //   </div>
     //   <div className="row">
