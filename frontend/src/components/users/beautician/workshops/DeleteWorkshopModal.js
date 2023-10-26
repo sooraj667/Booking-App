@@ -39,7 +39,7 @@ const DeleteWorkshopModal = (props) => {
         endDecorator={<DeleteForever />}
         onClick={() => setOpen(true)}
       >
-        Discard
+        Delete
       </Button>
       <Modal open={open} onClose={() => setOpen(false)}>
         <ModalDialog variant="outlined" role="alertdialog">
@@ -53,7 +53,7 @@ const DeleteWorkshopModal = (props) => {
           </DialogContent>
           <DialogActions>
             <Button variant="solid" color="danger" onClick={() => handleCancelWorkshop(props.id)}>
-              Discard notes
+              Delete
             </Button>
             <Button variant="plain" color="neutral" onClick={() => setOpen(false)}>
               Cancel

@@ -12,7 +12,7 @@ import "./Studio.css";
 import Editstudiomodal from "./Editstudiomodal";
 import Deleteconfirmationmodal from "../../../modals/Deleteconfirmationmodal";
 // import {setReRender} from "../../../../feautures/rerenderslice"
-import emptypic from "../../../../images/Empty-pana.png";
+import emptypic from "../../../../images/Barber-rafiki (1).png";
 import Avatar from "@mui/joy/Avatar";
 
 const Item = styled(Paper)(({ theme }) => ({
