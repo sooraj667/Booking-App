@@ -108,14 +108,15 @@ const Booking = () => {
       <div className="flex">
         {console.log(reqdatas.value.allappointments, "BYDUBAI")}
 
-        <section className="aboutHome">
-          <div className="container flexSB">
+        <section className="aboutHome flex justify-center">
+          <div className="container flexSB ">
             {/* <div className='left row'>
             <img src={"https://images.unsplash.com/photo-1600948836101-f9ffda59d250?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2036&q=80"} alt='' />
           </div> */}
-            <div className="right row">
+            <div className="right row ">
               {/* <Heading subtitle='LEARN ANYTHING' title='Benefits About Online Learning Expertise' /> */}
-              <div className="items">
+              <div className="items ">
+                
                 {reqdatas.value.allappointments.map((val) => {
                   return (
                     <>
