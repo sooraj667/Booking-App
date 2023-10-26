@@ -28,6 +28,7 @@ import Select from "@mui/joy/Select";
 import Option from "@mui/joy/Option";
 import PayUsingWalletModal from "../users/walletmodal/PayUsingWalletModal";
 import {setBookingFee} from "../../feautures/variableSlice"
+import Razorpay from "../razorpay/Razorpay";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -48,6 +49,14 @@ const Paypal = () => {
   const [selectedFeeForPayment, setSelectedFeeForPayment] =
     useState("IVDE ONNULA");
 
+
+
+  const [showChooseStudio, setShowChooseStudio] = useState(true);
+  const [showChooseTime, setShowChooseTime] = useState(true);
+  const [showChooseService, setShowChooseService] = useState(true);
+  const [showChooseDate, setShowChooseDate] = useState(true);
+  
+
   const navigate = useNavigate();
 
   const [alltime, setAlltime] = useState([
@@ -62,6 +71,7 @@ const Paypal = () => {
   ]);
 
   const handleDateChange = (date) => {
+    setShowChooseDate(false)
     setStartDate(date);
     localStorage.setItem("date", date);
     const currentdate = new Date();
@@ -73,6 +83,7 @@ const Paypal = () => {
     }
   };
   const handleTimeChange = (e) => {
+    setShowChooseTime(false)
     console.log(e.target.value, "TIME");
     setSelectedTime(e.target.value);
     localStorage.setItem("time", e.target.value);
@@ -97,12 +108,14 @@ const Paypal = () => {
   };
 
   const handleStudioChange = (e) => {
+    setShowChooseStudio(false)
     console.log(e.target.value, "STUDIO");
     setSelectedStudio(e.target.value);
     localStorage.setItem("studio", e.target.value);
   };
 
   const handleServiceChange = (e) => {
+    setShowChooseService(false)
     console.log(e.target.value, "SERVICE");
 
     const parts = e.target.value.split("Rs ")
@@ -154,7 +167,7 @@ const Paypal = () => {
           <FormControl sx={{ gridColumn: "1/-1" }}>
             <FormLabel>Select Date</FormLabel>
             <DatePicker
-              selected={startDate}
+              selected={showChooseDate ? null : startDate}
               onChange={handleDateChange}
               dateFormat="MM/dd/yyyy"
               className=" inputform form-control"
@@ -180,10 +193,12 @@ const Paypal = () => {
               onChange={handleTimeChange}
               className=" form-control inputform"
             >
+               {showChooseTime && <option value="">Choose Time</option> }
               {alltime.map((item) => {
                 return <option>{item}</option>;
               })}
             </select>
+            {showChooseTime && <option value="">Choose Time</option> }
             {slotNotAvailable && (
               <Alert
                 severity="error"
@@ -207,6 +222,9 @@ const Paypal = () => {
               onChange={handleStudioChange}
               className=" form-control inputform "
             >
+
+              {showChooseStudio && <option value="">Choose studio</option> }
+              
               {reqdatas.value.beautstudios.map((item) => {
                 return <option>{item.place}</option>;
               })}
@@ -220,7 +238,7 @@ const Paypal = () => {
               onChange={handleServiceChange}
               className=" form-control inputform"
             >
-              {console.log(reqdatas.value.beautservices, "NOKKEDAADAAADADAD")}
+             {showChooseService && <option value="">Choose Service</option> }
               {reqdatas.value.beautservices.map((item) => {
                 return (
                   <option>
@@ -330,91 +348,12 @@ const Paypal = () => {
                 <PayUsingWalletModal />
               )
             }
+
+            <Razorpay/>
         
       </Card>
 
-      {/* <div className="booking-form-outer">
-        <div className="sub-heading mb-3">BOOK YOUR SLOT</div>
-        <div className="row ">
-          <div className="col-md-6 ">
-            <div className="title ">Choose Date</div>
-            <DatePicker
-              selected={startDate}
-              onChange={handleDateChange}
-              dateFormat="MM/dd/yyyy"
-              className=" inputform form-control"
-            />
-
-            {dateError && (
-              <Alert
-                severity="error"
-                sx={{
-                  marginTop: "20px",
-                  // marginLeft: "70px",
-                }}
-              >
-                Please Choose Valid Date
-              </Alert>
-            )}
-          </div>
-          <div className="col-md-6">
-            <div className="title">Select Time</div>
-
-            <select
-              name="selectedTime"
-              onChange={handleTimeChange}
-              className=" form-control inputform"
-            >
-              {alltime.map((item) => {
-                return <option>{item}</option>;
-              })}
-            </select>
-
-            {slotNotAvailable && (
-              <Alert
-                severity="error"
-                sx={{
-                  marginTop: "20px",
-                  marginLeft: "70px",
-                }}
-              >
-                Slot Already Booked! Choose Another Slot
-              </Alert>
-            )}
-          </div>
-        </div>
-        <div className="row mt-5 mb-5">
-          <div className="col-md-6">
-            <div className="title">Choose Studio</div>
-            <select
-              name="selectedStudio"
-              onChange={handleStudioChange}
-              className=" form-control inputform "
-            >
-              {reqdatas.value.beautstudios.map((item) => {
-                return <option>{item.place}</option>;
-              })}
-            </select>
-          </div>
-          <div className="col-md-6">
-            <div className="title">Select Service</div>
-            <select
-              name="selectedService"
-              onChange={handleServiceChange}
-              className=" form-control inputform"
-            >
-              {console.log(reqdatas.value.beautservices, "NOKKEDAADAAADADAD")}
-              {reqdatas.value.beautservices.map((item) => {
-                return (
-                  <option>
-                    {item.service.name} - Rs {item.servicefee}/-
-                  </option>
-                );
-              })}
-            </select>
-          </div>
-        </div>
-      </div> */}
+      
       
       <hr />
       

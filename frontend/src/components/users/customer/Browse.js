@@ -26,6 +26,10 @@ const Browse = () => {
   const booknowHandler = (id) => {
     dispatch(toggleBooknow(id));
     localStorage.setItem("id", id);
+    localStorage.removeItem("studio")
+    localStorage.removeItem("time")
+    localStorage.removeItem("date")
+    localStorage.removeItem("service")
     // const datas={
     //     beautid:id,
     //     custid:statedatas.value.custdetails.id

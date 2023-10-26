@@ -29,6 +29,7 @@ import BookingCompleted from "./components/users/customer/booking-completed/Book
 import ZegoVideocall from "./components/zego_cloud/ZegoVideocall";
 import TopBeauticians from "./components/users/customer/topbeauticians/TopBeauticians";
 import WorkShopBookingCompleted from "./components/users/customer/workshops/WorkShopBookingCompleted";
+import Razorpay from "./components/razorpay/Razorpay";
 
 const Allroutes = () => {
   const dispatch =useDispatch()
@@ -144,6 +145,9 @@ const Allroutes = () => {
             <Route path="/top-beauticians" element={<TopBeauticians />} /> 
 
             <Route path="/workshop-booking-completed" element={<WorkShopBookingCompleted />} /> 
+
+
+            <Route path="/razor" element={<Razorpay />} />
             
             
             
