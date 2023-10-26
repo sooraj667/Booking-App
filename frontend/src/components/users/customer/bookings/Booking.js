@@ -129,6 +129,8 @@ const Booking = () => {
                               Service -{val.service.service.name} <br />
                               Amount Paid - {val.service.servicefee}
                               Order Status - {val.status==="Confirmed" ? <span className="text-success">Confirmed</span> : <span className="text-danger">Cancelled</span>  } 
+                              {/* <br />
+                              Payment Type - {val.service.servicefee} */}
                             </p>
                             {/* <Button
                             onClick={()=>handleCancelItem(val.id)}

@@ -29,10 +29,10 @@ const BookingCompleted = () => {
         },[]
     )
   return (
-    <div className="beautouter">
-      <div className="row outer">
-        <div className="col-md-12">
-            <div className="flex">
+    <div className="beautouter ">
+      <div className="row outer flex justify-center">
+        <div className="col-md-12 ">
+            <div className="flex  justify-center">
                 <div className="booking-completed-box">
                     <div className="title">
                         BOOKING COMPLETED!  

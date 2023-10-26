@@ -1,8 +1,14 @@
 import React from 'react'
 import Button from "@mui/joy/Button";
 import toast from 'react-hot-toast';
+import { useDispatch, useSelector } from "react-redux";
+import axiosInstance from '../../axios/axiosconfig';
+import { useNavigate } from "react-router-dom";
 
-const Razorpay = () => {
+const Razorpay = (props) => {
+    const navigate = useNavigate();
+    const reqdatas = useSelector((state) => state.custreqdata);
+    const statedatas = useSelector((state) => state.login);
     const loadScript = (src) => {
     return new Promise((resolve) => {
       const script = document.createElement("script");
@@ -19,9 +25,9 @@ const Razorpay = () => {
 //   const handleModalToggle = () => {
 //     setShowModal(!showModal);
 //   };
-  const dispalyRazorpay = async (amount, trainer_id) => {
-    // beautid: reqdatas.value.bookbeautdata.id,
-    // custid: statedatas.value.custdetails.id,
+  const displayRazorpay = async () => {
+    const beautid= reqdatas.value.bookbeautdata.id
+    const custid= statedatas.value.custdetails.id
     const date= localStorage.getItem("date")
     const time= localStorage.getItem("time")
     const studio= localStorage.getItem("studio")
@@ -32,51 +38,54 @@ const Razorpay = () => {
         return
     }
      
-    const det = localStorage.getItem("singledetails-C");
-    if (det) {
+    const details = localStorage.getItem("singledetails-C");
+    if (details) {
       const res = await loadScript(
         "https://checkout.razorpay.com/v1/checkout.js"
       );
       if (!res) {
-        alert("You are offline.. failed to laod razorpay");
+        alert("You are offline.. failed to load razorpay");
         return;
       }
-      const options = {
+      const options = { 
         key: "rzp_test_dpiSP2IlPN5nSf",
         currency: "INR",
-        amount: amount * 100,
+        amount: props.fee * 100,
         name: "User",
         description: "Thanks for purchasing",
 
         handler: function (response) {
-        //   alert(response.razorpay_payment_id);
-        //   const paymentData = {
-        //     paymentId: response.razorpay_payment_id,
-        //   };
-        //   const cookieData = localStorage.getItem("details");
-        //   console.log("haiis", cookieData);
-        //   const parsedData = JSON.parse(cookieData);
-        //   console.log("haiim", parsedData.id, trainer_id);
-        //   const datas = {
-        //     userid: parsedData.id,
-        //     trainerid: trainer_id,
-        //     paymentId: response.razorpay_payment_id,
-        //   };
+            localStorage.setItem(
+                "bookedbeautid",
+                reqdatas.value.bookbeautdata.id
+              );
+              localStorage.setItem(
+                "bookedcustid",
+                statedatas.value.custdetails.id
+              );
+              const datas = {
+                beautid: reqdatas.value.bookbeautdata.id,
+                custid: statedatas.value.custdetails.id,
+                date: localStorage.getItem("date"),
+                time: localStorage.getItem("time"),
+                studio: localStorage.getItem("studio"),
+                servicename: localStorage.getItem("service"),
+                type:"razorpay",
+              };
 
-        //   axiosInstance
-        //     .post("suscription/", datas)
-        //     .then((res) => {
-        //       if (res.data.message === "already subscribed") {
-        //         alert("Already subscribed");
-        //         console.log("already");
-        //       } else {
-        //         alert("successfully subscribed");
-        //       }
-        //     })
-        //     .catch((error) => {
-        //       console.error("Error sending payment data to backend:", error);
-        //     });
-          alert("payment Succesful");
+              axiosInstance.post("cust/booknow/", datas).then((response) => {
+                console.log(response, "RESRERSRERSRERSR");
+              });
+
+            //   setTimeout(()=> navigate("../booking-completed"), 2000).catch(
+            //     (error) => alert(error) 
+            //   );
+            navigate("../booking-completed")
+              
+              
+            
+        
+          
         },
         prefill: {
           name: "Arun",
@@ -92,7 +101,7 @@ const Razorpay = () => {
 
 
   return (
-    <Button onClick={()=>dispalyRazorpay(1000,1)}>Razorpay</Button>
+    <Button onClick={()=>displayRazorpay()}>Razorpay</Button>
   )
 }
 
