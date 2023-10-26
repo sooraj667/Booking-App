@@ -11,11 +11,13 @@ import Avatar from "@mui/material/Avatar";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import toast, { Toaster } from "react-hot-toast";
 import PreviousBeautBookings from "./PreviousBeautBookings";
-import {togglePreviousBooking} from "../../../../feautures/beautician/beautnavigationslice"
+import { togglePreviousBooking } from "../../../../feautures/beautician/beautnavigationslice";
+import emptypic from "../../../../images/Empty-pana.png";
+
 const Appointments = () => {
   const custdata = useSelector((state) => state.login);
   const reqdatas = useSelector((state) => state.custreqdata);
-  const[allAppointments,setAllAppointments]=useState([])
+  const [allAppointments, setAllAppointments] = useState(false);
   const dispatch = useDispatch();
   const [address, setAddress] = useState("");
   const [bookingToggleHandler, setBookingToggleHandler] = useState(false);
@@ -34,11 +36,14 @@ const Appointments = () => {
           console.log(res.data.appointmentdata, "########################");
           //   const parseddata=JSON.parse(res.data.studiodata)
           //   console.log(parseddata,"PARSEDDATA");
-          setAllAppointments(res.data.appointmentdata)
+          setAllAppointments(res.data.appointmentdata);
           //dispatch(setBeautservices(res.data.servicedata));
         }
         if (res.data.message === "notsuccess") {
           console.log("not success");
+        }
+        if (res.data.message === "no-bookings") {
+          setAllAppointments(false);
         }
       })
       .catch((err) => console.log(err));
@@ -81,69 +86,59 @@ const Appointments = () => {
             <div className="right row">
               {/* <Heading subtitle='LEARN ANYTHING' title='Benefits About Online Learning Expertise' /> */}
               <div className="items">
-                {allAppointments.map((val) => {
-                  return (
-                    <>
-                      <div className="item flexSB">
-                        <div className="img">
-                          <img src={val.customer.image} alt="" />
+                {allAppointments &&
+                  allAppointments.map((val) => {
+                    return (
+                      <>
+                        <div className="item flexSB">
+                          <div className="img">
+                            <img src={val.customer.image} alt="" />
+                            <div className="text">
+                              <h2 key={val.id}>{val.customer.name}</h2>
+                              <hr />
+                              <p>
+                                Service -{val.service.service.name} <br />
+                                Amount Paid - {val.service.servicefee}
+                              </p>
+                            </div>
+                          </div>
                           <div className="text">
-                            <h2 key={val.id}>{val.customer.name}</h2>
+                            <p>
+                              Date - {val.date} <br />
+                              Time - {val.time}
+                            </p>
                             <hr />
-                            <p>
-                              Service -{val.service.service.name} <br />
-                              Amount Paid - {val.service.servicefee}
-                            </p>
+                            <div onClick={() => addressHandler(val.id)}>
+                              ADDRESS <ArrowDropDownIcon />
+                            </div>
+                            {address === val.id && (
+                              <p>
+                                Address - {val.studio.locality} <br />{" "}
+                                {val.studio.place} <br /> {val.studio.district}{" "}
+                                <br /> {val.studio.state} <br />{" "}
+                                {val.studio.country} <br /> pincode -{" "}
+                                {val.studio.pincode} <br />{" "}
+                              </p>
+                            )}
                           </div>
                         </div>
-                        <div className="text">
-                          <p>
-                            Date - {val.date} <br />
-                            Time - {val.time}
-                          </p>
-                          <hr />
-                          <div onClick={() => addressHandler(val.id)}>
-                            ADDRESS <ArrowDropDownIcon />
-                          </div>
-                          {address === val.id && (
-                            <p>
-                              Address - {val.studio.locality} <br />{" "}
-                              {val.studio.place} <br /> {val.studio.district}{" "}
-                              <br /> {val.studio.state} <br />{" "}
-                              {val.studio.country} <br /> pincode -{" "}
-                              {val.studio.pincode} <br />{" "}
-                            </p>
-                          )}
-                        </div>
-                      </div>
-                    </>
-                  );
-                })}
+                      </>
+                    );
+                  })}
               </div>
             </div>
           </div>
         </section>
+        {!allAppointments && (
+          <div className="flex justify-end">
+            <Avatar src={emptypic} sx={{ width: 350, height: 350 }}></Avatar>
+            <div className="sub-heading-div flex justify-center align-center py-3 text-small fw-2 sgfont  themecolor ">
+              NO BOOKINGS
+            </div>
+          </div>
+        )}
       </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     // <div>
     //   {/* <Topstackcust/> */}

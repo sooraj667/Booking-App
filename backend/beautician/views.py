@@ -242,6 +242,9 @@ class Getbookings(APIView):
             appointmentsobjs=Appointment.objects.filter(beautician=beautobj,date__gte=date.today())
             appointmentsobjs_serialized=Appointmentserializer(appointmentsobjs,many=True)
 
+            if appointmentsobjs.count()==0:
+                return Response({"message":"no-bookings"})
+
 
    
      
@@ -281,7 +284,7 @@ class Getbookings(APIView):
                         
 
                 
-            print(appointmentsobjs_serialized.data)
+            # print(appointmentsobjs_serialized.data)
 
            
             return Response({"message":"success","appointmentdata":appointmentsobjs_serialized.data})
