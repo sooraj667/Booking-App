@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React, { useState, useEffect } from "react";
 import { toggleAppointments } from "../../../../feautures/beautician/beautnavigationslice";
 import { useSelector, useDispatch } from "react-redux";
 import { setAllappointments } from "../../../../feautures/customer/customerdataslice";
@@ -15,53 +15,67 @@ import DialogTitle from "@mui/material/DialogTitle";
 import toast, { Toaster } from "react-hot-toast";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
 
+import ImageListItem from "@mui/material/ImageListItem";
+
+import AspectRatio from "@mui/joy/AspectRatio";
+import Stack from "@mui/joy/Stack";
+
+import Card from "@mui/joy/Card";
+import CardContent from "@mui/joy/CardContent";
+import Skeleton from "@mui/joy/Skeleton";
+import Typography from "@mui/joy/Typography";
+import Avatar from "@mui/joy/Avatar";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import CurrencyRupeeRoundedIcon from "@mui/icons-material/CurrencyRupeeRounded";
+import AccessTimeRoundedIcon from "@mui/icons-material/AccessTimeRounded";
+
 const PreviousBeautBookings = () => {
-    const custdata = useSelector((state) => state.login);
-    const reqdatas = useSelector((state) => state.custreqdata);
-    const[allAppointments,setAllAppointments]=useState([])
-    const dispatch = useDispatch();
-    const [address, setAddress] = useState("");
-    const [bookingToggleHandler, setBookingToggleHandler] = useState(false);
+  const custdata = useSelector((state) => state.login);
+  const reqdatas = useSelector((state) => state.custreqdata);
+  const [allAppointments, setAllAppointments] = useState([]);
+  const dispatch = useDispatch();
+  const [address, setAddress] = useState("");
+  const [bookingToggleHandler, setBookingToggleHandler] = useState(false);
 
-    useEffect(() => {
-        const beautdetails = JSON.parse(localStorage.getItem("singledetails-B"));
-        console.log(beautdetails, "################3");
-    
-        const datas = {
-          beautid: beautdetails.id,
-        };
-        axiosInstance
-          .post("beaut/get-previous-booking/", datas)
-          .then((res) => {
-            if (res.data.message === "success") {
-              console.log(res.data.appointmentdata, "########################");
-              //   const parseddata=JSON.parse(res.data.studiodata)
-              //   console.log(parseddata,"PARSEDDATA");
-              setAllAppointments(res.data.appointmentdata)
-              //dispatch(setBeautservices(res.data.servicedata));
-            }
-            if (res.data.message === "notsuccess") {
-              console.log("not success");
-            }
-          })
-          .catch((err) => console.log(err));
-      }, []);
-    const addressHandler = (id) => {
-        if (address == "") {
-          setAddress(id);
-        } else {
-          setAddress("");
+  useEffect(() => {
+    const beautdetails = JSON.parse(localStorage.getItem("singledetails-B"));
+    console.log(beautdetails, "################3");
+
+    const datas = {
+      beautid: beautdetails.id,
+    };
+    axiosInstance
+      .post("beaut/get-previous-booking/", datas)
+      .then((res) => {
+        if (res.data.message === "success") {
+          console.log(res.data.appointmentdata, "########################");
+          //   const parseddata=JSON.parse(res.data.studiodata)
+          //   console.log(parseddata,"PARSEDDATA");
+          setAllAppointments(res.data.appointmentdata);
+          //dispatch(setBeautservices(res.data.servicedata));
         }
-      };
+        if (res.data.message === "notsuccess") {
+          console.log("not success");
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
+  const addressHandler = (id) => {
+    if (address == "") {
+      setAddress(id);
+    } else {
+      setAddress("");
+    }
+  };
 
-    // const handleCancelItem = (id) => {
-    //     setCancelItemID(id);
-    //     handleClickOpen();
-    //   };
+  // const handleCancelItem = (id) => {
+  //     setCancelItemID(id);
+  //     handleClickOpen();
+  //   };
 
-    const previouBookingClickHandler = () => {
-        dispatch(toggleAppointments());
-      };
+  const previouBookingClickHandler = () => {
+    dispatch(toggleAppointments());
+  };
   return (
     <div className="booking-outer">
       <Toaster />
@@ -76,8 +90,8 @@ const PreviousBeautBookings = () => {
           BOOKING
         </div>
       )}
-      <hr />
-      <div className="flex">
+      <hr /> 
+      <div className="flex justify-center">
         {console.log(reqdatas.value.allappointments, "BYDUBAI")}
 
         <section className="aboutHome">
@@ -91,7 +105,76 @@ const PreviousBeautBookings = () => {
                 {allAppointments.map((val) => {
                   return (
                     <>
-                      <div className="item flexSB">
+                      <div className="flex justify-center mb-4">
+                        <Stack spacing={2} useFlexGap>
+                          <Card variant="outlined" sx={{ width: 643 }}>
+                            <CardContent orientation="horizontal">
+                              <ImageListItem sx={{ width: 200 }}>
+                                <img
+                                  srcSet={val.customer.image}
+                                  src={val.customer.image}
+                                  loading="lazy"
+                                />
+                              </ImageListItem>
+                              <div>
+                                <Typography sx={{ overflow: "hidden" }}>
+                                  <span className="text-info"> Service</span>-
+                                  {val.service.service.name}
+                                </Typography>
+                                <Typography sx={{ overflow: "hidden" }}>
+                                  <span className="text-info">
+                                    {" "}
+                                    Customer Name -{" "}
+                                  </span>
+                                  {val.customer.name}
+
+                                  <hr />
+                                </Typography>
+                                <Typography sx={{ overflow: "hidden" }}>
+                                  <CalendarMonthIcon className="mr-2" />{" "}
+                                  {val.date}
+                                </Typography>
+                                <Typography sx={{ overflow: "hidden" }}>
+                                  <AccessTimeRoundedIcon className="mr-2" />
+                                  {val.time}
+                                </Typography>
+                                <Typography sx={{ overflow: "hidden" }}>
+                                  <CurrencyRupeeRoundedIcon className="mr-2" />
+                                  {val.service.servicefee}/-
+                                </Typography>
+                          
+                                {val.status === "Confirmed" && (
+                                  <span className="text-success">
+                                    Service Completed
+                                  </span>
+                                )}
+                              </div>
+                            </CardContent>
+                            <AspectRatio ratio="29/9">
+                              <Typography sx={{ overflowY: "auto" }}>
+                                <div
+                                  onClick={() => addressHandler(val.id)}
+                                  className="cur"
+                                >
+                                  STUDIO ADDRESS <ArrowDropDownIcon />
+                                  {address === val.id && (
+                                    <p>
+                                      Address - {val.studio.locality} <br />{" "}
+                                      {val.studio.place} <br />{" "}
+                                      {val.studio.district} <br />{" "}
+                                      {val.studio.state} <br />{" "}
+                                      {val.studio.country} <br /> pincode -{" "}
+                                      {val.studio.pincode} <br />{" "}
+                                    </p>
+                                  )}
+                                </div>
+                              </Typography>
+                            </AspectRatio>
+                          </Card>
+                        </Stack>
+                      </div>
+
+                      {/* <div className="item flexSB">
                         <div className="img">
                           <img src={val.customer.image} alt="" />
                           <div className="text">
@@ -122,7 +205,7 @@ const PreviousBeautBookings = () => {
                             </p>
                           )}
                         </div>
-                      </div>
+                      </div> */}
                     </>
                   );
                 })}
@@ -132,7 +215,7 @@ const PreviousBeautBookings = () => {
         </section>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default PreviousBeautBookings
+export default PreviousBeautBookings;

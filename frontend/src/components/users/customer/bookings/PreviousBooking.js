@@ -180,18 +180,12 @@ const PreviousBooking = () => {
                                   <CurrencyRupeeRoundedIcon className="mr-2" />
                                   {val.service.servicefee}/-
                                 </Typography>
-                            
+
                                 {val.status !== "Cancelled" && (
                                   <span className="text-success">
-                                    Service Completed 
+                                    Service Completed
                                   </span>
                                 )}
-
-                                
-                                
-                                {/* <Typography sx={{ overflow: "hidden" }}>
-                        <CalendarMonthIcon className="mr-2"/>{item.status}
-                        </Typography> */}
                               </div>
                             </CardContent>
                             <AspectRatio ratio="29/9">
@@ -232,10 +226,7 @@ const PreviousBooking = () => {
                                 ADD REVIEW
                               </Button>
 
-
-                              
-                              <AddToFavouritesModal id={val.id}/>
-
+                              <AddToFavouritesModal id={val.id} />
 
                               <Dialog
                                 open={open}
