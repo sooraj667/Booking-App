@@ -86,7 +86,7 @@ const TopBeauticians = () => {
                 🎊 {ranking.second.name} 🎊
               </Typography>
               <CardContent sx={{ maxWidth: "40ch" }}>
-                Meet the most sought-after beautician in town!
+              Meet Our Second Top Beautician: Master of Elegance!
                 <br />
                 <br />
                 Total Bookings{" "}
@@ -220,7 +220,7 @@ const TopBeauticians = () => {
         🎊 {ranking.third.name} 🎊
       </Typography>
       <CardContent sx={{ maxWidth: '40ch' }}>
-      Meet the most sought-after beautician in town!
+      Discover Our Third Top Beautician: Visionary Beauty Expert!
       <br /><br />
       Total Bookings <span className='text-info text-medium'>{ranking.third.appointment_count}</span> 
          

@@ -28,6 +28,7 @@ import "./Contents.css"
 import Cookies from "js-cookie";
 import { red } from "@mui/material/colors";
 import {toggleLandingPart} from "../../../feautures/customer/customernavigationslice"
+import HomeIcon from '@mui/icons-material/Home';
 
 
 const Contents = () => {
@@ -85,11 +86,11 @@ const Contents = () => {
     <li className="item" onClick={handleHomeClick}>
         <div className="col-md-3">
           <div class="icon">
-            <ContentCutIcon />
+            <HomeIcon />
           </div>
         </div>
         <div className="col-md-9">
-          <div class="title">Services</div>
+          <div class="title">Home</div>
         </div>
       </li>
 

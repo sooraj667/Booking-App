@@ -24,6 +24,7 @@ import InfoIcon from "@mui/icons-material/Info";
 import { setServiceId } from "../../../feautures/customer/servicepreviewslice";
 import { toggleServicePreview } from "../../../feautures/customer/customernavigationslice";
 import toast, { Toaster } from "react-hot-toast";
+import thinking from "../../../images/Thinking face-bro.png"
 
 // import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -152,51 +153,15 @@ const Landingpartcust = () => {
   return (
     <div>
       <Toaster/>
-      {/* <Topstackcust /> */}
-
-      {/* <Button
-        type="file"
-        onClick={addImageHandler}
-        variant="contained"
-        startIcon={<InsertPhotoIcon />}
-        sx={{ marginTop: "10px" }}
-        size="small"
-      >
-        Change
-      </Button>
-      {console.log(statedatas.value.beautdetails.image)}
-      <div>
-        {addImage && (
-          <>
-            <input
-              className="selectimage"
-              accept="image/*"
-              id="upload-button"
-              type="file"
-              onChange={handleFileChange}
-            />
-            <div>
-              <Button
-                type="file"
-                onClick={uploadImageHandler}
-                variant="contained"
-                startIcon={<DriveFolderUploadIcon />}
-                sx={{ marginTop: "10px" }}
-                size="small"
-              >
-                Upload
-              </Button>
-            </div>
-          </>
-        )}
-      </div> */}
+      
       <div class="landouter">
         <div className="sub-heading-div flex justify-center align-center py-3 text-small fw-2 sgfont">
-          What are you looking for?
+          <span className="mr-3"> What are you looking for?</span>
+          <Avatar  src={thinking} sx={{width:100,height:100}}></Avatar>
         </div>
 
         <div className="sub-heading-div flex justify-center align-center py-3 text-small fw-2 sgfont themecolor underline">
-          SERVICES
+          OUR SERVICES
         </div>
 
         {/* <div className="hero">
@@ -207,7 +172,7 @@ const Landingpartcust = () => {
 
           </div> */}
         
-        <Container
+        {/* <Container
           elevation={24}
           sx={{
             width: 800,
@@ -216,7 +181,7 @@ const Landingpartcust = () => {
             // backgroundImage:'url("https://img.freepik.com/premium-photo/close-up-hair-supplies-flat-lay_23-2148352942.jpg?w=900")',
             objectFit: "cover",
             backgroundRepeat: "no-repeat",
-            marginLeft: "10%",
+            marginLeft: "",
             marginTop: "30px",
             marginBottom: "30%",
             opacity: [0.9, 0.8, 0.8],
@@ -226,15 +191,15 @@ const Landingpartcust = () => {
             //   opacity: [0.9, 0.8, 0.7],
             // },
           }}
-        >
+        > */}
           {/* <div className="row ">
             <div className="heading1">Services</div>
           </div> */}
           <div className="row ">
             {allServices.map((item) => {
               return (
-                <div className="col-md-4 mb-3">
-                  <Card sx={{ width: 320, maxWidth: "100%", boxShadow: "lg" }} onClick={() => handleServiceClick(item.id)}>
+                <div className="col-md-6 mb-3">
+                  <Card sx={{ width: 420, maxWidth: "100%", boxShadow: "lg" }} onClick={() => handleServiceClick(item.id)}>
                     <CardOverflow>
                       <AspectRatio sx={{ minWidth: 200 }}>
                         <img
@@ -274,9 +239,9 @@ const Landingpartcust = () => {
                       >
                       
                       </Typography>
-                      <Typography level="body-sm">
+                      {/* <Typography level="body-sm">
                         (Only <b>7</b> left in stock!)
-                      </Typography>
+                      </Typography> */}
                     </CardContent>
                     <CardOverflow>
                       <Button variant="solid"  size="lg" sx={{
@@ -327,8 +292,11 @@ const Landingpartcust = () => {
             TOP BEAUTICIANS
 
           </div>
-
+          <div className="flex justify-center">
           <TopBeauticians/>
+          </div>
+
+          
 
           {/* <ImageList sx={{ width: 700, height: 450 }}>
             <ImageListItem key="Subheader" cols={2}>
@@ -428,7 +396,7 @@ const Landingpartcust = () => {
               }
             )
           } */}
-        </Container>
+        {/* </Container> */}
 
     
       </div>
