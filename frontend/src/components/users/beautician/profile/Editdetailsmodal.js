@@ -117,10 +117,8 @@ const Editdetailsmodal = () => {
           handleOpen()
 
         } }
-        variant="contained"
-        sx={{ marginBottom: "0px", marginLeft: "10px", marginTop: "50px",backgroundColor:"inherit",color:"black",'&:hover': {
-          backgroundColor: '#212529',color:"#D0D4D9" // Specify the desired background color on hover
-        } }}
+        variant="outlined"
+                sx={{ bgcolor: "background.level1" }}
       >
         Edit Details
       </Button>

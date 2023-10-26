@@ -13,6 +13,7 @@ import MuiAlert from "@mui/material/Alert";
 import { useDispatch } from "react-redux";
 import { setBeautDetails } from "../../../../feautures/loginslice";
 
+import AddIcon from '@mui/icons-material/Add';
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
@@ -63,7 +64,7 @@ const AddBioModal = (props) => {
             backgroundColor: '#212529',color:"#D0D4D9" // Specify the desired background color on hover
           } }}
       >
-        ADD BIO
+        ADD BIO <AddIcon/>
       </Button>
       <Toaster />
 
