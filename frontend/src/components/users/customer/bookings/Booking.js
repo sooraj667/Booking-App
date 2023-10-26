@@ -169,6 +169,11 @@ const Booking = () => {
                                     Booking Cancelled
                                   </span>
                                 )}
+                                 {val.status === "Confirmed" && (
+                                  <span className="text-success">
+                                    Booking Confirmed
+                                  </span>
+                                )}
                                 {/* <Typography sx={{ overflow: "hidden" }}>
                         <CalendarMonthIcon className="mr-2"/>{item.status}
                         </Typography> */}
