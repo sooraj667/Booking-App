@@ -15,22 +15,21 @@ import {
   setExpertIn,
   setServices,
 } from "../../../../feautures/loginslice";
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
 
-import WorkIcon from '@mui/icons-material/Work';
+import WorkIcon from "@mui/icons-material/Work";
 
-import Divider from '@mui/material/Divider';
+import Divider from "@mui/material/Divider";
 import Addservicemodal from "./Addservicemodal";
-import "./Services.css"
-import expertpng from "../../../../images/Beauty salon-rafiki.png"
-import AddIcon from '@mui/icons-material/Add';
+import "./Services.css";
+import expertpng from "../../../../images/Beauty salon-rafiki.png";
+import AddIcon from "@mui/icons-material/Add";
 import AddToExpertiseModal from "./AddToExpertiseModal";
 
 const Services = () => {
-  
   const statedatas = useSelector((state) => state.login);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -42,7 +41,7 @@ const Services = () => {
       const parsed = JSON.parse(beautDetails);
       dispatch(setBeautDetails(parsed));
     }
- 
+
     if (services) {
       const parsedservices = JSON.parse(services);
       dispatch(setServices(parsedservices));
@@ -50,138 +49,77 @@ const Services = () => {
   }, []);
   return (
     <div>
-      <div className="hero">
-        SERVICES
-      </div>
+      <div className="hero">SERVICES</div>
       <hr />
       <div className="services-outer">
         <div className="services-box">
-          
           <div className="sub-heading-div flex justify-center align-center py-3 text-small fw-2 sgfont  themecolor underline">
             EXPERTISE
-            
-
           </div>
-          <div className="flex justify-center"><Avatar src={expertpng} alt="" sx={{width:220,height:220}}/></div>
-          
-          
+          <div className="flex justify-center">
+            <Avatar src={expertpng} alt="" sx={{ width: 220, height: 220 }} />
+          </div>
+
           <div className="flex justify-center align-center themecolor">
-          {
-            statedatas.value.services.filter((item)=>{
-              return(item.topservice==true)
-            }).map((val)=>{
-              return(
-                <>
-                <div className="">
-                  <h1>{val.service.name}</h1>
-
-
-                </div>
-                </>
-              )
-            })
-
-          }
-
-
+            {statedatas.value.services
+              .filter((item) => {
+                return item.topservice == true;
+              })
+              .map((val) => {
+                return (
+                  <>
+                    <div className="">
+                      <h1>{val.service.name}</h1>
+                    </div>
+                  </>
+                );
+              })}
           </div>
-          
+
           <hr />
-          <div className="services-body">
-          <div className="services-heading">
-            All Services
+          <div className="services-body mb-4 ">
+            <div className="services-heading">All Services</div>
+            <List
+              sx={{
+                width: "100%",
+                color: "#212529",
+                
+
+                bgcolor: "inherit",
+              }}
+            >
+              {statedatas.value.services.map((item) => {
+                return (
+                  <>
+                    <ListItem>
+                      <ListItemAvatar>
+                        <Avatar>
+                          <Avatar src={item.service.image}></Avatar>
+                        </Avatar>
+                      </ListItemAvatar>
+                      <ListItemText
+                        primary={item.service.name}
+                        secondary={`Rs ${item.servicefee} /-`}
+                      />
+                      {/* <Avatar src={item.service.image}></Avatar> */}
+                      {/* {item.service.name} */}
+                      <AddToExpertiseModal id={item.id} />
+                    </ListItem>
+                    <Divider variant="inset" component="li" />
+                  </>
+                );
+              })}
+            </List>
+              <div className="pb-5"><Addservicemodal /></div>
+            
           </div>
-          <List
-                  sx={{
-                    width: "100%",
-                    color:"#212529",
-                  
-                    bgcolor: "inherit",
-                  }}
-                >
-                  {statedatas.value.services.map((item) => {
-                    return (
-                      <>
-                        <ListItem >
-                          <ListItemAvatar>
-                            <Avatar>
-                            <Avatar src={item.service.image}></Avatar>
-                            </Avatar>
-                          </ListItemAvatar>
-                          <ListItemText
-                            primary={item.service.name}
-                            secondary={`Rs ${item.servicefee} /-`}
-                          />
-                          {/* <Avatar src={item.service.image}></Avatar> */}
-                          {/* {item.service.name} */}
-                          <AddToExpertiseModal id={item.id}/>
-                      
-                        </ListItem>
-                        <Divider variant="inset" component="li" />
-                      </>
-                    );
-                  })}
-                </List>
-
-                <Addservicemodal/>
-
-
-          </div>
-
         </div>
-        
-
       </div>
-      
     </div>
   );
 };
 
 export default Services;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // {console.log(statedatas.value.expertin.name)}
 //       <Topstack />
@@ -238,13 +176,12 @@ export default Services;
 //                     borderRadius: "4px",
 //                     objectFit: "cover",
 //                     marginLeft:"60px"
-                    
+
 //                   }}
 //                 >
 //                   <img   src={statedatas.value.expertin.image} alt="" />
 //                 </Avatar>
-             
-            
+
 //           </Paper>
 //         </Grid> */}
 //         <Grid xs={12}>
@@ -276,8 +213,6 @@ export default Services;
 //             >
 //               Your Services
 //             </Typography>
-            
-            
 
 //             <Box sx={{ width: "100%" }}>
 //               <Stack spacing={2}>
@@ -303,7 +238,7 @@ export default Services;
 //                           />
 //                           <Avatar src={item.service.image}></Avatar>
 //                           {/* {item.service.name} */}
-                      
+
 //                         </ListItem>
 //                         <Divider variant="inset" component="li" />
 //                       </>

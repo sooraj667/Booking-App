@@ -10,6 +10,7 @@ import { setAllservices, setServices } from "../../../../feautures/loginslice";
 import axiosInstance from "../../../../axios/axiosconfig";
 import Input from "@mui/joy/Input";
 import MuiAlert from "@mui/material/Alert";
+import toast from "react-hot-toast";
 
 const style = {
   position: "absolute",
@@ -30,14 +31,16 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 const Addservicemodal = () => {
   const dispatch = useDispatch();
   const statedatas = useSelector((state) => state.login);
-  const [selectedService, setSelectedService] = useState("");
+  const [selectedService, setSelectedService] = useState(false);
   const [addServiceError, setAddServiceError] = useState(false);
   const [serviceFeeError, setServiceFeeError] = useState(false);
 
-  const [serviceFee, setServiceFee] = useState("");
+  const [serviceFee, setServiceFee] = useState(false);
   const [open, setOpen] = useState(false);
   const [changed, setChanged] = useState(false);
   const handleOpen = () => {
+    setSelectedService(false)
+    setServiceFee(false)
     setOpen(true);
   };
   const handleClose = () => {
@@ -57,6 +60,10 @@ const Addservicemodal = () => {
   }, [changed]);
 
   const handleAddService = () => {
+    if (selectedService===false || serviceFee ===false){
+      toast.error("Please add the values!")
+      return
+    }
     const datas = {
       servicename: selectedService,
       beautid: statedatas.value.beautdetails.id,
