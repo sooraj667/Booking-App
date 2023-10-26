@@ -27,6 +27,7 @@ const PayUsingWalletModal = () => {
   const navigate = useNavigate();
 
   const handleSubmit = () => {
+
     localStorage.setItem("bookedbeautid", reqdatas.value.bookbeautdata.id);
     localStorage.setItem("bookedcustid", statedatas.value.custdetails.id);
     const datas = {
@@ -66,6 +67,15 @@ const PayUsingWalletModal = () => {
       <Button
         variant="contained"
         onClick={() =>{
+          const date= localStorage.getItem("date")
+          const time= localStorage.getItem("time")
+          const studio= localStorage.getItem("studio")
+          const servicename= localStorage.getItem("service")
+          console.log(`${date} ${time} ${studio} ${servicename}  ,MYRR`);
+          if (!date || !time ||   !studio || !servicename ){
+              toast.error("Select All values")
+              return
+          }
             setWalletError(false)
             setOpen(true)
 
