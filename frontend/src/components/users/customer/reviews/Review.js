@@ -69,26 +69,12 @@ const Review = () => {
                     </AvatarGroup> */}
                   </Box>
                   <CardContent>
-                    <Typography level="title-lg">{item.customer.name}</Typography>
-                    <Typography level="body-sm">
-                      {item.content}
+                    <Typography level="title-lg">
+                      {item.customer.name}
                     </Typography>
+                    <Typography level="body-sm">{item.content}</Typography>
                   </CardContent>
-                  <CardActions buttonFlex="0 1 120px">
-                    <IconButton
-                      variant="outlined"
-                      color="neutral"
-                      sx={{ mr: "auto" }}
-                    >
-                      <FavoriteBorder />
-                    </IconButton>
-                    <Button variant="outlined" color="neutral">
-                      View
-                    </Button>
-                    <Button variant="solid" color="primary">
-                      Join
-                    </Button>
-                  </CardActions>
+                  <CardActions buttonFlex="0 1 120px"></CardActions>
                 </Card>
 
                 {/* <div className="box">

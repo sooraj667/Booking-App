@@ -223,7 +223,7 @@ const Booknow = () => {
         </div>
       </div>
 
-      <div className="flex">
+      <div className="flex justify-center">
         {bookNowToggle && (
           <div className="box">
             <Stack
@@ -240,7 +240,7 @@ const Booknow = () => {
       <hr />
 
       {showReview && (
-        <div className="review">
+        <div className="review mb-5">
           <Review />
         </div>
       )}

@@ -48,13 +48,13 @@ const BeautWorkshops = () => {
       }, []);
   return (
 
-    <div className="row justify-around">
+    <div className="row justify-between">
         {allWorkShops.map((item) => {
           return (
             <Card
               variant="outlined"
               sx={{
-                width: 320,
+                width: 380,
                 // to make the card resizable
                 overflow: "auto",
                 resize: "horizontal",
@@ -90,7 +90,7 @@ const BeautWorkshops = () => {
                     <CalendarMonthIcon />
                   </div>
                   <div className="col-md-5">
-                    <Typography level="title-sm">{item.date}</Typography>
+                    <Typography level="title-sm">{item.conducting_date}</Typography>
                   </div>
                   <div className="col-md-2"></div>
                 </div>
@@ -136,9 +136,10 @@ const BeautWorkshops = () => {
                     <ReportIcon />
                   </div>
                   <div className="col-md-5">
+                    
                     <Typography level="title-sm">
                       {" "}
-                      {item.registration_deadline}{" "}
+                      <span className='text-danger'>{item.registration_deadline}</span>{" "}
                     </Typography>
                   </div>
                   <div className="col-md-2"></div>
