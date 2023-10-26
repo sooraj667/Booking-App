@@ -510,7 +510,7 @@ class GetPreviousBookings(APIView):
         try:
             custobj=Customer.objects.get(id=custid)
   
-            appointmentsobjs=Appointment.objects.filter(customer=custobj,date__lt=date.today())
+            appointmentsobjs=Appointment.objects.filter(customer=custobj,date__lt=date.today(),status="Confirmed")
             appointmentsobjs_serialized=Appointmentserializer(appointmentsobjs,many=True)
 
             # studioobjs=Studio.objects.filter(beautician=beautobj)

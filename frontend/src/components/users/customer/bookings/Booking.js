@@ -13,6 +13,9 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import toast, { Toaster } from "react-hot-toast";
 import { togglePreviousBooking } from "../../../../feautures/customer/customernavigationslice";
+
+
+
 import ImageListItem from "@mui/material/ImageListItem";
 
 import AspectRatio from "@mui/joy/AspectRatio";
@@ -145,10 +148,15 @@ const Booking = () => {
                               </ImageListItem>
                               <div>
                                 <Typography sx={{ overflow: "hidden" }}>
-                                  <span className="text-info"> Service</span>-{val.service.service.name}
+                                  <span className="text-info"> Service</span>-
+                                  {val.service.service.name}
                                 </Typography>
                                 <Typography sx={{ overflow: "hidden" }}>
-                                <span className="text-info"> Appointment With - </span>{val.beautician.name}
+                                  <span className="text-info">
+                                    {" "}
+                                    Appointment With -{" "}
+                                  </span>
+                                  {val.beautician.name}
 
                                   <hr />
                                 </Typography>
@@ -169,7 +177,7 @@ const Booking = () => {
                                     Booking Cancelled
                                   </span>
                                 )}
-                                 {val.status === "Confirmed" && (
+                                {val.status === "Confirmed" && (
                                   <span className="text-success">
                                     Booking Confirmed
                                   </span>
@@ -242,86 +250,6 @@ const Booking = () => {
                           </Card>
                         </Stack>
                       </div>
-
-                      {/* <div className="item flexSB">
-                        <div className="img">
-                          <img src={val.beautician.image} alt="" />
-                          <div className="text">
-                            <h2 key={val.id}>{val.beautician.name}</h2>
-                            <hr />
-                            <p>
-                              Service -{val.service.service.name} <br />
-                              Amount Paid - {val.service.servicefee}
-                              Order Status -{" "}
-                              {val.status === "Confirmed" ? (
-                                <span className="text-success">Confirmed</span>
-                              ) : (
-                                <span className="text-danger">Cancelled</span>
-                              )}
-                            
-                            <div>
-                              {val.status === "Confirmed" && (
-                                <Button
-                                  variant="outlined"
-                                  onClick={() => handleCancelItem(val.id)}
-                                  sx={{
-                                    marginTop: "10px",
-                                    backgroundColor: "inherit",
-                                    color: "#900603",
-                                    "&:hover": {
-                                      backgroundColor: "#212529",
-                                      color: "#D0D4D9", // Specify the desired background color on hover
-                                    },
-                                  }}
-                                >
-                                  CANCEL BOOKING
-                                </Button>
-                              )}
-
-                              <Dialog
-                                open={open}
-                                onClose={handleClose}
-                                aria-labelledby="alert-dialog-title"
-                                aria-describedby="alert-dialog-description"
-                              >
-                                <DialogTitle id="alert-dialog-title">
-                                  {"Cancel Booking? "}
-                                </DialogTitle>
-                                <DialogContent>
-                                  <DialogContentText id="alert-dialog-description">
-                                    Are You sure you want to cancel?
-                                  </DialogContentText>
-                                </DialogContent>
-                                <DialogActions>
-                                  <Button onClick={handleClose}>CLOSE</Button>
-                                  <Button onClick={handleSubmit} autoFocus>
-                                    CONFIRM
-                                  </Button>
-                                </DialogActions>
-                              </Dialog>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="text">
-                          <p>
-                            Date - {val.date} <br />
-                            Time - {val.time}
-                          </p>
-                          <hr />
-                          <div onClick={() => addressHandler(val.id)}>
-                            ADDRESS <ArrowDropDownIcon />
-                          </div>
-                          {address === val.id && (
-                            <p>
-                              Address - {val.studio.locality} <br />{" "}
-                              {val.studio.place} <br /> {val.studio.district}{" "}
-                              <br /> {val.studio.state} <br />{" "}
-                              {val.studio.country} <br /> pincode -{" "}
-                              {val.studio.pincode} <br />{" "}
-                            </p>
-                          )}
-                        </div>
-                      </div> */}
                     </>
                   );
                 })}
