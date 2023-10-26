@@ -15,10 +15,14 @@ import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
 import Typography from "@mui/joy/Typography";
 import Sheet from "@mui/joy/Sheet";
+import toast, { Toaster } from "react-hot-toast";
 
 import { toggleBooknow } from "../../../feautures/customer/customernavigationslice";
+import AddToFavouritesModal from "./bookings/AddToFavouritesModal";
 const Browse = () => {
   const [allServices,setAllServices]=useState([])
+  const [allFavs,setAllFavs]=useState([])
+  const [allRevs,setAllRevs]=useState([])
   const dispatch = useDispatch();
   const statedatas = useSelector((state) => state.login);
   const navigationdatas = useSelector((state) => state.custnavigation);
@@ -45,6 +49,8 @@ const Browse = () => {
     axiosInstance
     .get("cust/getallbeauticians/").then((response)=>{
       dispatch(setAllBeauticiansC(response.data.allbeauticians));
+      setAllFavs(response.data.allfavs)
+      setAllRevs(response.data.allrevs)
   
     }).catch((error)=>{
       alert("ERROR")
@@ -70,6 +76,7 @@ const Browse = () => {
   }, []);
   return (
     <div className="browse-outer">
+      <Toaster/>
       <div className="hero">EXPLORE</div>
       <hr />
       <div
@@ -204,6 +211,7 @@ const Browse = () => {
 
 
 
+
                      
 
 
@@ -228,19 +236,23 @@ const Browse = () => {
                         <Typography level="body-xs" fontWeight="lg">
                          Likes
                         </Typography>
-                        <Typography fontWeight="lg">34</Typography>
+                        <Typography fontWeight="lg">{allFavs.filter((fav)=>{
+                          return(fav.beautician.name===item.name)
+                        }).length}</Typography>
                       </div>
                       <div>
                         <Typography level="body-xs" fontWeight="lg">
-                          Followers
+                          Bookings
                         </Typography>
-                        <Typography fontWeight="lg">980</Typography>
+                        <Typography fontWeight="lg">{item.appointment_count}</Typography>
                       </div>
                       <div>
                         <Typography level="body-xs" fontWeight="lg">
-                          Rating
+                          Reviews
                         </Typography>
-                        <Typography fontWeight="lg">8.9</Typography>
+                        <Typography fontWeight="lg">{allRevs.filter((rev)=>{
+                          return(rev.beautician.name===item.name)
+                        }).length}</Typography>
                       </div>
                     </Sheet>
                     <Box
@@ -250,9 +262,10 @@ const Browse = () => {
                         "& > button": { flex: 1 },
                       }}
                     >
-                      <Button variant="outlined" color="neutral">
+                      {/* <Button variant="outlined" color="neutral">
                         Chat
-                      </Button>
+                      </Button> */}
+                      <AddToFavouritesModal myid={item.id}/>
                       <Button variant="solid" color="primary" onClick={() => booknowHandler(item.id)}>
                         Book Now
                       </Button>

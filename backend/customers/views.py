@@ -701,8 +701,14 @@ class GetAllBeauticians(APIView):
     def get(self,request): 
         all=Beautician.objects.all()
         all_serialized=BeauticianSerializer(all,many=True)
+
+        allfav=FavouriteStylists.objects.all()
+        allfavs_serialized=FavouriteStylistsSerializer(allfav,many=True)
+
+        allrevs=Review.objects.all()
+        allrevs_serialized=Reviewserializer(allrevs,many=True)
         
-        return Response({"message":"done","allbeauticians":all_serialized.data})
+        return Response({"message":"done","allbeauticians":all_serialized.data,"allfavs":allfavs_serialized.data,"allrevs":allrevs_serialized.data})
     
 class RemoveFromFavourites(APIView):
   
