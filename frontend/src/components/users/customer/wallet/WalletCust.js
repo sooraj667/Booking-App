@@ -28,7 +28,7 @@ const WalletCust = () => {
     <div className="wallet-outer">
       <div className="hero">Wallet</div>
       <hr />
-      <div className="schedule-outer">
+      <div className="flex justify-center">
         <Card
           size="lg"
           variant="plain"
@@ -40,6 +40,7 @@ const WalletCust = () => {
             // to make the demo resizable
             resize: "horizontal",
             overflow: "auto",
+            
           }}
         >
           <CardOverflow
@@ -50,6 +51,7 @@ const WalletCust = () => {
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
+              backgroundColor:"#BA68C8",
               px: "var(--Card-padding)",
             }}
           >
@@ -74,7 +76,7 @@ const WalletCust = () => {
                 You can use this amount to make bookings!
               </Typography>
             </CardContent>
-            <Button
+            {/* <Button
               variant="outlined"
               color="primary"
               sx={{
@@ -85,7 +87,7 @@ const WalletCust = () => {
               }}
             >
               Book Now
-            </Button>
+            </Button> */}
           </CardContent>
         </Card>
 

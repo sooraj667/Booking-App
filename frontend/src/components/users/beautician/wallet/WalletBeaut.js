@@ -27,7 +27,7 @@ const WalletBeaut = () => {
     <div className="wallet-outer">
       <div className="hero">Wallet</div>
       <hr />
-      <div className="schedule-outer">
+      <div className=" flex justify-center">
 
       <Card
           size="lg"
@@ -51,6 +51,7 @@ const WalletBeaut = () => {
               flexDirection: "column",
               justifyContent: "center",
               px: "var(--Card-padding)",
+              backgroundColor:"#BA68C8",
             }}
           >
                 <Typography textColor="primary.200">

@@ -49,7 +49,7 @@ const AllWorkshops = () => {
               <Card
                 variant="outlined"
                 sx={{
-                  width: 320,
+                  width: 380,
                   // to make the card resizable
                   overflow: "auto",
                   resize: "horizontal",
@@ -85,7 +85,7 @@ const AllWorkshops = () => {
                       <CalendarMonthIcon />
                     </div>
                     <div className="col-md-5">
-                      <Typography level="title-sm">{item.date}</Typography>
+                      <Typography level="title-sm">{item.conducting_date}</Typography>
                     </div>
                     <div className="col-md-2"></div>
                   </div>
@@ -133,7 +133,7 @@ const AllWorkshops = () => {
                     <div className="col-md-5">
                       <Typography level="title-sm">
                         {" "}
-                        {item.registration_deadline}{" "}
+                        <div className="text-danger">{item.registration_deadline}{" "}</div>
                       </Typography>
                     </div>
                     <div className="col-md-2"></div>
