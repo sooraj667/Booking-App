@@ -301,8 +301,10 @@ class Getstudios(APIView):
         try:
             beautobj=Beautician.objects.get(id=beautid)
             studioobjs=Studio.objects.filter(beautician=beautobj)
-            studioobjs_serialized=StudioSerializer(studioobjs,many=True)
-            return Response({"message":"success","studios":studioobjs_serialized.data})
+            if studioobjs.count()!=0:
+
+                studioobjs_serialized=StudioSerializer(studioobjs,many=True)
+                return Response({"message":"success","studios":studioobjs_serialized.data})  
         except:
             return Response({"message":"not success"})
   
