@@ -19,6 +19,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import WorkshopPayUsingWalletModal from "./WorkshopPayUsingWalletModal";
+import Razorpay from "../../../razorpay/Razorpay";
 
 
 
@@ -33,6 +34,7 @@ const WorkShopBookingFullScreenDialog = (props) => {
   const [subject, setSubject] = useState("");
   const [beautName, setBeautName] = useState("");
   const [beautImage, setBeautImage] = useState("");
+  const [workshopID, setWorkshopID] = useState("");
   const [paymentToggle, setPaymentToggle] = useState(false);
   const [allReadyBooked, setAllReadyBoooked] = useState(false);
   const [amount, setAmount] = useState("");
@@ -55,7 +57,8 @@ const WorkShopBookingFullScreenDialog = (props) => {
           setSubject(val.subject),
           setBeautName(val.beautician.name),
           setBeautImage(val.beautician.image),
-          setAmount(val.price)
+          setAmount(val.price),
+          setWorkshopID(val.id)
         );
       });
       const datas={
@@ -177,6 +180,11 @@ const WorkShopBookingFullScreenDialog = (props) => {
                   <Toaster />
                 </PayPalScriptProvider>
               </div>
+              <div className="flex justify-center">
+              <Razorpay fee={amount} for={"workshop"} id={workshopID}/>
+
+              </div>
+              
               <div className="flex justify-center">
                 <WorkshopPayUsingWalletModal id={props.id} price={amount}/>
                

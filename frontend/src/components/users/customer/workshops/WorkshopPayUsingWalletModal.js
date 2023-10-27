@@ -42,8 +42,8 @@ const WorkshopPayUsingWalletModal = (props) => {
   return (
     <React.Fragment>
       <Toaster />
-      <Button variant="outlined" color="neutral" onClick={() => setOpen(true)}>
-        Open modal
+      <Button variant="outlined" color="primary" onClick={() => setOpen(true)} >
+        Pay Using Wallet
       </Button>
       <Transition in={open} timeout={400}>
         {(state) => (

@@ -349,7 +349,7 @@ const Paypal = () => {
               )
             }
 
-            <Razorpay fee={selectedFeeForPayment}/>
+            <Razorpay fee={selectedFeeForPayment} for="normal" id="nil"/>
         
       </Card>
 
