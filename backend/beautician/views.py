@@ -696,5 +696,19 @@ class GenerateRoomId(APIView):
         WorkshopLink.objects.create(workshop=obj,link_id=link)
        
         return Response({"message":"success","link":link})
-     
-           
+    
+    
+
+class GetBeautCompletedWorkshops(APIView):
+    def post(self,request): 
+            beautobj=Beautician.objects.get(id=request.data.get("beautid"))
+            current_date = datetime.now().date()  
+            current_time = datetime.now().time()
+            all=Workshop.objects.filter(beautician=beautobj, conducting_date__lt=current_date)
+            
+            if all.count()==0:
+                return Response({"message":"no-workshops"})
+            else:
+                all_serialized=WorkshopSerializer(all,many=True)
+
+                return Response({"message":"done","allworkshops":all_serialized.data})

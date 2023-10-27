@@ -29,6 +29,8 @@ urlpatterns = [
     path("send-email-link/",SendEmailLink.as_view(),name="SendEmailLink"),
     path("video-call-link/",VideoCallLink.as_view(),name="VideoCallLink"),
     path("generate-roomid/",GenerateRoomId.as_view(),name="GenerateRoomId"),
+    path("get-currentbeaut-completed-workshops/",GetBeautCompletedWorkshops.as_view(),name="GetBeautCompletedWorkshops"),
+
 
 
     

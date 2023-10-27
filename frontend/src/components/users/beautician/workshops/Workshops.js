@@ -9,6 +9,7 @@ import axiosInstance from "../../../../axios/axiosconfig";
 import { setAllWorkshops } from "../../../../feautures/beautician/workshopslice";
 import { setVideoCallLink } from "../../../../feautures/variableSlice";
 
+
 import Avatar from "@mui/joy/Avatar";
 import AvatarGroup from "@mui/joy/AvatarGroup";
 import Box from "@mui/joy/Box";
@@ -36,6 +37,7 @@ import CircularProgress from "@mui/joy/CircularProgress";
 import SvgIcon from "@mui/joy/SvgIcon";
 import ZegoVideocall from "../../../zego_cloud/ZegoVideocall";
 import AutorenewIcon from '@mui/icons-material/Autorenew';
+import MenuTab from "./MenuTab";
 
 const Workshops = () => {
   const navigate = useNavigate();
@@ -112,7 +114,12 @@ const Workshops = () => {
   return (
     <div>
       <Toaster />
-      <div className="hero">WORKSHOPS</div>
+      <div className="flex justify-center">
+      <div className="sub-heading-div flex justify-center align-center py-3 text-medium fw-2 sgfont  themecolor ">WORKSHOPS</div>
+      <div className="mt-4 ml-2"><MenuTab/></div>
+
+      </div>
+      
       <div className="flex justify-center">
         <Avatar src={workshop_png} sx={{ width: 220, height: 220 }} />
       </div>

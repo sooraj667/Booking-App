@@ -22,6 +22,7 @@ import WalletBeaut from "./wallet/WalletBeaut";
 import PreviousBeautBookings from "./appointments/PreviousBeautBookings";
 import BeauticianHeader from "./beautician-header/BeauticianHeader";
 import Workshops from "./workshops/Workshops";
+import ConductedWorkshops from "./workshops/ConductedWorkshops";
 
 const Beauticiandashboard = () => {
   const statedatas = useSelector((state) => state.beautnavigation);
@@ -84,6 +85,7 @@ const Beauticiandashboard = () => {
           {navigationdatas.value.previousbooking && <PreviousBeautBookings />}
 
           {navigationdatas.value.workshops && <Workshops />}
+          {navigationdatas.value.conducted_workshops && <ConductedWorkshops />}
         </div>
       </div>
     </div>
