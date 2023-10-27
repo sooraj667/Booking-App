@@ -96,7 +96,7 @@ const MenuTab = () => {
           <EditIcon />
           Conducted Workshops
         </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
+        {/* <MenuItem onClick={handleClose} disableRipple>
           <FileCopyIcon />
           Duplicate
         </MenuItem>
@@ -108,7 +108,7 @@ const MenuTab = () => {
         <MenuItem onClick={handleClose} disableRipple>
           <MoreHorizIcon />
           More
-        </MenuItem>
+        </MenuItem> */}
       </StyledMenu>
     </div>
   )

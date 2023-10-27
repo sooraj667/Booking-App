@@ -40,7 +40,7 @@ const ConductedWorkshops = () => {
       </div>
       <hr />
       <div className="sub-heading-div flex justify-center align-center py-3 text-small fw-2 sgfont  themecolor underline">
-        The workshops attended by you are shown here
+        The workshops conducted by you are shown here
       </div>
 
 
@@ -52,7 +52,7 @@ const ConductedWorkshops = () => {
         <div className="">
           {allWorkshops.map((item) => {
             return (
-              <div className="flex justify-center">
+              <div className="flex justify-center mb-4">
                 <Stack spacing={2} useFlexGap>
                   <Card variant="outlined" sx={{ width: 643 }}>
                 
@@ -66,7 +66,7 @@ const ConductedWorkshops = () => {
                         <Typography sx={{ overflow: "hidden" }}>
                           {item.beautician.name}
                           <div className="flex text-success">
-                        Completed <DoneAllRoundedIcon/>
+                        You have conducted this workshop <DoneAllRoundedIcon/>
                       </div>
                           <hr />
 
@@ -94,10 +94,10 @@ const ConductedWorkshops = () => {
                         </Typography>
                     </AspectRatio>
                   
-                    <Button color="danger">
+                    {/* <Button color="danger">
                      Rate
                       
-                    </Button>
+                    </Button> */}
                   </Card>
                 </Stack>
               </div>
