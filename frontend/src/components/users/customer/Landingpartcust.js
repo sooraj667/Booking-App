@@ -232,6 +232,7 @@ const Landingpartcust = () => {
                             size="sm"
                             variant="soft"
                             color="success"
+                            
                           >
                            {item.description}
                           </Chip>

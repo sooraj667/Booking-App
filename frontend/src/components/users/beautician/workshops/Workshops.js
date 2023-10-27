@@ -222,13 +222,13 @@ const Workshops = () => {
         </div>
       )}
 
-      <div className="row justify-around">
+      <div className="row justify-between">
         {workshops.value.allworkshops.map((item) => {
           return (
             <Card
               variant="outlined"
               sx={{
-                width: 320,
+                width: 380,
                 // to make the card resizable
                 overflow: "auto",
                 resize: "horizontal",
@@ -328,10 +328,12 @@ const Workshops = () => {
                 >
                   <FavoriteBorder />
                 </IconButton> */}
+             
                 <Button variant="outlined" color="neutral">
                   Boost
                 </Button>
                 <DeleteWorkshopModal id={item.id} />
+        
                 {/* <Button variant="solid" color="danger" onClick={()=> handleCancelWorkshopConfirm()}>
                   Cancel
                 </Button> */}

@@ -150,6 +150,7 @@ const Servicepreview = () => {
             serviceBeauts.map((item) => {
               return (
                 <Stack spacing={3} className="mt-3">
+                  
                   <Paper
                     key={item.id} // Add a unique key for each item
                     elevation={24}

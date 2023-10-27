@@ -88,10 +88,10 @@ const AttendedWorkshops = () => {
                         </Typography>
                     </AspectRatio>
                   
-                    <Button color="danger">
+                    {/* <Button color="danger">
                      Rate
                       
-                    </Button>
+                    </Button> */}
                   </Card>
                 </Stack>
               </div>
