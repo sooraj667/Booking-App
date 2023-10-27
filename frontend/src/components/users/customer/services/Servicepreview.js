@@ -7,12 +7,12 @@ import Avatar from "@mui/material/Avatar";
 import { deepOrange, deepPurple } from "@mui/material/colors";
 import { useTheme } from "@mui/material/styles";
 import { useDispatch } from "react-redux";
-import Card from "@mui/material/Card";
+
 import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
+
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import StarHalfIcon from "@mui/icons-material/StarHalf";
 import Viewmore from "./Viewmore";
@@ -24,6 +24,14 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import StarIcon from "@mui/icons-material/Star";
+
+
+import Card from '@mui/joy/Card';
+import CardCover from '@mui/joy/CardCover';
+import CardContent from '@mui/joy/CardContent';
+import Typography from '@mui/joy/Typography';
+import LocationOnRoundedIcon from '@mui/icons-material/LocationOnRounded';
+import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 
 const Servicepreview = () => {
   const servicepreview = useSelector((state) => state.servicepreview);
@@ -125,8 +133,12 @@ const Servicepreview = () => {
         </div>
       </div>
       <hr />
-      <div className="content">
-      {/* {
+      <div className="sub-heading-div flex justify-center align-center py-3 text-small fw-2 sgfont  themecolor underline">
+        EXPERTS
+      
+      </div>
+      <div className="">
+        {/* {
             experts && 
             <div className="intermediates-heading">
               EXPERTS
@@ -134,120 +146,152 @@ const Servicepreview = () => {
             </div>
           } */}
         <div
-          className="flex"
-          style={{
-            display: "flex",
-            flexDirection: "row" /* Display items in a row */,
-            flexWrap: "wrap" /* Allow items to wrap to the next line */,
-            justifyContent:
-              "space-between" /* Distribute items evenly along the row */,
-            gap: "2px",
-          }}
+          // className="flex"
+          // style={{
+          //   display: "flex",
+          //   flexDirection: "row" /* Display items in a row */,
+          //   flexWrap: "wrap" /* Allow items to wrap to the next line */,
+          //   justifyContent:
+          //     "space-between" /* Distribute items evenly along the row */,
+          //   gap: "2px",
+          // }}
         >
-
-       
+              
+          <div className="row">
           {experts &&
             serviceBeauts.map((item) => {
               return (
-                <Stack spacing={3} className="mt-3">
-                  
-                  <Paper
-                    key={item.id} // Add a unique key for each item
-                    elevation={24}
-                    className="card"
-                    sx={{
-                      width: 400,
-                      height: 220,
-                      backgroundColor: "inherit",
-                      // backgroundImage:'url("https://img.freepik.com/premium-photo/close-up-hair-supplies-flat-lay_23-2148352942.jpg?w=900")',
-                      objectFit: "cover",
-                      backgroundRepeat: "no-repeat",
-                      // marginLeft: "20%",
-                      marginTop: "30px",
-                      marginBottom: "30%",
-                      opacity: [0.3, 0.9, 0.9],
-                      cursor: "pointer",
-                      "&:hover": {
-                        backgroundColor: "grey",
-                        opacity: [0.3, 1, 1],
-                        color: "white",
-                      },
-                    }}
-                  >
-                    <Grid container spacing={4}>
-                      <Grid item xs={3}>
-                        <Avatar
-                          sx={{
-                            width: 125,
-                            height: 125,
-                            marginLeft: "30px",
-                            marginTop: "30px",
-                          }}
+                  <div className="col-6">
+                    <Card sx={{ minHeight: "280px", width: 320 }} onClick={() => booknowHandler(item.beautician.id)}>
+                      <CardCover>
+                        <img
                           src={item.beautician.image}
+                          srcSet={item.beautician.image}
+                          loading="lazy"
+                          alt=""
                         />
-                      </Grid>
-                      <Grid item xs={9}>
-                        <Typography
-                          className="textclass"
-                          variant="h5"
-                          component="h1"
-                          sx={{
-                            fontSize: "24px", // Adjust the font size as needed
-                            fontWeight: "bold", // Make the text bold if desired
-                            marginLeft: "55px",
-                            marginTop: "45px",
-                            whiteSpace: "nowrap", // Prevent text from wrapping to multiple lines
-                            // overflow: "hidden", // Hide any overflow text
-                            // textOverflow: "ellipsis",
-                            // marginBottom: "16px", // Add some spacing at the bottom
-                            // You can add more styles as needed, such as fontFamily, letterSpacing, etc.
-                          }}
-                        >
-                          {item.beautician.name}
-                          <br />
-                          Rs {item.servicefee}/-
-                          <br />
-                          <StarIcon /> <StarIcon /> <StarIcon />
-                          <hr />
-                          <Button
-                            variant="contained"
-                            sx={{
-                              marginLeft: "20px",
-                              marginTop: "1px",
-                              backgroundColor: "inherit",
-                              color: "black",
-                              "&:hover": {
-                                backgroundColor: "grey",
-                                opacity: [0.3, 1, 1],
-                                color: "white",
-                              },
-                            }}
-                            onClick={() => booknowHandler(item.beautician.id)}
-                          >
-                            Book Now
-                          </Button>
-                        </Typography>
-                      </Grid>
-
-                      {/* <Grid item xs={4}>
-                      <Button
-                        variant="contained"
+                      </CardCover>
+                      <CardCover
                         sx={{
-                          marginTop: "80px",
+                          background:
+                            "linear-gradient(to top, rgba(0,0,0,0.4), rgba(0,0,0,0) 200px), linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0) 300px)",
                         }}
-                        onClick={() => booknowHandler(item.id)}
-                      >
-                        Book Now
-                      </Button>
-                    </Grid> */}
-                    </Grid>
-                  </Paper>
-                </Stack>
+                      />
+                      <CardContent sx={{ justifyContent: "flex-end" }}>
+                        <Typography level="title-lg" textColor="#fff">
+                        {item.beautician.name}  <StarIcon /> <StarIcon /> <StarIcon />
+                        </Typography>
+                        <Typography
+                          startDecorator={<CurrencyRupeeIcon />}
+                          textColor="neutral.300"
+                        >
+                          {item.servicefee}/-
+                        
+                        </Typography>
+                      </CardContent>
+                    </Card>
+                  </div>
+
+                // <Stack spacing={3} className="mt-3">
+
+                //   <Paper
+                //     key={item.id} // Add a unique key for each item
+                //     elevation={24}
+                //     className="card"
+                //     sx={{
+                //       width: 400,
+                //       height: 220,
+                //       backgroundColor: "inherit",
+                //       // backgroundImage:'url("https://img.freepik.com/premium-photo/close-up-hair-supplies-flat-lay_23-2148352942.jpg?w=900")',
+                //       objectFit: "cover",
+                //       backgroundRepeat: "no-repeat",
+                //       // marginLeft: "20%",
+                //       marginTop: "30px",
+                //       marginBottom: "30%",
+                //       opacity: [0.3, 0.9, 0.9],
+                //       cursor: "pointer",
+                //       "&:hover": {
+                //         backgroundColor: "grey",
+                //         opacity: [0.3, 1, 1],
+                //         color: "white",
+                //       },
+                //     }}
+                //   >
+                //     <Grid container spacing={4}>
+                //       <Grid item xs={3}>
+                //         <Avatar
+                //           sx={{
+                //             width: 125,
+                //             height: 125,
+                //             marginLeft: "30px",
+                //             marginTop: "30px",
+                //           }}
+                //           src={item.beautician.image}
+                //         />
+                //       </Grid>
+                //       <Grid item xs={9}>
+                //         <Typography
+                //           className="textclass"
+                //           variant="h5"
+                //           component="h1"
+                //           sx={{
+                //             fontSize: "24px", // Adjust the font size as needed
+                //             fontWeight: "bold", // Make the text bold if desired
+                //             marginLeft: "55px",
+                //             marginTop: "45px",
+                //             whiteSpace: "nowrap", // Prevent text from wrapping to multiple lines
+                //             // overflow: "hidden", // Hide any overflow text
+                //             // textOverflow: "ellipsis",
+                //             // marginBottom: "16px", // Add some spacing at the bottom
+                //             // You can add more styles as needed, such as fontFamily, letterSpacing, etc.
+                //           }}
+                //         >
+                //           {item.beautician.name}
+                //           <br />
+                //           Rs {item.servicefee}/-
+                //           <br />
+                //           <StarIcon /> <StarIcon /> <StarIcon />
+                //           <hr />
+                //           <Button
+                //             variant="contained"
+                //             sx={{
+                //               marginLeft: "20px",
+                //               marginTop: "1px",
+                //               backgroundColor: "inherit",
+                //               color: "black",
+                //               "&:hover": {
+                //                 backgroundColor: "grey",
+                //                 opacity: [0.3, 1, 1],
+                //                 color: "white",
+                //               },
+                //             }}
+                //             onClick={() => booknowHandler(item.beautician.id)}
+                //           >
+                //             Book Now
+                //           </Button>
+                //         </Typography>
+                //       </Grid>
+
+                //       {/* <Grid item xs={4}>
+                //       <Button
+                //         variant="contained"
+                //         sx={{
+                //           marginTop: "80px",
+                //         }}
+                //         onClick={() => booknowHandler(item.id)}
+                //       >
+                //         Book Now
+                //       </Button>
+                //     </Grid> */}
+                //     </Grid>
+                //   </Paper>
+                // </Stack>
               );
             })}
-            
+
+          </div>
+          
         </div>
-      
 
         {intermediates && (
           <>

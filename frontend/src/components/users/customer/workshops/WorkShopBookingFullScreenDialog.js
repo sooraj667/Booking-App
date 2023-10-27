@@ -86,7 +86,7 @@ const WorkShopBookingFullScreenDialog = (props) => {
         onClose={handleClose}
         TransitionComponent={Transition}
       >
-        <AppBar sx={{ position: "relative" }}>
+        <AppBar sx={{ position: "relative",backgroundColor:"#202331" }}>
           <Toolbar>
             <IconButton
               edge="start"
@@ -97,11 +97,9 @@ const WorkShopBookingFullScreenDialog = (props) => {
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              Sound
+            WORKSHOP BOOKING
             </Typography>
-            <Button autoFocus color="inherit" onClick={handleClose}>
-              save
-            </Button>
+          
           </Toolbar>
         </AppBar>
         <div className="sub-heading-div flex justify-center align-center py-3 text-medium fw-2 sgfont  themecolor underline">
@@ -110,8 +108,11 @@ const WorkShopBookingFullScreenDialog = (props) => {
         <div className="sub-heading-div flex justify-center align-center py-3 text-small fw-2 sgfont  themecolor ">
           ONLINE WORKSHOP BY
         </div>
-        <div className="flex justify-center align-center py-3 text-small">
+        <div className="flex justify-center align-center py-3 text-small fw-2">
           {beautName}
+        </div>
+        <div className="flex justify-center align-center py-3 text-small fw-2">
+          Fee - <span className="text-info">Rs. {amount}</span>/-
         </div>
         <div className="flex justify-center align-center py-3 ">
           <ImageListItem sx={{ width: 200 }}>
@@ -123,14 +124,14 @@ const WorkShopBookingFullScreenDialog = (props) => {
             !allReadyBooked ?
             <div className="">
           <h4
-            className="flex justify-center align-center py-3 text-small"
+            className="flex justify-center align-center py-3 text-small cur"
             onClick={() => setPaymentToggle((prev) => !prev)}
           >
             Choose Payment <ArrowDropDownIcon />
           </h4>
           {paymentToggle && (
             <>
-              <div className="flex justify-center cur">
+              <div className="flex justify-center cur ">
                 <PayPalScriptProvider
                   options={{
                     clientId:
@@ -185,14 +186,14 @@ const WorkShopBookingFullScreenDialog = (props) => {
 
               </div>
               
-              <div className="flex justify-center">
+              <div className="flex justify-center mb-4 mt-2">
                 <WorkshopPayUsingWalletModal id={props.id} price={amount}/>
                
               </div>
             </>
           )}
 
-          <List>
+          {/* <List>
             <ListItem button>
               <ListItemText primary="Phone ringtone" secondary="Titania" />
             </ListItem>
@@ -203,7 +204,7 @@ const WorkShopBookingFullScreenDialog = (props) => {
                 secondary="Tethys"
               />
             </ListItem>
-          </List>
+          </List> */}
         </div>: <div className="sub-heading-div flex justify-center align-center py-3 text-small fw-2 sgfont  themecolor ">
            You have already booked for this workshop! <TaskAltIcon className="text-success ml-2"/>
 
@@ -211,6 +212,7 @@ const WorkShopBookingFullScreenDialog = (props) => {
         }
         
       </Dialog>
+      <hr />
     </div>
   );
 };
