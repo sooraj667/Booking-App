@@ -39,7 +39,10 @@ const CustomerManage = () => {
   return (
     <div>
       {console.log(admindatas.value.allcustdatas)}
-      <h2>Customers</h2>
+      <div className="sub-heading-div flex justify-center align-center py-3 text-medium  fw-2 sgfont  themecolor underline">
+        CUSTOMERS
+       
+      </div>
       <div className="container mt-4">
         
         <table className="table table-striped table-bordered">

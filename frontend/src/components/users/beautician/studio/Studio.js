@@ -50,7 +50,7 @@ const Studio = () => {
           setNoStudios(true);
         }
       })
-      .catch((err) => alert(err));
+      .catch((err) => console.log(err));
   }, [changed]);
 
   const handleChildStateChange = () => {

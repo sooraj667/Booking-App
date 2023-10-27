@@ -37,7 +37,10 @@ const Appointments = () => {
   return (
     <div> 
     {console.log(datas.value.allappointments)}
-    <h2>Appointments</h2>
+    <div className="sub-heading-div flex justify-center align-center py-3 text-medium  fw-2 sgfont  themecolor underline">
+        APPOINTMENTS
+       
+      </div>
     <div className="container mt-4">
       
       <table className="table table-striped table-bordered">

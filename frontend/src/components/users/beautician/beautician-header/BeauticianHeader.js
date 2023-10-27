@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 
 
+
 const BeauticianHeader = () => {
     const navigate=useNavigate()
     const handleLogout = () => {
@@ -27,11 +28,13 @@ const BeauticianHeader = () => {
       <AppBar
         position="fixed"
         sx={{
-          backgroundColor: "#0c0335",
+          backgroundColor: "#202331",
+        
+       
         }}
       >
         <Toolbar>
-          <IconButton
+          {/* <IconButton
             size="large"
             edge="start"
             color="inherit"
@@ -39,7 +42,7 @@ const BeauticianHeader = () => {
             sx={{ mr: 2 }}
           >
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
           
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           <Link to="/" className="groomup">

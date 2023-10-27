@@ -36,7 +36,10 @@ const BeauticianManage = () => {
   return (
     <div> 
       {console.log(datas.value.allbeautdatas)}
-      <h2>Beauticians</h2>
+      <div className="sub-heading-div flex justify-center align-center py-3 text-medium  fw-2 sgfont  themecolor underline">
+        BEAUTICIANS
+       
+      </div>
       <div className="container mt-4">
         
         <table className="table table-striped table-bordered">

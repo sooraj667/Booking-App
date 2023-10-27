@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import {toggleBeaut,toggleCust,toggleServices,toggleAppointments} from "../../../feautures/adminnavigationslice"
+import {toggleBeaut,toggleCust,toggleServices,toggleAppointments, toggleWorkshops} from "../../../feautures/adminnavigationslice"
 import Paper from "@mui/material/Paper";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -21,6 +21,7 @@ const ContentAd = () => {
     <Paper
       sx={{
         height: "950px",
+        position:"fixed",
         width: "250px",
         backgroundColor: "blue",
         borderRadius: "0px",
@@ -88,6 +89,16 @@ const ContentAd = () => {
             </Avatar>
           </ListItemAvatar>
           <ListItemText primary="Appointments" secondary="July 20, 2014" />
+        </ListItem>
+
+        <Divider variant="inset" component="li" />
+        <ListItem sx={{cursor:"pointer"}} onClick={() => dispatch(toggleWorkshops())}>
+          <ListItemAvatar>
+            <Avatar>
+              <BeachAccessIcon />
+            </Avatar>
+          </ListItemAvatar>
+          <ListItemText primary="Workshops" secondary="July 20, 2014" />
         </ListItem>
       </List>
     </Paper>

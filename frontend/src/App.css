@@ -41,8 +41,9 @@ html{
 .sidebar{
     height: 100%;
     width:16vw;
-    /* background-color:#432b92; */
-    background: linear-gradient(to right, rgba(17, 17, 17, 0.9), rgba(2, 8, 34, 0.9));
+    background-color:#0c0335;
+    
+    background: linear-gradient(to right, rgba(17, 17, 17, 0.9), rgba(2, 8, 34, 0.9)); 
 
     position: fixed;
     z-index: 1000;
@@ -1280,6 +1281,9 @@ html{
 }
 .cur{
   cursor: pointer;
+}
+.mart{
+  margin-top: 70px;
 }
 
 

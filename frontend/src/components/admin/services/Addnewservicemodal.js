@@ -13,6 +13,8 @@ import { storage } from "../../../firebase/firebaseconfig";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
 import { setAllservices } from "../../../feautures/adminDataAssignerSlice";
+import toast, { Toaster } from "react-hot-toast";
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 const style = {
   position: "absolute",
@@ -26,12 +28,12 @@ const style = {
   p: 4,
 };
 
-const Addnewservicemodal = () => {
+const Addnewservicemodal = () => { 
   const dispatch = useDispatch();
   const statedatas = useSelector((state) => state.login);
-  const [servicename, setServicename] = useState("");
-  const [servicedesc, setServicedesc] = useState("");
-  const [selectedImage, setSelectedImage] = useState("");
+  const [servicename, setServicename] = useState(false);
+  const [servicedesc, setServicedesc] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(false);
   const [changed, setChanged] = useState(false);
   const [open, setOpen] = useState(false);
   //   const [changed,setChanged]=useState(false)
@@ -66,6 +68,10 @@ const Addnewservicemodal = () => {
   };
 
   const handleSubmit = () => {
+    if(selectedImage===false || servicedesc===false ||servicename===false ){
+      toast.error("Please enter values for all the fields!")  
+      return
+    }
     const reference = ref(storage, `services/${selectedImage.name + v4()}`);
     uploadBytes(reference, selectedImage)
       .then((res) => {
@@ -103,14 +109,16 @@ const Addnewservicemodal = () => {
 
   return (
     <div>
+      <Toaster/>
       <div>
-        <Button
+        <AddCircleIcon onClick={handleOpen} />
+        {/* <Button
           onClick={handleOpen}
           variant="contained"
           sx={{ marginBottom: "0px", marginLeft: "220px", marginTop: "100px" }}
         >
           Add Service
-        </Button>
+        </Button> */}
         <Modal
           open={open}
           onClose={handleClose}
@@ -139,7 +147,7 @@ const Addnewservicemodal = () => {
                   <div className="col-md-6">
                     <Input
                       size="md"
-                      placeholder="Medium"
+                     
                       onChange={(e) => setServicename(e.target.value)}
                     />
                   </div>
@@ -148,10 +156,10 @@ const Addnewservicemodal = () => {
                   <div className="col-md-6 ">
                   <label>Description:</label>
                   </div>
-                  <div className="col-md-6">
+                  <div className="col-md-6 ">
                   <Input
                     size="md"
-                    placeholder="Medium"
+                    
                     onChange={(e) => setServicedesc(e.target.value)}
                   />
                   </div>
@@ -161,7 +169,7 @@ const Addnewservicemodal = () => {
                   <div className="col-md-6">
                   <label>Image:</label>
                   </div>
-                  <div className="col-md-6">
+                  <div className="col-md-6 mr-2">
                   <input
                     className="selectimage"
                     accept="image/*"
