@@ -6,7 +6,7 @@ import {
 } from "../../../../feautures/adminDataAssignerSlice";
 import  Button  from "@mui/material/Button";
 import axiosInstance from "../../../../axios/axiosconfig";
-
+import { Avatar } from "@mui/material";
 const Appointments = () => {
   const [blockStatus,setBlockStatus]=useState("")
   const dispatch = useDispatch();
@@ -46,7 +46,7 @@ const Appointments = () => {
       <table className="table table-striped table-bordered">
         <thead>
           <tr>
-            <th>Sl No</th>
+
             <th> Beautician</th>
             <th>Customer</th>
             <th>Studio</th>
@@ -59,11 +59,12 @@ const Appointments = () => {
           {Array.isArray(datas.value.allappointments) ? (
             datas.value.allappointments.map((item) => (
               <tr key={item.id}>
-                <td>{item.id}</td>
-                <td>{item.beautician.name}</td>
-                <td>{item.customer.name}</td>
-                <td>{item.studio.place}</td>
-                <td>{item.date} {item.time}</td>
+                
+                <td><div className="flex justify-between">{item.beautician.name} <Avatar src={item.beautician.image}></Avatar></div></td>
+                <td><div className="flex justify-between">{item.customer.name} <Avatar src={item.customer.image}></Avatar></div></td>
+                <td>{item.studio.studio_name} <br /> {item.studio.locality}  <br /> {item.studio.place}  <br /> {item.studio.district} <br /> {item.studio.state} <br /> {item.studio.country} <br />Pin Code -  {item.studio.pincode}</td>
+                <td>Date -{item.date} <br /> Time - {item.time}</td>
+
                 
                 
                 {/* {

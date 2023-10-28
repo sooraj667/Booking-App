@@ -11,6 +11,11 @@ import BookIcon from "@mui/icons-material/Book";
 import WorkIcon from "@mui/icons-material/Work";
 import BeachAccessIcon from "@mui/icons-material/BeachAccess";
 import Divider from "@mui/material/Divider";
+import Person3Icon from '@mui/icons-material/Person3';
+import Person4Icon from '@mui/icons-material/Person4';
+import ViewListIcon from '@mui/icons-material/ViewList';
+import TaskIcon from '@mui/icons-material/Task';
+import GroupsIcon from '@mui/icons-material/Groups';
 
 
 
@@ -48,7 +53,7 @@ const ContentAd = () => {
         <ListItem sx={{cursor:"pointer"}} onClick={() => dispatch(toggleBeaut())}>
           <ListItemAvatar>
             <Avatar>
-              <BookIcon />
+              <Person3Icon />
             </Avatar>
           </ListItemAvatar>
           <ListItemText primary="Beauticians" />
@@ -57,7 +62,7 @@ const ContentAd = () => {
         <ListItem sx={{cursor:"pointer"}} onClick={() => dispatch(toggleCust())}>
           <ListItemAvatar>
             <Avatar>
-              <WorkIcon />
+              <Person4Icon />
             </Avatar>
           </ListItemAvatar>
           <ListItemText primary="Customers" secondary="Jan 7, 2014" />
@@ -75,7 +80,7 @@ const ContentAd = () => {
         <ListItem sx={{cursor:"pointer"}} onClick={() => dispatch(toggleServices())}>
           <ListItemAvatar>
             <Avatar>
-              <BeachAccessIcon />
+              <ViewListIcon />
             </Avatar>
           </ListItemAvatar>
           <ListItemText primary="Services" secondary="July 20, 2014" />
@@ -85,7 +90,7 @@ const ContentAd = () => {
         <ListItem sx={{cursor:"pointer"}} onClick={() => dispatch(toggleAppointments())}>
           <ListItemAvatar>
             <Avatar>
-              <BeachAccessIcon />
+              <TaskIcon />
             </Avatar>
           </ListItemAvatar>
           <ListItemText primary="Appointments" secondary="July 20, 2014" />
@@ -95,7 +100,7 @@ const ContentAd = () => {
         <ListItem sx={{cursor:"pointer"}} onClick={() => dispatch(toggleWorkshops())}>
           <ListItemAvatar>
             <Avatar>
-              <BeachAccessIcon />
+              <GroupsIcon />
             </Avatar>
           </ListItemAvatar>
           <ListItemText primary="Workshops" secondary="July 20, 2014" />

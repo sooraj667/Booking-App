@@ -20,6 +20,9 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import ContentCutIcon from '@mui/icons-material/ContentCut';
 import StoreIcon from '@mui/icons-material/Store';
 import HomeIcon from '@mui/icons-material/Home';
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import GroupsIcon from '@mui/icons-material/Groups';
+
 
 const Contents = () => {
   const [accessToken,setAccessToken]=useState(Cookies.get("accesstoken-B"))
@@ -121,7 +124,7 @@ const Contents = () => {
       <li className="item" onClick={() => dispatch(toggleWorkshops())}>
         <div className="col-md-3">
           <div class="icon">
-            <StoreIcon />
+            <GroupsIcon />
           </div>
         </div>
         <div className="col-md-9">
@@ -135,7 +138,7 @@ const Contents = () => {
       <li className="item" onClick={() => dispatch(toggleWallet())}>
         <div className="col-md-3">
           <div class="icon">
-            <StoreIcon />
+            <AccountBalanceWalletIcon />
           </div>
         </div>
         <div className="col-md-9">

@@ -48,7 +48,7 @@ const ServicesAdmin = () => {
         <table className="table table-striped table-bordered">
           <thead>
             <tr>
-              <th>Sl No</th>
+             
 
               <th>Service Name</th>
 
@@ -59,7 +59,7 @@ const ServicesAdmin = () => {
             {Array.isArray(admindatas.value.allservices) ? (
               admindatas.value.allservices.map((item) => (
                 <tr key={item.id}>
-                  <td>{item.id}</td>
+                  
                   <td>{item.name}</td>
                   <td>{item.description}</td>
                   <Avatar alt="Remy Sharp" src={item.image} />

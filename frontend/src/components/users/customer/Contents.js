@@ -29,7 +29,10 @@ import Cookies from "js-cookie";
 import { red } from "@mui/material/colors";
 import {toggleLandingPart} from "../../../feautures/customer/customernavigationslice"
 import HomeIcon from '@mui/icons-material/Home';
-
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import GroupsIcon from '@mui/icons-material/Groups';
+import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 const Contents = () => {
   const dispatch = useDispatch();
@@ -130,7 +133,7 @@ const Contents = () => {
       <li className="item" onClick={() => dispatch(toggleFavouritestylists())}>
         <div className="col-md-3">
           <div class="icon">
-            <ExploreIcon />
+            <FavoriteIcon />
           </div>
         </div>
         <div className="col-md-9">
@@ -142,7 +145,7 @@ const Contents = () => {
       <li className="item" onClick={() => dispatch(toggleWallet())}>
         <div className="col-md-3">
           <div class="icon">
-            <ExploreIcon />
+            <AccountBalanceWalletIcon />
           </div>
         </div>
         <div className="col-md-9">

@@ -13,6 +13,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { toggleAllWorkShops,toggleBookedWorkShops,toggleAttendedWorkShops,toggleCancelledWorkShops } from "../../../../feautures/customer/customernavigationslice";
 import { useDispatch } from "react-redux";
+import GroupsIcon from '@mui/icons-material/Groups';
 
 const WorkshopDrawer = () => {
   const dispatch = useDispatch();
@@ -108,7 +109,7 @@ const WorkshopDrawer = () => {
       {["right"].map((anchor) => (
         <React.Fragment key={anchor}>
           <Button onClick={toggleDrawer(anchor, true)} sx={{ color: "white" }}>
-            ONLINE WORKSHOPS <ArrowDropDownIcon className="mr-3 cur" />
+            ONLINE WORKSHOPS <GroupsIcon className="mr-3 ml-1 cur" />
           </Button>
           <Drawer
             anchor={anchor}

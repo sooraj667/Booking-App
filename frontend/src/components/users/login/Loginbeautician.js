@@ -86,7 +86,7 @@ const Loginbeautician = () => {
     <div className="mainrow mb-5">
       <Toaster />
       <div className="sub-heading-div flex justify-center align-center py-3 text-small fw-2 sgfont  themecolor ">
-        LOGIN BEAUTICIAN
+      BEAUTICIAN LOGIN 
       </div>
       <div className="flex justify-around align-center">
         <div className="first">

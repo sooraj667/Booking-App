@@ -75,7 +75,7 @@ const Signupcustomer = () => {
     <div className="">
       <Toaster />
       <div className="sub-heading-div flex justify-center align-center py-3 text-small fw-2 sgfont  themecolor ">
-        SIGNUP CUSTOMER
+      CUSTOMER SIGNUP  
       </div>
       <div className="flex justify-around align-center">
         <div className="first">

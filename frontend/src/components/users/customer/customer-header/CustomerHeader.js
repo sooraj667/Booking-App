@@ -13,6 +13,7 @@ import { useNavigate } from 'react-router-dom';
 
 import WorkshopDrawer from '../workshops/WorkshopDrawer';
 
+
 const CustomerHeader = () => {
     const navigate=useNavigate()
     const handleLogout = () => {
@@ -39,7 +40,7 @@ const CustomerHeader = () => {
          
           </Typography>
           <div className="cur">
-            <WorkshopDrawer/>
+            <WorkshopDrawer/>   
           {/* ONLINE WORKSHOPS <ArrowDropDownIcon className='mr-3 cur'/> */}
 
           </div>
