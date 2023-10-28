@@ -26,6 +26,7 @@ const Item = styled(Paper)(({ theme }) => ({
 const Studio = () => {
   const [changed, setChanged] = useState(false);
   const [noStudios, setNoStudios] = useState(false);
+  const [allStudios, setAllStudios] = useState([]);
   const studiodatas = useSelector((state) => state.studioform);
   const rerender = useSelector((state) => state.rerender);
   const dispatch = useDispatch();
@@ -43,8 +44,9 @@ const Studio = () => {
       .then((res) => {
         console.log(res.data);
         if (res.data.message === "success") {
-          localStorage.setItem("studios-B", JSON.stringify(res.data.studios));
-          dispatch(setStudiodatas(res.data.studios));
+          //localStorage.setItem("studios-B", JSON.stringify(res.data.studios));
+          //dispatch(setStudiodatas(res.data.studios));
+          setAllStudios(res.data.studios)
           setNoStudios(false);
         } else {
           setNoStudios(true);
@@ -62,20 +64,20 @@ const Studio = () => {
       <hr />
 
       <div className="add-studio">
-        <Addstudiomodal />
+        <Addstudiomodal set={setAllStudios}/>
       </div>
 
-      {noStudios && (
+      {noStudios ? (
         <div className="justify-end">
           <Avatar src={emptypic} sx={{ width: 350, height: 350 }}></Avatar>
           <div className="sub-heading-div flex justify-center align-center py-3 text-small fw-2 sgfont  themecolor ">
-            NO BOOKINGS
+            NO STUDIOSS
           </div>
         </div>
-      )}
+      ):""}
 
       <div className="outerbox">
-        {studiodatas.value.studiodetails.map((item) => {
+        {allStudios.map((item) => {
           return (
             <section className="aboutHome">
               <div className="container flexSB">
@@ -91,8 +93,9 @@ const Studio = () => {
                             <p>PLACE - {item.place}</p>
                             <hr />
                             <div className="row">
-                              <Editstudiomodal studioId={item.id} />
+                              <Editstudiomodal studioId={item.id} set={setAllStudios} />
                               <Deleteconfirmationmodal
+                                set={setAllStudios}
                                 id={item.id}
                                 item_to_delete="studio"
                                 rerenderit={handleChildStateChange}

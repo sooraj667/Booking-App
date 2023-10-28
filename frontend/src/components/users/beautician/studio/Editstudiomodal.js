@@ -19,6 +19,7 @@ import {
 } from "../../../../feautures/beautician/studioformslice";
 import Input from "@mui/joy/Input";
 import MuiAlert from "@mui/material/Alert";
+import toast from "react-hot-toast";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -36,7 +37,7 @@ const style = {
   p: 4,
 };
 
-const Editstudiomodal = ({ studioId }) => {
+const Editstudiomodal = (props) => {
   const dispatch = useDispatch();
   const statedatas = useSelector((state) => state.login);
   const formdatas = useSelector((state) => state.studioform);
@@ -70,7 +71,7 @@ const Editstudiomodal = ({ studioId }) => {
   };
 
   useEffect(() => {
-    console.log(studioId, "STUDIOID");
+    console.log(props.studioId, "STUDIOID");
 
     const studios = localStorage.getItem("studios-B");
     const parsed = JSON.parse(studios);
@@ -96,7 +97,7 @@ const Editstudiomodal = ({ studioId }) => {
     const beautparsed = JSON.parse(beautdetails);
 
     const datas = {
-      studioid: studioId,
+      studioid: props.studioId,
       beautid: beautparsed.id,
       name: name,
       locality: locality,
@@ -111,9 +112,11 @@ const Editstudiomodal = ({ studioId }) => {
     axiosInstance
       .post("beaut/editstudio/", datas)
       .then((res) => {
-        localStorage.setItem("studios-B", JSON.stringify(res.data.studios));
+        //localStorage.setItem("studios-B", JSON.stringify(res.data.studios));
         console.log(res.data.studios, "ITHAAN STUDIOS");
+        props.set(res.data.studios)
         setChanged((prev) => !prev);
+        toast.success("Updated")
         handleClose();
       })
       .catch((error) => alert(error));
@@ -123,7 +126,7 @@ const Editstudiomodal = ({ studioId }) => {
     // const studioid=localStorage.getItem("studio-id")
 
     const datas = {
-      id: studioId,
+      id: props.studioId,
     };
     axiosInstance
       .post("beaut/get-single-studio/", datas)
@@ -191,15 +194,18 @@ const Editstudiomodal = ({ studioId }) => {
                     <TextField
                       value={name}
                       variant="standard"
+                      
                       onChange={(e) => {
                         setCannotUpdate(false);
 
                         if (!/^[a-zA-Z ]+$/.test(e.target.value)) {
                           setNameError("Studio name can only have alphabets!");
+                          setName(e.target.value);
                         } else {
                           setNameError(false);
-
                           setName(e.target.value);
+
+                          
                         }
                       }}
                     />
@@ -220,6 +226,7 @@ const Editstudiomodal = ({ studioId }) => {
                           setLocalityError(
                             "Locality name can only have alphabets!"
                           );
+                          setLocality(e.target.value);
                         } else {
                           setLocalityError(false);
                           setLocality(e.target.value);
@@ -242,6 +249,7 @@ const Editstudiomodal = ({ studioId }) => {
                         setCannotUpdate(false);
                         if (!/^[a-zA-Z ]+$/.test(e.target.value)) {
                           setPlaceError("Place name can only have alphabets!");
+                          setPlace(e.target.value);
                         } else {
                           setPlaceError(false);
                           setPlace(e.target.value);
@@ -268,6 +276,7 @@ const Editstudiomodal = ({ studioId }) => {
                           setDistrictError(
                             "District name can only have alphabets!"
                           );
+                          setDistrict(e.target.value);
                         } else {
                           setDistrictError(false);
                           setDistrict(e.target.value);
@@ -292,6 +301,7 @@ const Editstudiomodal = ({ studioId }) => {
                         setCannotUpdate(false);
                         if (!/^[a-zA-Z ]+$/.test(e.target.value)) {
                           setStateError("State name can only have alphabets!");
+                          setState(e.target.value);
                         } else {
                           setStateError(false);
                           setState(e.target.value);
@@ -318,6 +328,7 @@ const Editstudiomodal = ({ studioId }) => {
                           setCountryError(
                             "Country name can only have alphabets!"
                           );
+                          setCountry(e.target.value);
                         } else {
                           setCountryError(false);
                           setCountry(e.target.value);
@@ -342,6 +353,7 @@ const Editstudiomodal = ({ studioId }) => {
                         setCannotUpdate(false);
                         if (!/^\d{6}$/.test(e.target.value)) {
                           setPincodeError("Invalid Pincode!");
+                          setPincode(e.target.value);
                         } else {
                           setPincodeError(false);
                           setPincode(e.target.value);

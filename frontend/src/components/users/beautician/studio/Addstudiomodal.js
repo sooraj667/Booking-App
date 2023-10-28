@@ -39,7 +39,7 @@ const style = {
   p: 4,
 };
 
-const Addstudiomodal = () => {
+const Addstudiomodal = (props) => {
   const dispatch = useDispatch();
   const statedatas = useSelector((state) => state.login);
   const formdatas = useSelector((state) => state.studioform);
@@ -117,7 +117,8 @@ const Addstudiomodal = () => {
     axiosInstance
       .post("beaut/addstudio/", datas)
       .then((res) => {
-        localStorage.setItem("studios-B", JSON.stringify(res.data.studios));
+        //localStorage.setItem("studios-B", JSON.stringify(res.data.studios));
+        props.set(res.data.studios)
         console.log(res.data.studios, "ITHAAN STUDIOS");
 
         setChanged((prev) => !prev);

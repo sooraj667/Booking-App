@@ -76,7 +76,7 @@ const Workshops = () => {
       .post("beaut/send-email-link/", datas)
       .then((res) => {
         if (res.data.message === "already-sent") {
-          toast("Email Already Sent!");
+          toast("Please Generate ID!");
         } else {
           toast.success("Mail Sent");
         }
@@ -178,15 +178,16 @@ const Workshops = () => {
                                 response.data.link
                               );
                               dispatch(setVideoCallLink(response.data.link));
+                              navigate("../video-call");
                             } else {
-                              alert("else");
+                              toast.error("Please Generate Id")
                             }
                           })
                           .catch(() => {
                             alert("ERROR");
                           });
 
-                        navigate("../video-call");
+                        
                       }}
                     >
                       Video Call

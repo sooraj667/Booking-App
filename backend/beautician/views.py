@@ -371,7 +371,7 @@ class Deletestudio(APIView):
                 
         studioid=request.data.get("studioid")
         print(studioid,"##################")
-        studioobj=Studio.objects.get(id=studioid)
+        studioobj=Studio.objects.get(id=studioid) 
         print(studioobj,"STUDIONBJJJJDJDJJD")
         beautobj=studioobj.beautician
         studioobj.delete()
@@ -655,14 +655,13 @@ class SendEmailLink(APIView):
         id=request.data.get("workshop_id")
         obj=Workshop.objects.get(id=id)
         try:
-            WorkshopLink.objects.get(workshop=obj)
-            return Response({"message":"already-sent"})
-        except:
+            linkobj=WorkshopLink.objects.get(workshop=obj)
+            link=linkobj.link_id
             booked_customers=obj.customers.all()
             
 
-            link=generate_link()
-            WorkshopLink.objects.create(workshop=obj,link_id=link)
+            # link=generate_link()
+            # WorkshopLink.objects.create(workshop=obj,link_id=link)
 
             subject = f"Link for your registered workshop"
             message = f"The meeting link for the workshop {obj.subject} is  http://localhost:3000/video-call?roomID={link}  Please join the link on {obj.start_time}"
@@ -675,6 +674,10 @@ class SendEmailLink(APIView):
 
         
             return Response({"message":'success'})
+            
+        except:
+            return Response({"message":"already-sent"})
+            
         
 class VideoCallLink(APIView):
     def post(self,request): 

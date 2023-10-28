@@ -20,44 +20,51 @@ const style = {
   p: 4,
 };
 
-const Deleteconfirmationmodal = ({ item_to_delete, id, rerenderit }) => {
+const Deleteconfirmationmodal = (props) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const dispatch=useDispatch()
 
   const handleSubmit = () => {
-    if (item_to_delete == "studio") {
+    if (props.item_to_delete == "studio") {
       const datas = {
-        studioid: id,
+        studioid: props.id,
       };
       console.log(datas, "ID NOKK BROOOOO");
-      console.log(item_to_delete, "ITEM NOKK BROOOOO");
+      console.log(props.item_to_delete, "ITEM NOKK BROOOOO");
       axiosInstance
         .post("beaut/deletestudio/", datas)
         .then((response) => {
           console.log(response.data);
+          props.set(response.data.studios)
+          toast.success("Studio Address Deleted")
 
-          const beautdetails = localStorage.getItem("singledetails-B");
-          const parsed = JSON.parse(beautdetails);
+      //     const beautdetails = localStorage.getItem("singledetails-B");
+      //     const parsed = JSON.parse(beautdetails);
       
-          const datas = {
-            beautid: parsed.id,
-          };
-          axiosInstance
-      .post("beaut/getstudios/", datas)
-      .then((res) => {
-        console.log(res.data);
-        localStorage.setItem("studios-B", JSON.stringify(res.data.studios));
-        dispatch(setStudiodatas(res.data.studios));
-        toast.success("Address Deleted!")
-      })
-      .catch((err) => alert(err));
+      //     const datas = {
+      //       beautid: parsed.id,
+      //     };
+      //     axiosInstance
+      // .post("beaut/getstudios/", datas)
+      // .then((res) => {
+      //   console.log(res.data);
+      //   if (res.data.message === "success"){
+      //     props.set(res.data.studios)
+      //     toast.success("Address Deleted!")
+
+      //   }
+      //   //localStorage.setItem("studios-B", JSON.stringify(res.data.studios));
+      //   //dispatch(setStudiodatas(res.data.studios));
+      
+      // })
+      // .catch((err) => alert(err));
 
 
 
-          handleClose();
-          // rerenderit();
+      //     handleClose();
+      //     // rerenderit();
         })
         .catch((error) => {
           alert(error);
