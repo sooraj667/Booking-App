@@ -45,6 +45,7 @@ import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 
 import "./Landingpartcust.css";
 import TopBeauticians from "./topbeauticians/TopBeauticians";
+import TopWorkshop from "./top-workshop/TopWorkshop";
 
 // function srcset(image, width, height, rows = 1, cols = 1) {
 //   return {
@@ -295,6 +296,15 @@ const Landingpartcust = () => {
           </div>
           <div className="flex justify-center">
           <TopBeauticians/>
+          </div>
+
+          <div className="sub-heading-div flex justify-center align-center py-3 text-small fw-2 sgfont  themecolor underline">
+            TOP  ONLINE WORKSHOP
+
+          </div>
+
+          <div className="flex justify-center">
+          <TopWorkshop/>
           </div>
 
           

@@ -179,7 +179,7 @@ const WorkShopBookingFullScreenDialog = (props) => {
                     }}
                   />
                   <Toaster />
-                </PayPalScriptProvider>
+                </PayPalScriptProvider> 
               </div>
               <div className="flex justify-center">
               <Razorpay fee={amount} for={"workshop"} id={workshopID}/>
@@ -213,6 +213,7 @@ const WorkShopBookingFullScreenDialog = (props) => {
         
       </Dialog>
       <hr />
+      {console.log(`${props.id} and ${props.allWorkShops}`)}
     </div>
   );
 };

@@ -46,7 +46,7 @@ const BookedWorkshops = () => {
         <div className="">
           {allWorkshops.map((item) => {
             return (
-              <div className="flex justify-center">
+              <div className="flex justify-center mb-4">
                 <Stack spacing={2} useFlexGap>
                   <Card variant="outlined" sx={{ width: 643 }}>
                     <CardContent orientation="horizontal">

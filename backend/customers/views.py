@@ -752,6 +752,7 @@ class CheckWorkshopBooked(APIView):
     def post(self,request): 
         workshopid=request.data.get("workshopid")
         custid=request.data.get("custid")
+        print(workshopid,"IVDE NOKK MYREEEEEEEEEEEEEEEEEEEEE")
        
       
         workshop_obj=Workshop.objects.get(id=workshopid)
@@ -859,6 +860,39 @@ class GetCancelledWorkshops(APIView):
 
             return Response({"message":"done","all_bookings":all_bookings_serialized.data})
 
+
+
+
+class GetTopWorkshop(APIView):
+   
+    def get(self,request):
+        
+
+        work_dict={}
+        all=WorkshopBooking.objects.all()
+        if all.count()==0:
+            return Response({"message":"failed"})
+        for item in all:
+            if item.workshop.id not in work_dict:
+                work_dict[item.workshop.id]=1
+            else:
+                work_dict[item.workshop.id]+=1
+       
+            
+
+        print(work_dict,"DDSS")
+        max_val=0
+        for k,v in work_dict.items():
+            if v>max_val:
+                max_val=v
+                
+                try:
+                    workshop=Workshop.objects.get(id=k)
+                except:
+                    return Response({"message":"no-workshops"}) 
+        workshop_serialized=WorkshopSerializer(workshop)
+
+        return Response({"message":"success","topworkshop":workshop_serialized.data})
 
       
         
