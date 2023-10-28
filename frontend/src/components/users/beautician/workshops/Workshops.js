@@ -320,7 +320,7 @@ const Workshops = () => {
                   <div className="col-md-2"></div>
                 </div>
               </CardContent>
-              <CardActions buttonFlex="0 1 120px">
+             
                 {/* <IconButton
                   variant="outlined"
                   color="neutral"
@@ -329,15 +329,19 @@ const Workshops = () => {
                   <FavoriteBorder />
                 </IconButton> */}
              
-                <Button variant="outlined" color="neutral">
+                {/* <Button variant="outlined" color="neutral">
                   Boost
-                </Button>
+                </Button> */}
+                <div className="flex justify-center mt-3">
                 <DeleteWorkshopModal id={item.id} />
+
+                </div>
+             
         
                 {/* <Button variant="solid" color="danger" onClick={()=> handleCancelWorkshopConfirm()}>
                   Cancel
                 </Button> */}
-              </CardActions>
+            
             </Card>
           );
         })}

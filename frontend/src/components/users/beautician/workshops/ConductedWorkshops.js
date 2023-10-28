@@ -46,7 +46,7 @@ const ConductedWorkshops = () => {
 
       {noWS ? (
         <div className="sub-heading-div flex justify-center align-center py-3 text-small fw-2 sgfont  themecolor underline">
-          NO BOOKED WORKSHOPS!
+          NO WORKSHOPS CONDUCTED YET!
         </div>
       ) : (
         <div className="">
