@@ -600,7 +600,7 @@ class AddWorkshop(APIView):
 
         starttime = datetime.strptime(starttime, "%I:%M %p").time()
         endtime = datetime.strptime(endtime, "%I:%M %p").time()
-
+        c_date=datetime.now().date()
 
 
         try:
@@ -608,7 +608,7 @@ class AddWorkshop(APIView):
             return Response({"message":'already-present'})
         except:
             Workshop.objects.create(beautician=Beautician.objects.get(id=id),subject=subject,description=description,price=price,conducting_date=selectedDate,registration_deadline=selectedRegDate,start_time=starttime,end_time=endtime,total_seats=totalseats)
-            all=Workshop.objects.filter(beautician=Beautician.objects.get(id=id))
+            all=Workshop.objects.filter(beautician=Beautician.objects.get(id=id),conducting_date__gt=c_date)
             all_serialized=WorkshopSerializer(all,many=True)
             all_serialized.data
             return Response({"message":'success',"allworkshops":all_serialized.data})
@@ -620,11 +620,13 @@ class AddWorkshop(APIView):
 
 class GetBeautWorkshops(APIView):
     def post(self,request): 
-        all_workshops=Workshop.objects.filter(beautician_id=request.data.get("id"))
-        all_workshops_serialized=WorkshopSerializer(all_workshops,many=True)
-
         c_date=datetime.now().date()
         c_time=datetime.now().time()
+
+        all_workshops=Workshop.objects.filter(beautician_id=request.data.get("id"),conducting_date__gt=c_date)
+        all_workshops_serialized=WorkshopSerializer(all_workshops,many=True)
+
+     
         
         todays_workshops=Workshop.objects.filter(beautician_id=request.data.get("id"),conducting_date=c_date,start_time__gt=c_time)
         all_links=WorkshopLink.objects.all()
@@ -644,9 +646,9 @@ class CancelWorkshop(APIView):
         id=request.data.get("id")
         obj=Workshop.objects.get(id=id)
         beaut=obj.beautician
-        
+        c_date=datetime.now().date()
         obj.delete()
-        all=Workshop.objects.filter(beautician=beaut)
+        all=Workshop.objects.filter(beautician=beaut,conducting_date__gt=c_date)
         all_serialized=WorkshopSerializer(all,many=True)
         return Response({"message":'success',"allworkshops":all_serialized.data})
     
